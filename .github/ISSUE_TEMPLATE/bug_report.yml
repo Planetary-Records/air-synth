@@ -1,0 +1,35 @@
+name: Bug report
+description: A reproducible instrument, installation or documentation problem
+body:
+  - type: markdown
+    attributes:
+      value: For security issues use SECURITY.md privately. Remove credentials, private projects and third-party recordings from attachments.
+  - type: input
+    id: version
+    attributes:
+      label: Package version or source commit
+    validations:
+      required: true
+  - type: input
+    id: report_id
+    attributes:
+      label: air report ID (optional)
+      description: If you prepared a report with the ALPHA badge, copy its ID here. You can report a problem without one.
+  - type: input
+    id: environment
+    attributes:
+      label: Windows / DAW version / sample rate / buffer size
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result and actual result
+      description: Include whether this occurs while playing, generating a sound or making samples. A short original sound/MIDI example helps.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence and workarounds
+      description: Check logs and attachments for account data, private paths and audio before submitting.

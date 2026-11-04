@@ -1,0 +1,5 @@
+*.soundstate -text
+*.airackproject -text
+*.raw -text
+registry-v16.json binary
+*.racklist -text

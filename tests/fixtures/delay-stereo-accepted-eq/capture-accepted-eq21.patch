@@ -1,0 +1,46 @@
+diff --git a/tests/native/DynamicEqRackTests.cpp b/tests/native/DynamicEqRackTests.cpp
+index f806d46..b37343e 100644
+--- a/tests/native/DynamicEqRackTests.cpp
++++ b/tests/native/DynamicEqRackTests.cpp
+@@ -857,8 +857,41 @@ void acceptedDelayAndDraftEqMigration()
+     bad=sound;put(bad,macros,registry[2023].stateKey);sign(bad);CHECK(!decodeSoundState(bad.getData(),bad.getSize(),out)&&out==migrated);
+     bad=sound;static_cast<unsigned char*>(bad.getData())[locks+2023]=2;sign(bad);CHECK(!decodeSoundState(bad.getData(),bad.getSize(),out)&&out==migrated);
+ }
++bool captureAcceptedEq21(const juce::File& directory)
++{
++    if(parameterCount!=2191||currentSoundStateVersion!=21||currentProjectStateVersion!=20||directory.exists()||!directory.createDirectory().wasOk())return false;
++    const auto write=[&](const char* name,const juce::MemoryBlock& bytes){const auto file=directory.getChildFile(name);if(file.exists()||!file.replaceWithData(bytes.getData(),bytes.getSize()))return false;std::cout<<"ACCEPTED_EQ21 "<<name<<" bytes="<<bytes.getSize()<<" sha256="<<juce::SHA256(bytes).toHexString()<<'\n';return true;};
++    juce::Array<juce::var> rows;
++    for(const auto& d:parameterRegistry()){
++        auto* row=new juce::DynamicObject;row->setProperty("id",d.id);row->setProperty("name",d.name);row->setProperty("unit",d.unit);row->setProperty("kind",int(d.kind));row->setProperty("minimum",double(d.minimum));row->setProperty("maximum",double(d.maximum));row->setProperty("default",double(d.defaultValue));row->setProperty("skew",double(d.skew));row->setProperty("key",juce::int64(d.stateKey));juce::Array<juce::var> choices;for(const auto& c:d.choices)choices.add(c);row->setProperty("choices",choices);rows.add(juce::var(row));
++    }
++    const auto json=juce::JSON::toString(rows,true,17);if(!write("registry-v21.json",juce::MemoryBlock(json.toRawUTF8(),json.getNumBytesAsUTF8())))return false;
++    SoundDocument empty,rich;
++    RackEdit edit;edit.kind=RackEditKind::addEffect;edit.slot=2;edit.effect=EffectKind::delay;
++    if(editRackLayout(rich.layout,edit,rich.layout)!=RackEditResult::applied)return false;
++    const std::array<std::pair<const char*,float>,13> delayValues{{{"bypassed",1.f},{"delay.synced",1.f},{"delay.seconds",.37f},{"delay.beats",.62f},
++        {"delay.feedback",.71f},{"delay.stereo",.44f},{"delay.filter_hz",.29f},{"delay.mix",.83f},{"delay.saturation",.41f},{"delay.low_cut_hz",.23f},
++        {"delay.wobble",.57f},{"delay.wobble_rate_hz",.34f},{"delay.glide",1.f}}};
++    for(const auto& [key,value]:delayValues){const auto index=rackParameterIndex(NativeModule::delay,2,key);if(!index||rich.values[*index]==value)return false;rich.values[*index]=value;}
++    for(std::size_t i=dynamicEqExtensionParameterStart;i<parameterCount;++i){const int count=int(parameterRegistry()[i].choices.size());rich.values[i]=float(int(1+i%7)%count)/float(count-1);rich.controlLocks[i]=i%3==0;}
++    const auto feedback=rackParameterIndex(NativeModule::delay,2,"delay.feedback"),mix=rackParameterIndex(NativeModule::delay,2,"delay.mix"),wobble=rackParameterIndex(NativeModule::delay,2,"delay.wobble");
++    if(!feedback||!mix||!wobble)return false;
++    rich.values[0]=.3f;rich.controlLocks[*feedback]=true;rich.effectLocks[2]=true;
++    rich.macros[0]={parameterRegistry()[*mix].stateKey,.21f};rich.macros[1]={parameterRegistry()[*wobble].stateKey,-.17f};
++    const auto examples=exampleRackDesigns();const auto oxide=std::find_if(examples.begin(),examples.end(),[](const auto& d){return d.name=="Oxide Return";});
++    if(oxide==examples.end()||oxide->units.size()!=1||oxide->units[0].defaults.size()!=13)return false;
++    RackOperation place;place.kind=RackOperationKind::place;place.design=*oxide;
++    place.newInstance=juce::Uuid("6e1d4f8a-3c9b-4d72-af58-b2c7e4d93e1a");place.destination={RackRole::fx,masterChain,0};place.allocation={{0,0}};
++    SoundDocument embedded;RackDifference delta;
++    if(makeRackCandidate(rich,place,SoundEditOrigin::manual,embedded,delta)!=RackCandidateStatus::ready)return false;
++    juce::MemoryBlock bytes;
++    for(const auto& item:std::array<std::pair<const char*,const SoundDocument*>,3>{{{"default-v21.soundstate",&empty},{"rich-v21.soundstate",&rich},{"embedded-v21.soundstate",&embedded}}})if(!encodeSoundState(*item.second,bytes)||!write(item.first,bytes))return false;
++    for(const auto& item:std::array<std::pair<const char*,const SoundDocument*>,2>{{{"rich-v20.airackproject",&rich},{"embedded-v20.airackproject",&embedded}}}){ProjectDocument project;project.sound=*item.second;if(!encodeProjectState(project,bytes)||!write(item.first,bytes))return false;}
++    return true;
++}
+ int main(int argc,char** argv)
+ {
++    if(argc==3&&juce::String(argv[1])=="--capture-accepted-eq21")return captureAcceptedEq21(juce::File(juce::String::fromUTF8(argv[2])))?0:1;
+     if(argc==2&&juce::String(argv[1])=="--merged-formats"){acceptedDelayAndDraftEqMigration();std::cout<<"EQ merged formats: "<<checks<<" checks, "<<failures<<" failures\n";return failures?1:0;}
+     if(argc==2&&juce::String(argv[1])=="--extension-clipboard"){extensionClipboardAndSnapshots();std::cout<<"EQ extension clipboard: "<<checks<<" checks, "<<failures<<" failures\n";return failures?1:0;}
+     if(argc==2&&juce::String(argv[1])=="--extensions"){extensionSelectorsPreserveLegacyAutomation();std::cout<<"EQ extension rack: "<<checks<<" checks, "<<failures<<" failures\n";return failures?1:0;}

@@ -1,0 +1,188 @@
+{
+  "source_commit": "d86ab6e04a901ca151f7804a0217d2cab8fa0967",
+  "source_path": "docs/design/racks/2026-10-09-studio-rack/window/skin",
+  "amended": "2026-10-14: the MIDI drag's operation messages added to elements.json's strip and pattern.settings tables by hand, as window_skin.py's STRIP_OPERATIONS now lists them; the PROGRAMMER's page_spec and parameters (1231) written by main_units.py's pages command, for the stepped FX pages and GLOBAL's RENDER section; no plate was drawn again. 2026-10-20: the AI and LIBRARY plates and elements.json are side_units.py's and window_skin.py's output again, with the studio feedback spec's decisions 1, 2, 7 and 8: the AI unit's mode row (CREATE SOUND, CREATE RACK, REFINE RACK) and the LIBRARY's LOAD FILE and REVIEW painted out to plain plate and gone from the elements, groups and focus order with the AI page's rack rows and the LIBRARY's tabs; GENERATE, REFINE, AUDITION and both APPLYs take ai:mode.lit as their lit layer; the LIBRARY list shows five rows and their position. 2026-10-21: SESSION's \"Name copied\" message (NAME COPIED over the sound's name, for 1.5 s) added to elements.json by hand, as window_skin.py's SESSION_MESSAGES now lists it",
+  "alpha_amendment": "2026-11-03: elements.json experimental-access wording from a106db68; no artwork or geometry changed.",
+  "files": [
+    {
+      "path": "elements.json",
+      "sha256": "093e5b7f288e2c491317fda2c5bec92dd06a13bc5b9abf3951a4d9473fc7d2c0"
+    },
+    {
+      "path": "fonts/IBMPlexSansCondensed-OFL.txt",
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "path": "fonts/IBMPlexSansCondensed-Regular.ttf",
+      "sha256": "e7437c072eef2ef592ae6f2beb0000446287385907abb57ac1cf07bcbaa2aa33"
+    },
+    {
+      "path": "fonts/Inconsolata-Regular.ttf",
+      "sha256": "ab56ea18c5c24d2b909261f0c63a14f9576dfabaf2e9ebd353062aa4149cefc7"
+    },
+    {
+      "path": "fonts/LICENSE.txt",
+      "sha256": "29bd0cfd0fb2a45f9b057c834a057724bae1f63b525a8ac83d3e7525706d9f80"
+    },
+    {
+      "path": "fonts/PermanentMarker-LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "fonts/PermanentMarker-Regular.ttf",
+      "sha256": "28f82c8a7943cb8e9d599f8554da1d4fc75dbcf69b9885ad6c0611d20c6946c5"
+    },
+    {
+      "path": "parts/ai-account-amber.png",
+      "sha256": "87a6fe8cc7b9c49fc1f47ca22de2453d6d1ddf45d89a75e33c478474f011b9ca"
+    },
+    {
+      "path": "parts/ai-account-green.png",
+      "sha256": "1a0c41c7252a8add657f95066b8ba2e82340bca3a5f09a479b65b2f84999df96"
+    },
+    {
+      "path": "parts/ai-linked-lit.png",
+      "sha256": "27ca7511f57864c14269c8f6aa47d944fe8b416c89d4ad202b93ae7bccc63706"
+    },
+    {
+      "path": "parts/ai-mode-lit.png",
+      "sha256": "7749f8cc48936e82f4a6a0dba9c0c33c5c497fa83bb46401d56c7c9d057d45ce"
+    },
+    {
+      "path": "parts/pattern-bars-pointer.png",
+      "sha256": "00667172a439e62e7880dfc71f03a00691132293d11adf2487274101e9744609"
+    },
+    {
+      "path": "parts/pattern-channel-pointer.png",
+      "sha256": "ea2e83b42b1625f21d497a169e39d23a0b0c9956de79b5c80479b0d05dafda9b"
+    },
+    {
+      "path": "parts/pattern-grid-pointer.png",
+      "sha256": "274d9e1897d766691e8c9594609cac447693b49a5a4c5007abe64eacf23f4a17"
+    },
+    {
+      "path": "parts/pattern-key-lit.png",
+      "sha256": "a90c5de5c982226abc43688ca62d1ca9cdbcdaf1add802ba801666b2d9c352ad"
+    },
+    {
+      "path": "parts/pattern-length-pointer.png",
+      "sha256": "342edc66040d1cda0a56d2ec79ba9dca8e05c2460dca905c9cbc2e00490c6733"
+    },
+    {
+      "path": "parts/pattern-meter-pointer.png",
+      "sha256": "b7e61c25f392fd8782f5a8c95c0c648899c1c12a2ab64d380d91c158d1e19ed8"
+    },
+    {
+      "path": "parts/pattern-mode-down.png",
+      "sha256": "26275d250e935c065b50215089fb8542918a2c2a058249a80d45e8ae23c838bc"
+    },
+    {
+      "path": "parts/pattern-mode-up.png",
+      "sha256": "c8f78e3d276e907418d784febf19806bdb43df6fbe90120d62a037a25bb0f4ae"
+    },
+    {
+      "path": "parts/pattern-pitch-pointer.png",
+      "sha256": "462543a9089bf67cc491ad9a52507ad206657f6c964e3f7e6859d7f2fab61bc5"
+    },
+    {
+      "path": "parts/pattern-playing-lit.png",
+      "sha256": "171f09d961439325e2a13b1a2e87961a231514b0a965d53119f8bb9f33e56523"
+    },
+    {
+      "path": "parts/pattern-start-pointer.png",
+      "sha256": "2d1dc2ffb76967fd23195b0f8320b81403d492e8b175456808829bf8c4cf8ae9"
+    },
+    {
+      "path": "parts/pattern-swing-pointer.png",
+      "sha256": "1c37c7e173a415c56ba63eaf087d98330e6ef3ee41bd7f13115e4adfa23e810c"
+    },
+    {
+      "path": "parts/pattern-velocity-pointer.png",
+      "sha256": "3d2b390b99fab70ba324a2a35edb70ed06c9e2b4f9a778b8d40705f95c0d4f4e"
+    },
+    {
+      "path": "parts/programmer-button.png",
+      "sha256": "ccc9d398fb48b6b8b461ce4ac7b473ea48e47da6d2d6d2572561f084e48f9e8a"
+    },
+    {
+      "path": "parts/programmer-knob-body.png",
+      "sha256": "5a96d1bc9b714fd7df281c56ec79b989cac43764caf84dd078a3b714c63f8ebe"
+    },
+    {
+      "path": "parts/programmer-knob-pointer.png",
+      "sha256": "40a0782bda201ae0640a351d694150897fc1614728ff5a36b3c5031e8ded39e5"
+    },
+    {
+      "path": "parts/programmer-led-lit.png",
+      "sha256": "5b4ca93288c74abd9ba3a25c69028db953c7f5af56ae41dfb5911cdcca2781d8"
+    },
+    {
+      "path": "parts/programmer-led.png",
+      "sha256": "b2be9bb293f78dcd99a681a348645b543f7e70d5ad26f002dff1dc37d22a5996"
+    },
+    {
+      "path": "parts/programmer-lock.png",
+      "sha256": "ce8b1fcda454081e7e8e9737d679caa13245636e5463b5890b9bb2f322139ba6"
+    },
+    {
+      "path": "parts/programmer-tape.png",
+      "sha256": "65145be1dbe967622757a694c3d39e74424b92b12edd926fb60852f043f230b1"
+    },
+    {
+      "path": "parts/session-ai-lit.png",
+      "sha256": "6e2bb11ef0f30dbec168d2a8f625773cf4e99224f591969837a9d4d5f3ab454d"
+    },
+    {
+      "path": "parts/session-display-amber.png",
+      "sha256": "5881f4fc8a613ec3671f32f23f0fcdedfe0d437c76aee9d88dd22e0925fd76ef"
+    },
+    {
+      "path": "parts/session-error-lit.png",
+      "sha256": "4d30efd91a9172c86f7db8ab5c6769698a82813a1232bdfbb2559ff971853779"
+    },
+    {
+      "path": "parts/session-rack-down.png",
+      "sha256": "d575a194941b57e7697f9384718dd656a3d7351f68f870e7f4f17908047a1975"
+    },
+    {
+      "path": "parts/session-rack-up.png",
+      "sha256": "96dc3df6a83f6e3717772f2b95495024509d0c3dd057ebd8dd8a67734dbc6fc6"
+    },
+    {
+      "path": "parts/strip-display-amber.png",
+      "sha256": "0bf997f07d044ccaef7284d511dec5fe08cf6e7f91e7e963afae704be063b44f"
+    },
+    {
+      "path": "parts/strip-mode-down.png",
+      "sha256": "d575a194941b57e7697f9384718dd656a3d7351f68f870e7f4f17908047a1975"
+    },
+    {
+      "path": "parts/strip-mode-up.png",
+      "sha256": "2e2ff0eb663f8347cca360b66fcde2ce6eb44db15212d89b87fc04963cae9526"
+    },
+    {
+      "path": "plates/advanced.png",
+      "sha256": "5ddac3a8202b199297dcc8876d86c5dba125725e53bf98914fd0801f1318402c"
+    },
+    {
+      "path": "plates/ai.png",
+      "sha256": "7287063827514394be578a1d83e26820c2c455bae45619ce34143055cc88805a"
+    },
+    {
+      "path": "plates/library.png",
+      "sha256": "cee4ac84818deb333d4b9ac79e7986490dcbabe547692afb07164d7f4583e01f"
+    },
+    {
+      "path": "plates/pattern.png",
+      "sha256": "7105102f69a31c320bacb0fa0d25a9c121bcec17c4545a7eff6088a20c1fcdb5"
+    },
+    {
+      "path": "plates/session.png",
+      "sha256": "9acfebf4d2778ea6d89483b10aa843dc46a2bc4b9c206e1654b214022d15b093"
+    },
+    {
+      "path": "plates/strip.png",
+      "sha256": "15e6da0c13bc94ce2d319e0a94d4bc88aa61e7949aecedf29a25a54d2783acf2"
+    }
+  ]
+}

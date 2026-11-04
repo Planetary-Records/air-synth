@@ -1,0 +1,334 @@
+{
+  "schema": "saturation-release-main-reconciliation-oracles-v1",
+  "main_source_commit": "19c4f6c5cf5dcb55e9a91caccbf087e9a14e5a45",
+  "branch_source_commit": "19d157668b38d79ea533a9e9443def4fb6b8bcbb",
+  "main_writer": {
+    "parameters": 4239,
+    "sound_version": 29,
+    "project_version": 28,
+    "effect_banks": 18,
+    "source": "preserved main producer libraries; exact archived main headers;38 state/rack/pattern source files equal CI producer checkout modulo LF",
+    "producer_executable_sha256": "c774c274756ce037fe2f9f139ccb52014005cfe0d1a93487d01e6df38950acd1"
+  },
+  "saturation_writer": {
+    "parameters": 2815,
+    "sound_version": 24,
+    "project_version": 23,
+    "effect_banks": 17,
+    "source": "preserved branch producer libraries; exact archived branch headers; ProjectDocument.cpp compiled from exact branch snapshot",
+    "producer_executable_sha256": "dfbca7e300709934ed3ce8230c6c7660c4484cba853ec73f717489cbf9ccbf0e"
+  },
+  "audio_oracles": {
+    "source": "independent retained main29 producer library image; no merged production DSP or decoder loaded",
+    "rates": [
+      48000
+    ],
+    "qualities": [
+      "realtime",
+      "higher"
+    ],
+    "frames": 12288,
+    "channels": 2,
+    "block_size": 64,
+    "midi": "channel1 note60 velocity0.8 at frame0; note-off at4096; host tempo120",
+    "sample_layout": "little-endian interleaved float32",
+    "factories": 19
+  },
+  "limits": [
+    "Retained producer library provenance does not establish every historical compiler read solely from logs; source comparison and library copy hashes are independently retained.",
+    "Audio cases are a focused reconciliation oracle, not final product/DAW/listening or saturation CPU acceptance."
+  ],
+  "evidence_seals": [
+    {
+      "evidence": "build/saturation-release-mvp-20261026/task0/legacy-oracles-sealed-before-decoders.json",
+      "sha256": "87f188f70edcbcea3cf6d2d1f84036fddc1923f1cf0b00a2d58790c69c902340"
+    },
+    {
+      "evidence": "build/saturation-release-mvp-20261026/task0/main-audio-factory-oracles-sealed.json",
+      "sha256": "3858a082495a9cf157425ab3668fe2a1b02c2ed56c5b959eaac01ccab04512f5"
+    },
+    {
+      "evidence": "build/saturation-release-mvp-20261026/task0/premerge-additional.json",
+      "sha256": "f65ef4ff76eeb0f6088b06945687b3c64fa6525a14ec39197dd9a6e541d44f3a"
+    },
+    {
+      "evidence": "build/saturation-release-mvp-20261026/task0/premerge-main-libs.json",
+      "sha256": "6dec9c06f14f5a2acac3a6ceb35c7168fa0fa9324c29577588cc5922d3951f9d"
+    },
+    {
+      "evidence": "build/saturation-release-mvp-20261026/task0/premerge-main-space-libs.json",
+      "sha256": "0e782bf18d8f4dedc643a66210bedefe7799420e84aff8466e2ed5d033045c54"
+    },
+    {
+      "evidence": "build/saturation-release-mvp-20261026/task0/ci-codec-comparison.json",
+      "sha256": "ffeca6b1d3bf46efed02edabd0587b7eb3ad63c57f44bc4920242cb878eb1a2b"
+    }
+  ],
+  "immutable_outputs": [
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/default.airackproject",
+      "bytes": 38633,
+      "sha256": "345b9ecb7933da25afac12ebf6f2fac19ebb90661b4653e721d6e82bb644f5f8"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/default.json",
+      "bytes": 427126,
+      "sha256": "9940d8afd19b4199d3c165de145aa5977e53341c7b2b291234b4da950791858d"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/default.soundstate",
+      "bytes": 38525,
+      "sha256": "261ffba936757c9ee7dcfa2285a6313873d3d54bd9543fa2d15bdb4770b7d996"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/embedded.airackproject",
+      "bytes": 47534,
+      "sha256": "8be37d16d0cafcf84bbff0b67d980a15bcb618428a4fc71e7f5844a7731b32bc"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/embedded.json",
+      "bytes": 439041,
+      "sha256": "f38ec84cfc783ebbaffd098ed53d7c2e875f9c19ecd9c29ecf5fb178687a4c7d"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/embedded.soundstate",
+      "bytes": 47426,
+      "sha256": "b002cb799c7e5e9935df4daf46cfba48b5f021dfb5d5ba40bdc5c0d26f30eb0a"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/inactive.airackproject",
+      "bytes": 38633,
+      "sha256": "b81beee5c449960434aec7fc765340c80997a0eb396ad81823d82b80e418c3f8"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/inactive.json",
+      "bytes": 431305,
+      "sha256": "6b07374d21837a96bf47a37914cca2c44d92bc865beca86cee5431401ddd5de4"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/inactive.soundstate",
+      "bytes": 38525,
+      "sha256": "1aa51ecb5c5a2c313aabb23590994a06574f20d3518a1a3dd1d6a77ab58bb9ce"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/registry.json",
+      "bytes": 995569,
+      "sha256": "5b5a4bad152c96f78430e6e230baf1d291e83bf6a6d04619bc9af61c54d7ca8b"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/rich.airackproject",
+      "bytes": 39194,
+      "sha256": "1f262b58b7eb42568449375f95a703137938832feee63a8c86bae579a18c9716"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/rich.json",
+      "bytes": 431291,
+      "sha256": "d9f7d9b58a71a1c5497c9feb90e8672a54ffb1f770c44144d6f43f3c0ad69083"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026/rich.soundstate",
+      "bytes": 38525,
+      "sha256": "9829bada97ce24f8541fcbe7b0253bd95317c15890e7e2acd3c9b0526781706b"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/default.airackproject",
+      "bytes": 25805,
+      "sha256": "5798febb4912b3572a7089e182db7a0957b0768fda82d6f0c318fa75cc827d13"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/default.json",
+      "bytes": 280559,
+      "sha256": "6c86a77e1ef9477736e1dac8d501e0b287392dc76b8144c985a884d82048886e"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/default.soundstate",
+      "bytes": 25697,
+      "sha256": "07c9764aa4b766194abcd3ca64f856da3ddef382c15da473d5a9e72eb16de122"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/embedded.airackproject",
+      "bytes": 34866,
+      "sha256": "e53fa934b83f14a818586d947334d03bf640caa8ebe4e38d5820e0ff75cfc99d"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/embedded.json",
+      "bytes": 292951,
+      "sha256": "3f7de409f7d1045d96bdc22040432c5a2563143344ef43e0c28eb9928181527b"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/embedded.soundstate",
+      "bytes": 34758,
+      "sha256": "0f76ce8f74447ea3dc1691edafba125eb98654fe823d1a061434cfa85215bc76"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/inactive.airackproject",
+      "bytes": 25805,
+      "sha256": "87dc7d806a54c111c361ecc1bcc118f3fea4b48ebc0efc4231ecbd2835c1c940"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/inactive.json",
+      "bytes": 283035,
+      "sha256": "44e91c2fae129b72ddc7a34cfb72878c26949024f3d86fc31d17ee3b27f1eadc"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/inactive.soundstate",
+      "bytes": 25697,
+      "sha256": "22774b6a8b8edfde7808c61cc5dbcfd682a5be6d1c684ffec6c1e7792d174048"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/registry.json",
+      "bytes": 632906,
+      "sha256": "dbe395ef3153d1fd8685bf25da1ecd8d19b5a3798c8d69851178eb8988374015"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/rich.airackproject",
+      "bytes": 26366,
+      "sha256": "d8bcc17bf938f14649789d545fbae3696daa5757c7efbb24e43a748f7f096bd5"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/rich.json",
+      "bytes": 283022,
+      "sha256": "e605b1efe2061c907558490cf4f4a9a02f96e528a4b1de389f93f87431d9d840"
+    },
+    {
+      "path": "tests/fixtures/main-sync/saturation-20261026/rich.soundstate",
+      "bytes": 25697,
+      "sha256": "f91ad907ce3094d802a089164c084968dbd8046e400a17890a503ffb53d40b04"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/default-higher.f32",
+      "bytes": 98304,
+      "sha256": "291a596ffabf8fd8cba08396407e3bd35a8ab052ddafd2cb107d85706c2939f7"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/default-realtime.f32",
+      "bytes": 98304,
+      "sha256": "a8a5ff831992d68e1c3a335262adde1584d079e32da829b92646532e2e073595"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/embedded-higher.f32",
+      "bytes": 98304,
+      "sha256": "d58d978a6826a41d57b765b0c8d71f7fc1607d4262cd69670f0840c04c722956"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/embedded-realtime.f32",
+      "bytes": 98304,
+      "sha256": "4b73551f3f96e53f82604bdd2a64456b81b6014d7d0f1def0e56cda4625bc045"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-0.airackrack",
+      "bytes": 4582,
+      "sha256": "f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-1.airackrack",
+      "bytes": 4642,
+      "sha256": "e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-10.airackrack",
+      "bytes": 1711,
+      "sha256": "bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-11.airackrack",
+      "bytes": 1413,
+      "sha256": "33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-12.airackrack",
+      "bytes": 1455,
+      "sha256": "3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-13.airackrack",
+      "bytes": 1324,
+      "sha256": "1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-14.airackrack",
+      "bytes": 1465,
+      "sha256": "92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-15.airackrack",
+      "bytes": 2495,
+      "sha256": "9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-16.airackrack",
+      "bytes": 2239,
+      "sha256": "7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-17.airackrack",
+      "bytes": 8873,
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-18.airackrack",
+      "bytes": 9494,
+      "sha256": "f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-2.airackrack",
+      "bytes": 1740,
+      "sha256": "f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-3.airackrack",
+      "bytes": 2065,
+      "sha256": "28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-4.airackrack",
+      "bytes": 1467,
+      "sha256": "74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-5.airackrack",
+      "bytes": 2249,
+      "sha256": "c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-6.airackrack",
+      "bytes": 2570,
+      "sha256": "ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-7.airackrack",
+      "bytes": 1740,
+      "sha256": "a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-8.airackrack",
+      "bytes": 1647,
+      "sha256": "4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/factory-9.airackrack",
+      "bytes": 1696,
+      "sha256": "3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/inactive-higher.f32",
+      "bytes": 98304,
+      "sha256": "d58d978a6826a41d57b765b0c8d71f7fc1607d4262cd69670f0840c04c722956"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/inactive-realtime.f32",
+      "bytes": 98304,
+      "sha256": "4b73551f3f96e53f82604bdd2a64456b81b6014d7d0f1def0e56cda4625bc045"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/rich-higher.f32",
+      "bytes": 98304,
+      "sha256": "ea81d2695791f91c182fe25415cd2b75cdd27ecda17c97d5cf50751c3ef426a9"
+    },
+    {
+      "path": "tests/fixtures/main-sync/main-20261026-oracles/rich-realtime.f32",
+      "bytes": 98304,
+      "sha256": "cce17cccb94e6e8cab1e633a66e9b2d8a11d568c4e1d8eeec47a404cfda3b93a"
+    }
+  ]
+}

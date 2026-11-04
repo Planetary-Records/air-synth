@@ -1,0 +1,35 @@
+--- a/tests/native/DynamicEqIntegrationTests.cpp
++++ b/tests/native/DynamicEqIntegrationTests.cpp
+@@ -565,6 +565,32 @@
+ }
+ int main(int argc,char** argv)
+ {
++    if(argc==4&&std::string_view(argv[1])=="--capture-main55"){
++        CHECK(currentSoundStateVersion==23&&currentProjectStateVersion==22&&parameterCount==2535);
++        const juce::File directory(argv[2]);CHECK(directory.createDirectory());
++        const auto write=[&](const char* name,const juce::MemoryBlock& bytes){CHECK(directory.getChildFile(name).replaceWithData(bytes.getData(),bytes.getSize()));};
++        auto initial=std::make_unique<SoundDocument>();juce::MemoryBlock bytes;CHECK(encodeSoundState(*initial,bytes));write("default-v23.soundstate",bytes);
++        bytes.reset();CHECK(juce::File(argv[3]).loadFileAsData(bytes));auto rich=std::make_unique<SoundDocument>();CHECK(decodeSoundState(bytes.getData(),bytes.getSize(),*rich));
++        for(std::size_t base=dynamicEqDetectorParameterStart;base<parameterCount;base+=dynamicEqDetectorParametersPerBand){
++            rich->values[base]=1;rich->values[base+1]=1;rich->values[base+2]=1;rich->values[base+3]=.2f;rich->values[base+4]=.8f;
++        }
++        rich->controlLocks[13]=true;rich->controlLocks[dynamicEqDetectorParameterStart]=true;rich->controlLocks[parameterCount-1]=true;
++        rich->synthLocks[2]=true;rich->effectLocks[7]=true;
++        rich->macros[0]={parameterRegistry()[dynamicEqDetectorParameterStart+3].stateKey,.125f};
++        rich->macros[7]={parameterRegistry()[parameterCount-1].stateKey,-.125f};
++        CHECK(encodeSoundState(*rich,bytes));write("rich-v23.soundstate",bytes);
++        auto again=std::make_unique<SoundDocument>();CHECK(decodeSoundState(bytes.getData(),bytes.getSize(),*again)&&*again==*rich);
++        auto project=std::make_unique<ProjectDocument>();project->sound=*rich;CHECK(encodeProjectState(*project,bytes));write("rich-v22.airackproject",bytes);
++        auto recalled=std::make_unique<ProjectDocument>();CHECK(decodeProjectState(bytes.getData(),bytes.getSize(),*recalled)&&*recalled==*project);
++        juce::Array<juce::var> rows;
++        for(const auto& d:parameterRegistry()){
++            auto* row=new juce::DynamicObject;row->setProperty("id",d.id);row->setProperty("name",d.name);row->setProperty("unit",d.unit);
++            row->setProperty("kind",int(d.kind));row->setProperty("minimum",d.minimum);row->setProperty("maximum",d.maximum);row->setProperty("default",d.defaultValue);
++            row->setProperty("skew",d.skew);row->setProperty("key",juce::int64(d.stateKey));juce::Array<juce::var> choices;for(const auto& c:d.choices)choices.add(c);row->setProperty("choices",choices);rows.add(juce::var(row));
++        }
++        CHECK(directory.getChildFile("registry-v23.json").replaceWithText(juce::JSON::toString(juce::var(rows),true)));
++        std::cout<<"MAIN55_CAPTURE checks="<<checks<<" failures="<<failures<<'\n';return failures?1:0;
++    }
+     if(argc==2&&std::string_view(argv[1])=="--sidechain"){externalDetectorRouting();externalDetectorLifetimes();std::cout<<"External detector routing checks="<<checks<<" failures="<<failures<<'\n';return failures?1:0;}
+     if(argc==2&&std::string_view(argv[1])=="--pipeline-fingerprint"){pipelineFingerprint();std::cout<<"Pipeline fingerprint checks="<<checks<<" failures="<<failures<<'\n';return failures?1:0;}
+     if(argc==2&&std::string_view(argv[1])=="--pipeline-counts"){pipelineEffectCounts();std::cout<<"Pipeline count checks="<<checks<<" failures="<<failures<<'\n';return failures?1:0;}

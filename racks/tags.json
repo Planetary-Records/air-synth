@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "tags": [
+    {
+      "id": "ambient",
+      "label": "Ambient"
+    },
+    {
+      "id": "analog",
+      "label": "Analog"
+    },
+    {
+      "id": "bass",
+      "label": "Bass"
+    },
+    {
+      "id": "colour",
+      "label": "Colour"
+    },
+    {
+      "id": "compressor",
+      "label": "Compressor"
+    },
+    {
+      "id": "dark",
+      "label": "Dark"
+    },
+    {
+      "id": "delay",
+      "label": "Delay"
+    },
+    {
+      "id": "distortion",
+      "label": "Distortion"
+    },
+    {
+      "id": "drums",
+      "label": "Drums"
+    },
+    {
+      "id": "dynamic",
+      "label": "Dynamic EQ"
+    },
+    {
+      "id": "eq",
+      "label": "EQ"
+    },
+    {
+      "id": "evolving",
+      "label": "Evolving"
+    },
+    {
+      "id": "multiband",
+      "label": "Multiband"
+    },
+    {
+      "id": "pads",
+      "label": "Pads"
+    },
+    {
+      "id": "plucks",
+      "label": "Plucks"
+    },
+    {
+      "id": "precision",
+      "label": "Precision"
+    },
+    {
+      "id": "reverb",
+      "label": "Reverb"
+    },
+    {
+      "id": "sampler",
+      "label": "Sampler"
+    },
+    {
+      "id": "saturator",
+      "label": "Saturator"
+    },
+    {
+      "id": "space",
+      "label": "Space"
+    },
+    {
+      "id": "tape",
+      "label": "Tape"
+    },
+    {
+      "id": "warm",
+      "label": "Warm"
+    },
+    {
+      "id": "wavetable",
+      "label": "Wavetable"
+    }
+  ]
+}

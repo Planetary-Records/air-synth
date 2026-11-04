@@ -1,0 +1,42 @@
+# Preparation only. Review public-contributor-ci.md before activating in the cleared public snapshot.
+name: Contributor smoke
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contributor-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    if: github.event.repository.private == false
+    runs-on: windows-2022
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Bootstrap coordinator
+        run: |
+          cmake -S tools/native-run -B build/native-run -G 'Visual Studio 17 2022' -A x64
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          cmake --build build/native-run --config Debug --target RackSynthNativeRun
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Build product and fast tests
+        run: |
+          $native = (Resolve-Path build/native-run/Debug/RackSynthNativeRun.exe).Path
+          & $native -- cmake -S . -B build/contributor -G 'Visual Studio 17 2022' -A x64 -DRACKSYNTH_BUILD_PROBES=OFF
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          & $native -- cmake --build build/contributor --config Debug --parallel 2 --target RackSynthInstrument_VST3 RackSynthCoreTests RackSynthStateTests RackSynthRender
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Fast functional tests
+        run: |
+          ctest --test-dir build/contributor -C Debug --output-on-failure -R '^(RackSynthCoreTests|RackSynthStateTests|RackSynthRenderSelfTest)$'
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }

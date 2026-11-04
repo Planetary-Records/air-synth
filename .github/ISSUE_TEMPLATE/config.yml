@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: https://planetary.music/legal/terms
+    about: Send security details privately. Do not post credentials or exploits in issues.

@@ -1,0 +1,6 @@
+{
+  "source": "No clean baseline yet; every test keeps the 600-second limit.",
+  "headroom": 400,
+  "floorSeconds": 120,
+  "tests": {}
+}

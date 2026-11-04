@@ -1,0 +1,1334 @@
+{
+  "format": "ai-rack-maker-skin",
+  "version": 1,
+  "status": "PROTOTYPE, not a product schema",
+  "design_id": "c83dab6a-1c4e-48c1-83c4-80d9212ca603",
+  "maker": "MARLOW & FINCH",
+  "model": "PROGRAMME COMPRESSOR TYPE TP-2",
+  "units": 2,
+  "reveal": {
+    "kind": "recess",
+    "view": "setup",
+    "opener": "face.setup",
+    "closers": [
+      "face.close",
+      "face.close.right"
+    ],
+    "motion": {
+      "ms": 220,
+      "turns": [
+        [
+          1674.85,
+          209.48,
+          20.09
+        ],
+        [
+          1964.45,
+          209.41,
+          19.61
+        ]
+      ],
+      "lid": [
+        1643.11,
+        83.31,
+        353.37,
+        243.06
+      ],
+      "corner": 22.26
+    }
+  },
+  "rack": "THREAD PRESS, Marlow & Finch's programme compressor (an example rack's faceplate)",
+  "coordinate_space": "face pixels: the clean face plate at the house pitch, for both views; the host scales the whole rack uniformly",
+  "rack_pitch": {
+    "panel_w": 2140,
+    "u_px": 197.11,
+    "note": "EIA: 19 in panel, 1.75 in per unit"
+  },
+  "views": {
+    "face": {
+      "plate": "face:plate",
+      "rack_units": 2,
+      "source": "thread-press/closed.png",
+      "source_face_rect": [
+        5,
+        136,
+        2167,
+        538
+      ],
+      "conversion": "resampled from 2162x402 to 2140x394"
+    },
+    "setup": {
+      "plate": "setup:plate",
+      "over": "face",
+      "source": "thread-press/open.png",
+      "conversion": "registered to closed.png by a shift of [-0.079, 0.459] px, then resampled as the face"
+    }
+  },
+  "bindings": "each element binds its rack unit (an index into the design's units) and the unit module's local key; the host resolves the registry parameter per placed rack",
+  "assets": {
+    "face:plate": {
+      "file": "plates/thread-press-face.png",
+      "size": [
+        2140,
+        394
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "thread-press/closed.png",
+      "source_sha256": "8f7fdd98be11539c982ea0a595eeb86171d3cad785e9e8cbc6af5fd05b80fce3",
+      "note": "heads, IN / OUT's bat and the lamp's light removed (skirts rebuilt by a polar fill, the lamp unlit); legends, ticks, ears, cover and fasteners kept"
+    },
+    "setup:plate": {
+      "file": "plates/thread-press-setup.png",
+      "size": [
+        396,
+        295
+      ],
+      "anchor": [
+        1621,
+        68
+      ],
+      "role": "plate",
+      "alpha": true,
+      "motion": "drawn over the face plate at its anchor while the set-up is open",
+      "source": "thread-press/open.png, registered",
+      "source_sha256": "fa02fc73428c3ab91c400978e78a7cdaa548f9ba370af44b44cba4ceb059b938",
+      "note": "the recess inside its frame: the set-up knobs' heads, MAKE-UP's line, RELEASE's bar and both bats removed; alpha feathers its edge into the face plate"
+    },
+    "face:grip.head": {
+      "file": "parts/thread-press-face-grip-head.png",
+      "size": [
+        75,
+        144
+      ],
+      "role": "chicken-head head and white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        37.01,
+        74.01
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/closed.png"
+    },
+    "face:front.head": {
+      "file": "parts/thread-press-face-front-head.png",
+      "size": [
+        70,
+        137
+      ],
+      "role": "chicken-head head and white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        35.01,
+        70.01
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/closed.png"
+    },
+    "face:blend.head": {
+      "file": "parts/thread-press-face-blend-head.png",
+      "size": [
+        70,
+        135
+      ],
+      "role": "chicken-head head and white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        35.01,
+        69.01
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/closed.png"
+    },
+    "face:density.head": {
+      "file": "parts/thread-press-face-density-head.png",
+      "size": [
+        64,
+        116
+      ],
+      "role": "chicken-head head and white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        32.01,
+        59.01
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/closed.png"
+    },
+    "setup:ratio.head": {
+      "file": "parts/thread-press-setup-ratio-head.png",
+      "size": [
+        36,
+        61
+      ],
+      "role": "chicken-head head and white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        17.51,
+        32.51
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/open.png, registered"
+    },
+    "setup:release.pointer": {
+      "file": "parts/thread-press-setup-release-pointer.png",
+      "size": [
+        38,
+        56
+      ],
+      "role": "bar and the screwdriver slot cut in it, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        18.51,
+        27.51
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/open.png, registered"
+    },
+    "setup:makeup.pointer": {
+      "file": "parts/thread-press-setup-makeup-pointer.png",
+      "size": [
+        12,
+        32
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        5.84,
+        30.9
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/open.png, registered"
+    },
+    "setup:tone.head": {
+      "file": "parts/thread-press-setup-tone-head.png",
+      "size": [
+        35,
+        63
+      ],
+      "role": "chicken-head head and white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        17.51,
+        34.51
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/open.png, registered"
+    },
+    "setup:mix.head": {
+      "file": "parts/thread-press-setup-mix-head.png",
+      "size": [
+        36,
+        61
+      ],
+      "role": "chicken-head head and white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        17.51,
+        33.51
+      ],
+      "motion": "rotates about the pivot",
+      "source": "thread-press/open.png, registered"
+    },
+    "face:in.up": {
+      "file": "parts/thread-press-face-in-up.png",
+      "size": [
+        32,
+        55
+      ],
+      "role": "bat up, as drawn",
+      "alpha": true,
+      "anchor": [
+        15.5,
+        56.98
+      ],
+      "motion": "static per position",
+      "source": "thread-press/closed.png"
+    },
+    "face:in.down": {
+      "file": "parts/thread-press-face-in-down.png",
+      "size": [
+        32,
+        39
+      ],
+      "role": "bat down: the raised bat's shaft mirrored about the pivot and foreshortened by 0.608, the drawing's own ratio between its lowered and raised bats, its ball upright",
+      "alpha": true,
+      "anchor": [
+        15.5,
+        -1.18
+      ],
+      "motion": "static per position",
+      "source": "thread-press/closed.png, derived"
+    },
+    "setup:shape.down": {
+      "file": "parts/thread-press-setup-shape-down.png",
+      "size": [
+        19,
+        32
+      ],
+      "role": "bat down, as drawn",
+      "alpha": true,
+      "anchor": [
+        9.5,
+        6.77
+      ],
+      "motion": "static per position",
+      "source": "thread-press/open.png, registered"
+    },
+    "setup:shape.up": {
+      "file": "parts/thread-press-setup-shape-up.png",
+      "size": [
+        23,
+        42
+      ],
+      "role": "bat up: DRIVE IN / OUT's drawn bat, on this bushing",
+      "alpha": true,
+      "anchor": [
+        11.5,
+        36.65
+      ],
+      "motion": "static per position",
+      "source": "thread-press/open.png, registered, lent by the other lever"
+    },
+    "setup:drive-in.up": {
+      "file": "parts/thread-press-setup-drive-in-up.png",
+      "size": [
+        23,
+        42
+      ],
+      "role": "bat up, as drawn",
+      "alpha": true,
+      "anchor": [
+        11.5,
+        36.65
+      ],
+      "motion": "static per position",
+      "source": "thread-press/open.png, registered"
+    },
+    "setup:drive-in.down": {
+      "file": "parts/thread-press-setup-drive-in-down.png",
+      "size": [
+        19,
+        32
+      ],
+      "role": "bat down: TANH / SOFT's drawn bat, on this bushing",
+      "alpha": true,
+      "anchor": [
+        9.5,
+        6.77
+      ],
+      "motion": "static per position",
+      "source": "thread-press/open.png, registered, lent by the other lever"
+    },
+    "face:lamp.lit": {
+      "file": "parts/thread-press-face-lamp-lit.png",
+      "size": [
+        56,
+        56
+      ],
+      "role": "the lit lamp, lens and glow",
+      "alpha": true,
+      "anchor": [
+        27.69,
+        27.3
+      ],
+      "motion": "shown while the lamp's value is lit",
+      "source": "thread-press/closed.png",
+      "lens_r": 22.65
+    },
+    "procedural:lock-dot": {
+      "role": "lock dot",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "the stack's yellow lock dot at each element's geometry.dot"
+    },
+    "procedural:focus-ring": {
+      "role": "focus",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "2 px amber ring, 3 px outside the hit shape"
+    }
+  },
+  "groups": [
+    {
+      "id": "face.face",
+      "view": "face",
+      "label": "Thread Press",
+      "members": [
+        "face.grip",
+        "face.front",
+        "face.blend",
+        "face.density",
+        "face.in",
+        "face.lamp",
+        "face.setup"
+      ],
+      "focus_order": [
+        "face.grip",
+        "face.front",
+        "face.blend",
+        "face.density",
+        "face.in",
+        "face.setup"
+      ],
+      "visibility": "always"
+    },
+    {
+      "id": "face.setup",
+      "view": "setup",
+      "label": "Set-up",
+      "members": [
+        "face.ratio",
+        "face.release",
+        "face.makeup",
+        "face.tone",
+        "face.mix",
+        "face.shape",
+        "face.drive-in",
+        "face.close",
+        "face.close.right"
+      ],
+      "focus_order": [
+        "face.ratio",
+        "face.release",
+        "face.makeup",
+        "face.shape",
+        "face.tone",
+        "face.mix",
+        "face.drive-in",
+        "face.close"
+      ],
+      "visibility": "while the set-up is open"
+    }
+  ],
+  "elements": [
+    {
+      "id": "face.grip",
+      "view": "face",
+      "kind": "rotary",
+      "label": "GRIP",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "compressor.threshold_db",
+        "type": "float",
+        "range": [
+          -36,
+          0
+        ],
+        "unit": "dB",
+        "default": -18,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          592.09,
+          213.63
+        ],
+        "face_r": 65.87,
+        "tick_center": [
+          592.09,
+          213.63
+        ],
+        "tick_r": 73.69,
+        "hit_r": 73.69,
+        "dot": [
+          641.72,
+          164.0
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -135.44,
+          136.23
+        ],
+        "ticks": [
+          [
+            -36,
+            -135.44
+          ],
+          [
+            -24,
+            -78.79
+          ],
+          [
+            -18,
+            -0.59
+          ],
+          [
+            -12,
+            78.61
+          ],
+          [
+            0,
+            136.23
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": -3.740000009536743,
+        "drawn_value": -18.2417,
+        "brief_value": -18
+      },
+      "layers": {
+        "pointer": "face:grip.head"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.front",
+      "view": "face",
+      "kind": "rotary",
+      "label": "FRONT",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "compressor.attack_ms",
+        "type": "float",
+        "range": [
+          1,
+          60
+        ],
+        "unit": "ms",
+        "default": 10,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          830.96,
+          217.44
+        ],
+        "face_r": 62.77,
+        "tick_center": [
+          830.96,
+          217.44
+        ],
+        "tick_r": 69.75,
+        "hit_r": 69.75,
+        "dot": [
+          877.81,
+          170.59
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -134.25,
+          134.71
+        ],
+        "ticks": [
+          [
+            1,
+            -134.25
+          ],
+          [
+            15,
+            -11.81
+          ],
+          [
+            60,
+            134.71
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": -25.5,
+        "drawn_value": 11.0813,
+        "brief_value": 15
+      },
+      "layers": {
+        "pointer": "face:front.head"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.blend",
+      "view": "face",
+      "kind": "rotary",
+      "label": "BLEND",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "compressor.mix",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 1,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1069.53,
+          217.95
+        ],
+        "face_r": 61.79,
+        "tick_center": [
+          1069.53,
+          217.95
+        ],
+        "tick_r": 69.0,
+        "hit_r": 69.0,
+        "dot": [
+          1115.85,
+          171.63
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -134.44,
+          134.52
+        ],
+        "ticks": [
+          [
+            0,
+            -134.44
+          ],
+          [
+            0.5,
+            -0.61
+          ],
+          [
+            1,
+            134.52
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": 44.119998931884766,
+        "drawn_value": 0.6655,
+        "brief_value": 0.7
+      },
+      "layers": {
+        "pointer": "face:blend.head"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.density",
+      "view": "face",
+      "kind": "rotary",
+      "label": "DENSITY",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.gain_db",
+        "type": "float",
+        "range": [
+          0,
+          12
+        ],
+        "unit": "dB",
+        "default": 6,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1324.54,
+          217.11
+        ],
+        "face_r": 53.63,
+        "tick_center": [
+          1324.54,
+          217.11
+        ],
+        "tick_r": 61.73,
+        "hit_r": 61.73,
+        "dot": [
+          1365.71,
+          175.94
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -136.93,
+          137.27
+        ],
+        "ticks": [
+          [
+            0,
+            -136.93
+          ],
+          [
+            6,
+            -0.14
+          ],
+          [
+            12,
+            137.27
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": -61.08000183105469,
+        "drawn_value": 3.327,
+        "brief_value": 2
+      },
+      "layers": {
+        "pointer": "face:density.head"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.in",
+      "view": "face",
+      "kind": "lever",
+      "label": "IN / OUT",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "bypassed",
+        "type": "toggle",
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          1531.75,
+          245.02
+        ],
+        "rect": [
+          1494.14,
+          191.12,
+          75.23,
+          91.15
+        ],
+        "dot": [
+          1571.15,
+          213.5
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "IN",
+          "asset": "face:in.up"
+        },
+        {
+          "value": 1,
+          "legend": "OUT",
+          "asset": "face:in.down"
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0
+      },
+      "input": {
+        "click": "flips to the other position (one gesture)",
+        "keys": "Space/Enter flip"
+      },
+      "inverted": "up is IN, which is bypassed off"
+    },
+    {
+      "id": "face.lamp",
+      "view": "face",
+      "kind": "lamp",
+      "label": "Lamp",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "bypassed",
+        "type": "toggle",
+        "default": 0
+      },
+      "lit_value": 0,
+      "geometry": {
+        "led": [
+          1531.44,
+          100.74
+        ],
+        "lens_r": 22.65
+      },
+      "layers": {
+        "lit": "face:lamp.lit"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "lit while unit 0 is IN"
+      }
+    },
+    {
+      "id": "face.ratio",
+      "view": "setup",
+      "kind": "rotary",
+      "label": "RATIO",
+      "group": "face.setup",
+      "binding": {
+        "rack_unit": 0,
+        "key": "compressor.ratio",
+        "type": "float",
+        "range": [
+          1.5,
+          20
+        ],
+        "unit": "",
+        "default": 4,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1695.28,
+          153.3
+        ],
+        "face_r": 26.59,
+        "tick_center": [
+          1695.28,
+          153.3
+        ],
+        "tick_r": 30.65,
+        "hit_r": 30.65,
+        "dot": [
+          1714.48,
+          134.1
+        ],
+        "hit_rect": [
+          1632.22,
+          79.39,
+          122.54,
+          140.15
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.36,
+          129.74
+        ],
+        "ticks": [
+          [
+            1.5,
+            -129.36
+          ],
+          [
+            2,
+            -84.85
+          ],
+          [
+            3,
+            -42.35
+          ],
+          [
+            4,
+            -0.46
+          ],
+          [
+            6,
+            40.65
+          ],
+          [
+            10,
+            84.45
+          ],
+          [
+            20,
+            129.74
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": -73.72000122070312,
+        "drawn_value": 2.2241,
+        "brief_value": 2
+      },
+      "layers": {
+        "pointer": "setup:ratio.head"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.release",
+      "view": "setup",
+      "kind": "rotary",
+      "label": "RELEASE",
+      "group": "face.setup",
+      "binding": {
+        "rack_unit": 0,
+        "key": "compressor.release_ms",
+        "type": "float",
+        "range": [
+          10,
+          2000
+        ],
+        "unit": "ms",
+        "default": 100,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1814.24,
+          152.33
+        ],
+        "face_r": 26.59,
+        "tick_center": [
+          1814.24,
+          152.33
+        ],
+        "tick_r": 32.95,
+        "hit_r": 32.95,
+        "dot": [
+          1835.06,
+          131.51
+        ],
+        "hit_rect": [
+          1754.76,
+          79.39,
+          121.06,
+          140.15
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -119.64,
+          120.5
+        ],
+        "ticks": [
+          [
+            10,
+            -119.64
+          ],
+          [
+            2000,
+            120.5
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": -24.149999618530273,
+        "drawn_value": 82.2221,
+        "brief_value": 120
+      },
+      "layers": {
+        "pointer": "setup:release.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.makeup",
+      "view": "setup",
+      "kind": "rotary",
+      "label": "MAKE-UP",
+      "group": "face.setup",
+      "binding": {
+        "rack_unit": 0,
+        "key": "compressor.makeup_db",
+        "type": "float",
+        "range": [
+          0,
+          24
+        ],
+        "unit": "dB",
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1937.42,
+          152.31
+        ],
+        "face_r": 26.59,
+        "tick_center": [
+          1937.42,
+          152.31
+        ],
+        "tick_r": 32.97,
+        "hit_r": 32.97,
+        "dot": [
+          1958.26,
+          131.47
+        ],
+        "hit_rect": [
+          1875.82,
+          79.39,
+          129.57,
+          140.15
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -139.92,
+          135.2
+        ],
+        "ticks": [
+          [
+            0,
+            -139.92
+          ],
+          [
+            24,
+            135.2
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": -139.9199981689453,
+        "drawn_value": 0.0,
+        "brief_value": 0
+      },
+      "layers": {
+        "pointer": "setup:makeup.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.tone",
+      "view": "setup",
+      "kind": "rotary",
+      "label": "TONE",
+      "group": "face.setup",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.tone_hz",
+        "type": "float",
+        "range": [
+          200,
+          20000
+        ],
+        "unit": "Hz",
+        "default": 12000,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1767.02,
+          289.03
+        ],
+        "face_r": 26.59,
+        "tick_center": [
+          1767.02,
+          289.03
+        ],
+        "tick_r": 33.13,
+        "hit_r": 33.13,
+        "dot": [
+          1787.97,
+          268.08
+        ],
+        "hit_rect": [
+          1723.58,
+          223.46,
+          96.21,
+          128.39
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -131.97,
+          133.55
+        ],
+        "ticks": [
+          [
+            200,
+            -131.97
+          ],
+          [
+            20000,
+            133.55
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": 4.739999771118164,
+        "drawn_value": 2141.8198,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "setup:tone.head"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.mix",
+      "view": "setup",
+      "kind": "rotary",
+      "label": "MIX",
+      "group": "face.setup",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.mix",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1872.73,
+          289.3
+        ],
+        "face_r": 26.59,
+        "tick_center": [
+          1872.73,
+          289.3
+        ],
+        "tick_r": 33.08,
+        "hit_r": 33.08,
+        "dot": [
+          1893.65,
+          268.38
+        ],
+        "hit_rect": [
+          1819.89,
+          223.46,
+          98.69,
+          128.39
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -131.92,
+          133.96
+        ],
+        "ticks": [
+          [
+            0,
+            -131.92
+          ],
+          [
+            1,
+            133.96
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "mockup": {
+        "pointer_angle": -65.87999725341797,
+        "drawn_value": 0.2484,
+        "brief_value": 0.2
+      },
+      "layers": {
+        "pointer": "setup:mix.head"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.shape",
+      "view": "setup",
+      "kind": "lever",
+      "label": "TANH / SOFT",
+      "group": "face.setup",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.shape",
+        "type": "choice",
+        "default": 0,
+        "choices": [
+          "Tanh",
+          "Soft sign"
+        ]
+      },
+      "geometry": {
+        "pivot": [
+          1680.23,
+          298.93
+        ],
+        "rect": [
+          1658.45,
+          277.37,
+          43.55,
+          43.12
+        ],
+        "dot": [
+          1703.87,
+          283.17
+        ],
+        "hit_rect": [
+          1632.22,
+          223.46,
+          91.36,
+          128.39
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "TANH",
+          "asset": "setup:shape.up"
+        },
+        {
+          "value": 1,
+          "legend": "SOFT",
+          "asset": "setup:shape.down"
+        }
+      ],
+      "mockup": {
+        "drawn_value": 1
+      },
+      "input": {
+        "click": "flips to the other position (one gesture)",
+        "keys": "Space/Enter flip"
+      }
+    },
+    {
+      "id": "face.drive-in",
+      "view": "setup",
+      "kind": "lever",
+      "label": "DRIVE IN / OUT",
+      "group": "face.setup",
+      "binding": {
+        "rack_unit": 1,
+        "key": "bypassed",
+        "type": "toggle",
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          1964.31,
+          299.42
+        ],
+        "rect": [
+          1942.53,
+          266.1,
+          43.55,
+          54.89
+        ],
+        "dot": [
+          1987.95,
+          283.66
+        ],
+        "hit_rect": [
+          1918.48,
+          223.46,
+          86.91,
+          128.39
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "IN",
+          "asset": "setup:drive-in.up"
+        },
+        {
+          "value": 1,
+          "legend": "OUT",
+          "asset": "setup:drive-in.down"
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0
+      },
+      "input": {
+        "click": "flips to the other position (one gesture)",
+        "keys": "Space/Enter flip"
+      },
+      "inverted": "up is IN, which is bypassed off"
+    },
+    {
+      "id": "face.setup",
+      "view": "face",
+      "kind": "action",
+      "label": "Open set-up",
+      "group": "face.face",
+      "action": "open set-up",
+      "geometry": {
+        "rect": [
+          1643.11,
+          83.31,
+          353.37,
+          243.06
+        ]
+      },
+      "input": {
+        "click": "opens the set-up recess in place",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "face.close",
+      "view": "setup",
+      "kind": "action",
+      "label": "Close set-up",
+      "group": "face.setup",
+      "action": "close set-up",
+      "geometry": {
+        "rect": [
+          1629.91,
+          206.79,
+          33.34,
+          33.34
+        ]
+      },
+      "input": {
+        "click": "closes the set-up recess",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "face.close.right",
+      "view": "setup",
+      "kind": "action",
+      "label": "Close set-up",
+      "group": "face.setup",
+      "action": "close set-up",
+      "geometry": {
+        "rect": [
+          1977.87,
+          206.66,
+          34.32,
+          34.32
+        ]
+      },
+      "input": {
+        "click": "closes the set-up recess",
+        "keys": "none: not in Tab order"
+      }
+    }
+  ]
+}

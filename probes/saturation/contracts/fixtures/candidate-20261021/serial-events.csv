@@ -1,0 +1,10 @@
+frame,operation,slot,bypassed
+63,bypass,2,1
+64,settings,2,
+65,settings,2,
+127,bypass,2,0
+511,bypass,all,1
+512,settings,7,
+512,reset,all,
+513,bypass,all,0
+1024,reset,all,

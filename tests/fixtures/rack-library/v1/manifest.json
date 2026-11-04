@@ -1,0 +1,2015 @@
+{
+  "schema": 1,
+  "source_baseline": "9cbc6a89fea377b657d267a3c954afa5005c5fc2",
+  "planning_source": "6a285309931cc91f8f6e61586dea0e5cc2ccc5eb",
+  "sources": [
+    {
+      "path": "src/racks/RackExamples.cpp",
+      "sha256": "d704b4edaa4e3d826fdecf047c9663ea60761acb09598536ba4d50db5a20fc84"
+    },
+    {
+      "path": "src/racks/RackDesign.cpp",
+      "sha256": "6196855ecbd4b35a03d739904ef41ffb642557f4effc78230b359552b2e412c0"
+    },
+    {
+      "path": "src/racks/RackLibrary.cpp",
+      "sha256": "c37cfa0e93ff081a08a03997cb9c4de31f2aaab72c5ac62ff5963ccd6c0eb80f"
+    },
+    {
+      "path": "src/state/ParameterRegistry.cpp",
+      "sha256": "49364f80083b272daba92901377bfc0d420c7b38d0dab05af1485a2718dbcdae"
+    },
+    {
+      "path": "src/dsp/DspCompatibility.h",
+      "sha256": "2dd04f95786ac3aaf1759ae669d531846e105dbe1af94c73aaeda9980c3d98bf"
+    }
+  ],
+  "current": [
+    {
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+      "revision": "1",
+      "name": "Ember Reed",
+      "path": "current/c83dab6a1c4e48c183c480d9212ca601-r1.json",
+      "bytes": 3292,
+      "sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a"
+    },
+    {
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca602",
+      "revision": "1",
+      "name": "Glass Current",
+      "path": "current/c83dab6a1c4e48c183c480d9212ca602-r1.json",
+      "bytes": 3069,
+      "sha256": "8b1afcfbcef817e372928a9d8ff80ef53b8731043b77096968e2dd966dcfe8f4"
+    },
+    {
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca603",
+      "revision": "1",
+      "name": "Thread Press",
+      "path": "current/c83dab6a1c4e48c183c480d9212ca603-r1.json",
+      "bytes": 1895,
+      "sha256": "cff62f76f8baec2a7f8d153a953f55b1ce69ba6fab0432d99577ddaeac6569ed"
+    },
+    {
+      "design": "330cb53b-cd9b-443c-94d8-2700bc8b88f7",
+      "revision": "1",
+      "name": "Oxide Return",
+      "path": "current/330cb53bcd9b443c94d82700bc8b88f7-r1.json",
+      "bytes": 2941,
+      "sha256": "61fb7252e7e804e9742fee81ee7befa5f5778e3bac43c344dca85609037952c0"
+    },
+    {
+      "design": "22d80511-2e4f-4a41-b1dd-203eabbcf32e",
+      "revision": "1",
+      "name": "Small Hours",
+      "path": "current/22d805112e4f4a41b1dd203eabbcf32e-r1.json",
+      "bytes": 3305,
+      "sha256": "82154ffc00dbe85e4af0d2041da99b1f52a3b9888bea29f16b4bd2d2bfe61c69"
+    },
+    {
+      "design": "cdeafe3f-9c29-4c7c-9013-8284b505af10",
+      "revision": "1",
+      "name": "Night Dial",
+      "path": "current/cdeafe3f9c294c7c90138284b505af10-r1.json",
+      "bytes": 4617,
+      "sha256": "55eb1f05ca9ba938034ede012941c197498a87e89c0af5fa52ef29b936064054"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842a402",
+      "revision": "1",
+      "name": "Copper Arc",
+      "path": "current/9138771513d34c57a47912251842a402-r1.json",
+      "bytes": 4582,
+      "sha256": "f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842b402",
+      "revision": "1",
+      "name": "Prism Relay",
+      "path": "current/9138771513d34c57a47912251842b402-r1.json",
+      "bytes": 4642,
+      "sha256": "e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842c401",
+      "revision": "1",
+      "name": "Lumen Drift",
+      "path": "current/9138771513d34c57a47912251842c401-r1.json",
+      "bytes": 1740,
+      "sha256": "f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842d402",
+      "revision": "1",
+      "name": "Anchor Press",
+      "path": "current/9138771513d34c57a47912251842d402-r1.json",
+      "bytes": 2065,
+      "sha256": "28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842e402",
+      "revision": "1",
+      "name": "Cinder Coil",
+      "path": "current/9138771513d34c57a47912251842e402-r1.json",
+      "bytes": 1467,
+      "sha256": "74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842f402",
+      "revision": "1",
+      "name": "Echo Thread",
+      "path": "current/9138771513d34c57a47912251842f402-r1.json",
+      "bytes": 2249,
+      "sha256": "c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842a802",
+      "revision": "1",
+      "name": "Contour Loom",
+      "path": "current/9138771513d34c57a47912251842a802-r1.json",
+      "bytes": 2570,
+      "sha256": "ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842b802",
+      "revision": "1",
+      "name": "Veil Current",
+      "path": "current/9138771513d34c57a47912251842b802-r1.json",
+      "bytes": 1740,
+      "sha256": "a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842c802",
+      "revision": "1",
+      "name": "Orbit Ribbon",
+      "path": "current/9138771513d34c57a47912251842c802-r1.json",
+      "bytes": 1647,
+      "sha256": "4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842d901",
+      "revision": "1",
+      "name": "Aster Sweep",
+      "path": "current/9138771513d34c57a47912251842d901-r1.json",
+      "bytes": 1696,
+      "sha256": "3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842e902",
+      "revision": "1",
+      "name": "Silver Loop",
+      "path": "current/9138771513d34c57a47912251842e902-r1.json",
+      "bytes": 1711,
+      "sha256": "bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842f901",
+      "revision": "1",
+      "name": "Centre Line",
+      "path": "current/9138771513d34c57a47912251842f901-r1.json",
+      "bytes": 1413,
+      "sha256": "33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842aa02",
+      "revision": "1",
+      "name": "Twin Current",
+      "path": "current/9138771513d34c57a47912251842aa02-r1.json",
+      "bytes": 1455,
+      "sha256": "3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842bb01",
+      "revision": "1",
+      "name": "Sideband Tide",
+      "path": "current/9138771513d34c57a47912251842bb01-r1.json",
+      "bytes": 1324,
+      "sha256": "1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842bc01",
+      "revision": "1",
+      "name": "Ember Room",
+      "path": "current/9138771513d34c57a47912251842bc01-r1.json",
+      "bytes": 1465,
+      "sha256": "92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842bd02",
+      "revision": "1",
+      "name": "Band Balance",
+      "path": "current/9138771513d34c57a47912251842bd02-r1.json",
+      "bytes": 2495,
+      "sha256": "9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842be01",
+      "revision": "1",
+      "name": "Field Balance",
+      "path": "current/9138771513d34c57a47912251842be01-r1.json",
+      "bytes": 2239,
+      "sha256": "7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf"
+    },
+    {
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "name": "Contour Dynamics",
+      "path": "current/72b0ea6d4c2d4d93a3d87a904b050001-r1.json",
+      "bytes": 8873,
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e"
+    },
+    {
+      "design": "cc73c36a-696e-4b09-9cf3-dcd4dfac16f0",
+      "revision": "1",
+      "name": "Lumen Field",
+      "path": "current/cc73c36a696e4b099cf3dcd4dfac16f0-r1.json",
+      "bytes": 9494,
+      "sha256": "f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842bf01",
+      "revision": "2",
+      "name": "Character Drive",
+      "path": "current/9138771513d34c57a47912251842bf01-r2.json",
+      "bytes": 4355,
+      "sha256": "84303af35953521165929e3455a2e3f3cfe7d8cda0abf3761462b4d6bf409874"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842bf02",
+      "revision": "2",
+      "name": "Band Color",
+      "path": "current/9138771513d34c57a47912251842bf02-r2.json",
+      "bytes": 4412,
+      "sha256": "236d6a5ce909e3385fc0e458979b05cd373246fb67f05174c97a7a890f10bdaf"
+    },
+    {
+      "design": "f97641c2-cd64-46a9-a3ab-0cc027a5f8d4",
+      "revision": "1",
+      "name": "Tile Array",
+      "path": "current/f97641c2cd6446a9a3ab0cc027a5f8d4-r1.json",
+      "bytes": 11120,
+      "sha256": "dd207988425c8356961fbc26a065034d6d49c2cf1709bd05a08671bd76b8c5a8"
+    }
+  ],
+  "packages": [
+    {
+      "id": "ember-reed",
+      "version": "1.0.0",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+      "revision": "1",
+      "canonical_sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a"
+    },
+    {
+      "id": "glass-current",
+      "version": "1.0.0",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca602",
+      "revision": "1",
+      "canonical_sha256": "8b1afcfbcef817e372928a9d8ff80ef53b8731043b77096968e2dd966dcfe8f4"
+    },
+    {
+      "id": "thread-press",
+      "version": "1.0.0",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca603",
+      "revision": "1",
+      "canonical_sha256": "cff62f76f8baec2a7f8d153a953f55b1ce69ba6fab0432d99577ddaeac6569ed"
+    },
+    {
+      "id": "oxide-return",
+      "version": "1.0.0",
+      "design": "330cb53b-cd9b-443c-94d8-2700bc8b88f7",
+      "revision": "1",
+      "canonical_sha256": "61fb7252e7e804e9742fee81ee7befa5f5778e3bac43c344dca85609037952c0"
+    },
+    {
+      "id": "small-hours",
+      "version": "1.0.0",
+      "design": "22d80511-2e4f-4a41-b1dd-203eabbcf32e",
+      "revision": "1",
+      "canonical_sha256": "82154ffc00dbe85e4af0d2041da99b1f52a3b9888bea29f16b4bd2d2bfe61c69"
+    },
+    {
+      "id": "night-dial",
+      "version": "1.0.0",
+      "design": "cdeafe3f-9c29-4c7c-9013-8284b505af10",
+      "revision": "1",
+      "canonical_sha256": "55eb1f05ca9ba938034ede012941c197498a87e89c0af5fa52ef29b936064054"
+    },
+    {
+      "id": "tile-array",
+      "version": "1.0.0",
+      "design": "f97641c2-cd64-46a9-a3ab-0cc027a5f8d4",
+      "revision": "1",
+      "canonical_sha256": "dd207988425c8356961fbc26a065034d6d49c2cf1709bd05a08671bd76b8c5a8"
+    },
+    {
+      "id": "contour-dynamics",
+      "version": "1.0.0",
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "canonical_sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e"
+    },
+    {
+      "id": "lumen-field",
+      "version": "1.0.0",
+      "design": "cc73c36a-696e-4b09-9cf3-dcd4dfac16f0",
+      "revision": "1",
+      "canonical_sha256": "f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191"
+    },
+    {
+      "id": "character-drive",
+      "version": "1.0.0",
+      "design": "91387715-13d3-4c57-a479-12251842bf01",
+      "revision": "2",
+      "canonical_sha256": "84303af35953521165929e3455a2e3f3cfe7d8cda0abf3761462b4d6bf409874"
+    },
+    {
+      "id": "band-color",
+      "version": "1.0.0",
+      "design": "91387715-13d3-4c57-a479-12251842bf02",
+      "revision": "2",
+      "canonical_sha256": "236d6a5ce909e3385fc0e458979b05cd373246fb67f05174c97a7a890f10bdaf"
+    }
+  ],
+  "historical": [
+    {
+      "source": "tests/fixtures/eq-comparison-legacy/contour-v1.rackdesign",
+      "path": "historical/629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e.json",
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "bytes": 8873
+    },
+    {
+      "source": "tests/fixtures/eq-placement-legacy/contour-v1.rackdesign",
+      "path": "historical/629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e.json",
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "bytes": 8873
+    },
+    {
+      "source": "tests/fixtures/eq-shapes-accepted-delay/oxide-return-v1.rackdesign",
+      "path": "historical/544009d613a14de73f952127f2e85dd5dcaeb67120c9b5ff8a808f72437d0699.json",
+      "design": "330cb53b-cd9b-443c-94d8-2700bc8b88f7",
+      "revision": "1",
+      "sha256": "544009d613a14de73f952127f2e85dd5dcaeb67120c9b5ff8a808f72437d0699",
+      "bytes": 2867
+    },
+    {
+      "source": "tests/fixtures/eq-shapes-legacy/contour-v1.rackdesign",
+      "path": "historical/629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e.json",
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "bytes": 8873
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-0.airackrack",
+      "path": "historical/f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e.json",
+      "design": "91387715-13d3-4c57-a479-12251842a402",
+      "revision": "1",
+      "sha256": "f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e",
+      "bytes": 4582
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-1.airackrack",
+      "path": "historical/e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9.json",
+      "design": "91387715-13d3-4c57-a479-12251842b402",
+      "revision": "1",
+      "sha256": "e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9",
+      "bytes": 4642
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-10.airackrack",
+      "path": "historical/bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5.json",
+      "design": "91387715-13d3-4c57-a479-12251842e902",
+      "revision": "1",
+      "sha256": "bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5",
+      "bytes": 1711
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-11.airackrack",
+      "path": "historical/33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d.json",
+      "design": "91387715-13d3-4c57-a479-12251842f901",
+      "revision": "1",
+      "sha256": "33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d",
+      "bytes": 1413
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-12.airackrack",
+      "path": "historical/3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d.json",
+      "design": "91387715-13d3-4c57-a479-12251842aa02",
+      "revision": "1",
+      "sha256": "3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d",
+      "bytes": 1455
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-13.airackrack",
+      "path": "historical/1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72.json",
+      "design": "91387715-13d3-4c57-a479-12251842bb01",
+      "revision": "1",
+      "sha256": "1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72",
+      "bytes": 1324
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-14.airackrack",
+      "path": "historical/92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25.json",
+      "design": "91387715-13d3-4c57-a479-12251842bc01",
+      "revision": "1",
+      "sha256": "92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25",
+      "bytes": 1465
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-15.airackrack",
+      "path": "historical/9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab.json",
+      "design": "91387715-13d3-4c57-a479-12251842bd02",
+      "revision": "1",
+      "sha256": "9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab",
+      "bytes": 2495
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-16.airackrack",
+      "path": "historical/7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf.json",
+      "design": "91387715-13d3-4c57-a479-12251842be01",
+      "revision": "1",
+      "sha256": "7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf",
+      "bytes": 2239
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-17.airackrack",
+      "path": "historical/629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e.json",
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "bytes": 8873
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-18.airackrack",
+      "path": "historical/f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191.json",
+      "design": "cc73c36a-696e-4b09-9cf3-dcd4dfac16f0",
+      "revision": "1",
+      "sha256": "f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191",
+      "bytes": 9494
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-2.airackrack",
+      "path": "historical/f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350.json",
+      "design": "91387715-13d3-4c57-a479-12251842c401",
+      "revision": "1",
+      "sha256": "f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350",
+      "bytes": 1740
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-3.airackrack",
+      "path": "historical/28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce.json",
+      "design": "91387715-13d3-4c57-a479-12251842d402",
+      "revision": "1",
+      "sha256": "28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce",
+      "bytes": 2065
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-4.airackrack",
+      "path": "historical/74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6.json",
+      "design": "91387715-13d3-4c57-a479-12251842e402",
+      "revision": "1",
+      "sha256": "74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6",
+      "bytes": 1467
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-5.airackrack",
+      "path": "historical/c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5.json",
+      "design": "91387715-13d3-4c57-a479-12251842f402",
+      "revision": "1",
+      "sha256": "c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5",
+      "bytes": 2249
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-6.airackrack",
+      "path": "historical/ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4.json",
+      "design": "91387715-13d3-4c57-a479-12251842a802",
+      "revision": "1",
+      "sha256": "ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4",
+      "bytes": 2570
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-7.airackrack",
+      "path": "historical/a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b.json",
+      "design": "91387715-13d3-4c57-a479-12251842b802",
+      "revision": "1",
+      "sha256": "a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b",
+      "bytes": 1740
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-8.airackrack",
+      "path": "historical/4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c.json",
+      "design": "91387715-13d3-4c57-a479-12251842c802",
+      "revision": "1",
+      "sha256": "4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c",
+      "bytes": 1647
+    },
+    {
+      "source": "tests/fixtures/main-sync/main-20261026-oracles/factory-9.airackrack",
+      "path": "historical/3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1.json",
+      "design": "91387715-13d3-4c57-a479-12251842d901",
+      "revision": "1",
+      "sha256": "3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1",
+      "bytes": 1696
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/example-c83dab6a-1c4e-48c1-83c4-80d9212ca601.airack",
+      "path": "historical/1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a.json",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+      "revision": "1",
+      "sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a",
+      "bytes": 3292
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/example-c83dab6a-1c4e-48c1-83c4-80d9212ca602.airack",
+      "path": "historical/8b1afcfbcef817e372928a9d8ff80ef53b8731043b77096968e2dd966dcfe8f4.json",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca602",
+      "revision": "1",
+      "sha256": "8b1afcfbcef817e372928a9d8ff80ef53b8731043b77096968e2dd966dcfe8f4",
+      "bytes": 3069
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/example-c83dab6a-1c4e-48c1-83c4-80d9212ca603.airack",
+      "path": "historical/cff62f76f8baec2a7f8d153a953f55b1ce69ba6fab0432d99577ddaeac6569ed.json",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca603",
+      "revision": "1",
+      "sha256": "cff62f76f8baec2a7f8d153a953f55b1ce69ba6fab0432d99577ddaeac6569ed",
+      "bytes": 1895
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-72b0ea6d-4c2d-4d93-a3d8-7a904b050001.airack",
+      "path": "historical/629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e.json",
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "bytes": 8873
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842a402.airack",
+      "path": "historical/f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e.json",
+      "design": "91387715-13d3-4c57-a479-12251842a402",
+      "revision": "1",
+      "sha256": "f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e",
+      "bytes": 4582
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842a802.airack",
+      "path": "historical/ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4.json",
+      "design": "91387715-13d3-4c57-a479-12251842a802",
+      "revision": "1",
+      "sha256": "ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4",
+      "bytes": 2570
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842aa02.airack",
+      "path": "historical/3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d.json",
+      "design": "91387715-13d3-4c57-a479-12251842aa02",
+      "revision": "1",
+      "sha256": "3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d",
+      "bytes": 1455
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842b402.airack",
+      "path": "historical/e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9.json",
+      "design": "91387715-13d3-4c57-a479-12251842b402",
+      "revision": "1",
+      "sha256": "e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9",
+      "bytes": 4642
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842b802.airack",
+      "path": "historical/a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b.json",
+      "design": "91387715-13d3-4c57-a479-12251842b802",
+      "revision": "1",
+      "sha256": "a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b",
+      "bytes": 1740
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842bb01.airack",
+      "path": "historical/1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72.json",
+      "design": "91387715-13d3-4c57-a479-12251842bb01",
+      "revision": "1",
+      "sha256": "1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72",
+      "bytes": 1324
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842bc01.airack",
+      "path": "historical/92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25.json",
+      "design": "91387715-13d3-4c57-a479-12251842bc01",
+      "revision": "1",
+      "sha256": "92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25",
+      "bytes": 1465
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842bd02.airack",
+      "path": "historical/9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab.json",
+      "design": "91387715-13d3-4c57-a479-12251842bd02",
+      "revision": "1",
+      "sha256": "9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab",
+      "bytes": 2495
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842be01.airack",
+      "path": "historical/7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf.json",
+      "design": "91387715-13d3-4c57-a479-12251842be01",
+      "revision": "1",
+      "sha256": "7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf",
+      "bytes": 2239
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842c401.airack",
+      "path": "historical/f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350.json",
+      "design": "91387715-13d3-4c57-a479-12251842c401",
+      "revision": "1",
+      "sha256": "f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350",
+      "bytes": 1740
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842c802.airack",
+      "path": "historical/4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c.json",
+      "design": "91387715-13d3-4c57-a479-12251842c802",
+      "revision": "1",
+      "sha256": "4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c",
+      "bytes": 1647
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842d402.airack",
+      "path": "historical/28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce.json",
+      "design": "91387715-13d3-4c57-a479-12251842d402",
+      "revision": "1",
+      "sha256": "28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce",
+      "bytes": 2065
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842d901.airack",
+      "path": "historical/3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1.json",
+      "design": "91387715-13d3-4c57-a479-12251842d901",
+      "revision": "1",
+      "sha256": "3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1",
+      "bytes": 1696
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842e402.airack",
+      "path": "historical/74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6.json",
+      "design": "91387715-13d3-4c57-a479-12251842e402",
+      "revision": "1",
+      "sha256": "74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6",
+      "bytes": 1467
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842e902.airack",
+      "path": "historical/bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5.json",
+      "design": "91387715-13d3-4c57-a479-12251842e902",
+      "revision": "1",
+      "sha256": "bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5",
+      "bytes": 1711
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842f402.airack",
+      "path": "historical/c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5.json",
+      "design": "91387715-13d3-4c57-a479-12251842f402",
+      "revision": "1",
+      "sha256": "c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5",
+      "bytes": 2249
+    },
+    {
+      "source": "tests/fixtures/saturation-legacy/factory-91387715-13d3-4c57-a479-12251842f901.airack",
+      "path": "historical/33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d.json",
+      "design": "91387715-13d3-4c57-a479-12251842f901",
+      "revision": "1",
+      "sha256": "33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d",
+      "bytes": 1413
+    },
+    {
+      "source": "tests/fixtures/saturation-release-20261026/band-color-revision-1.rackdesign",
+      "path": "historical/2ecfd2a23a613dde5d8d895754f478124d2c5c0174990dc7edaab37ed0be3d5d.json",
+      "design": "91387715-13d3-4c57-a479-12251842bf02",
+      "revision": "1",
+      "sha256": "2ecfd2a23a613dde5d8d895754f478124d2c5c0174990dc7edaab37ed0be3d5d",
+      "bytes": 4432
+    },
+    {
+      "source": "tests/fixtures/saturation-release-20261026/character-drive-revision-1.rackdesign",
+      "path": "historical/c55cee48271b8f402a05b903d0a16dca99beb9d1b5b2141c580670ac38fb804d.json",
+      "design": "91387715-13d3-4c57-a479-12251842bf01",
+      "revision": "1",
+      "sha256": "c55cee48271b8f402a05b903d0a16dca99beb9d1b5b2141c580670ac38fb804d",
+      "bytes": 4427
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-330cb53bcd9b443c94d82700bc8b88f7.rackdesign",
+      "path": "historical/544009d613a14de73f952127f2e85dd5dcaeb67120c9b5ff8a808f72437d0699.json",
+      "design": "330cb53b-cd9b-443c-94d8-2700bc8b88f7",
+      "revision": "1",
+      "sha256": "544009d613a14de73f952127f2e85dd5dcaeb67120c9b5ff8a808f72437d0699",
+      "bytes": 2867
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-72b0ea6d4c2d4d93a3d87a904b050001.rackdesign",
+      "path": "historical/629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e.json",
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "bytes": 8873
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842a402.rackdesign",
+      "path": "historical/f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e.json",
+      "design": "91387715-13d3-4c57-a479-12251842a402",
+      "revision": "1",
+      "sha256": "f034d6ab6c84c3daaf1d176034d3097e226e3aeb08f3907f68aad1870635206e",
+      "bytes": 4582
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842a802.rackdesign",
+      "path": "historical/ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4.json",
+      "design": "91387715-13d3-4c57-a479-12251842a802",
+      "revision": "1",
+      "sha256": "ddf918a3b7c368b8355b871ab03973af1243a7b59d380ed80ff8e988fe6d00e4",
+      "bytes": 2570
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842aa02.rackdesign",
+      "path": "historical/3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d.json",
+      "design": "91387715-13d3-4c57-a479-12251842aa02",
+      "revision": "1",
+      "sha256": "3a142158a0d83bd0fdf392ac2f9d1a71a2ca9780c29499f0c1375cddf68e7d9d",
+      "bytes": 1455
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842b402.rackdesign",
+      "path": "historical/e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9.json",
+      "design": "91387715-13d3-4c57-a479-12251842b402",
+      "revision": "1",
+      "sha256": "e25107fe9206584ebcbb2b3ee8021710270084fdbd2b843cacbb30c377d99dc9",
+      "bytes": 4642
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842b802.rackdesign",
+      "path": "historical/a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b.json",
+      "design": "91387715-13d3-4c57-a479-12251842b802",
+      "revision": "1",
+      "sha256": "a4b40720a95ba809a2da812324bfe2a2b7ce731f1d40723fdcd57860d14f6c2b",
+      "bytes": 1740
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842bb01.rackdesign",
+      "path": "historical/1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72.json",
+      "design": "91387715-13d3-4c57-a479-12251842bb01",
+      "revision": "1",
+      "sha256": "1fb9757fa163c9678d96a4c873e76b04b06eae7e4226405a82c7c2d9343b5e72",
+      "bytes": 1324
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842bc01.rackdesign",
+      "path": "historical/92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25.json",
+      "design": "91387715-13d3-4c57-a479-12251842bc01",
+      "revision": "1",
+      "sha256": "92b7d5ed4501f1b61ae70c02f01c4f351ca5d34289fe9670538385867e993f25",
+      "bytes": 1465
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842bd02.rackdesign",
+      "path": "historical/9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab.json",
+      "design": "91387715-13d3-4c57-a479-12251842bd02",
+      "revision": "1",
+      "sha256": "9640d0638bf1703204b46443b3a0818765e4b4fe4cf5485861a81dd7c13f1bab",
+      "bytes": 2495
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842be01.rackdesign",
+      "path": "historical/7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf.json",
+      "design": "91387715-13d3-4c57-a479-12251842be01",
+      "revision": "1",
+      "sha256": "7ad26c8709b589089eb2c3df8d3912978172b6e89471a4f768ccada003bcaacf",
+      "bytes": 2239
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842c401.rackdesign",
+      "path": "historical/f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350.json",
+      "design": "91387715-13d3-4c57-a479-12251842c401",
+      "revision": "1",
+      "sha256": "f94fe9030a99900edf91ee7ff1f521d20dbba6d6db9bdc09774bd97ea7be4350",
+      "bytes": 1740
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842c802.rackdesign",
+      "path": "historical/4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c.json",
+      "design": "91387715-13d3-4c57-a479-12251842c802",
+      "revision": "1",
+      "sha256": "4e2e5c7b49446deca5cd23952614c3e147bf7d09ea045409878a191e68697a1c",
+      "bytes": 1647
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842d402.rackdesign",
+      "path": "historical/28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce.json",
+      "design": "91387715-13d3-4c57-a479-12251842d402",
+      "revision": "1",
+      "sha256": "28aa8a7fe14bc12636cf5a49785ee7cdb2eeea1bdb374239d7fdb311359d37ce",
+      "bytes": 2065
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842d901.rackdesign",
+      "path": "historical/3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1.json",
+      "design": "91387715-13d3-4c57-a479-12251842d901",
+      "revision": "1",
+      "sha256": "3b11ae30d9936c17a68fc45bae8efb19d0d1cfcf46c33e0c0f0f715b63bd3da1",
+      "bytes": 1696
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842e402.rackdesign",
+      "path": "historical/74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6.json",
+      "design": "91387715-13d3-4c57-a479-12251842e402",
+      "revision": "1",
+      "sha256": "74a971b94d9ea607f46b914f70790143c20e6b9d691709068a4a50e4108496a6",
+      "bytes": 1467
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842e902.rackdesign",
+      "path": "historical/bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5.json",
+      "design": "91387715-13d3-4c57-a479-12251842e902",
+      "revision": "1",
+      "sha256": "bebd5a6b4e00728cade0e148ab2acd3dc2e7ee59b604868c5fca495734c168a5",
+      "bytes": 1711
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842f402.rackdesign",
+      "path": "historical/c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5.json",
+      "design": "91387715-13d3-4c57-a479-12251842f402",
+      "revision": "1",
+      "sha256": "c0517e63367b7f2d7331b4037b069f9c2bc37cf222d59f63ec0acf6a0454f2e5",
+      "bytes": 2249
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-9138771513d34c57a47912251842f901.rackdesign",
+      "path": "historical/33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d.json",
+      "design": "91387715-13d3-4c57-a479-12251842f901",
+      "revision": "1",
+      "sha256": "33f5372e3451099d17da54cae7d337d2760825f54c2dfc8dd3a908a7d88e806d",
+      "bytes": 1413
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-c83dab6a1c4e48c183c480d9212ca601.rackdesign",
+      "path": "historical/1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a.json",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+      "revision": "1",
+      "sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a",
+      "bytes": 3292
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-c83dab6a1c4e48c183c480d9212ca602.rackdesign",
+      "path": "historical/8b1afcfbcef817e372928a9d8ff80ef53b8731043b77096968e2dd966dcfe8f4.json",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca602",
+      "revision": "1",
+      "sha256": "8b1afcfbcef817e372928a9d8ff80ef53b8731043b77096968e2dd966dcfe8f4",
+      "bytes": 3069
+    },
+    {
+      "source": "tests/fixtures/space-reverb-legacy/factory-c83dab6a1c4e48c183c480d9212ca603.rackdesign",
+      "path": "historical/cff62f76f8baec2a7f8d153a953f55b1ce69ba6fab0432d99577ddaeac6569ed.json",
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca603",
+      "revision": "1",
+      "sha256": "cff62f76f8baec2a7f8d153a953f55b1ce69ba6fab0432d99577ddaeac6569ed",
+      "bytes": 1895
+    }
+  ],
+  "assets": [
+    {
+      "path": "resources/maker-skins/band-color/.gitattributes",
+      "bytes": 46,
+      "sha256": "afbca0833b78e23e9742501b1840afd5eb5f1eab0df20f34272e5b8df1e2ca59"
+    },
+    {
+      "path": "resources/maker-skins/band-color/band-color-elements.json",
+      "bytes": 29451,
+      "sha256": "b7a00ed8a51e116b398fbc2d99c242e6d393176ef183e39e5588ea249c4699f2"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-global-mix-pointer.png",
+      "bytes": 7903,
+      "sha256": "d8a04321c7e56f84b06edfbf29e65fdf78779b3e1618d38666405db7097cac53"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-high-crossover-pointer.png",
+      "bytes": 5309,
+      "sha256": "74544c9b0e5f4f9d3d6dce68f0c8129fbfafca8d7f80c5386c1dec485b6ede4e"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-high-drive-pointer.png",
+      "bytes": 2740,
+      "sha256": "6d2ddbcb825c336cce710d87763c70ca1027704df050cb3893be7758b7b8c683"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-high-mix-pointer.png",
+      "bytes": 2314,
+      "sha256": "6a8a6ed8d6188a2b3430f64d27bf809664914a90d590acbe5ed0109dffd90a37"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-high-tilt-pointer.png",
+      "bytes": 1994,
+      "sha256": "41ff782af53ae14715b843b9aa1923aa9b1eaca8e759b58cc4b30e1ddb601453"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-low-crossover-pointer.png",
+      "bytes": 5075,
+      "sha256": "c731a4bead5f571e8efe177c9d04af169c04edfd1ac143127b9ffbb89a2ced8f"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-mid-drive-pointer.png",
+      "bytes": 2900,
+      "sha256": "5b66f0d66734db473b71d577902857bf2dde7be42c4bfc321d238f8992f7d1c9"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-face-mid-mix-pointer.png",
+      "bytes": 2190,
+      "sha256": "e23f4a457a5aad89bfd4f6266c0bef2bbf3636190ef24fb5e2d7495b78b0b945"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-setup-compensation-down.png",
+      "bytes": 1767,
+      "sha256": "bfb769c2c8de9a589aa5d6fe8796642d8c83856600b5a0db9ec37232aef56de1"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-setup-compensation-up.png",
+      "bytes": 1777,
+      "sha256": "8e3dcf81a7d3e0106456ddb68ac092142745879c3a142036e52890669ff0e00c"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-setup-input-trim-pointer.png",
+      "bytes": 2364,
+      "sha256": "659c27820c0989261670b84f63ef0827c527fc907c94ac721307761ffbd172e9"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-setup-mode-down.png",
+      "bytes": 1756,
+      "sha256": "4dd58d33d4c1a208a9d28edc407328339fe404b62f05a6f6542ef264c2925412"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-setup-mode-up.png",
+      "bytes": 1771,
+      "sha256": "6e5e09188b92f6e3300e51b4d55c96cce9be960f038e4d70ae6eddddc5043c63"
+    },
+    {
+      "path": "resources/maker-skins/band-color/parts/band-color-setup-output-trim-pointer.png",
+      "bytes": 2959,
+      "sha256": "6ee0848c89e457c1581673ce4c174d79b6d25090fc4107d4c870a6910033efb0"
+    },
+    {
+      "path": "resources/maker-skins/band-color/plates/band-color-face.png",
+      "bytes": 975690,
+      "sha256": "06cecd870566b7a896178dbb5b87aaf3ef2c727fd2dfc2e03f5fe7af79498968"
+    },
+    {
+      "path": "resources/maker-skins/band-color/plates/band-color-setup.png",
+      "bytes": 219896,
+      "sha256": "10b07b8113847244c5684859dd1d25085079fa64c2cffdbe134278a7420e3e99"
+    },
+    {
+      "path": "resources/maker-skins/band-color/SOURCE.json",
+      "bytes": 10059,
+      "sha256": "a74d05d5ff383976b42175c21125a031dbab1b18a1d5da131e15b56be5deb703"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/.gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/character-drive-elements.json",
+      "bytes": 30965,
+      "sha256": "84d35f422940e5aeb47b26dea0f665a9f40ed3d22d46be65bf9ad80aaab5d635"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-advanced-key.png",
+      "bytes": 12885,
+      "sha256": "9dd6a3fb8eb1d8c86c8a271191db0204164bc2ff1b478e39526f55d7c6b1e392"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-advanced-knob-ring.png",
+      "bytes": 21980,
+      "sha256": "4443fb1e966241bbceec2b889c885dbd0982a76d6e85893bd9f00510c54c05b7"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-advanced-knob.png",
+      "bytes": 21143,
+      "sha256": "3cd8c6917fbbdd461b3bd8964a8905bc4a24f89087355b77e356524ab170ed90"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-advanced-plate.png",
+      "bytes": 187012,
+      "sha256": "b6a652e967c9b6fd2fd92b49d3f6499f30b025f6b18282c2ce0084a6c4ed5ece"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-advanced-section.png",
+      "bytes": 122829,
+      "sha256": "4f82886eb9b57e66272ddeb38e412dcce4fe0ebde4c8653f7bcd610cb67f6d7b"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-character.png",
+      "bytes": 30976,
+      "sha256": "a01c06787dee91b128afc7aee3dd16813da84a93bd24f9ccf1c1a8d5239e91a8"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-drive.png",
+      "bytes": 37570,
+      "sha256": "e6c1a6cfb5371fef60f3d38181a2866eea54656e85c2216a16826b1df92304dd"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-face-character-head.png",
+      "bytes": 16324,
+      "sha256": "a2d12ace7f3947c9d20eccc0731354e4800eea281536f4a988e61166070101d5"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-face-control-head.png",
+      "bytes": 13147,
+      "sha256": "2212476ab48527c2af393c3e9d55eb5da7044cfa3bcbe1f76d043ef9b756845d"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-face-drive-head.png",
+      "bytes": 19124,
+      "sha256": "5f49ad1bf8500bf8f206aac8b874524938d255ce1d766ee86c1a01b5d9af3364"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-medium.png",
+      "bytes": 22693,
+      "sha256": "1d0fc886dd5dec537b6651f840c2d4f541ea1adade6288fb495263695196fb85"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-patch-bay-latch.png",
+      "bytes": 3357,
+      "sha256": "745fe433c84dee22afb64ec93774966c0bb10aa7cb8552e7181b7b7c8e8cee2e"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-patch-bay.png",
+      "bytes": 30353,
+      "sha256": "ffdc911144c30630fed709a574c39f6dd853ea6ea33ef5a5a334729793b05504"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-setup-cap.png",
+      "bytes": 8418,
+      "sha256": "f48185720032db5f46899b6a81ea013898decc3fed991c9cac15fe7de0d42ff1"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/parts/character-drive-small.png",
+      "bytes": 15155,
+      "sha256": "ef7f3c8bd49b2f80aa398efdf184e60768bc1c4f2d70505a24e637d914cf3c7f"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/plates/character-drive-face.png",
+      "bytes": 1749593,
+      "sha256": "b381f03bf6503c65faa4e91d551723e0867574dd020a127c1f9171b2338c4b10"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/plates/character-drive-setup.png",
+      "bytes": 127243,
+      "sha256": "c6fe0b85b3b4e11fbb0df221729e44c4148b93727a752aedfcb54a17b699e4d2"
+    },
+    {
+      "path": "resources/maker-skins/character-drive/SOURCE.json",
+      "bytes": 11217,
+      "sha256": "a596d45d565b9642da0fb94fe330dd2e8373fcaabbaaf5f67938fbc7a68b9e3b"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/.gitattributes",
+      "bytes": 90,
+      "sha256": "6b3c55abd98db4a9aedb40c98c4657a5bda8fa395d19e405fa8787a486db4724"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/ember-reed-elements.json",
+      "bytes": 81816,
+      "sha256": "a164939dffb5e0528bbfcb4af11d2acc13bc8f088841f00f2478e444ca9c530c"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-amp-decay-pointer.png",
+      "bytes": 1526,
+      "sha256": "2e10520afd32d7be365518c19575d89ae99a586562f476a69f5341bcb31e537b"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-amp-sustain-pointer.png",
+      "bytes": 1452,
+      "sha256": "b907caac4507b96eff66d65e62fc90cf12c31baf5e615ac33437b2d600ded3f9"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-mix-pointer.png",
+      "bytes": 1425,
+      "sha256": "f59a80b7990ab077aaf90b8c4ae02ea2d7bc2d7033426ee1c3d64e7d6b629291"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-shape-down.png",
+      "bytes": 4919,
+      "sha256": "8912b751c29f006df22ac26a500c40a9317efbf6c54d2a606860924134bf209e"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-shape-up.png",
+      "bytes": 7009,
+      "sha256": "503c3ba724d8f4515defb5e442cc97b9be4f3c5f97f483d871f4b33c414da510"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-tone-pointer.png",
+      "bytes": 1356,
+      "sha256": "f8a66c5e0c7d397414285af5d1e7b77d48aa15d2dc90ef646056ad23d6fbd256"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-amount-pointer.png",
+      "bytes": 1313,
+      "sha256": "69cd1304de4e36452c03e30865187401f184e5a027dd8dcb34fc8822e7b8c30c"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-attack-pointer.png",
+      "bytes": 1296,
+      "sha256": "ab378cfbdca7872a8bea836fb85837d643cde30d1464cdbbf45e513a5dfe7ee0"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-mode-down.png",
+      "bytes": 5079,
+      "sha256": "53138876ffd672ad253b6fb32db4a79b9e24c0bb13320669bec152eaf3c757e4"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-mode-middle.png",
+      "bytes": 2879,
+      "sha256": "e242cbc2e04761130a41d1a740ee065f12d3caadeda715542b781cb9d8c07b91"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-mode-up.png",
+      "bytes": 7075,
+      "sha256": "697a9ed594fd6284dc5f6deec82738cf31d8b37cbae162872d8fe85976b8f458"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-release-pointer.png",
+      "bytes": 1375,
+      "sha256": "bb1ec22e7d0a148d453fa1ef1f3fc91f54975c8e61bfd9017fb1c8bf2c22338e"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-sustain-pointer.png",
+      "bytes": 1154,
+      "sha256": "d03274645dd9c9495522cd76e537bde66d968c34204fffb682ed122bf7be1cd4"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-rate-pointer.png",
+      "bytes": 1291,
+      "sha256": "a1ab369f2d66a216531a1f140efad7abc1cee682f6d0245e12de68c6eb55b054"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-shape-pointer.png",
+      "bytes": 1692,
+      "sha256": "2f474338cb6622316ca22d0ebf3df7917c2f5501baaf5cb2e6517c31b6a5e614"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-sync-down.png",
+      "bytes": 5050,
+      "sha256": "875e6b41efe0c7ced497eb19828d62ed5459f3a9cbda62a121d50e9778e4c111"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-sync-up.png",
+      "bytes": 7138,
+      "sha256": "00dfd06481b2823bbf1243294d12730d7b43632dfa4fb7089efbbf3b5613d8c1"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-fine-pointer.png",
+      "bytes": 1242,
+      "sha256": "82acb43c60a0b33b30c53b85819cb5034684f0c5ab7693a423941015c1c6d232"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-level-pointer.png",
+      "bytes": 1304,
+      "sha256": "088d903d5ea9564283daf60ffafd7041d578c80136a26a920debbeada48e0f12"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-tune-pointer.png",
+      "bytes": 1334,
+      "sha256": "825d4073bde2bfcce11fa724e9fb313dbb57dc555187daf64f123a7915b52270"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-wave-pointer.png",
+      "bytes": 2161,
+      "sha256": "5ea5ec075b80535f9f11da36fa3a12d409741ede601ca36e73ed93c08601728e"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-width-pointer.png",
+      "bytes": 1316,
+      "sha256": "faae4d5f882e062a7af82ac081353304fe40ac1b5784f236770ee64850e9d733"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-fine-pointer.png",
+      "bytes": 1275,
+      "sha256": "4bd7b21a55b5e49ebbb6842e89294d2f03e57769d20afdd39d25805d3dff5faa"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-level-pointer.png",
+      "bytes": 1281,
+      "sha256": "07d2c8688645129f863ceefa179b71b712a4ded350d3ebf2bdd8b262cdd87e20"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-noise-pointer.png",
+      "bytes": 1327,
+      "sha256": "5a22504bb636c09bdf932b9b57800abcb7a5ff029432ed38160014f6f0682094"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-tune-pointer.png",
+      "bytes": 1210,
+      "sha256": "a4622c50051e27ef13c4236b0c6a285afe936bbe3db92bd81af8e8925fdafddf"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-wave-pointer.png",
+      "bytes": 1736,
+      "sha256": "f2897ff6199e8ac079d2628ba2090571d1b385d1579b5ab63ea5dd4bbe34fab5"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-deck-vel-air-pointer.png",
+      "bytes": 1380,
+      "sha256": "fae246f1b06447d49d03ba5348c013e842883b83d38c412406a4736cc45ce5e7"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-air-knurl.png",
+      "bytes": 932190,
+      "sha256": "dcbe7e42bba1921f97850dce2de4dd68d9957818b891ad599648d7debdd30b32"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-air-rotor.png",
+      "bytes": 3044,
+      "sha256": "2a5729700cef7fbc8d1b7e31757a1404d7932daf4e0960fd2c271093eb8eb23d"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-bite-knurl.png",
+      "bytes": 494933,
+      "sha256": "9bb79699b12809217772e1b36c8cad9ac3e759ee26b9977e295d66fafea7de20"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-bite-rotor.png",
+      "bytes": 2394,
+      "sha256": "d56a13a2837bd613038077144e068b44cb1b0e885e20de8ccb83aac62a31896f"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-fader-cap.png",
+      "bytes": 6299,
+      "sha256": "518e4216db9f1534fcf8760d65f051fc77e75a397c4866c5b284b00a07717158"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-grain-knurl.png",
+      "bytes": 488946,
+      "sha256": "4a03f4dfb3c7fa629ca21715e1a34377b9980a1f7654c465a4ddef0b8933debb"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-grain-rotor.png",
+      "bytes": 2540,
+      "sha256": "cedc5ed2112b1d140c60ca1fbc181602ff2f27c8c8b2b7c886115ab39d53f852"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/parts/ember-reed-face-lamp-lit.png",
+      "bytes": 7599,
+      "sha256": "4c8407824c3979015b7c113a40870d443125a25146ff21e3122deee1a2f97395"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/plates/ember-reed-deck.png",
+      "bytes": 2375305,
+      "sha256": "bdea23f10236d1ce642d2d804dd17110a7e8e1aad1ca7b41fa372ab79da3cdaf"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/plates/ember-reed-face.png",
+      "bytes": 1088972,
+      "sha256": "6656a07990da3fb024368cab8888f6e29130be201fdeeda15cb8ac525e93dba1"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/plates/ember-reed-front.png",
+      "bytes": 450676,
+      "sha256": "8a606636e0ada1c145882d8372ac199c949906048fb016c1ce189061a95b1da5"
+    },
+    {
+      "path": "resources/maker-skins/ember-reed/SOURCE.json",
+      "bytes": 8668,
+      "sha256": "75ebc36936f942bb141e662b061b2b82f3705ef74e12607df926441c85d2d495"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/.gitattributes",
+      "bytes": 90,
+      "sha256": "6b3c55abd98db4a9aedb40c98c4657a5bda8fa395d19e405fa8787a486db4724"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/glass-current-elements.json",
+      "bytes": 111539,
+      "sha256": "e5246c8c41e5655f362929978029111a68f69c89a9a386f4681eaf0dc242ffe1"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-face-drift-rotor.png",
+      "bytes": 1845,
+      "sha256": "caf49725acee9175962f2ea0d1552673f2d57369b7052b8500108182a5e22f64"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-face-echo-rotor.png",
+      "bytes": 1770,
+      "sha256": "e3754a86b1c384fe40cf107d8687141b27184d580d50896eb71fb53176885b7d"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-face-facet-rotor.png",
+      "bytes": 1856,
+      "sha256": "31c0db950d1bf1e727727183875c54fe355cd82b53bdb17d98ba8369e8217fc4"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-face-horizon-rotor.png",
+      "bytes": 1896,
+      "sha256": "e69b127918fde883bf8a6dbc8c6e237755c4c24ba87288277b5a8d69c5dd2a92"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-face-power-lit.png",
+      "bytes": 7363,
+      "sha256": "a754cb2a79d8ee4b7a19c59da02cbf80fd0dc966c7c917e51b30fe91e85cb7b2"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-face-vfd-segment-lit.png",
+      "bytes": 1799,
+      "sha256": "d23c059e3f5157671f2968186906ead4fa1d27f50113e65fcbdab65054c3e836"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-face-vfd-segment-unlit.png",
+      "bytes": 2059,
+      "sha256": "3a1bb5cbe166163f6564f453889f2cf0959901de214510365d09ecfea339c2dc"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-panel-page-lit.png",
+      "bytes": 7024,
+      "sha256": "7f3a7c2d52be631f8a5b5c64a8accd336ab7a1ed0a0eaaf0d17fe4540d9a2b18"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-panel-soft1-rotor.png",
+      "bytes": 1031,
+      "sha256": "ba4f80d28395c6012a05b97202af1d0dbb389d2b91cc0f3e2f2423955779de8e"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-panel-soft2-rotor.png",
+      "bytes": 1262,
+      "sha256": "2722980beec868cdddc0c61a98c76445ea8de2b194a35537b6e0f5cdd22487eb"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-panel-soft3-rotor.png",
+      "bytes": 1247,
+      "sha256": "cae52c3cd83cffbe56433ea62359cfb0b77778b0230cceed9a14d4fae20e01ad"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-panel-soft4-rotor.png",
+      "bytes": 1282,
+      "sha256": "37b0fdef666bd4cc7414e0a287048f59ccdd0ee766e5bd4fbba5173dcba561f6"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/parts/glass-current-strip-power-lit.png",
+      "bytes": 12580,
+      "sha256": "f83b99627fe1fb12129aa4a54307e98ce637476935ce088701721420a09855f4"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/plates/glass-current-door.png",
+      "bytes": 243021,
+      "sha256": "4c134dac472edb1922e13c0d2a85dbe5181f54f9e9f28abb3e78949634cea3f0"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/plates/glass-current-face.png",
+      "bytes": 1146952,
+      "sha256": "741eaf9166cc6d182c9fd7126e96c41560edc6041c29400af22987e65c7ea002"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/plates/glass-current-panel.png",
+      "bytes": 312867,
+      "sha256": "e457852f4bda42fb5b7c72cc003ed1dfd8afac9543cf0bac011092fc03391931"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/plates/glass-current-strip.png",
+      "bytes": 332034,
+      "sha256": "7f45619b9ec6ac6e0241a2591a7d9b372f1dee174d720077467b462ff0ade60c"
+    },
+    {
+      "path": "resources/maker-skins/glass-current/SOURCE.json",
+      "bytes": 3730,
+      "sha256": "b3de50551fdb53960cc3004d56c1d7dd2182b69ec4c3e9d429e8491d4f98962e"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/.gitattributes",
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/lumen-field-elements.json",
+      "bytes": 28378,
+      "sha256": "951fad6877ce332c598a14c1a9b3fb1e8d08f57b78e5a13c269047f2de5df918"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/parts/lumen-field-deck-shared-pointer.png",
+      "bytes": 976,
+      "sha256": "5d79d463569bb62af26d5661b05127ee1b95f637131b9e1435e46cddb0d52971"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/parts/lumen-field-face-decay-pointer.png",
+      "bytes": 24379,
+      "sha256": "3b17192a0b2cf6f01205f210138633b8fdba2e90052263aa75c6da547b5186cb"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/parts/lumen-field-face-in-down.png",
+      "bytes": 2793,
+      "sha256": "914e6fa0380b752227a510daf89187f37aaa13df12b96b5e31068e17e9e5b71c"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/parts/lumen-field-face-in-up.png",
+      "bytes": 2854,
+      "sha256": "f36526c912daf44f95a764d0f13c6c41f498a48b10697e1237b5decee50d6570"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/parts/lumen-field-face-lamp-lit.png",
+      "bytes": 2067,
+      "sha256": "9133277dc0aa5b31363e3c9978411524f82198b9e602bda9c5ef7eedef8fffad"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/parts/lumen-field-face-shared-cap.png",
+      "bytes": 6886,
+      "sha256": "420af8130d7c3b339c12483e0488a88d134788234b72285281c75715f8c0f7c1"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/parts/lumen-field-face-shared-pointer.png",
+      "bytes": 1452,
+      "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/plates/lumen-field-deck.png",
+      "bytes": 1273419,
+      "sha256": "427c1bc3c932a53c8ade47383adda35581f2f9a9e41c3dd4d3acb29e9f90a02e"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/plates/lumen-field-face.png",
+      "bytes": 1406782,
+      "sha256": "f5dc3ee403be83f6e2fc8045204328498023a3e5064af0be5cc7c639a4124f11"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/plates/lumen-field-front.png",
+      "bytes": 360680,
+      "sha256": "44e5341ca04c587867e37f7717b246ff7bf7ff91b3c555c71bab3b968ccce2c0"
+    },
+    {
+      "path": "resources/maker-skins/lumen-field/SOURCE.json",
+      "bytes": 6033,
+      "sha256": "85f708a4fbc49f7430499ebf3696251f93e553a8d8bdfb531f477569e1e8503e"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/.gitattributes",
+      "bytes": 90,
+      "sha256": "6b3c55abd98db4a9aedb40c98c4657a5bda8fa395d19e405fa8787a486db4724"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/night-dial-elements.json",
+      "bytes": 65218,
+      "sha256": "5289de388260d4ef9e3f1d2f2e1be7abed54681a537c8e21e242d6770da36b36"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-deck-knob-rotor.png",
+      "bytes": 867,
+      "sha256": "f1e85fb624e34592ec16f80fa3f837177e9508d0d03b6dfc3ef0eb4dafd05001"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-deck-lever-saw.png",
+      "bytes": 6687,
+      "sha256": "214e2ad6a3d1bdf894da097417eedbaaf6ba591d4e3751135eec9aebffc07558"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-deck-lever-sqr.png",
+      "bytes": 6580,
+      "sha256": "976226b37cc1e9de2a56dc5db1fc510fa268ca82593aa28fd6f9f2cea0132a8d"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-deck-selector-bar.png",
+      "bytes": 1979,
+      "sha256": "a77bb5d41a4c35b5bea465357fe1919140936bc3267f29f9cbf0fac9d787c51b"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-face-backlight-lit.png",
+      "bytes": 200177,
+      "sha256": "f28fb1762174f375051b2c2777bb7db7ad1800f6cb2fc4714c8ba0c915dd9166"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-face-dial-rotor.png",
+      "bytes": 3864,
+      "sha256": "bec6e954e3a73f32cdf6ca669defee601e3276c00245de9677fc97d4af218081"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-face-glow-rotor.png",
+      "bytes": 861,
+      "sha256": "2fde56816a1c3108d3a4e731952a327df404189cb06ef19763952212e1dc1d40"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-face-knob-rotor.png",
+      "bytes": 911,
+      "sha256": "df3d20b0551b6a79226bcaae538f81b593fd8bcb50d6847850236832834de947"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-face-needle.png",
+      "bytes": 6991,
+      "sha256": "8607bb3cd464192fe4d6503cf3509e99e2efe5990699cf5668ae6011272ac8ef"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/parts/night-dial-face-pull-raised.png",
+      "bytes": 24374,
+      "sha256": "37ebf5ca032b24adf869dd396cbe77fd644f6993fe4455e1942d1a97830c335d"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/plates/night-dial-deck.png",
+      "bytes": 793724,
+      "sha256": "deabf80decd4fb9f326e4b536b1ac53a92446751cb1da0b3890b8f2aa59f1110"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/plates/night-dial-face.png",
+      "bytes": 1224670,
+      "sha256": "eed866ac7d5b6f1e39d735466077a180151acf9f94f34a49eb929e729336289d"
+    },
+    {
+      "path": "resources/maker-skins/night-dial/SOURCE.json",
+      "bytes": 3513,
+      "sha256": "4b98cbe33efdebafc486ae03c971a410e4d8e2733f5a565c2d5460276aa61b82"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/.gitattributes",
+      "bytes": 90,
+      "sha256": "6b3c55abd98db4a9aedb40c98c4657a5bda8fa395d19e405fa8787a486db4724"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/oxide-return-elements.json",
+      "bytes": 53325,
+      "sha256": "403789176ec14f27476bb371f3fbfa1b8354ad1e0aea59a63b1f79a6b4154fff"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-high-cut-knurl.png",
+      "bytes": 715402,
+      "sha256": "8902e8397267ba4a97cc91c652008fbd1e7d1c321943d174bbc3fb8588485813"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-high-cut-pointer.png",
+      "bytes": 1556,
+      "sha256": "21f0194635195d5d99ae267b0fba9203ffaa789193446c7cac18e37501134487"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-in-in.png",
+      "bytes": 44783,
+      "sha256": "a5d20b357c2bd49c8f933d0f63fcbfed211c8ee82385ee755605f30a2e29a6ed"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-in-out.png",
+      "bytes": 45696,
+      "sha256": "ae57b787c7ce7816090e9457b8fdf302ccc15d65503bd601e6ee06130011bae7"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-lamp-lit.png",
+      "bytes": 8392,
+      "sha256": "fd2e44c015791745e5c5493594070f735affff0be67653be03e8d7d1b85f9982"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-low-cut-knurl.png",
+      "bytes": 775226,
+      "sha256": "edca5323074cb1418250cd9bd0c3e914ebb61de9321ec4250fc8777443c8a26f"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-low-cut-pointer.png",
+      "bytes": 2106,
+      "sha256": "03cd238823c819a9cb8ba801281e720152df84c9622251825a61b23c11018f87"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-mix-knurl.png",
+      "bytes": 1215653,
+      "sha256": "b097c224892782f366ba13a4c40e1d437b892f9f0316ae9b08fac7394bfb3cd3"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-mix-pointer.png",
+      "bytes": 2391,
+      "sha256": "1dd0db2afb5409b84c685d9f5d90ffcc7e26966d55a4daed0a1b66256756947e"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-repeats-knurl.png",
+      "bytes": 1258266,
+      "sha256": "c5810dab7d46d7791c5bd8550eb7fe79db7805a0ea9a3f45e1f4f7dbff302c81"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-repeats-pointer.png",
+      "bytes": 2416,
+      "sha256": "8631a5b6d5957b3a22036345d4651c97302ce8e0c6b58174bda6a82eb8cf1a5c"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-saturation-knurl.png",
+      "bytes": 829431,
+      "sha256": "b44aa568ff62366f34fdd811ef8b4db0da4ec63d82c02edf1a6adec4f8971776"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-saturation-pointer.png",
+      "bytes": 1967,
+      "sha256": "2fb6d15702973ed05346e85bd0e91ce1242757fc4737d95a16d9b0a602300d07"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-time-hub.png",
+      "bytes": 12084,
+      "sha256": "2e9a947c32f5a9b08e8e4cb44e9da484e0bf8567261b9417553f1653c75fea46"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-time-knurl.png",
+      "bytes": 2873033,
+      "sha256": "856ea379dd63e5db6d623eadf929aa0b92b7772f1a29505b043e64c0d6c9f938"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-time-needle.png",
+      "bytes": 12001,
+      "sha256": "8ad3158701f13e6e7a091c5ef612e24eaf3bf77918c70f0fa5c8e07dea240abe"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-wobble-knurl.png",
+      "bytes": 857390,
+      "sha256": "99659eeb6e10f842c70ae1eb05f6896f6456825373c032e9d8fe7c88500479f3"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-face-wobble-pointer.png",
+      "bytes": 1933,
+      "sha256": "9b9474973c6793dac9c53ddf4579a153bef501da0d8425558933029f157a8686"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-cross-knurl.png",
+      "bytes": 248736,
+      "sha256": "f43a11734a49f0b6accb1e039738be0e5b8d3ac9c2849ea28bca366401131e89"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-cross-pointer.png",
+      "bytes": 445,
+      "sha256": "19b580abe6d263944089ad348a618935a99743d8aab372951221f835575ed528"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-note-knurl.png",
+      "bytes": 386783,
+      "sha256": "d2725f259abc4d5b3e998f6dc5a16f0d98f10e6a81ae468275fa4ef0447516df"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-note-pointer.png",
+      "bytes": 565,
+      "sha256": "8124c6dd73d28ffd91736fa7a39e2dd692eb9687de712db512f729f58e3ab3d2"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-ping-pong-dual.png",
+      "bytes": 15721,
+      "sha256": "6b398842dea53b2bc3c4d0793cee2c630fc8d93668bb4a1cffb20ec5232cfca8"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-ping-pong-ping-pong.png",
+      "bytes": 16213,
+      "sha256": "67e6ad694ad980e7e3cf339ea53bb3300ab271f54fd0dc4b9183e294aaab09ae"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-sync-free.png",
+      "bytes": 15280,
+      "sha256": "59143925eeaf5303716f585c15ea1b4d545472035794ab9230d7ea471bceaef0"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-sync-sync.png",
+      "bytes": 15907,
+      "sha256": "6241397303701b9227be920b7b3b8692531495cff4cc8e73b0503ee048a382cf"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-wobble-rate-knurl.png",
+      "bytes": 264753,
+      "sha256": "80584ab67a86dfd541b976975f48c73f6806f2d762a980722843f54173887d6e"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-wobble-rate-pointer.png",
+      "bytes": 407,
+      "sha256": "efcf79b375fd20acf1ed8abcca73e9985c9f4233cf28da5b606fdadd6bfc919a"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/plates/oxide-return-face.png",
+      "bytes": 1809868,
+      "sha256": "2ec408a050eadc94e27a0c10597378aee3a5d9d7cebf8802964940b939a7f02e"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/plates/oxide-return-tempo.png",
+      "bytes": 303639,
+      "sha256": "07f07e84e7964a982207620f9bf49b1bd41f373704792a23e8777062cfe3c8e2"
+    },
+    {
+      "path": "resources/maker-skins/oxide-return/SOURCE.json",
+      "bytes": 5585,
+      "sha256": "8f9aa473b5c0a76a1947efd6ae6d8499440eed5626f4973a266843c42387d4f6"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/.gitattributes",
+      "bytes": 90,
+      "sha256": "6b3c55abd98db4a9aedb40c98c4657a5bda8fa395d19e405fa8787a486db4724"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-adjust-trim-pointer.png",
+      "bytes": 498,
+      "sha256": "bf61e6f96e42672fb85e68579fa4f6b7ce93cad02de410874b5dcaef1dfbc3bd"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-face-afterglow-dimple.png",
+      "bytes": 5258,
+      "sha256": "e31a74f3468a1c01bc28e3b2bb8787a29d4d2531bdb27ac186bdd0e52c5c32d3"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-face-afterglow-needle.png",
+      "bytes": 1920,
+      "sha256": "427e2db3adf8a4dd1930841a6f2d52ecad6b4a11f6fcc40670f0a34f6dbdb873"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-face-age-paddle.png",
+      "bytes": 2481,
+      "sha256": "5243dce2c60c47d8967508e5924fd3f9bd83a80036f7bb8b56347df3bb7bfab0"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-face-in-paddle.png",
+      "bytes": 2612,
+      "sha256": "10dd85ed073a56c389d8dac7bd6ca2738c1eef7dba09b6298b2e9aea6d2278c5"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-face-knob-pointer.png",
+      "bytes": 785,
+      "sha256": "9f8517c81b11cf3e6270229faa751ab7bfc3031e564e8629a69c09c06093e3c9"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-face-lamp-lit.png",
+      "bytes": 6824,
+      "sha256": "1411c77dbb3607e05293baff3d263808753fa8fa118369c49657855e58f1334e"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/parts/small-hours-face-program-pointer.png",
+      "bytes": 747,
+      "sha256": "8ebfaf3587c377a464e60e17c3fcd76e840332e1401ad3d9be81a032174e2264"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/plates/small-hours-adjust.png",
+      "bytes": 370002,
+      "sha256": "188924d0a41520fe15f7dee01f0ac7f0be4fb9ea45d9ef39d72b3eefb4bc0a48"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/plates/small-hours-face.png",
+      "bytes": 1668329,
+      "sha256": "46aa86fc8a7de87afeb4d3138c9b92cb410631fb85c06a253d8bb9f1f92aac2c"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/small-hours-elements.json",
+      "bytes": 34943,
+      "sha256": "719bd92b21cad9f9a4b208373960856987711887e6812e88292b8dba21a1af5b"
+    },
+    {
+      "path": "resources/maker-skins/small-hours/SOURCE.json",
+      "bytes": 3600,
+      "sha256": "5ca5ed9f7985d7286e62a7fb9c4dbcc6eb8eacf6ca4bbb24e102417d65014591"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/.gitattributes",
+      "bytes": 90,
+      "sha256": "6b3c55abd98db4a9aedb40c98c4657a5bda8fa395d19e405fa8787a486db4724"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-face-blend-head.png",
+      "bytes": 17563,
+      "sha256": "b20d1b769d45f5bc3dcf04231219132b208a28160e0e0742a064cfb0b2d5cb1d"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-face-density-head.png",
+      "bytes": 13147,
+      "sha256": "2212476ab48527c2af393c3e9d55eb5da7044cfa3bcbe1f76d043ef9b756845d"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-face-front-head.png",
+      "bytes": 16324,
+      "sha256": "a2d12ace7f3947c9d20eccc0731354e4800eea281536f4a988e61166070101d5"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-face-grip-head.png",
+      "bytes": 19124,
+      "sha256": "5f49ad1bf8500bf8f206aac8b874524938d255ce1d766ee86c1a01b5d9af3364"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-face-in-down.png",
+      "bytes": 3474,
+      "sha256": "d3c6724a5146d45bd6c764140e157de9410a0f00aa9ecd976d12f5ad3b2a4fe3"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-face-in-up.png",
+      "bytes": 4759,
+      "sha256": "a51a8e9c57c9d75740f61a74d0389935c9c33d3a3caabafae14e48a9efeab108"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-face-lamp-lit.png",
+      "bytes": 7381,
+      "sha256": "d30fcf3abf376dfff1b0fd5821bd2dd206f9b15f31899dc05a8d19a193e3403f"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-drive-in-down.png",
+      "bytes": 1906,
+      "sha256": "7a3d1284121098656404afe564b05e3cd4d22cec04d1e14e62351b5bac5e9344"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-drive-in-up.png",
+      "bytes": 2698,
+      "sha256": "9775680129294ff6e97e5e0edf7b4c94f979fe1d4ef2394c56ad636d845cb6bc"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-makeup-pointer.png",
+      "bytes": 864,
+      "sha256": "4a71e7932ce773617c40110a8c0969065c41354f3328c253f98c525a560347f4"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-mix-head.png",
+      "bytes": 4215,
+      "sha256": "a963fd022a05672b5e031d70b08e2009d6ca5074fbaa8a1ba746c002c4d329fa"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-ratio-head.png",
+      "bytes": 4294,
+      "sha256": "e87f1a8f866916e5bca0f08f191521761e77eeef8e9dde7e697fc735bb0a614a"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-release-pointer.png",
+      "bytes": 4663,
+      "sha256": "60a468ce88e473f93976b9ce3db85907b2576f316d87dfd65f386b006574c8c4"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-shape-down.png",
+      "bytes": 1906,
+      "sha256": "7a3d1284121098656404afe564b05e3cd4d22cec04d1e14e62351b5bac5e9344"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-shape-up.png",
+      "bytes": 2698,
+      "sha256": "9775680129294ff6e97e5e0edf7b4c94f979fe1d4ef2394c56ad636d845cb6bc"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/parts/thread-press-setup-tone-head.png",
+      "bytes": 4672,
+      "sha256": "a004f6f0926a57b763d439cf5d054898dd61b1d0384929144aea76ff949b487b"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/plates/thread-press-face.png",
+      "bytes": 1504034,
+      "sha256": "a2eed0478d544bc531d90202d1e141445dcc00a15b2741546ecf5e808a29c903"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/plates/thread-press-setup.png",
+      "bytes": 235524,
+      "sha256": "12101f02298366bbbe99ac14ae38d86148d2836b52306180e0f7194b62b04bff"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/SOURCE.json",
+      "bytes": 3582,
+      "sha256": "dd8caad708bed62f756ddee253770b4e25db8574d887a7aed1dd27eb1688f5f0"
+    },
+    {
+      "path": "resources/maker-skins/thread-press/thread-press-elements.json",
+      "bytes": 31579,
+      "sha256": "7c559cf2d078e2651c937571f0855b6474c30cb48a0099730a2ab6e498552704"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enable-latching-key-disabled.png",
+      "bytes": 27729,
+      "sha256": "70aecddaa30002b4c0d4ed50bc7fc37d2c64afcc7af3a86ea593de62614a1726"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enable-latching-key-hover_off.png",
+      "bytes": 29745,
+      "sha256": "f59a15d8963faf318b060f46c082562c2a85955ed54922b55314cdc3c53d15fb"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enable-latching-key-hover_on.png",
+      "bytes": 31080,
+      "sha256": "b9d8f30a3ca980e509f71f0797532600f7d35f2afc5d0d4af4b9108db64759f8"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enable-latching-key-off.png",
+      "bytes": 29787,
+      "sha256": "84c15dfe5cee2195f8f63040c6bbad7bb61f957800c76d20bceaf01a6901cee4"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enable-latching-key-on.png",
+      "bytes": 32627,
+      "sha256": "d98bb9bb6063b5235986576d864798fb0c18b60c66897512770af24f35fdba4d"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enable-latching-key-pressed_off.png",
+      "bytes": 31072,
+      "sha256": "2600cc4e9805c2b3e9b1fa6f734482fc63d6cafe2fcdd47eca5bfd34d6001b33"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enable-latching-key-pressed_on.png",
+      "bytes": 32670,
+      "sha256": "c8f94838101b3f9b9871a70a6651276fe7cc5b65c1fcf5c169af6a9702857f25"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enabled-indicator-off.png",
+      "bytes": 2909,
+      "sha256": "f7af2e3b33ad4e412a3df5002267830b1346b1d514c14db5ff41f7ddb59e4c98"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-enabled-indicator-on.png",
+      "bytes": 2999,
+      "sha256": "6b8f92a80950ff744487c0b44722baea24c45f60caf6781d3bc7ec007c0f6a5b"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-ivory-performance-pad-disabled.png",
+      "bytes": 55313,
+      "sha256": "1a8579b3d3d63287501abcc769c7df41bd5d5396820748b97cb3ee97a470aca4"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-ivory-performance-pad-hover.png",
+      "bytes": 57360,
+      "sha256": "dc5f7ea99ec25ba2c01a3810836ea40e01e7a0c926cfee977bfa518a9f131802"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-ivory-performance-pad-idle.png",
+      "bytes": 55423,
+      "sha256": "cedc5d17f9efcfc25532ffa344f827ed051071ed7862ec4150bfc87b6908e3d2"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-ivory-performance-pad-pressed.png",
+      "bytes": 58857,
+      "sha256": "7ceea58b5fd8aceb21947a64d555ff6474dcc9c797cf2b7f0c48856a34598f55"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-kit-level-fader-cap-disabled.png",
+      "bytes": 9407,
+      "sha256": "94d29c6205a957eab398347a7bf351159dedebf734e28f64358050a44b4ec818"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-kit-level-fader-cap-hover.png",
+      "bytes": 10090,
+      "sha256": "370b8965c791afdf1c2f83ee1bb55206c5ee5aecfaeb73c54151e3b90872365a"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-kit-level-fader-cap-idle.png",
+      "bytes": 9781,
+      "sha256": "28fe464c6d8cb84d1ed5a5d0f0186286ab5c3e4b12c0a90a45f238ef7a7ffd50"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-kit-level-fader-cap-pressed.png",
+      "bytes": 10068,
+      "sha256": "8010346c3b20542911e131251f2a9e7e049887a76152c77df070905c19528d9d"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-membrane-action-key-disabled.png",
+      "bytes": 29917,
+      "sha256": "af84d147587fc0b085e3cc987c49dc3373764fbe7ec0ae721fc4779a91e25acf"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-membrane-action-key-hover.png",
+      "bytes": 32667,
+      "sha256": "a28c5ac95413e65f49efa2d3cdb31783ccbf28c77ff836a73cf559e9af04400b"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-membrane-action-key-idle.png",
+      "bytes": 32429,
+      "sha256": "cf37b418758c57f64460bd8d8a1deead5b2a433af7301037da1dc0d636b5cc0e"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-membrane-action-key-pressed.png",
+      "bytes": 34365,
+      "sha256": "3e529f4389cb71cbcfc0652374ccbc7cd5c694c779c6b1811a329b4588479175"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-membrane-action-key-selected.png",
+      "bytes": 34045,
+      "sha256": "1aa09b13650b61c61e2c3b982029f96fbb976e7a5b629abcb22bcfe8c2aac937"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-selected-pad-outline-selected.png",
+      "bytes": 28231,
+      "sha256": "5b7fcd451459a5535b7710ae92fc9681ded5ba22b4d58045ae544ae179d02177"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-wheel-face-body.png",
+      "bytes": 49322,
+      "sha256": "85a0a51190f9c5a08bb29a7d76f4c2e49d4a0a0bda36b9608ed627a68495e6f5"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-wheel-face-rotor.png",
+      "bytes": 45079,
+      "sha256": "6a53184bc9a3a815fc5caa8ca6036925038fe8e1d138a5e1404eb02689cc8aa2"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-wheel-pad-body.png",
+      "bytes": 21330,
+      "sha256": "dfd2774fd310f347acbc14695ec127cb17bd3ff9e3040cbcb1ee6b013a1d872e"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/parts/tile-array-wheel-pad-rotor.png",
+      "bytes": 19337,
+      "sha256": "d721af02309facdb5322075ac663e68514037bcd11310ee16971249a06a9c404"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/plates/tile-array-face.png",
+      "bytes": 2919666,
+      "sha256": "9e9f12e31b209335dbe64d9d0872f63bf025c8889adb5977c4478ddd31f715d0"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/plates/tile-array-programmer.png",
+      "bytes": 1982299,
+      "sha256": "35e2af173395e2be4f1d3aae2497a8b35a530473e56d8496d176be378285a840"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/SOURCE.json",
+      "bytes": 17778,
+      "sha256": "8a38d0d6be5a29c4f833d78fada7c2efa32b004d45961aa6b2f5f4d9e95e78e0"
+    },
+    {
+      "path": "resources/maker-skins/tile-array/tile-array-elements.json",
+      "bytes": 400095,
+      "sha256": "3a27aa09248c97b9be50396e148cefc1e381c2fbbb2fc9cebd91f089b17e118d"
+    }
+  ]
+}

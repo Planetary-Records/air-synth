@@ -1,0 +1,17 @@
+tests/fixtures/space-reverb-pr47-sound23/** -text
+tests/fixtures/space-reverb-accepted-main55-sound23/** -text
+tests/fixtures/era-reverb-sound26/** -text
+tests/fixtures/era-reverb-sound27/** -text
+tests/fixtures/drum-main-reconciliation/** -text
+# Preserve original redistribution notice bytes on Windows checkouts.
+licenses/third-party/** -text
+LICENSE -text
+tests/fixtures/rack-library/** -text
+tests/fixtures/rack-package-recall/RackDesign.cpp.frozen -text
+racks/*/rack.json -text
+tests/fixtures/rack-library-product/** -text
+racks/*/package.json -text
+racks/*/screenshot.png -text
+racks/*/skin/** -text
+racks/*/notices/** -text
+tests/fixtures/saturation-lifecycle-rate-20261024/** -text

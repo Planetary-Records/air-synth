@@ -1,0 +1,45 @@
+{
+  "source_commit": "698257be1c8bbf9ab7a1f38c72c2200c5860aabd",
+  "scope": "Actual accepted-main PR55 Sound23/Project22 writer before any Space merge:2535 controls/16 effect banks. Full original tracked Git blobs verified after CRLF normalization; only temporary capture entry added to DynamicEqIntegrationTests. Independently configured and compiled from that frozen source, probesOFF.",
+  "receipt": {
+    "actual_exit": 0,
+    "binary_sha256": "DFD9A0BA90FBC26ED7415AAE2E393ADE1829962107E32F04B9ABF52E182EC98C",
+    "source_sha256": "035A0E794D183C77B75D6340707F46CE6D05168ED03EF59A08F80C8F3738C30B",
+    "ended_utc": "2026-10-20T15:00:38.7980053Z",
+    "input_sha256": "646230850FCEACC898376FAEADD454C1E625CDA1320F70364D2DA33EAE2F0AC2"
+  },
+  "checks": 13,
+  "failures": 0,
+  "input_file": "tests/fixtures/eq-detector-accepted-delay22/embedded-v22.soundstate",
+  "rich_state": "Actual accepted embedded predecessor state upgraded by main writer; all64 detector bands use non-default auto/adaptive/source/free limits, with non-default locks and two continuous detector macro targets. Exact sound and Project round trips checked by the main writer.",
+  "files": {
+    "capture.log": {
+      "bytes": 37,
+      "sha256": "dc5015e0ce58716baade31dbec1aee01fb1751b98e2408a9532f6be9748d91f1"
+    },
+    "capture.patch": {
+      "bytes": 3582,
+      "sha256": "e367cd771a299d88d9f405885324225dc745bc3ade96f65febe24b76f0c86717"
+    },
+    "default-v23.soundstate": {
+      "bytes": 23169,
+      "sha256": "4cb06929f0be3a84f8834f4435717f1c2a03abc57e99ea3d5486325a0b07cee8"
+    },
+    "registry-v23.json": {
+      "bytes": 569786,
+      "sha256": "0098522dc4c00cff88b76b282ab8053df4ba818fa6bb11cb62bb300417dc8189"
+    },
+    "rich-v22.airackproject": {
+      "bytes": 26246,
+      "sha256": "48c2c750d9f0c6b6a167b919088ffcef4052c7917cf9d1ee98768483afc41a51"
+    },
+    "rich-v23.soundstate": {
+      "bytes": 26138,
+      "sha256": "aa018619f867bf8242195e9a098e31338d3a5883e2c8c2d914cec80f9d488c44"
+    },
+    "source-binding.json": {
+      "bytes": 70334,
+      "sha256": "ef2a3730c750b47aa9e657c7e243acbeea1e4ee661573e691140c9c9ca341903"
+    }
+  }
+}

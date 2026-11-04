@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "status": "incomplete: native screenshot and sanitized runtime skin required in Task8",
+  "originalSkinPolicy": "Original skin bytes/hashes are frozen inputs. Release skins are derived sanitized copies with their own hashes; preserve runtime fields, controls and notices.",
+  "manifest": {
+    "schema": 1,
+    "id": "lumen-field",
+    "version": "1.0.0",
+    "metadata": {
+      "design": "cc73c36a-696e-4b09-9cf3-dcd4dfac16f0",
+      "revision": "1",
+      "canonical_sha256": "f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191",
+      "name": "Lumen Field",
+      "maker": "MONEVIK AKUSTIK",
+      "purpose": "An original spacious stereo hall with softened high-frequency decay and a gentle wet low cut.",
+      "description": "An original spacious stereo hall with softened high-frequency decay and a gentle wet low cut. Shape time with Decay, tone with Post EQ and busy parts with ducking.",
+      "role": "fx",
+      "tags": [
+        "reverb",
+        "space",
+        "ambient"
+      ]
+    },
+    "design": "rack.json",
+    "skin": "skin/lumen-field-elements.json",
+    "screenshot": "",
+    "files": [
+      {
+        "path": "rack.json",
+        "sha256": "f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191",
+        "kind": "design",
+        "bytes": 9494
+      },
+      {
+        "path": "skin/lumen-field-elements.json",
+        "sha256": "951fad6877ce332c598a14c1a9b3fb1e8d08f57b78e5a13c269047f2de5df918",
+        "kind": "skin",
+        "bytes": 28378
+      },
+      {
+        "path": "skin/parts/lumen-field-deck-shared-pointer.png",
+        "sha256": "5d79d463569bb62af26d5661b05127ee1b95f637131b9e1435e46cddb0d52971",
+        "kind": "png",
+        "bytes": 976
+      },
+      {
+        "path": "skin/parts/lumen-field-face-decay-pointer.png",
+        "sha256": "3b17192a0b2cf6f01205f210138633b8fdba2e90052263aa75c6da547b5186cb",
+        "kind": "png",
+        "bytes": 24379
+      },
+      {
+        "path": "skin/parts/lumen-field-face-in-down.png",
+        "sha256": "914e6fa0380b752227a510daf89187f37aaa13df12b96b5e31068e17e9e5b71c",
+        "kind": "png",
+        "bytes": 2793
+      },
+      {
+        "path": "skin/parts/lumen-field-face-in-up.png",
+        "sha256": "f36526c912daf44f95a764d0f13c6c41f498a48b10697e1237b5decee50d6570",
+        "kind": "png",
+        "bytes": 2854
+      },
+      {
+        "path": "skin/parts/lumen-field-face-lamp-lit.png",
+        "sha256": "9133277dc0aa5b31363e3c9978411524f82198b9e602bda9c5ef7eedef8fffad",
+        "kind": "png",
+        "bytes": 2067
+      },
+      {
+        "path": "skin/parts/lumen-field-face-shared-cap.png",
+        "sha256": "420af8130d7c3b339c12483e0488a88d134788234b72285281c75715f8c0f7c1",
+        "kind": "png",
+        "bytes": 6886
+      },
+      {
+        "path": "skin/parts/lumen-field-face-shared-pointer.png",
+        "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b",
+        "kind": "png",
+        "bytes": 1452
+      },
+      {
+        "path": "skin/plates/lumen-field-deck.png",
+        "sha256": "427c1bc3c932a53c8ade47383adda35581f2f9a9e41c3dd4d3acb29e9f90a02e",
+        "kind": "png",
+        "bytes": 1273419
+      },
+      {
+        "path": "skin/plates/lumen-field-face.png",
+        "sha256": "f5dc3ee403be83f6e2fc8045204328498023a3e5064af0be5cc7c639a4124f11",
+        "kind": "png",
+        "bytes": 1406782
+      },
+      {
+        "path": "skin/plates/lumen-field-front.png",
+        "sha256": "44e5341ca04c587867e37f7717b246ff7bf7ff91b3c555c71bab3b968ccce2c0",
+        "kind": "png",
+        "bytes": 360680
+      }
+    ],
+    "capabilities": {
+      "airMin": "0.1.0",
+      "modules": [
+        {
+          "module": 18,
+          "algorithmRevision": 1
+        }
+      ],
+      "nativeEditor": "space_reverb"
+    }
+  },
+  "sources": [
+    {
+      "path": "rack.json",
+      "source": "racks/lumen-field/rack.json"
+    },
+    {
+      "path": "skin/lumen-field-elements.json",
+      "source": "resources/maker-skins/lumen-field/lumen-field-elements.json"
+    },
+    {
+      "path": "skin/parts/lumen-field-deck-shared-pointer.png",
+      "source": "resources/maker-skins/lumen-field/parts/lumen-field-deck-shared-pointer.png"
+    },
+    {
+      "path": "skin/parts/lumen-field-face-decay-pointer.png",
+      "source": "resources/maker-skins/lumen-field/parts/lumen-field-face-decay-pointer.png"
+    },
+    {
+      "path": "skin/parts/lumen-field-face-in-down.png",
+      "source": "resources/maker-skins/lumen-field/parts/lumen-field-face-in-down.png"
+    },
+    {
+      "path": "skin/parts/lumen-field-face-in-up.png",
+      "source": "resources/maker-skins/lumen-field/parts/lumen-field-face-in-up.png"
+    },
+    {
+      "path": "skin/parts/lumen-field-face-lamp-lit.png",
+      "source": "resources/maker-skins/lumen-field/parts/lumen-field-face-lamp-lit.png"
+    },
+    {
+      "path": "skin/parts/lumen-field-face-shared-cap.png",
+      "source": "resources/maker-skins/lumen-field/parts/lumen-field-face-shared-cap.png"
+    },
+    {
+      "path": "skin/parts/lumen-field-face-shared-pointer.png",
+      "source": "resources/maker-skins/lumen-field/parts/lumen-field-face-shared-pointer.png"
+    },
+    {
+      "path": "skin/plates/lumen-field-deck.png",
+      "source": "resources/maker-skins/lumen-field/plates/lumen-field-deck.png"
+    },
+    {
+      "path": "skin/plates/lumen-field-face.png",
+      "source": "resources/maker-skins/lumen-field/plates/lumen-field-face.png"
+    },
+    {
+      "path": "skin/plates/lumen-field-front.png",
+      "source": "resources/maker-skins/lumen-field/plates/lumen-field-front.png"
+    }
+  ]
+}

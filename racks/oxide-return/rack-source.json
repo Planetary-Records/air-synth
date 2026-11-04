@@ -1,0 +1,362 @@
+{
+  "schema": 1,
+  "status": "incomplete: native screenshot and sanitized runtime skin required in Task8",
+  "originalSkinPolicy": "Original skin bytes/hashes are frozen inputs. Release skins are derived sanitized copies with their own hashes; preserve runtime fields, controls and notices.",
+  "manifest": {
+    "schema": 1,
+    "id": "oxide-return",
+    "version": "1.0.0",
+    "metadata": {
+      "design": "330cb53b-cd9b-443c-94d8-2700bc8b88f7",
+      "revision": "1",
+      "canonical_sha256": "61fb7252e7e804e9742fee81ee7befa5f5778e3bac43c344dca85609037952c0",
+      "name": "Oxide Return",
+      "maker": "ARDENTI",
+      "purpose": "A warm tape-style echo whose repeats saturate, darken and thin as they recirculate, with a gentle wow; time changes glide like a tape transport.",
+      "description": "A warm tape-style echo whose repeats saturate, darken and thin as they recirculate, with a gentle wow; time changes glide like a tape transport. Shape the echo time, how long the repeats return, how much tape grit and wobble they gather and the low and high cut on the repeats; the dry signal stays clean. Switch to host-synced note values, cross the repeats between the sides, or speed the wobble up toward flutter when needed.",
+      "role": "fx",
+      "tags": [
+        "delay",
+        "tape",
+        "warm"
+      ]
+    },
+    "design": "rack.json",
+    "skin": "skin/oxide-return-elements.json",
+    "screenshot": "",
+    "files": [
+      {
+        "path": "rack.json",
+        "sha256": "61fb7252e7e804e9742fee81ee7befa5f5778e3bac43c344dca85609037952c0",
+        "kind": "design",
+        "bytes": 2941
+      },
+      {
+        "path": "skin/oxide-return-elements.json",
+        "sha256": "403789176ec14f27476bb371f3fbfa1b8354ad1e0aea59a63b1f79a6b4154fff",
+        "kind": "skin",
+        "bytes": 53325
+      },
+      {
+        "path": "skin/parts/oxide-return-face-high-cut-knurl.png",
+        "sha256": "8902e8397267ba4a97cc91c652008fbd1e7d1c321943d174bbc3fb8588485813",
+        "kind": "png",
+        "bytes": 715402
+      },
+      {
+        "path": "skin/parts/oxide-return-face-high-cut-pointer.png",
+        "sha256": "21f0194635195d5d99ae267b0fba9203ffaa789193446c7cac18e37501134487",
+        "kind": "png",
+        "bytes": 1556
+      },
+      {
+        "path": "skin/parts/oxide-return-face-in-in.png",
+        "sha256": "a5d20b357c2bd49c8f933d0f63fcbfed211c8ee82385ee755605f30a2e29a6ed",
+        "kind": "png",
+        "bytes": 44783
+      },
+      {
+        "path": "skin/parts/oxide-return-face-in-out.png",
+        "sha256": "ae57b787c7ce7816090e9457b8fdf302ccc15d65503bd601e6ee06130011bae7",
+        "kind": "png",
+        "bytes": 45696
+      },
+      {
+        "path": "skin/parts/oxide-return-face-lamp-lit.png",
+        "sha256": "fd2e44c015791745e5c5493594070f735affff0be67653be03e8d7d1b85f9982",
+        "kind": "png",
+        "bytes": 8392
+      },
+      {
+        "path": "skin/parts/oxide-return-face-low-cut-knurl.png",
+        "sha256": "edca5323074cb1418250cd9bd0c3e914ebb61de9321ec4250fc8777443c8a26f",
+        "kind": "png",
+        "bytes": 775226
+      },
+      {
+        "path": "skin/parts/oxide-return-face-low-cut-pointer.png",
+        "sha256": "03cd238823c819a9cb8ba801281e720152df84c9622251825a61b23c11018f87",
+        "kind": "png",
+        "bytes": 2106
+      },
+      {
+        "path": "skin/parts/oxide-return-face-mix-knurl.png",
+        "sha256": "b097c224892782f366ba13a4c40e1d437b892f9f0316ae9b08fac7394bfb3cd3",
+        "kind": "png",
+        "bytes": 1215653
+      },
+      {
+        "path": "skin/parts/oxide-return-face-mix-pointer.png",
+        "sha256": "1dd0db2afb5409b84c685d9f5d90ffcc7e26966d55a4daed0a1b66256756947e",
+        "kind": "png",
+        "bytes": 2391
+      },
+      {
+        "path": "skin/parts/oxide-return-face-repeats-knurl.png",
+        "sha256": "c5810dab7d46d7791c5bd8550eb7fe79db7805a0ea9a3f45e1f4f7dbff302c81",
+        "kind": "png",
+        "bytes": 1258266
+      },
+      {
+        "path": "skin/parts/oxide-return-face-repeats-pointer.png",
+        "sha256": "8631a5b6d5957b3a22036345d4651c97302ce8e0c6b58174bda6a82eb8cf1a5c",
+        "kind": "png",
+        "bytes": 2416
+      },
+      {
+        "path": "skin/parts/oxide-return-face-saturation-knurl.png",
+        "sha256": "b44aa568ff62366f34fdd811ef8b4db0da4ec63d82c02edf1a6adec4f8971776",
+        "kind": "png",
+        "bytes": 829431
+      },
+      {
+        "path": "skin/parts/oxide-return-face-saturation-pointer.png",
+        "sha256": "2fb6d15702973ed05346e85bd0e91ce1242757fc4737d95a16d9b0a602300d07",
+        "kind": "png",
+        "bytes": 1967
+      },
+      {
+        "path": "skin/parts/oxide-return-face-time-hub.png",
+        "sha256": "2e9a947c32f5a9b08e8e4cb44e9da484e0bf8567261b9417553f1653c75fea46",
+        "kind": "png",
+        "bytes": 12084
+      },
+      {
+        "path": "skin/parts/oxide-return-face-time-knurl.png",
+        "sha256": "856ea379dd63e5db6d623eadf929aa0b92b7772f1a29505b043e64c0d6c9f938",
+        "kind": "png",
+        "bytes": 2873033
+      },
+      {
+        "path": "skin/parts/oxide-return-face-time-needle.png",
+        "sha256": "8ad3158701f13e6e7a091c5ef612e24eaf3bf77918c70f0fa5c8e07dea240abe",
+        "kind": "png",
+        "bytes": 12001
+      },
+      {
+        "path": "skin/parts/oxide-return-face-wobble-knurl.png",
+        "sha256": "99659eeb6e10f842c70ae1eb05f6896f6456825373c032e9d8fe7c88500479f3",
+        "kind": "png",
+        "bytes": 857390
+      },
+      {
+        "path": "skin/parts/oxide-return-face-wobble-pointer.png",
+        "sha256": "9b9474973c6793dac9c53ddf4579a153bef501da0d8425558933029f157a8686",
+        "kind": "png",
+        "bytes": 1933
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-cross-knurl.png",
+        "sha256": "f43a11734a49f0b6accb1e039738be0e5b8d3ac9c2849ea28bca366401131e89",
+        "kind": "png",
+        "bytes": 248736
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-cross-pointer.png",
+        "sha256": "19b580abe6d263944089ad348a618935a99743d8aab372951221f835575ed528",
+        "kind": "png",
+        "bytes": 445
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-note-knurl.png",
+        "sha256": "d2725f259abc4d5b3e998f6dc5a16f0d98f10e6a81ae468275fa4ef0447516df",
+        "kind": "png",
+        "bytes": 386783
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-note-pointer.png",
+        "sha256": "8124c6dd73d28ffd91736fa7a39e2dd692eb9687de712db512f729f58e3ab3d2",
+        "kind": "png",
+        "bytes": 565
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-ping-pong-dual.png",
+        "sha256": "6b398842dea53b2bc3c4d0793cee2c630fc8d93668bb4a1cffb20ec5232cfca8",
+        "kind": "png",
+        "bytes": 15721
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-ping-pong-ping-pong.png",
+        "sha256": "67e6ad694ad980e7e3cf339ea53bb3300ab271f54fd0dc4b9183e294aaab09ae",
+        "kind": "png",
+        "bytes": 16213
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-sync-free.png",
+        "sha256": "59143925eeaf5303716f585c15ea1b4d545472035794ab9230d7ea471bceaef0",
+        "kind": "png",
+        "bytes": 15280
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-sync-sync.png",
+        "sha256": "6241397303701b9227be920b7b3b8692531495cff4cc8e73b0503ee048a382cf",
+        "kind": "png",
+        "bytes": 15907
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-wobble-rate-knurl.png",
+        "sha256": "80584ab67a86dfd541b976975f48c73f6806f2d762a980722843f54173887d6e",
+        "kind": "png",
+        "bytes": 264753
+      },
+      {
+        "path": "skin/parts/oxide-return-tempo-wobble-rate-pointer.png",
+        "sha256": "efcf79b375fd20acf1ed8abcca73e9985c9f4233cf28da5b606fdadd6bfc919a",
+        "kind": "png",
+        "bytes": 407
+      },
+      {
+        "path": "skin/plates/oxide-return-face.png",
+        "sha256": "2ec408a050eadc94e27a0c10597378aee3a5d9d7cebf8802964940b939a7f02e",
+        "kind": "png",
+        "bytes": 1809868
+      },
+      {
+        "path": "skin/plates/oxide-return-tempo.png",
+        "sha256": "07f07e84e7964a982207620f9bf49b1bd41f373704792a23e8777062cfe3c8e2",
+        "kind": "png",
+        "bytes": 303639
+      }
+    ],
+    "capabilities": {
+      "airMin": "0.1.0",
+      "modules": [
+        {
+          "module": 3,
+          "algorithmRevision": 2
+        }
+      ],
+      "nativeEditor": ""
+    }
+  },
+  "sources": [
+    {
+      "path": "rack.json",
+      "source": "racks/oxide-return/rack.json"
+    },
+    {
+      "path": "skin/oxide-return-elements.json",
+      "source": "resources/maker-skins/oxide-return/oxide-return-elements.json"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-high-cut-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-high-cut-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-high-cut-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-high-cut-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-in-in.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-in-in.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-in-out.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-in-out.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-lamp-lit.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-lamp-lit.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-low-cut-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-low-cut-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-low-cut-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-low-cut-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-mix-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-mix-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-mix-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-mix-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-repeats-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-repeats-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-repeats-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-repeats-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-saturation-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-saturation-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-saturation-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-saturation-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-time-hub.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-time-hub.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-time-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-time-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-time-needle.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-time-needle.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-wobble-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-wobble-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-face-wobble-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-face-wobble-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-cross-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-cross-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-cross-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-cross-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-note-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-note-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-note-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-note-pointer.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-ping-pong-dual.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-ping-pong-dual.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-ping-pong-ping-pong.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-ping-pong-ping-pong.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-sync-free.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-sync-free.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-sync-sync.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-sync-sync.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-wobble-rate-knurl.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-wobble-rate-knurl.png"
+    },
+    {
+      "path": "skin/parts/oxide-return-tempo-wobble-rate-pointer.png",
+      "source": "resources/maker-skins/oxide-return/parts/oxide-return-tempo-wobble-rate-pointer.png"
+    },
+    {
+      "path": "skin/plates/oxide-return-face.png",
+      "source": "resources/maker-skins/oxide-return/plates/oxide-return-face.png"
+    },
+    {
+      "path": "skin/plates/oxide-return-tempo.png",
+      "source": "resources/maker-skins/oxide-return/plates/oxide-return-tempo.png"
+    }
+  ]
+}

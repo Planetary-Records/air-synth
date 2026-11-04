@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "status": "incomplete: native screenshot and sanitized runtime skin required in Task8",
+  "originalSkinPolicy": "Original skin bytes/hashes are frozen inputs. Release skins are derived sanitized copies with their own hashes; preserve runtime fields, controls and notices.",
+  "manifest": {
+    "schema": 1,
+    "id": "night-dial",
+    "version": "1.0.0",
+    "metadata": {
+      "design": "cdeafe3f-9c29-4c7c-9013-8284b505af10",
+      "revision": "1",
+      "canonical_sha256": "55eb1f05ca9ba938034ede012941c197498a87e89c0af5fa52ef29b936064054",
+      "name": "Night Dial",
+      "maker": "ELMSTEAD SIGNAL WORKS",
+      "purpose": "A moving wavetable voice with analogue warmth for cinematic future garage: wide drifting pads, slow swells, evolving textures, reese and sub bass, vowel choirs and soft plucks.",
+      "description": "A moving wavetable voice with analogue warmth for cinematic future garage: wide drifting pads, slow swells, evolving textures, reese and sub bass, vowel choirs and soft plucks. Shape the table position and its sweep, unison spread, drift, the filter (clean, ladder, classic or vowel) and the swell and tail. Space, tape and vinyl come from FX racks.",
+      "role": "synth",
+      "tags": [
+        "wavetable",
+        "pads",
+        "bass"
+      ]
+    },
+    "design": "rack.json",
+    "skin": "skin/night-dial-elements.json",
+    "screenshot": "",
+    "files": [
+      {
+        "path": "rack.json",
+        "sha256": "55eb1f05ca9ba938034ede012941c197498a87e89c0af5fa52ef29b936064054",
+        "kind": "design",
+        "bytes": 4617
+      },
+      {
+        "path": "skin/night-dial-elements.json",
+        "sha256": "5289de388260d4ef9e3f1d2f2e1be7abed54681a537c8e21e242d6770da36b36",
+        "kind": "skin",
+        "bytes": 65218
+      },
+      {
+        "path": "skin/parts/night-dial-deck-knob-rotor.png",
+        "sha256": "f1e85fb624e34592ec16f80fa3f837177e9508d0d03b6dfc3ef0eb4dafd05001",
+        "kind": "png",
+        "bytes": 867
+      },
+      {
+        "path": "skin/parts/night-dial-deck-lever-saw.png",
+        "sha256": "214e2ad6a3d1bdf894da097417eedbaaf6ba591d4e3751135eec9aebffc07558",
+        "kind": "png",
+        "bytes": 6687
+      },
+      {
+        "path": "skin/parts/night-dial-deck-lever-sqr.png",
+        "sha256": "976226b37cc1e9de2a56dc5db1fc510fa268ca82593aa28fd6f9f2cea0132a8d",
+        "kind": "png",
+        "bytes": 6580
+      },
+      {
+        "path": "skin/parts/night-dial-deck-selector-bar.png",
+        "sha256": "a77bb5d41a4c35b5bea465357fe1919140936bc3267f29f9cbf0fac9d787c51b",
+        "kind": "png",
+        "bytes": 1979
+      },
+      {
+        "path": "skin/parts/night-dial-face-backlight-lit.png",
+        "sha256": "f28fb1762174f375051b2c2777bb7db7ad1800f6cb2fc4714c8ba0c915dd9166",
+        "kind": "png",
+        "bytes": 200177
+      },
+      {
+        "path": "skin/parts/night-dial-face-dial-rotor.png",
+        "sha256": "bec6e954e3a73f32cdf6ca669defee601e3276c00245de9677fc97d4af218081",
+        "kind": "png",
+        "bytes": 3864
+      },
+      {
+        "path": "skin/parts/night-dial-face-glow-rotor.png",
+        "sha256": "2fde56816a1c3108d3a4e731952a327df404189cb06ef19763952212e1dc1d40",
+        "kind": "png",
+        "bytes": 861
+      },
+      {
+        "path": "skin/parts/night-dial-face-knob-rotor.png",
+        "sha256": "df3d20b0551b6a79226bcaae538f81b593fd8bcb50d6847850236832834de947",
+        "kind": "png",
+        "bytes": 911
+      },
+      {
+        "path": "skin/parts/night-dial-face-needle.png",
+        "sha256": "8607bb3cd464192fe4d6503cf3509e99e2efe5990699cf5668ae6011272ac8ef",
+        "kind": "png",
+        "bytes": 6991
+      },
+      {
+        "path": "skin/parts/night-dial-face-pull-raised.png",
+        "sha256": "37ebf5ca032b24adf869dd396cbe77fd644f6993fe4455e1942d1a97830c335d",
+        "kind": "png",
+        "bytes": 24374
+      },
+      {
+        "path": "skin/plates/night-dial-deck.png",
+        "sha256": "deabf80decd4fb9f326e4b536b1ac53a92446751cb1da0b3890b8f2aa59f1110",
+        "kind": "png",
+        "bytes": 793724
+      },
+      {
+        "path": "skin/plates/night-dial-face.png",
+        "sha256": "eed866ac7d5b6f1e39d735466077a180151acf9f94f34a49eb929e729336289d",
+        "kind": "png",
+        "bytes": 1224670
+      }
+    ],
+    "capabilities": {
+      "airMin": "0.1.0",
+      "modules": [
+        {
+          "module": 1,
+          "algorithmRevision": 2
+        }
+      ],
+      "nativeEditor": ""
+    }
+  },
+  "sources": [
+    {
+      "path": "rack.json",
+      "source": "racks/night-dial/rack.json"
+    },
+    {
+      "path": "skin/night-dial-elements.json",
+      "source": "resources/maker-skins/night-dial/night-dial-elements.json"
+    },
+    {
+      "path": "skin/parts/night-dial-deck-knob-rotor.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-deck-knob-rotor.png"
+    },
+    {
+      "path": "skin/parts/night-dial-deck-lever-saw.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-deck-lever-saw.png"
+    },
+    {
+      "path": "skin/parts/night-dial-deck-lever-sqr.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-deck-lever-sqr.png"
+    },
+    {
+      "path": "skin/parts/night-dial-deck-selector-bar.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-deck-selector-bar.png"
+    },
+    {
+      "path": "skin/parts/night-dial-face-backlight-lit.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-face-backlight-lit.png"
+    },
+    {
+      "path": "skin/parts/night-dial-face-dial-rotor.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-face-dial-rotor.png"
+    },
+    {
+      "path": "skin/parts/night-dial-face-glow-rotor.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-face-glow-rotor.png"
+    },
+    {
+      "path": "skin/parts/night-dial-face-knob-rotor.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-face-knob-rotor.png"
+    },
+    {
+      "path": "skin/parts/night-dial-face-needle.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-face-needle.png"
+    },
+    {
+      "path": "skin/parts/night-dial-face-pull-raised.png",
+      "source": "resources/maker-skins/night-dial/parts/night-dial-face-pull-raised.png"
+    },
+    {
+      "path": "skin/plates/night-dial-deck.png",
+      "source": "resources/maker-skins/night-dial/plates/night-dial-deck.png"
+    },
+    {
+      "path": "skin/plates/night-dial-face.png",
+      "source": "resources/maker-skins/night-dial/plates/night-dial-face.png"
+    }
+  ]
+}

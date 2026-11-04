@@ -1,0 +1,3757 @@
+{
+  "format": "ai-rack-elements-prototype",
+  "version": 1,
+  "status": "PROTOTYPE, not a product schema",
+  "rack": "AI Rack Synth global control unit (house)",
+  "coordinate_space": "view pixels: each view's clean plate; the host scales the whole rack uniformly",
+  "rack_pitch": {
+    "panel_w": 2140,
+    "u_px": 197.11,
+    "note": "EIA: 19 in panel, 1.75 in per unit"
+  },
+  "views": {
+    "unit": {
+      "plate": "unit:plate",
+      "rack_units": 3,
+      "source": "house/unit.png",
+      "source_plate_rect": [
+        17,
+        86,
+        2140,
+        541
+      ],
+      "conversion": "25 rows of panel inserted at canvas y 97 and at canvas y 620"
+    },
+    "strip": {
+      "plate": "strip:plate",
+      "rack_units": 1,
+      "source": "house/folded.png",
+      "source_plate_rect": [
+        17,
+        258,
+        2139,
+        202
+      ],
+      "conversion": "resampled from 2139x202 to 2140x197"
+    }
+  },
+  "assets": {
+    "unit:plate": {
+      "file": "plates/unit.png",
+      "size": [
+        2140,
+        591
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "house/unit.png",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a",
+      "note": "pointers, fader caps, tapes and dashes removed; PROTECT's LED unlit; knob bodies, legends, ticks and ears kept"
+    },
+    "strip:plate": {
+      "file": "plates/strip.png",
+      "size": [
+        2140,
+        197
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "house/folded.png",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be",
+      "note": "pointers, fader caps, tapes and dashes removed; PROTECT's LED unlit; knob bodies, legends, ticks and ears kept"
+    },
+    "unit:glide.pointer": {
+      "file": "parts/unit-glide-pointer.png",
+      "size": [
+        77,
+        77
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        37.92,
+        37.74
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: glide's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:pan.1.pointer": {
+      "file": "parts/unit-pan-1-pointer.png",
+      "size": [
+        67,
+        67
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        33.2,
+        32.86
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: pan.1's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:pan.2.pointer": {
+      "file": "parts/unit-pan-2-pointer.png",
+      "size": [
+        67,
+        67
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        32.88,
+        33.28
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: pan.2's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:pan.3.pointer": {
+      "file": "parts/unit-pan-3-pointer.png",
+      "size": [
+        69,
+        69
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        33.62,
+        33.53
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: pan.3's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:pan.4.pointer": {
+      "file": "parts/unit-pan-4-pointer.png",
+      "size": [
+        67,
+        67
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        33.13,
+        32.72
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: pan.4's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.1.pointer": {
+      "file": "parts/unit-macro-1-pointer.png",
+      "size": [
+        75,
+        75
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        37.22,
+        37.14
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.1's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.2.pointer": {
+      "file": "parts/unit-macro-2-pointer.png",
+      "size": [
+        71,
+        71
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        35.07,
+        35.37
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.2's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.3.pointer": {
+      "file": "parts/unit-macro-3-pointer.png",
+      "size": [
+        71,
+        71
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        34.61,
+        35.04
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.3's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.4.pointer": {
+      "file": "parts/unit-macro-4-pointer.png",
+      "size": [
+        69,
+        69
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        34.42,
+        33.94
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.4's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.5.pointer": {
+      "file": "parts/unit-macro-5-pointer.png",
+      "size": [
+        71,
+        71
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        34.53,
+        34.53
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.5's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.6.pointer": {
+      "file": "parts/unit-macro-6-pointer.png",
+      "size": [
+        75,
+        75
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        36.75,
+        37.47
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.6's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.7.pointer": {
+      "file": "parts/unit-macro-7-pointer.png",
+      "size": [
+        71,
+        71
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        34.59,
+        34.84
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.7's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:macro.8.pointer": {
+      "file": "parts/unit-macro-8-pointer.png",
+      "size": [
+        71,
+        71
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        34.68,
+        35.47
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: macro.8's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:master.pointer": {
+      "file": "parts/unit-master-pointer.png",
+      "size": [
+        149,
+        149
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        74.37,
+        73.67
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: master's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:gain.pointer": {
+      "file": "parts/unit-gain-pointer.png",
+      "size": [
+        87,
+        87
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        42.63,
+        42.83
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/unit.png: gain's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:fader.cap": {
+      "file": "parts/unit-fader-cap.png",
+      "size": [
+        40,
+        54
+      ],
+      "role": "cap",
+      "alpha": true,
+      "anchor": [
+        18.5,
+        25.0
+      ],
+      "motion": "translate vertically; anchor on the cap's line",
+      "source": "house/unit.png: LEVEL 1's cap with its contact shadow (shared by the four faders)",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a"
+    },
+    "unit:led.lit": {
+      "file": "parts/unit-led-lit.png",
+      "size": [
+        51,
+        51
+      ],
+      "role": "lit",
+      "alpha": true,
+      "anchor": [
+        24.8,
+        25.13
+      ],
+      "motion": "static; opacity from value",
+      "source": "house/unit.png: PROTECT's lit lens and glow, difference-matted against LEGATO's unlit lens; scaled per LED by lens radius",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a",
+      "lens_r": 7.62
+    },
+    "unit:tape": {
+      "file": "parts/unit-tape.png",
+      "size": [
+        123,
+        53
+      ],
+      "role": "tape",
+      "alpha": true,
+      "anchor": [
+        0.0,
+        0.0
+      ],
+      "motion": "9-slice; host draws the text",
+      "source": "house/unit.png: the FACET -25 tape, deskewed, text inpainted, contact shadow as alpha",
+      "source_sha256": "cf5b3a8fa2dce36adc71c1e4924d92b0e0eb99865b58ec05262c184295d38d5a",
+      "body": [
+        10,
+        10,
+        115,
+        44
+      ],
+      "slice": [
+        24,
+        14,
+        24,
+        14
+      ],
+      "text": {
+        "font": {
+          "family": "Permanent Marker",
+          "designer": "Font Diner",
+          "file": "fonts/PermanentMarker-Regular.ttf",
+          "sha256": "28f82c8a7943cb8e9d599f8554da1d4fc75dbcf69b9885ad6c0611d20c6946c5",
+          "license": "Apache-2.0",
+          "license_file": "fonts/LICENSE.txt",
+          "source": "https://github.com/google/fonts/blob/740941b92c366cd9480403ec249412d8a6d47f0e/apache/permanentmarker/PermanentMarker-Regular.ttf"
+        },
+        "color": "#1b1b1b",
+        "alpha": 0.9,
+        "cap_height_of_body": {
+          "one line": 0.4,
+          "two lines": 0.27
+        },
+        "line_pitch_of_cap": 1.5,
+        "max_width_of_body": 0.86,
+        "stroke_of_cap": 0.0,
+        "layout": "macro tapes: one line; slot names: split at the middle space onto two centred lines",
+        "weight": "glyphs are filled in one layer, to match the images' ~2.5 px marker stroke",
+        "note": "host-drawn from the document in the font bundled with the skin"
+      }
+    },
+    "strip:master.pointer": {
+      "file": "parts/strip-master-pointer.png",
+      "size": [
+        110,
+        110
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        54.54,
+        54.6
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: master's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.1.pointer": {
+      "file": "parts/strip-macro-1-pointer.png",
+      "size": [
+        84,
+        84
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        41.9,
+        41.05
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.1's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.2.pointer": {
+      "file": "parts/strip-macro-2-pointer.png",
+      "size": [
+        80,
+        80
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        39.64,
+        39.42
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.2's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.3.pointer": {
+      "file": "parts/strip-macro-3-pointer.png",
+      "size": [
+        84,
+        84
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        41.14,
+        41.35
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.3's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.4.pointer": {
+      "file": "parts/strip-macro-4-pointer.png",
+      "size": [
+        80,
+        80
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        39.31,
+        39.27
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.4's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.5.pointer": {
+      "file": "parts/strip-macro-5-pointer.png",
+      "size": [
+        86,
+        86
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        42.27,
+        42.29
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.5's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.6.pointer": {
+      "file": "parts/strip-macro-6-pointer.png",
+      "size": [
+        80,
+        80
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        39.24,
+        39.53
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.6's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.7.pointer": {
+      "file": "parts/strip-macro-7-pointer.png",
+      "size": [
+        82,
+        82
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        40.58,
+        40.23
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.7's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:macro.8.pointer": {
+      "file": "parts/strip-macro-8-pointer.png",
+      "size": [
+        80,
+        80
+      ],
+      "role": "pointer",
+      "alpha": true,
+      "anchor": [
+        39.17,
+        39.36
+      ],
+      "motion": "rotate about anchor",
+      "source": "house/folded.png: macro.8's painted pointer, difference-matted against the polar-filled knob top, stored at 12 o'clock",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be"
+    },
+    "strip:led.lit": {
+      "file": "parts/strip-led-lit.png",
+      "size": [
+        56,
+        56
+      ],
+      "role": "lit",
+      "alpha": true,
+      "anchor": [
+        27.28,
+        27.31
+      ],
+      "motion": "static; opacity from value",
+      "source": "house/folded.png: PROTECT's lit lens and glow, difference-matted against LEGATO's unlit lens; scaled per LED by lens radius",
+      "source_sha256": "e7b0f8195c2ad68a57a193074306732736bdb2cb954925f9219f43fc6afd63be",
+      "lens_r": 8.62
+    },
+    "procedural:button-states": {
+      "role": "button states",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "hover lightens the face inside its outline by 8%; pressed darkens it by 30%; focus draws a 2 px amber ring 3 px outside the outline; disabled fades the button 70% into the panel colour around it and dims a lit LED to 35%"
+    },
+    "procedural:dash": {
+      "role": "unassigned macro dash",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "a white rounded bar the size of the printed dash"
+    },
+    "procedural:focus-ring": {
+      "role": "focus",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "2 px amber ring, 3 px outside the hit shape"
+    }
+  },
+  "groups": [
+    {
+      "id": "unit.voice",
+      "view": "unit",
+      "label": "VOICE",
+      "members": [
+        "unit.mono",
+        "unit.glide",
+        "unit.legato"
+      ],
+      "focus_order": [
+        "unit.mono",
+        "unit.glide",
+        "unit.legato"
+      ],
+      "visibility": "while unfolded (3U)"
+    },
+    {
+      "id": "unit.source.1",
+      "view": "unit",
+      "label": "SOURCES 1",
+      "members": [
+        "unit.pan.1",
+        "unit.mute.1",
+        "unit.solo.1",
+        "unit.level.1",
+        "unit.slot-tape.1"
+      ],
+      "focus_order": [
+        "unit.pan.1",
+        "unit.mute.1",
+        "unit.solo.1",
+        "unit.level.1"
+      ],
+      "visibility": "while unfolded (3U)"
+    },
+    {
+      "id": "unit.source.2",
+      "view": "unit",
+      "label": "SOURCES 2",
+      "members": [
+        "unit.pan.2",
+        "unit.mute.2",
+        "unit.solo.2",
+        "unit.level.2",
+        "unit.slot-tape.2"
+      ],
+      "focus_order": [
+        "unit.pan.2",
+        "unit.mute.2",
+        "unit.solo.2",
+        "unit.level.2"
+      ],
+      "visibility": "while unfolded (3U)"
+    },
+    {
+      "id": "unit.source.3",
+      "view": "unit",
+      "label": "SOURCES 3",
+      "members": [
+        "unit.pan.3",
+        "unit.mute.3",
+        "unit.solo.3",
+        "unit.level.3",
+        "unit.slot-tape.3"
+      ],
+      "focus_order": [
+        "unit.pan.3",
+        "unit.mute.3",
+        "unit.solo.3",
+        "unit.level.3"
+      ],
+      "visibility": "while unfolded (3U)"
+    },
+    {
+      "id": "unit.source.4",
+      "view": "unit",
+      "label": "SOURCES 4",
+      "members": [
+        "unit.pan.4",
+        "unit.mute.4",
+        "unit.solo.4",
+        "unit.level.4",
+        "unit.slot-tape.4"
+      ],
+      "focus_order": [
+        "unit.pan.4",
+        "unit.mute.4",
+        "unit.solo.4",
+        "unit.level.4"
+      ],
+      "visibility": "while unfolded (3U)"
+    },
+    {
+      "id": "unit.macros",
+      "view": "unit",
+      "label": "MACROS",
+      "members": [
+        "unit.macro.1",
+        "unit.assign.1",
+        "unit.macro-tape.1",
+        "unit.macro.2",
+        "unit.assign.2",
+        "unit.macro-tape.2",
+        "unit.macro.3",
+        "unit.assign.3",
+        "unit.macro-tape.3",
+        "unit.macro.4",
+        "unit.assign.4",
+        "unit.macro-tape.4",
+        "unit.macro.5",
+        "unit.assign.5",
+        "unit.macro-tape.5",
+        "unit.macro.6",
+        "unit.assign.6",
+        "unit.macro-tape.6",
+        "unit.macro.7",
+        "unit.assign.7",
+        "unit.macro-tape.7",
+        "unit.macro.8",
+        "unit.assign.8",
+        "unit.macro-tape.8"
+      ],
+      "focus_order": [
+        "unit.macro.1",
+        "unit.assign.1",
+        "unit.macro.2",
+        "unit.assign.2",
+        "unit.macro.3",
+        "unit.assign.3",
+        "unit.macro.4",
+        "unit.assign.4",
+        "unit.macro.5",
+        "unit.assign.5",
+        "unit.macro.6",
+        "unit.assign.6",
+        "unit.macro.7",
+        "unit.assign.7",
+        "unit.macro.8",
+        "unit.assign.8"
+      ],
+      "visibility": "while unfolded (3U)"
+    },
+    {
+      "id": "unit.output",
+      "view": "unit",
+      "label": "OUTPUT",
+      "members": [
+        "unit.master",
+        "unit.gain",
+        "unit.protect"
+      ],
+      "focus_order": [
+        "unit.master",
+        "unit.gain",
+        "unit.protect"
+      ],
+      "visibility": "while unfolded (3U)"
+    },
+    {
+      "id": "strip.strip",
+      "view": "strip",
+      "label": "Folded strip",
+      "members": [
+        "strip.master",
+        "strip.macro.1",
+        "strip.macro-tape.1",
+        "strip.macro.2",
+        "strip.macro-tape.2",
+        "strip.macro.3",
+        "strip.macro-tape.3",
+        "strip.macro.4",
+        "strip.macro-tape.4",
+        "strip.macro.5",
+        "strip.macro-tape.5",
+        "strip.macro.6",
+        "strip.macro-tape.6",
+        "strip.macro.7",
+        "strip.macro-tape.7",
+        "strip.macro.8",
+        "strip.macro-tape.8",
+        "strip.protect"
+      ],
+      "focus_order": [
+        "strip.master",
+        "strip.macro.1",
+        "strip.macro.2",
+        "strip.macro.3",
+        "strip.macro.4",
+        "strip.macro.5",
+        "strip.macro.6",
+        "strip.macro.7",
+        "strip.macro.8",
+        "strip.protect"
+      ],
+      "visibility": "while folded (1U)"
+    },
+    {
+      "id": "rail",
+      "view": "both",
+      "label": "Fold rail",
+      "members": [
+        "fold"
+      ],
+      "focus_order": [
+        "fold"
+      ],
+      "visibility": "always"
+    }
+  ],
+  "elements": [
+    {
+      "id": "unit.mono",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "MONO",
+      "group": "unit.voice",
+      "binding": {
+        "param": "global.voice_mode",
+        "default": 0,
+        "type": "choice",
+        "choices": [
+          "Polyphonic",
+          "Monophonic"
+        ],
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          149.0,
+          330.0,
+          42.0,
+          43.0
+        ],
+        "led": [
+          168.49,
+          311.95
+        ],
+        "lens_r": 6.88
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.glide",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "GLIDE",
+      "group": "unit.voice",
+      "binding": {
+        "param": "global.glide_seconds",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          2
+        ],
+        "unit": "s",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          286.92,
+          344.74
+        ],
+        "face_r": 30.48,
+        "tick_center": [
+          291.42,
+          345.81
+        ],
+        "tick_r": 41.0,
+        "hit_r": 43.3
+      },
+      "scale": {
+        "sweep": [
+          -139.1,
+          140.2
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -131.59,
+        "pointer_r": [
+          7.8,
+          31.8
+        ],
+        "drawn_value": 0.0917
+      },
+      "layers": {
+        "pointer": "unit:glide.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.legato",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "LEGATO",
+      "group": "unit.voice",
+      "binding": {
+        "param": "global.legato",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          391.0,
+          330.0,
+          44.0,
+          43.0
+        ],
+        "led": [
+          411.7,
+          311.88
+        ],
+        "lens_r": 6.62
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.pan.1",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "PAN 1",
+      "group": "unit.source.1",
+      "binding": {
+        "param": "synth.1.pan",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          -1,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          565.2,
+          210.86
+        ],
+        "face_r": 25.99,
+        "tick_center": [
+          568.97,
+          214.41
+        ],
+        "tick_r": 35.0,
+        "hit_r": 37.68
+      },
+      "scale": {
+        "sweep": [
+          -140.7,
+          142.1
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 1.81,
+        "pointer_r": [
+          2.2,
+          27.0
+        ],
+        "drawn_value": -0.0372
+      },
+      "layers": {
+        "pointer": "unit:pan.1.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.mute.1",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "MUTE 1",
+      "group": "unit.source.1",
+      "binding": {
+        "param": "synth.1.mute",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          523.0,
+          321.0,
+          35.0,
+          35.0
+        ],
+        "led": [
+          539.19,
+          306.0
+        ],
+        "lens_r": 5.69
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.solo.1",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "SOLO 1",
+      "group": "unit.source.1",
+      "binding": {
+        "param": "synth.1.solo",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          579.0,
+          321.0,
+          36.0,
+          35.0
+        ],
+        "led": [
+          595.78,
+          305.32
+        ],
+        "lens_r": 5.75
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.level.1",
+      "view": "unit",
+      "kind": "fader",
+      "label": "LEVEL 1",
+      "group": "unit.source.1",
+      "binding": {
+        "param": "synth.1.level",
+        "default": 0.5,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "slot": [
+          563.0,
+          376.0,
+          11.0,
+          122.0
+        ],
+        "cap_center_x": 568.5,
+        "y0": 489.0,
+        "y1": 385.5,
+        "hit_rect": [
+          549.0,
+          362.0,
+          38.0,
+          150.0
+        ]
+      },
+      "scale": {
+        "note": "cap line y = y0 + (y1 - y0) * normalised value; y0/y1 are the outer printed dashes"
+      },
+      "mockup": {
+        "cap_line_y": 438.0,
+        "drawn_value": 0.4928
+      },
+      "layers": {
+        "cap": "unit:fader.cap"
+      },
+      "input": {
+        "drag": "relative vertical drag from anywhere on the fader, 1:1 with the cap; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.slot-tape.1",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Synth slot 1 name",
+      "group": "unit.source.1",
+      "geometry": {
+        "center": [
+          568.5,
+          137.9
+        ],
+        "size": [
+          110.6,
+          45.7
+        ],
+        "angle": -4.76
+      },
+      "source": "the name of the rack in synth slot 1",
+      "mockup": {
+        "text": "EMBER REED"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.pan.2",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "PAN 2",
+      "group": "unit.source.2",
+      "binding": {
+        "param": "synth.2.pan",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          -1,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          716.88,
+          210.28
+        ],
+        "face_r": 26.67,
+        "tick_center": [
+          719.2,
+          213.41
+        ],
+        "tick_r": 35.0,
+        "hit_r": 36.72
+      },
+      "scale": {
+        "sweep": [
+          -142.5,
+          142.9
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 3.8,
+        "pointer_r": [
+          2.4,
+          26.8
+        ],
+        "drawn_value": -0.0037
+      },
+      "layers": {
+        "pointer": "unit:pan.2.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.mute.2",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "MUTE 2",
+      "group": "unit.source.2",
+      "binding": {
+        "param": "synth.2.mute",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          674.0,
+          321.0,
+          35.0,
+          35.0
+        ],
+        "led": [
+          690.39,
+          305.8
+        ],
+        "lens_r": 5.69
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.solo.2",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "SOLO 2",
+      "group": "unit.source.2",
+      "binding": {
+        "param": "synth.2.solo",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          731.0,
+          321.0,
+          34.0,
+          36.0
+        ],
+        "led": [
+          747.36,
+          306.45
+        ],
+        "lens_r": 5.75
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.level.2",
+      "view": "unit",
+      "kind": "fader",
+      "label": "LEVEL 2",
+      "group": "unit.source.2",
+      "binding": {
+        "param": "synth.2.level",
+        "default": 0.5,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "slot": [
+          714.0,
+          375.0,
+          10.0,
+          123.0
+        ],
+        "cap_center_x": 719.0,
+        "y0": 489.0,
+        "y1": 385.5,
+        "hit_rect": [
+          700.0,
+          361.0,
+          38.0,
+          151.0
+        ]
+      },
+      "scale": {
+        "note": "cap line y = y0 + (y1 - y0) * normalised value; y0/y1 are the outer printed dashes"
+      },
+      "mockup": {
+        "cap_line_y": 438.0,
+        "drawn_value": 0.4928
+      },
+      "layers": {
+        "cap": "unit:fader.cap"
+      },
+      "input": {
+        "drag": "relative vertical drag from anywhere on the fader, 1:1 with the cap; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.slot-tape.2",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Synth slot 2 name",
+      "group": "unit.source.2",
+      "geometry": {
+        "center": [
+          719.2,
+          137.2
+        ],
+        "size": [
+          108.9,
+          45.5
+        ],
+        "angle": -4.13
+      },
+      "source": "the name of the rack in synth slot 2",
+      "mockup": {
+        "text": "GLASS CURRENT"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.pan.3",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "PAN 3",
+      "group": "unit.source.3",
+      "binding": {
+        "param": "synth.3.pan",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          -1,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          870.62,
+          210.53
+        ],
+        "face_r": 26.7,
+        "tick_center": [
+          873.06,
+          213.62
+        ],
+        "tick_r": 35.0,
+        "hit_r": 37.25
+      },
+      "scale": {
+        "sweep": [
+          -141.3,
+          142.6
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 3.46,
+        "pointer_r": [
+          2.1,
+          27.6
+        ],
+        "drawn_value": -0.0105
+      },
+      "layers": {
+        "pointer": "unit:pan.3.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.mute.3",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "MUTE 3",
+      "group": "unit.source.3",
+      "binding": {
+        "param": "synth.3.mute",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          827.0,
+          321.0,
+          35.0,
+          35.0
+        ],
+        "led": [
+          842.55,
+          305.37
+        ],
+        "lens_r": 5.69
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.solo.3",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "SOLO 3",
+      "group": "unit.source.3",
+      "binding": {
+        "param": "synth.3.solo",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          883.0,
+          321.0,
+          36.0,
+          35.0
+        ],
+        "led": [
+          899.97,
+          305.7
+        ],
+        "lens_r": 5.75
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.level.3",
+      "view": "unit",
+      "kind": "fader",
+      "label": "LEVEL 3",
+      "group": "unit.source.3",
+      "binding": {
+        "param": "synth.3.level",
+        "default": 0.5,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "slot": [
+          867.0,
+          375.0,
+          11.0,
+          123.0
+        ],
+        "cap_center_x": 872.5,
+        "y0": 489.0,
+        "y1": 385.5,
+        "hit_rect": [
+          853.0,
+          361.0,
+          38.0,
+          151.0
+        ]
+      },
+      "scale": {
+        "note": "cap line y = y0 + (y1 - y0) * normalised value; y0/y1 are the outer printed dashes"
+      },
+      "mockup": {
+        "cap_line_y": 438.0,
+        "drawn_value": 0.4928
+      },
+      "layers": {
+        "cap": "unit:fader.cap"
+      },
+      "input": {
+        "drag": "relative vertical drag from anywhere on the fader, 1:1 with the cap; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.slot-tape.3",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Synth slot 3 name",
+      "group": "unit.source.3",
+      "geometry": {
+        "center": [
+          874.5,
+          137.9
+        ],
+        "size": [
+          110.6,
+          45.7
+        ],
+        "angle": -4.45
+      },
+      "source": "the name of the rack in synth slot 3",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.pan.4",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "PAN 4",
+      "group": "unit.source.4",
+      "binding": {
+        "param": "synth.4.pan",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          -1,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1025.13,
+          210.72
+        ],
+        "face_r": 26.48,
+        "tick_center": [
+          1027.13,
+          213.17
+        ],
+        "tick_r": 35.0,
+        "hit_r": 36.74
+      },
+      "scale": {
+        "sweep": [
+          -142.4,
+          143.1
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 4.38,
+        "pointer_r": [
+          2.6,
+          27.3
+        ],
+        "drawn_value": 0.0032
+      },
+      "layers": {
+        "pointer": "unit:pan.4.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.mute.4",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "MUTE 4",
+      "group": "unit.source.4",
+      "binding": {
+        "param": "synth.4.mute",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          981.0,
+          321.0,
+          35.0,
+          35.0
+        ],
+        "led": [
+          997.3,
+          305.91
+        ],
+        "lens_r": 5.69
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.solo.4",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "SOLO 4",
+      "group": "unit.source.4",
+      "binding": {
+        "param": "synth.4.solo",
+        "default": 0,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          1037.0,
+          321.0,
+          35.0,
+          35.0
+        ],
+        "led": [
+          1054.4,
+          306.36
+        ],
+        "lens_r": 5.75
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "unit.level.4",
+      "view": "unit",
+      "kind": "fader",
+      "label": "LEVEL 4",
+      "group": "unit.source.4",
+      "binding": {
+        "param": "synth.4.level",
+        "default": 0.5,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "slot": [
+          1021.0,
+          376.0,
+          10.0,
+          122.0
+        ],
+        "cap_center_x": 1026.0,
+        "y0": 489.0,
+        "y1": 385.5,
+        "hit_rect": [
+          1007.0,
+          362.0,
+          38.0,
+          150.0
+        ]
+      },
+      "scale": {
+        "note": "cap line y = y0 + (y1 - y0) * normalised value; y0/y1 are the outer printed dashes"
+      },
+      "mockup": {
+        "cap_line_y": 438.0,
+        "drawn_value": 0.4928
+      },
+      "layers": {
+        "cap": "unit:fader.cap"
+      },
+      "input": {
+        "drag": "relative vertical drag from anywhere on the fader, 1:1 with the cap; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.slot-tape.4",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Synth slot 4 name",
+      "group": "unit.source.4",
+      "geometry": {
+        "center": [
+          1022.2,
+          137.2
+        ],
+        "size": [
+          108.9,
+          45.5
+        ],
+        "angle": -4.45
+      },
+      "source": "the name of the rack in synth slot 4",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.1",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 1",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.1",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1234.22,
+          197.14
+        ],
+        "face_r": 27.14,
+        "tick_center": [
+          1235.91,
+          198.66
+        ],
+        "tick_r": 38.0,
+        "hit_r": 40.47
+      },
+      "scale": {
+        "sweep": [
+          -139.0,
+          140.6
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 51.63,
+        "pointer_r": [
+          7.1,
+          30.9
+        ],
+        "drawn_value": 0.6697
+      },
+      "layers": {
+        "pointer": "unit:macro.1.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.1",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 1",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1218.0,
+          265.0,
+          34.0,
+          35.0
+        ],
+        "led": [
+          1234.54,
+          251.83
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 1's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.1",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 1 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1229.9,
+          130.0
+        ],
+        "size": [
+          101.3,
+          32.5
+        ],
+        "angle": -1.97
+      },
+      "source": "macro 1's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": "AIR +40"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.2",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 2",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.2",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1363.07,
+          197.37
+        ],
+        "face_r": 27.19,
+        "tick_center": [
+          1363.44,
+          198.15
+        ],
+        "tick_r": 39.0,
+        "hit_r": 39.69
+      },
+      "scale": {
+        "sweep": [
+          -140.0,
+          140.5
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -43.38,
+        "pointer_r": [
+          6.0,
+          28.6
+        ],
+        "drawn_value": 0.3459
+      },
+      "layers": {
+        "pointer": "unit:macro.2.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.2",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 2",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1347.0,
+          265.0,
+          34.0,
+          35.0
+        ],
+        "led": [
+          1362.82,
+          251.95
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 2's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.2",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 2 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1361.2,
+          129.5
+        ],
+        "size": [
+          102.8,
+          33.3
+        ],
+        "angle": -2.12
+      },
+      "source": "macro 2's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": "FACET -25"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.3",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 3",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.3",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1492.61,
+          195.04
+        ],
+        "face_r": 28.45,
+        "tick_center": [
+          1493.03,
+          198.1
+        ],
+        "tick_r": 39.0,
+        "hit_r": 40.0
+      },
+      "scale": {
+        "sweep": [
+          -139.5,
+          140.6
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 3.37,
+        "pointer_r": [
+          2.6,
+          29.1
+        ],
+        "drawn_value": 0.5069
+      },
+      "layers": {
+        "pointer": "unit:macro.3.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.3",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 3",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1476.0,
+          265.0,
+          34.0,
+          36.0
+        ],
+        "led": [
+          1491.84,
+          251.86
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 3's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.3",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 3 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1492.9,
+          129.1
+        ],
+        "size": [
+          102.3,
+          33.0
+        ],
+        "angle": -1.02
+      },
+      "source": "macro 3's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": "ECHO +60"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.4",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 4",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.4",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1623.42,
+          196.94
+        ],
+        "face_r": 26.99,
+        "tick_center": [
+          1623.7,
+          198.55
+        ],
+        "tick_r": 38.0,
+        "hit_r": 40.42
+      },
+      "scale": {
+        "sweep": [
+          -138.9,
+          140.9
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -57.95,
+        "pointer_r": [
+          5.2,
+          27.8
+        ],
+        "drawn_value": 0.2959
+      },
+      "layers": {
+        "pointer": "unit:macro.4.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.4",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 4",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1606.0,
+          265.0,
+          34.0,
+          36.0
+        ],
+        "led": [
+          1622.12,
+          251.88
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 4's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.4",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 4 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1624.3,
+          129.1
+        ],
+        "size": [
+          102.0,
+          32.1
+        ],
+        "angle": -1.94
+      },
+      "source": "macro 4's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": "GRIP +30"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.5",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 5",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.5",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1232.53,
+          425.53
+        ],
+        "face_r": 28.46,
+        "tick_center": [
+          1235.87,
+          425.93
+        ],
+        "tick_r": 38.0,
+        "hit_r": 41.19
+      },
+      "scale": {
+        "sweep": [
+          -140.0,
+          141.6
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -138.62,
+        "pointer_r": [
+          7.1,
+          28.9
+        ],
+        "drawn_value": 0.0197
+      },
+      "layers": {
+        "pointer": "unit:macro.5.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.5",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 5",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1218.0,
+          495.0,
+          34.0,
+          35.0
+        ],
+        "led": [
+          1234.68,
+          480.78
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 5's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.5",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 5 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1233.0,
+          359.0
+        ],
+        "size": [
+          102.1,
+          32.73
+        ],
+        "angle": -1.76,
+        "dash": [
+          1226.0,
+          357.0,
+          14.0,
+          4.0
+        ]
+      },
+      "source": "macro 5's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.6",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 6",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.6",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1362.75,
+          423.47
+        ],
+        "face_r": 29.52,
+        "tick_center": [
+          1363.95,
+          426.31
+        ],
+        "tick_r": 38.0,
+        "hit_r": 40.98
+      },
+      "scale": {
+        "sweep": [
+          -139.8,
+          141.2
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -139.13,
+        "pointer_r": [
+          9.4,
+          31.3
+        ],
+        "drawn_value": 0.0172
+      },
+      "layers": {
+        "pointer": "unit:macro.6.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.6",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 6",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1347.0,
+          495.0,
+          34.0,
+          35.0
+        ],
+        "led": [
+          1362.44,
+          480.68
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 6's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.6",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 6 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1361.5,
+          358.5
+        ],
+        "size": [
+          102.1,
+          32.73
+        ],
+        "angle": -1.76,
+        "dash": [
+          1354.0,
+          357.0,
+          15.0,
+          3.0
+        ]
+      },
+      "source": "macro 6's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.7",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 7",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.7",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1492.59,
+          425.84
+        ],
+        "face_r": 27.76,
+        "tick_center": [
+          1493.28,
+          426.3
+        ],
+        "tick_r": 39.0,
+        "hit_r": 41.48
+      },
+      "scale": {
+        "sweep": [
+          -139.3,
+          141.1
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -134.86,
+        "pointer_r": [
+          7.6,
+          28.9
+        ],
+        "drawn_value": 0.0201
+      },
+      "layers": {
+        "pointer": "unit:macro.7.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.7",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 7",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1476.0,
+          495.0,
+          34.0,
+          35.0
+        ],
+        "led": [
+          1491.62,
+          480.79
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 7's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.7",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 7 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1491.0,
+          359.0
+        ],
+        "size": [
+          102.1,
+          32.73
+        ],
+        "angle": -1.76,
+        "dash": [
+          1484.0,
+          357.0,
+          14.0,
+          4.0
+        ]
+      },
+      "source": "macro 7's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.macro.8",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MACRO 8",
+      "group": "unit.macros",
+      "binding": {
+        "param": "macro.8",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1622.68,
+          425.47
+        ],
+        "face_r": 27.51,
+        "tick_center": [
+          1623.46,
+          426.14
+        ],
+        "tick_r": 38.0,
+        "hit_r": 41.47
+      },
+      "scale": {
+        "sweep": [
+          -139.5,
+          141.5
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -137.36,
+        "pointer_r": [
+          6.8,
+          29.3
+        ],
+        "drawn_value": 0.0131
+      },
+      "layers": {
+        "pointer": "unit:macro.8.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.assign.8",
+      "view": "unit",
+      "kind": "action",
+      "label": "ASSIGN 8",
+      "group": "unit.macros",
+      "geometry": {
+        "rect": [
+          1606.0,
+          495.0,
+          34.0,
+          35.0
+        ],
+        "led": [
+          1621.98,
+          480.76
+        ],
+        "lens_r": 5.81
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "action": "opens macro 8's target and depth (today's Assign and Clear)",
+      "led": "lit while this macro's assign editor is open (an interpretation; the brief does not say)",
+      "input": {
+        "click": "opens the assign editor; clicking again closes it",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "unit.macro-tape.8",
+      "view": "unit",
+      "kind": "tape",
+      "label": "Macro 8 binding",
+      "group": "unit.macros",
+      "geometry": {
+        "center": [
+          1621.5,
+          358.5
+        ],
+        "size": [
+          102.1,
+          32.73
+        ],
+        "angle": -1.76,
+        "dash": [
+          1615.0,
+          357.0,
+          13.0,
+          3.0
+        ]
+      },
+      "source": "macro 8's binding: target label and signed depth x100; a printed dash when unassigned",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "unit.master",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "MASTER",
+      "group": "unit.output",
+      "binding": {
+        "param": "global.master_level",
+        "default": 0.5,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1855.37,
+          219.67
+        ],
+        "face_r": 66.51,
+        "tick_center": [
+          1853.08,
+          222.09
+        ],
+        "tick_r": 81.0,
+        "hit_r": 82.42
+      },
+      "scale": {
+        "sweep": [
+          -135.9,
+          138.0
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 0.05,
+        "pointer_r": [
+          27.7,
+          67.7
+        ],
+        "drawn_value": 0.5023
+      },
+      "layers": {
+        "pointer": "unit:master.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.gain",
+      "view": "unit",
+      "kind": "rotary",
+      "label": "GAIN",
+      "group": "unit.output",
+      "binding": {
+        "param": "output.gain_db",
+        "default": 30.0,
+        "type": "float",
+        "range": [
+          -24,
+          36
+        ],
+        "unit": "dB",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1832.63,
+          429.83
+        ],
+        "face_r": 35.53,
+        "tick_center": [
+          1832.81,
+          430.83
+        ],
+        "tick_r": 48.0,
+        "hit_r": 51.34
+      },
+      "scale": {
+        "sweep": [
+          -137.6,
+          140.9
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 115.52,
+        "pointer_r": [
+          9.8,
+          37.1
+        ],
+        "drawn_value": 30.32
+      },
+      "layers": {
+        "pointer": "unit:gain.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "unit.protect",
+      "view": "unit",
+      "kind": "toggle",
+      "label": "PROTECT",
+      "group": "unit.output",
+      "binding": {
+        "param": "output.protection",
+        "default": 1,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          1961.0,
+          422.0,
+          45.0,
+          46.0
+        ],
+        "led": [
+          1982.8,
+          404.13
+        ],
+        "lens_r": 7.62
+      },
+      "layers": {
+        "lit": "unit:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "strip.master",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MASTER",
+      "group": "strip.strip",
+      "binding": {
+        "param": "global.master_level",
+        "default": 0.5,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          472.26,
+          120.05
+        ],
+        "face_r": 45.04,
+        "tick_center": [
+          472.01,
+          118.26
+        ],
+        "tick_r": 58.28,
+        "hit_r": 58.42
+      },
+      "scale": {
+        "sweep": [
+          -140.8,
+          142.0
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -0.95,
+        "pointer_r": [
+          19.0,
+          49.3
+        ],
+        "drawn_value": 0.4953
+      },
+      "layers": {
+        "pointer": "strip:master.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro.1",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 1",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.1",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          652.71,
+          128.28
+        ],
+        "face_r": 31.81,
+        "tick_center": [
+          653.7,
+          128.78
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.56
+      },
+      "scale": {
+        "sweep": [
+          -143.8,
+          143.9
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 45.09,
+        "pointer_r": [
+          7.6,
+          36.2
+        ],
+        "drawn_value": 0.6518
+      },
+      "layers": {
+        "pointer": "strip:macro.1.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.1",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 1 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          654.41,
+          30.43
+        ],
+        "size": [
+          118.16,
+          34.48
+        ],
+        "angle": -2.45
+      },
+      "source": "macro 1's binding, as on the 3U unit",
+      "mockup": {
+        "text": "AIR +40"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.macro.2",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 2",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.2",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          806.52,
+          128.64
+        ],
+        "face_r": 32.03,
+        "tick_center": [
+          807.13,
+          128.91
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.43
+      },
+      "scale": {
+        "sweep": [
+          -143.4,
+          143.9
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -40.47,
+        "pointer_r": [
+          6.8,
+          34.1
+        ],
+        "drawn_value": 0.357
+      },
+      "layers": {
+        "pointer": "strip:macro.2.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.2",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 2 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          807.08,
+          30.33
+        ],
+        "size": [
+          117.15,
+          34.58
+        ],
+        "angle": -2.32
+      },
+      "source": "macro 2's binding, as on the 3U unit",
+      "mockup": {
+        "text": "FACET -25"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.macro.3",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 3",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.3",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          959.08,
+          128.58
+        ],
+        "face_r": 32.51,
+        "tick_center": [
+          959.69,
+          128.56
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.5
+      },
+      "scale": {
+        "sweep": [
+          -143.7,
+          143.6
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": 1.67,
+        "pointer_r": [
+          5.0,
+          35.9
+        ],
+        "drawn_value": 0.5033
+      },
+      "layers": {
+        "pointer": "strip:macro.3.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.3",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 3 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          959.35,
+          30.04
+        ],
+        "size": [
+          118.76,
+          34.87
+        ],
+        "angle": -1.94
+      },
+      "source": "macro 3's binding, as on the 3U unit",
+      "mockup": {
+        "text": "ECHO +60"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.macro.4",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 4",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.4",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1114.32,
+          128.5
+        ],
+        "face_r": 32.0,
+        "tick_center": [
+          1114.43,
+          128.34
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.04
+      },
+      "scale": {
+        "sweep": [
+          -144.1,
+          144.0
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -40.99,
+        "pointer_r": [
+          6.2,
+          33.8
+        ],
+        "drawn_value": 0.3571
+      },
+      "layers": {
+        "pointer": "strip:macro.4.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.4",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 4 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          1113.72,
+          30.23
+        ],
+        "size": [
+          118.26,
+          34.38
+        ],
+        "angle": -2.32
+      },
+      "source": "macro 4's binding, as on the 3U unit",
+      "mockup": {
+        "text": "GRIP +30"
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.macro.5",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 5",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.5",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1269.35,
+          126.57
+        ],
+        "face_r": 33.09,
+        "tick_center": [
+          1268.06,
+          128.78
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.69
+      },
+      "scale": {
+        "sweep": [
+          -143.3,
+          144.0
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -136.9,
+        "pointer_r": [
+          9.9,
+          36.9
+        ],
+        "drawn_value": 0.0248
+      },
+      "layers": {
+        "pointer": "strip:macro.5.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.5",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 5 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          1267.59,
+          30.23
+        ],
+        "size": [
+          118.08,
+          34.58
+        ],
+        "angle": -2.26,
+        "dash": [
+          1260.59,
+          29.26,
+          13.83,
+          2.96
+        ]
+      },
+      "source": "macro 5's binding, as on the 3U unit",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.macro.6",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 6",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.6",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1421.39,
+          128.75
+        ],
+        "face_r": 32.2,
+        "tick_center": [
+          1421.57,
+          128.77
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.5
+      },
+      "scale": {
+        "sweep": [
+          -143.1,
+          143.7
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -135.42,
+        "pointer_r": [
+          7.5,
+          34.1
+        ],
+        "drawn_value": 0.0274
+      },
+      "layers": {
+        "pointer": "strip:macro.6.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.6",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 6 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          1421.16,
+          29.75
+        ],
+        "size": [
+          118.08,
+          34.58
+        ],
+        "angle": -2.26,
+        "dash": [
+          1413.66,
+          28.28,
+          14.82,
+          2.96
+        ]
+      },
+      "source": "macro 6's binding, as on the 3U unit",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.macro.7",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 7",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.7",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1574.81,
+          127.48
+        ],
+        "face_r": 32.9,
+        "tick_center": [
+          1574.74,
+          128.92
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.62
+      },
+      "scale": {
+        "sweep": [
+          -143.4,
+          143.4
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -137.42,
+        "pointer_r": [
+          8.1,
+          35.0
+        ],
+        "drawn_value": 0.025
+      },
+      "layers": {
+        "pointer": "strip:macro.7.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.7",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 7 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          1574.24,
+          29.75
+        ],
+        "size": [
+          118.08,
+          34.58
+        ],
+        "angle": -2.26,
+        "dash": [
+          1566.73,
+          28.28,
+          14.82,
+          2.96
+        ]
+      },
+      "source": "macro 7's binding, as on the 3U unit",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.macro.8",
+      "view": "strip",
+      "kind": "rotary",
+      "label": "MACRO 8",
+      "group": "strip.strip",
+      "binding": {
+        "param": "macro.8",
+        "default": 0.0,
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "response": "linear",
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "pivot": [
+          1728.47,
+          128.59
+        ],
+        "face_r": 32.24,
+        "tick_center": [
+          1728.47,
+          128.83
+        ],
+        "tick_r": 44.45,
+        "hit_r": 45.68
+      },
+      "scale": {
+        "sweep": [
+          -143.1,
+          143.5
+        ],
+        "note": "normalised value 0..1 -> base angle sweep[0]..sweep[1] about tick_center (the printed end ticks); the pointer, painted on the face, rotates about pivot to aim at that tick"
+      },
+      "mockup": {
+        "pointer_angle": -135.97,
+        "pointer_r": [
+          7.5,
+          34.5
+        ],
+        "drawn_value": 0.0256
+      },
+      "layers": {
+        "pointer": "strip:macro.8.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "strip.macro-tape.8",
+      "view": "strip",
+      "kind": "tape",
+      "label": "Macro 8 binding",
+      "group": "strip.strip",
+      "geometry": {
+        "center": [
+          1728.31,
+          29.75
+        ],
+        "size": [
+          118.08,
+          34.58
+        ],
+        "angle": -2.26,
+        "dash": [
+          1720.8,
+          28.28,
+          14.82,
+          2.96
+        ]
+      },
+      "source": "macro 8's binding, as on the 3U unit",
+      "mockup": {
+        "text": null
+      },
+      "layers": {
+        "blank": "unit:tape",
+        "text": "unit:tape.text",
+        "dash": "procedural:dash"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "edited through ASSIGN (macros) or by loading a rack into the slot"
+      }
+    },
+    {
+      "id": "strip.protect",
+      "view": "strip",
+      "kind": "toggle",
+      "label": "PROTECT",
+      "group": "strip.strip",
+      "binding": {
+        "param": "output.protection",
+        "default": 1,
+        "type": "toggle",
+        "on_index": 1,
+        "source": "src/state/ParameterRegistry.cpp"
+      },
+      "geometry": {
+        "rect": [
+          1890.88,
+          83.87,
+          49.02,
+          50.38
+        ],
+        "led": [
+          1915.67,
+          64.17
+        ],
+        "lens_r": 8.62
+      },
+      "layers": {
+        "lit": "strip:led.lit",
+        "states": "procedural:button-states"
+      },
+      "led": "lit while the bound value is on",
+      "input": {
+        "click": "toggle (one gesture)",
+        "keys": "Space/Enter toggle"
+      }
+    },
+    {
+      "id": "fold",
+      "view": "both",
+      "kind": "disclosure",
+      "label": "Fold the AI Rack Synth unit",
+      "group": "rail",
+      "geometry": {
+        "rail_w": 28,
+        "note": "host-drawn triangle on a left rail, outside the plate"
+      },
+      "input": {
+        "click": "3U <-> 1U",
+        "keys": "Space/Enter"
+      },
+      "effect": "switches the visible view; writes no parameter and sends no gesture; focus moves to the same control or the fold toggle"
+    }
+  ],
+  "host_contract": {
+    "api": "simulated host in app/Main.cpp",
+    "parameter_path": "juce::ParameterAttachment readback; begin/set/end gestures",
+    "document_state": "macro bindings (target label and depth) and slot names are simulated document state, not parameters; editing them writes no parameter",
+    "product_support": "none; prototype only",
+    "entrypoint": "app/Main.cpp"
+  },
+  "narrow": {
+    "view": "strip",
+    "cuts": [
+      [
+        110,
+        392
+      ],
+      [
+        550,
+        590
+      ],
+      [
+        720,
+        742
+      ],
+      [
+        872,
+        894
+      ],
+      [
+        1026,
+        1048
+      ],
+      [
+        1181,
+        1203
+      ],
+      [
+        1334,
+        1356
+      ],
+      [
+        1487,
+        1509
+      ],
+      [
+        1641,
+        1663
+      ],
+      [
+        1791,
+        1866
+      ],
+      [
+        1972,
+        2012
+      ]
+    ],
+    "blend": 16,
+    "fill": [
+      359,
+      392
+    ],
+    "fill_at": 118,
+    "width": 1549,
+    "note": "the strip in a rack column narrower than the panel (the narrow-width rule): the strip plate without the cuts' columns, each cut joined by a linear cross-fade of 'blend' columns centred on it; the strip's elements and groups copied to view 'narrow', each element moved left by the cuts ending at or left of its centre; a wider column filled by tiling the plate's 'fill' columns, alternately mirrored, after the narrow plate's column 'fill_at'"
+  }
+}

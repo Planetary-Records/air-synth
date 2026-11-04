@@ -1,0 +1,417 @@
+{
+  "appearance": "Approved oxide source pixels; crop/resample with source alpha only. Native engraving and house review marks are overlays; no procedural hardware or borrowed sprites.",
+  "drawings": [
+    {
+      "path": "docs/design/saturation/2026-10-18-native-skin/oxide-stationary-source.png",
+      "sha256": "e242c5531178a347dc7cfe77581b3f2816a646cadd56cc6ec58ecd0c5214b000"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-18-native-skin/oxide-setup-recess-source.png",
+      "sha256": "507dd199c2b5d07e973f2a88ff4a86202986d899c124a1a5948353f4e731e357"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-18-native-skin/oxide-control-caps-source.png",
+      "sha256": "c469eae7703be977257a8403e0afe3e662dd870d8a078e6d60e82e7d056c6219"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-19-layout-study/styled-layout-v2.png",
+      "sha256": "4b8a6401e32a5f2a09ae5b1501119a69f47f7cca98856e75a8a4753c94f14273"
+    }
+  ],
+  "extraction": {
+    "advanced_panel": {
+      "source": "styled-layout-v2.png",
+      "source_sha256": "4b8a6401e32a5f2a09ae5b1501119a69f47f7cca98856e75a8a4753c94f14273",
+      "script": "extract-advanced-panel.ps1",
+      "script_sha256": "29aa20ca68eedf8d08423af237d1d28c577fdf02dfe2589bef2308902ed40074",
+      "purpose": "Approved lower equipment panel assets; engineering source-pixel extraction, no generated or code-painted hardware",
+      "self_checks": "source-border, repeated-interior and alpha-part RGB samples passed",
+      "assets": [
+        {
+          "file": "character-drive-advanced-plate.png",
+          "size": [
+            1677,
+            286
+          ],
+          "source_crop": [
+            74,
+            458,
+            1677,
+            286
+          ],
+          "nine_slice_insets": [
+            8,
+            8,
+            8,
+            8
+          ],
+          "interior_source_patch": [
+            765,
+            466,
+            264,
+            58
+          ],
+          "side_edge_source_band_y_height": [
+            540,
+            120
+          ],
+          "interior_operation": "repeat exact source pixels; retain source frame; key interior unchanged",
+          "sha256": "b6a652e967c9b6fd2fd92b49d3f6499f30b025f6b18282c2ce0084a6c4ed5ece"
+        },
+        {
+          "file": "character-drive-advanced-section.png",
+          "size": [
+            822,
+            196
+          ],
+          "source_crop": [
+            86,
+            528,
+            822,
+            196
+          ],
+          "nine_slice_insets": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "interior_source_patch": [
+            315,
+            540,
+            395,
+            30
+          ],
+          "side_edge_source_band_y_height": [
+            0,
+            0
+          ],
+          "interior_operation": "repeat exact source pixels; retain source frame; key interior unchanged",
+          "sha256": "4f82886eb9b57e66272ddeb38e412dcce4fe0ebde4c8653f7bcd610cb67f6d7b"
+        },
+        {
+          "file": "character-drive-advanced-key.png",
+          "size": [
+            132,
+            54
+          ],
+          "source_crop": [
+            166,
+            612,
+            132,
+            54
+          ],
+          "nine_slice_insets": [
+            7,
+            7,
+            7,
+            7
+          ],
+          "interior_source_patch": [
+            173,
+            619,
+            118,
+            40
+          ],
+          "side_edge_source_band_y_height": [
+            0,
+            0
+          ],
+          "interior_operation": "repeat exact source pixels; retain source frame; key interior unchanged",
+          "sha256": "9dd6a3fb8eb1d8c86c8a271191db0204164bc2ff1b478e39526f55d7c6b1e392"
+        },
+        {
+          "file": "character-drive-advanced-knob.png",
+          "size": [
+            104,
+            104
+          ],
+          "source_crop": [
+            733,
+            590,
+            104,
+            104
+          ],
+          "pivot": [
+            51.5,
+            51.5
+          ],
+          "source_pointer_degrees": 0.0,
+          "alpha_inner_radius": 0.0,
+          "alpha_outer_radius": 37.0,
+          "alpha_feather_pixels": 1,
+          "rgb_operation": "unchanged source RGB",
+          "sha256": "3cd8c6917fbbdd461b3bd8964a8905bc4a24f89087355b77e356524ab170ed90"
+        },
+        {
+          "file": "character-drive-advanced-knob-ring.png",
+          "size": [
+            104,
+            104
+          ],
+          "source_crop": [
+            733,
+            590,
+            104,
+            104
+          ],
+          "pivot": [
+            51.5,
+            51.5
+          ],
+          "source_pointer_degrees": 0.0,
+          "alpha_inner_radius": 35.0,
+          "alpha_outer_radius": 49.0,
+          "alpha_feather_pixels": 1,
+          "rgb_operation": "unchanged source RGB",
+          "sha256": "4443fb1e966241bbceec2b889c885dbd0982a76d6e85893bd9f00510c54c05b7"
+        }
+      ]
+    },
+    "caps": [
+      {
+        "anchor": [
+          54.565,
+          57.11
+        ],
+        "height": 114,
+        "name": "medium",
+        "pivot": [
+          385,
+          302
+        ],
+        "radius": 191,
+        "rect": [
+          192,
+          100,
+          383,
+          403
+        ],
+        "size": 108,
+        "width": 108
+      },
+      {
+        "anchor": [
+          44.303,
+          44.303
+        ],
+        "height": 89,
+        "name": "small",
+        "pivot": [
+          941,
+          323
+        ],
+        "radius": 145,
+        "rect": [
+          795,
+          177,
+          291,
+          292
+        ],
+        "size": 88,
+        "width": 88
+      },
+      {
+        "anchor": [
+          32.221,
+          32.221
+        ],
+        "height": 64,
+        "name": "setup-cap",
+        "pivot": [
+          941,
+          323
+        ],
+        "radius": 145,
+        "rect": [
+          795,
+          177,
+          291,
+          292
+        ],
+        "size": 64,
+        "width": 64
+      },
+      {
+        "anchor": [
+          63.326,
+          64.306
+        ],
+        "height": 145,
+        "name": "character",
+        "pivot": [
+          384,
+          843
+        ],
+        "radius": 193,
+        "rect": [
+          190,
+          646,
+          387,
+          445
+        ],
+        "size": 126,
+        "width": 126
+      },
+      {
+        "anchor": [
+          73.991,
+          73.0
+        ],
+        "height": 146,
+        "name": "drive",
+        "pivot": [
+          942,
+          865
+        ],
+        "radius": 221,
+        "rect": [
+          718,
+          644,
+          444,
+          443
+        ],
+        "size": 146,
+        "width": 147
+      }
+    ],
+    "operations": "Crop and bicubic resample only; alpha preserved. Pivots measured from circular skirts, not elongated bounding-box centres.",
+    "patch_bay": {
+      "source": "docs/design/saturation/2026-10-19-layout-study/styled-layout-v2.png",
+      "source_sha256": "4b8a6401e32a5f2a09ae5b1501119a69f47f7cca98856e75a8a4753c94f14273",
+      "source_size": [
+        1823,
+        863
+      ],
+      "script": "docs/design/saturation/2026-10-19-layout-study/extract-patch-bay.ps1",
+      "script_sha256": "2246579adc3512fca52a7cff85bf0a69311c7e866bb19834c9617f07d2ea5d8a",
+      "cover": {
+        "file": "character-drive-patch-bay.png",
+        "crop_xywh": [
+          1491,
+          468,
+          248,
+          54
+        ],
+        "size": [
+          248,
+          54
+        ],
+        "sha256": "ffdc911144c30630fed709a574c39f6dd853ea6ea33ef5a5a334729793b05504",
+        "source_pixels_identical": true
+      },
+      "latch": {
+        "file": "character-drive-patch-bay-latch.png",
+        "crop_xywh": [
+          1690,
+          478,
+          31,
+          32
+        ],
+        "size": [
+          31,
+          32
+        ],
+        "pivot": [
+          15.5,
+          16.0
+        ],
+        "pivot_in_cover": [
+          214.5,
+          26.0
+        ],
+        "alpha_radius": 14.5,
+        "sha256": "745fe433c84dee22afb64ec93774966c0bb10aa7cb8552e7181b7b7c8e8cee2e",
+        "rgb": "unchanged source pixels",
+        "alpha": "one-pixel circular edge from measured latch"
+      },
+      "operations": "Exact crop; latch alpha extraction only. No resampling, painting, inpainting or new generated parts."
+    },
+    "plate_crop_xyxy": [
+      5,
+      134,
+      2167,
+      542
+    ],
+    "plate_size": [
+      2140,
+      394
+    ],
+    "recess_anchor": [
+      1806.43,
+      79.19
+    ],
+    "recess_crop_xywh": [
+      1830,
+      216,
+      244,
+      258
+    ]
+  },
+  "files": [
+    {
+      "path": "character-drive-elements.json",
+      "sha256": "84d35f422940e5aeb47b26dea0f665a9f40ed3d22d46be65bf9ad80aaab5d635"
+    },
+    {
+      "path": "plates/character-drive-face.png",
+      "sha256": "b381f03bf6503c65faa4e91d551723e0867574dd020a127c1f9171b2338c4b10"
+    },
+    {
+      "path": "plates/character-drive-setup.png",
+      "sha256": "c6fe0b85b3b4e11fbb0df221729e44c4148b93727a752aedfcb54a17b699e4d2"
+    },
+    {
+      "path": "parts/character-drive-medium.png",
+      "sha256": "1d0fc886dd5dec537b6651f840c2d4f541ea1adade6288fb495263695196fb85"
+    },
+    {
+      "path": "parts/character-drive-small.png",
+      "sha256": "ef7f3c8bd49b2f80aa398efdf184e60768bc1c4f2d70505a24e637d914cf3c7f"
+    },
+    {
+      "path": "parts/character-drive-setup-cap.png",
+      "sha256": "f48185720032db5f46899b6a81ea013898decc3fed991c9cac15fe7de0d42ff1"
+    },
+    {
+      "path": "parts/character-drive-character.png",
+      "sha256": "a01c06787dee91b128afc7aee3dd16813da84a93bd24f9ccf1c1a8d5239e91a8"
+    },
+    {
+      "path": "parts/character-drive-drive.png",
+      "sha256": "e6c1a6cfb5371fef60f3d38181a2866eea54656e85c2216a16826b1df92304dd"
+    },
+    {
+      "path": "parts/character-drive-patch-bay.png",
+      "sha256": "ffdc911144c30630fed709a574c39f6dd853ea6ea33ef5a5a334729793b05504"
+    },
+    {
+      "path": "parts/character-drive-patch-bay-latch.png",
+      "sha256": "745fe433c84dee22afb64ec93774966c0bb10aa7cb8552e7181b7b7c8e8cee2e"
+    },
+    {
+      "path": "parts/character-drive-advanced-plate.png",
+      "sha256": "b6a652e967c9b6fd2fd92b49d3f6499f30b025f6b18282c2ce0084a6c4ed5ece"
+    },
+    {
+      "path": "parts/character-drive-advanced-section.png",
+      "sha256": "4f82886eb9b57e66272ddeb38e412dcce4fe0ebde4c8653f7bcd610cb67f6d7b"
+    },
+    {
+      "path": "parts/character-drive-advanced-key.png",
+      "sha256": "9dd6a3fb8eb1d8c86c8a271191db0204164bc2ff1b478e39526f55d7c6b1e392"
+    },
+    {
+      "path": "parts/character-drive-advanced-knob.png",
+      "sha256": "3cd8c6917fbbdd461b3bd8964a8905bc4a24f89087355b77e356524ab170ed90"
+    },
+    {
+      "path": "parts/character-drive-advanced-knob-ring.png",
+      "sha256": "4443fb1e966241bbceec2b889c885dbd0982a76d6e85893bd9f00510c54c05b7"
+    }
+  ],
+  "routing": "Inherited parent model; no overrides or subagents",
+  "script": "docs/design/racks/2026-10-09-studio-rack/character-drive/skin/character_drive_skin.ps1",
+  "script_sha256": "38736b586ded28fd32677055ac2fca88adf9983e65a94a35cbab76965d3a9249",
+  "status": "NATIVE_UI_PENDING_HUMAN_VISUAL_ACCEPTANCE"
+}

@@ -1,0 +1,456 @@
+{
+  "schema": 1,
+  "status": "incomplete: native screenshot and sanitized runtime skin required in Task8",
+  "originalSkinPolicy": "Original skin bytes/hashes are frozen inputs. Release skins are derived sanitized copies with their own hashes; preserve runtime fields, controls and notices.",
+  "manifest": {
+    "schema": 1,
+    "id": "ember-reed",
+    "version": "1.0.0",
+    "metadata": {
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+      "revision": "1",
+      "canonical_sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a",
+      "name": "Ember Reed",
+      "maker": "HALLORAN ELECTRONIC MUSIC CO.",
+      "purpose": "A warm, articulate pulse and triangle voice with a brief filter bloom and restrained native drive.",
+      "description": "A warm, articulate pulse and triangle voice with a brief filter bloom and restrained native drive.",
+      "role": "synth",
+      "tags": [
+        "analog",
+        "warm",
+        "plucks"
+      ]
+    },
+    "design": "rack.json",
+    "skin": "skin/ember-reed-elements.json",
+    "screenshot": "",
+    "files": [
+      {
+        "path": "rack.json",
+        "sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a",
+        "kind": "design",
+        "bytes": 3292
+      },
+      {
+        "path": "skin/ember-reed-elements.json",
+        "sha256": "a164939dffb5e0528bbfcb4af11d2acc13bc8f088841f00f2478e444ca9c530c",
+        "kind": "skin",
+        "bytes": 81816
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-amp-decay-pointer.png",
+        "sha256": "2e10520afd32d7be365518c19575d89ae99a586562f476a69f5341bcb31e537b",
+        "kind": "png",
+        "bytes": 1526
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-amp-sustain-pointer.png",
+        "sha256": "b907caac4507b96eff66d65e62fc90cf12c31baf5e615ac33437b2d600ded3f9",
+        "kind": "png",
+        "bytes": 1452
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-drive-mix-pointer.png",
+        "sha256": "f59a80b7990ab077aaf90b8c4ae02ea2d7bc2d7033426ee1c3d64e7d6b629291",
+        "kind": "png",
+        "bytes": 1425
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-drive-shape-down.png",
+        "sha256": "8912b751c29f006df22ac26a500c40a9317efbf6c54d2a606860924134bf209e",
+        "kind": "png",
+        "bytes": 4919
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-drive-shape-up.png",
+        "sha256": "503c3ba724d8f4515defb5e442cc97b9be4f3c5f97f483d871f4b33c414da510",
+        "kind": "png",
+        "bytes": 7009
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-drive-tone-pointer.png",
+        "sha256": "f8a66c5e0c7d397414285af5d1e7b77d48aa15d2dc90ef646056ad23d6fbd256",
+        "kind": "png",
+        "bytes": 1356
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-fenv-amount-pointer.png",
+        "sha256": "69cd1304de4e36452c03e30865187401f184e5a027dd8dcb34fc8822e7b8c30c",
+        "kind": "png",
+        "bytes": 1313
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-fenv-attack-pointer.png",
+        "sha256": "ab378cfbdca7872a8bea836fb85837d643cde30d1464cdbbf45e513a5dfe7ee0",
+        "kind": "png",
+        "bytes": 1296
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-fenv-mode-down.png",
+        "sha256": "53138876ffd672ad253b6fb32db4a79b9e24c0bb13320669bec152eaf3c757e4",
+        "kind": "png",
+        "bytes": 5079
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-fenv-mode-middle.png",
+        "sha256": "e242cbc2e04761130a41d1a740ee065f12d3caadeda715542b781cb9d8c07b91",
+        "kind": "png",
+        "bytes": 2879
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-fenv-mode-up.png",
+        "sha256": "697a9ed594fd6284dc5f6deec82738cf31d8b37cbae162872d8fe85976b8f458",
+        "kind": "png",
+        "bytes": 7075
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-fenv-release-pointer.png",
+        "sha256": "bb1ec22e7d0a148d453fa1ef1f3fc91f54975c8e61bfd9017fb1c8bf2c22338e",
+        "kind": "png",
+        "bytes": 1375
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-fenv-sustain-pointer.png",
+        "sha256": "d03274645dd9c9495522cd76e537bde66d968c34204fffb682ed122bf7be1cd4",
+        "kind": "png",
+        "bytes": 1154
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-lfo-rate-pointer.png",
+        "sha256": "a1ab369f2d66a216531a1f140efad7abc1cee682f6d0245e12de68c6eb55b054",
+        "kind": "png",
+        "bytes": 1291
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-lfo-shape-pointer.png",
+        "sha256": "2f474338cb6622316ca22d0ebf3df7917c2f5501baaf5cb2e6517c31b6a5e614",
+        "kind": "png",
+        "bytes": 1692
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-lfo-sync-down.png",
+        "sha256": "875e6b41efe0c7ced497eb19828d62ed5459f3a9cbda62a121d50e9778e4c111",
+        "kind": "png",
+        "bytes": 5050
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-lfo-sync-up.png",
+        "sha256": "00dfd06481b2823bbf1243294d12730d7b43632dfa4fb7089efbbf3b5613d8c1",
+        "kind": "png",
+        "bytes": 7138
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc1-fine-pointer.png",
+        "sha256": "82acb43c60a0b33b30c53b85819cb5034684f0c5ab7693a423941015c1c6d232",
+        "kind": "png",
+        "bytes": 1242
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc1-level-pointer.png",
+        "sha256": "088d903d5ea9564283daf60ffafd7041d578c80136a26a920debbeada48e0f12",
+        "kind": "png",
+        "bytes": 1304
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc1-tune-pointer.png",
+        "sha256": "825d4073bde2bfcce11fa724e9fb313dbb57dc555187daf64f123a7915b52270",
+        "kind": "png",
+        "bytes": 1334
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc1-wave-pointer.png",
+        "sha256": "5ea5ec075b80535f9f11da36fa3a12d409741ede601ca36e73ed93c08601728e",
+        "kind": "png",
+        "bytes": 2161
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc1-width-pointer.png",
+        "sha256": "faae4d5f882e062a7af82ac081353304fe40ac1b5784f236770ee64850e9d733",
+        "kind": "png",
+        "bytes": 1316
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc2-fine-pointer.png",
+        "sha256": "4bd7b21a55b5e49ebbb6842e89294d2f03e57769d20afdd39d25805d3dff5faa",
+        "kind": "png",
+        "bytes": 1275
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc2-level-pointer.png",
+        "sha256": "07d2c8688645129f863ceefa179b71b712a4ded350d3ebf2bdd8b262cdd87e20",
+        "kind": "png",
+        "bytes": 1281
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc2-noise-pointer.png",
+        "sha256": "5a22504bb636c09bdf932b9b57800abcb7a5ff029432ed38160014f6f0682094",
+        "kind": "png",
+        "bytes": 1327
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc2-tune-pointer.png",
+        "sha256": "a4622c50051e27ef13c4236b0c6a285afe936bbe3db92bd81af8e8925fdafddf",
+        "kind": "png",
+        "bytes": 1210
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-osc2-wave-pointer.png",
+        "sha256": "f2897ff6199e8ac079d2628ba2090571d1b385d1579b5ab63ea5dd4bbe34fab5",
+        "kind": "png",
+        "bytes": 1736
+      },
+      {
+        "path": "skin/parts/ember-reed-deck-vel-air-pointer.png",
+        "sha256": "fae246f1b06447d49d03ba5348c013e842883b83d38c412406a4736cc45ce5e7",
+        "kind": "png",
+        "bytes": 1380
+      },
+      {
+        "path": "skin/parts/ember-reed-face-air-knurl.png",
+        "sha256": "dcbe7e42bba1921f97850dce2de4dd68d9957818b891ad599648d7debdd30b32",
+        "kind": "png",
+        "bytes": 932190
+      },
+      {
+        "path": "skin/parts/ember-reed-face-air-rotor.png",
+        "sha256": "2a5729700cef7fbc8d1b7e31757a1404d7932daf4e0960fd2c271093eb8eb23d",
+        "kind": "png",
+        "bytes": 3044
+      },
+      {
+        "path": "skin/parts/ember-reed-face-bite-knurl.png",
+        "sha256": "9bb79699b12809217772e1b36c8cad9ac3e759ee26b9977e295d66fafea7de20",
+        "kind": "png",
+        "bytes": 494933
+      },
+      {
+        "path": "skin/parts/ember-reed-face-bite-rotor.png",
+        "sha256": "d56a13a2837bd613038077144e068b44cb1b0e885e20de8ccb83aac62a31896f",
+        "kind": "png",
+        "bytes": 2394
+      },
+      {
+        "path": "skin/parts/ember-reed-face-fader-cap.png",
+        "sha256": "518e4216db9f1534fcf8760d65f051fc77e75a397c4866c5b284b00a07717158",
+        "kind": "png",
+        "bytes": 6299
+      },
+      {
+        "path": "skin/parts/ember-reed-face-grain-knurl.png",
+        "sha256": "4a03f4dfb3c7fa629ca21715e1a34377b9980a1f7654c465a4ddef0b8933debb",
+        "kind": "png",
+        "bytes": 488946
+      },
+      {
+        "path": "skin/parts/ember-reed-face-grain-rotor.png",
+        "sha256": "cedc5ed2112b1d140c60ca1fbc181602ff2f27c8c8b2b7c886115ab39d53f852",
+        "kind": "png",
+        "bytes": 2540
+      },
+      {
+        "path": "skin/parts/ember-reed-face-lamp-lit.png",
+        "sha256": "4c8407824c3979015b7c113a40870d443125a25146ff21e3122deee1a2f97395",
+        "kind": "png",
+        "bytes": 7599
+      },
+      {
+        "path": "skin/plates/ember-reed-deck.png",
+        "sha256": "bdea23f10236d1ce642d2d804dd17110a7e8e1aad1ca7b41fa372ab79da3cdaf",
+        "kind": "png",
+        "bytes": 2375305
+      },
+      {
+        "path": "skin/plates/ember-reed-face.png",
+        "sha256": "6656a07990da3fb024368cab8888f6e29130be201fdeeda15cb8ac525e93dba1",
+        "kind": "png",
+        "bytes": 1088972
+      },
+      {
+        "path": "skin/plates/ember-reed-front.png",
+        "sha256": "8a606636e0ada1c145882d8372ac199c949906048fb016c1ce189061a95b1da5",
+        "kind": "png",
+        "bytes": 450676
+      }
+    ],
+    "capabilities": {
+      "airMin": "0.1.0",
+      "modules": [
+        {
+          "module": 0,
+          "algorithmRevision": 1
+        },
+        {
+          "module": 2,
+          "algorithmRevision": 1
+        }
+      ],
+      "nativeEditor": ""
+    }
+  },
+  "sources": [
+    {
+      "path": "rack.json",
+      "source": "racks/ember-reed/rack.json"
+    },
+    {
+      "path": "skin/ember-reed-elements.json",
+      "source": "resources/maker-skins/ember-reed/ember-reed-elements.json"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-amp-decay-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-amp-decay-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-amp-sustain-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-amp-sustain-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-drive-mix-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-mix-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-drive-shape-down.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-shape-down.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-drive-shape-up.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-shape-up.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-drive-tone-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-drive-tone-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-fenv-amount-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-amount-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-fenv-attack-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-attack-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-fenv-mode-down.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-mode-down.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-fenv-mode-middle.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-mode-middle.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-fenv-mode-up.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-mode-up.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-fenv-release-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-release-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-fenv-sustain-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-fenv-sustain-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-lfo-rate-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-rate-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-lfo-shape-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-shape-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-lfo-sync-down.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-sync-down.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-lfo-sync-up.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-lfo-sync-up.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc1-fine-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-fine-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc1-level-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-level-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc1-tune-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-tune-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc1-wave-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-wave-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc1-width-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc1-width-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc2-fine-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-fine-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc2-level-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-level-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc2-noise-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-noise-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc2-tune-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-tune-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-osc2-wave-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-osc2-wave-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-deck-vel-air-pointer.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-deck-vel-air-pointer.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-air-knurl.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-air-knurl.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-air-rotor.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-air-rotor.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-bite-knurl.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-bite-knurl.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-bite-rotor.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-bite-rotor.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-fader-cap.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-fader-cap.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-grain-knurl.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-grain-knurl.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-grain-rotor.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-grain-rotor.png"
+    },
+    {
+      "path": "skin/parts/ember-reed-face-lamp-lit.png",
+      "source": "resources/maker-skins/ember-reed/parts/ember-reed-face-lamp-lit.png"
+    },
+    {
+      "path": "skin/plates/ember-reed-deck.png",
+      "source": "resources/maker-skins/ember-reed/plates/ember-reed-deck.png"
+    },
+    {
+      "path": "skin/plates/ember-reed-face.png",
+      "source": "resources/maker-skins/ember-reed/plates/ember-reed-face.png"
+    },
+    {
+      "path": "skin/plates/ember-reed-front.png",
+      "source": "resources/maker-skins/ember-reed/plates/ember-reed-front.png"
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "schema": 1,
+  "status": "incomplete: native screenshot and sanitized runtime skin required in Task8",
+  "originalSkinPolicy": "Original skin bytes/hashes are frozen inputs. Release skins are derived sanitized copies with their own hashes; preserve runtime fields, controls and notices.",
+  "manifest": {
+    "schema": 1,
+    "id": "character-drive",
+    "version": "1.0.0",
+    "metadata": {
+      "design": "91387715-13d3-4c57-a479-12251842bf01",
+      "revision": "2",
+      "canonical_sha256": "84303af35953521165929e3455a2e3f3cfe7d8cda0abf3761462b4d6bf409874",
+      "name": "Character Drive",
+      "maker": "OXIDE INSTRUMENTS",
+      "purpose": "Full-band warmth and bite with Soft, Glow or Dense character, drive, input level, tilt and parallel wet blend.",
+      "description": "Full-band warmth and bite with Soft, Glow or Dense character, drive, input level, tilt and parallel wet blend. Retained three-band settings keep lows clean while shaping mids and highs.",
+      "role": "fx",
+      "tags": [
+        "saturator",
+        "distortion",
+        "warm"
+      ]
+    },
+    "design": "rack.json",
+    "skin": "skin/character-drive-elements.json",
+    "screenshot": "",
+    "files": [
+      {
+        "path": "rack.json",
+        "sha256": "84303af35953521165929e3455a2e3f3cfe7d8cda0abf3761462b4d6bf409874",
+        "kind": "design",
+        "bytes": 4355
+      },
+      {
+        "path": "skin/character-drive-elements.json",
+        "sha256": "84d35f422940e5aeb47b26dea0f665a9f40ed3d22d46be65bf9ad80aaab5d635",
+        "kind": "skin",
+        "bytes": 30965
+      },
+      {
+        "path": "skin/parts/character-drive-advanced-key.png",
+        "sha256": "9dd6a3fb8eb1d8c86c8a271191db0204164bc2ff1b478e39526f55d7c6b1e392",
+        "kind": "png",
+        "bytes": 12885
+      },
+      {
+        "path": "skin/parts/character-drive-advanced-knob-ring.png",
+        "sha256": "4443fb1e966241bbceec2b889c885dbd0982a76d6e85893bd9f00510c54c05b7",
+        "kind": "png",
+        "bytes": 21980
+      },
+      {
+        "path": "skin/parts/character-drive-advanced-knob.png",
+        "sha256": "3cd8c6917fbbdd461b3bd8964a8905bc4a24f89087355b77e356524ab170ed90",
+        "kind": "png",
+        "bytes": 21143
+      },
+      {
+        "path": "skin/parts/character-drive-advanced-plate.png",
+        "sha256": "b6a652e967c9b6fd2fd92b49d3f6499f30b025f6b18282c2ce0084a6c4ed5ece",
+        "kind": "png",
+        "bytes": 187012
+      },
+      {
+        "path": "skin/parts/character-drive-advanced-section.png",
+        "sha256": "4f82886eb9b57e66272ddeb38e412dcce4fe0ebde4c8653f7bcd610cb67f6d7b",
+        "kind": "png",
+        "bytes": 122829
+      },
+      {
+        "path": "skin/parts/character-drive-character.png",
+        "sha256": "a01c06787dee91b128afc7aee3dd16813da84a93bd24f9ccf1c1a8d5239e91a8",
+        "kind": "png",
+        "bytes": 30976
+      },
+      {
+        "path": "skin/parts/character-drive-drive.png",
+        "sha256": "e6c1a6cfb5371fef60f3d38181a2866eea54656e85c2216a16826b1df92304dd",
+        "kind": "png",
+        "bytes": 37570
+      },
+      {
+        "path": "skin/parts/character-drive-face-character-head.png",
+        "sha256": "a2d12ace7f3947c9d20eccc0731354e4800eea281536f4a988e61166070101d5",
+        "kind": "png",
+        "bytes": 16324
+      },
+      {
+        "path": "skin/parts/character-drive-face-control-head.png",
+        "sha256": "2212476ab48527c2af393c3e9d55eb5da7044cfa3bcbe1f76d043ef9b756845d",
+        "kind": "png",
+        "bytes": 13147
+      },
+      {
+        "path": "skin/parts/character-drive-face-drive-head.png",
+        "sha256": "5f49ad1bf8500bf8f206aac8b874524938d255ce1d766ee86c1a01b5d9af3364",
+        "kind": "png",
+        "bytes": 19124
+      },
+      {
+        "path": "skin/parts/character-drive-medium.png",
+        "sha256": "1d0fc886dd5dec537b6651f840c2d4f541ea1adade6288fb495263695196fb85",
+        "kind": "png",
+        "bytes": 22693
+      },
+      {
+        "path": "skin/parts/character-drive-patch-bay-latch.png",
+        "sha256": "745fe433c84dee22afb64ec93774966c0bb10aa7cb8552e7181b7b7c8e8cee2e",
+        "kind": "png",
+        "bytes": 3357
+      },
+      {
+        "path": "skin/parts/character-drive-patch-bay.png",
+        "sha256": "ffdc911144c30630fed709a574c39f6dd853ea6ea33ef5a5a334729793b05504",
+        "kind": "png",
+        "bytes": 30353
+      },
+      {
+        "path": "skin/parts/character-drive-setup-cap.png",
+        "sha256": "f48185720032db5f46899b6a81ea013898decc3fed991c9cac15fe7de0d42ff1",
+        "kind": "png",
+        "bytes": 8418
+      },
+      {
+        "path": "skin/parts/character-drive-small.png",
+        "sha256": "ef7f3c8bd49b2f80aa398efdf184e60768bc1c4f2d70505a24e637d914cf3c7f",
+        "kind": "png",
+        "bytes": 15155
+      },
+      {
+        "path": "skin/plates/character-drive-face.png",
+        "sha256": "b381f03bf6503c65faa4e91d551723e0867574dd020a127c1f9171b2338c4b10",
+        "kind": "png",
+        "bytes": 1749593
+      },
+      {
+        "path": "skin/plates/character-drive-setup.png",
+        "sha256": "c6fe0b85b3b4e11fbb0df221729e44c4148b93727a752aedfcb54a17b699e4d2",
+        "kind": "png",
+        "bytes": 127243
+      }
+    ],
+    "capabilities": {
+      "airMin": "0.1.0",
+      "modules": [
+        {
+          "module": 21,
+          "algorithmRevision": 1
+        }
+      ],
+      "nativeEditor": ""
+    }
+  },
+  "sources": [
+    {
+      "path": "rack.json",
+      "source": "racks/character-drive/rack.json"
+    },
+    {
+      "path": "skin/character-drive-elements.json",
+      "source": "resources/maker-skins/character-drive/character-drive-elements.json"
+    },
+    {
+      "path": "skin/parts/character-drive-advanced-key.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-advanced-key.png"
+    },
+    {
+      "path": "skin/parts/character-drive-advanced-knob-ring.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-advanced-knob-ring.png"
+    },
+    {
+      "path": "skin/parts/character-drive-advanced-knob.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-advanced-knob.png"
+    },
+    {
+      "path": "skin/parts/character-drive-advanced-plate.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-advanced-plate.png"
+    },
+    {
+      "path": "skin/parts/character-drive-advanced-section.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-advanced-section.png"
+    },
+    {
+      "path": "skin/parts/character-drive-character.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-character.png"
+    },
+    {
+      "path": "skin/parts/character-drive-drive.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-drive.png"
+    },
+    {
+      "path": "skin/parts/character-drive-face-character-head.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-face-character-head.png"
+    },
+    {
+      "path": "skin/parts/character-drive-face-control-head.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-face-control-head.png"
+    },
+    {
+      "path": "skin/parts/character-drive-face-drive-head.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-face-drive-head.png"
+    },
+    {
+      "path": "skin/parts/character-drive-medium.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-medium.png"
+    },
+    {
+      "path": "skin/parts/character-drive-patch-bay-latch.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-patch-bay-latch.png"
+    },
+    {
+      "path": "skin/parts/character-drive-patch-bay.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-patch-bay.png"
+    },
+    {
+      "path": "skin/parts/character-drive-setup-cap.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-setup-cap.png"
+    },
+    {
+      "path": "skin/parts/character-drive-small.png",
+      "source": "resources/maker-skins/character-drive/parts/character-drive-small.png"
+    },
+    {
+      "path": "skin/plates/character-drive-face.png",
+      "source": "resources/maker-skins/character-drive/plates/character-drive-face.png"
+    },
+    {
+      "path": "skin/plates/character-drive-setup.png",
+      "source": "resources/maker-skins/character-drive/plates/character-drive-setup.png"
+    }
+  ]
+}

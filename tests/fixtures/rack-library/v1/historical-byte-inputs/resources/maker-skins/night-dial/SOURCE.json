@@ -1,0 +1,96 @@
+{
+  "source_path": "docs/design/racks/2026-10-09-studio-rack/night-dial/skin",
+  "command": "uv run --offline --python 3.12 --no-project --with opencv-python-headless --with numpy python -B night_dial_skin.py measure; extract; elements; compare; install",
+  "script": {
+    "path": "night_dial_skin.py",
+    "sha256": "6d3f52477e921b889b626f4c94c56fdf3d2bb277cda6c1b7d5911739e27a5b80"
+  },
+  "concepts": [
+    {
+      "path": "night-dial/closed.png",
+      "sha256": "295c99e8e61e80fb9c3251ff551c1386f8af1b8c302132fd8c54d18a8a72485a"
+    },
+    {
+      "path": "night-dial/open.png",
+      "sha256": "9b217d6d3c97e5982806a29f6f6c16b46874b3c68097e48b1e13d2cc5359c8a3"
+    }
+  ],
+  "plates": [
+    {
+      "path": "night-dial/skin-sources/plate-face.png",
+      "sha256": "9cee0a68628effba13bf870a40605cd84a3fb9dd4d20785813b9e7e370687871"
+    },
+    {
+      "path": "night-dial/skin-sources/plate-face-lit.png",
+      "sha256": "67bdda4881e45b7a44efea981eaf31bfadb18e63a9bf95a1c11ee50bce9119fd"
+    },
+    {
+      "path": "night-dial/skin-sources/plate-deck.png",
+      "sha256": "b3f57110f630d271827d99d63bf4d71605c8a85937e030786716dc315dbdce9b"
+    }
+  ],
+  "sheets": [
+    {
+      "path": "night-dial/skin-sources/assets-01.png",
+      "sha256": "d6d9aac0f13e2eff5218ced315833bf21910ae566cfd011a152e0d8b54741996"
+    }
+  ],
+  "cell_map": {
+    "path": "night-dial/skin-sources/asset-map.json",
+    "sha256": "f53b797b383df554442278c547ff95974dd9316568776164d5cc5c285ac7ce4b"
+  },
+  "files": [
+    {
+      "path": "night-dial-elements.json",
+      "sha256": "5289de388260d4ef9e3f1d2f2e1be7abed54681a537c8e21e242d6770da36b36"
+    },
+    {
+      "path": "parts/night-dial-deck-knob-rotor.png",
+      "sha256": "f1e85fb624e34592ec16f80fa3f837177e9508d0d03b6dfc3ef0eb4dafd05001"
+    },
+    {
+      "path": "parts/night-dial-deck-lever-saw.png",
+      "sha256": "214e2ad6a3d1bdf894da097417eedbaaf6ba591d4e3751135eec9aebffc07558"
+    },
+    {
+      "path": "parts/night-dial-deck-lever-sqr.png",
+      "sha256": "976226b37cc1e9de2a56dc5db1fc510fa268ca82593aa28fd6f9f2cea0132a8d"
+    },
+    {
+      "path": "parts/night-dial-deck-selector-bar.png",
+      "sha256": "a77bb5d41a4c35b5bea465357fe1919140936bc3267f29f9cbf0fac9d787c51b"
+    },
+    {
+      "path": "parts/night-dial-face-backlight-lit.png",
+      "sha256": "f28fb1762174f375051b2c2777bb7db7ad1800f6cb2fc4714c8ba0c915dd9166"
+    },
+    {
+      "path": "parts/night-dial-face-dial-rotor.png",
+      "sha256": "bec6e954e3a73f32cdf6ca669defee601e3276c00245de9677fc97d4af218081"
+    },
+    {
+      "path": "parts/night-dial-face-glow-rotor.png",
+      "sha256": "2fde56816a1c3108d3a4e731952a327df404189cb06ef19763952212e1dc1d40"
+    },
+    {
+      "path": "parts/night-dial-face-knob-rotor.png",
+      "sha256": "df3d20b0551b6a79226bcaae538f81b593fd8bcb50d6847850236832834de947"
+    },
+    {
+      "path": "parts/night-dial-face-needle.png",
+      "sha256": "8607bb3cd464192fe4d6503cf3509e99e2efe5990699cf5668ae6011272ac8ef"
+    },
+    {
+      "path": "parts/night-dial-face-pull-raised.png",
+      "sha256": "37ebf5ca032b24adf869dd396cbe77fd644f6993fe4455e1942d1a97830c335d"
+    },
+    {
+      "path": "plates/night-dial-deck.png",
+      "sha256": "deabf80decd4fb9f326e4b536b1ac53a92446751cb1da0b3890b8f2aa59f1110"
+    },
+    {
+      "path": "plates/night-dial-face.png",
+      "sha256": "eed866ac7d5b6f1e39d735466077a180151acf9f94f34a49eb929e729336289d"
+    }
+  ]
+}

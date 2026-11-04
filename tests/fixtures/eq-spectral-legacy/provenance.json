@@ -1,0 +1,11 @@
+{
+  "schema_predecessor": "384ba492ae2f1809d4c07c3b8c159abb97c3708a",
+  "capture": "build/eq-spectral-integration-20261021-a/predecessor-capture-8.log",
+  "note": "Captured before registry/state changes; contemporaneous Task2 DSP changes do not change neutral descriptors or encoded state. Native capture14/0; frozen2535/Sound23/Project22.",
+  "sha256": {
+    "default-v23.soundstate": "4cb06929f0be3a84f8834f4435717f1c2a03abc57e99ea3d5486325a0b07cee8",
+    "registry-v23.json": "958fd8e8bad6c2ff7740c621ef9fe1700310029f4e3e3ee01dae4bb0fac9be96",
+    "rich-v22.airackproject": "d6f1f2b52d1ca05fcf280bbabadf57362f6ac6e65b37af2ff1566e6989f41d97",
+    "rich-v23.soundstate": "6d9596fe6cdad8543f85fe99f3ba9eecf990b402842586f3a91ba8b7b590a09a"
+  }
+}

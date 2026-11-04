@@ -1,0 +1,11 @@
+Original Permanent Marker TTF name-table attribution/license metadata:
+
+Copyright (c) 2010 by Font Diner, Inc. All rights reserved.
+
+Permanent Marker is a trademark of Font Diner, Inc.
+
+Font Diner, Inc
+
+Licensed under the Apache License, Version 2.0
+
+http://www.apache.org/licenses/LICENSE-2.0

@@ -1,0 +1,4 @@
+Original AIR rack definitions and artwork: AGPL-3.0-only.
+Native screenshot rendered by AIR. Maker names are fictional.
+The screenshot includes AIR's native font rendering; accompanying font notices are retained.
+No executable code, plugin or font file is supplied by this data package.

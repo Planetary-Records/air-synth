@@ -1,0 +1,2830 @@
+{
+  "format": "ai-rack-maker-skin",
+  "version": 1,
+  "status": "PROTOTYPE, not a product schema",
+  "design_id": "cdeafe3f-9c29-4c7c-9013-8284b505af10",
+  "maker": "ELMSTEAD SIGNAL WORKS",
+  "model": "NIGHT DIAL HYBRID VOICE NDV-2",
+  "units": 3,
+  "reveal": {
+    "kind": "drawer",
+    "view": "deck",
+    "units": 2,
+    "opener": "face.deck",
+    "titles": [
+      "Open deck",
+      "Close deck"
+    ],
+    "motion": {
+      "ms": 200
+    }
+  },
+  "rack": "NIGHT DIAL, ELMSTEAD SIGNAL WORKS' hybrid voice (an example rack's faceplate)",
+  "coordinate_space": "each view's own plate pixels at the house pitch; the host stacks the face and, while open, the deck below it, and scales the whole rack uniformly",
+  "rack_pitch": {
+    "panel_w": 2140,
+    "u_px": 197.11,
+    "note": "EIA: 19 in panel, 1.75 in per unit"
+  },
+  "views": {
+    "face": {
+      "plate": "face:plate",
+      "rack_units": 3,
+      "source": "night-dial/closed.png",
+      "conversion": "closed.png's box from x 7 y 69 scaled by 0.9911996294580825 on both axes, then 586 scaled rows planned to 591"
+    },
+    "deck": {
+      "plate": "deck:plate",
+      "rack_units": 2,
+      "below": "face",
+      "source": "night-dial/open.png",
+      "conversion": "open.png's deck from x 7 y 506 (the seam) scaled by 1.1674849972722312 on both axes, then 370 scaled rows planned to 394"
+    }
+  },
+  "bindings": "each element binds its rack unit (an index into the design's units) and the unit module's local key; the host resolves the registry parameter per placed rack",
+  "assets": {
+    "face:plate": {
+      "file": "plates/night-dial-face.png",
+      "size": [
+        2140,
+        591
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "night-dial/skin-sources/plate-face.png with the sheet's knob bodies and the pull at rest baked in",
+      "source_sha256": "9cee0a68628effba13bf870a40605cd84a3fb9dd4d20785813b9e7e370687871"
+    },
+    "deck:plate": {
+      "file": "plates/night-dial-deck.png",
+      "size": [
+        2140,
+        394
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "night-dial/skin-sources/plate-deck.png's deck with the sheet's knob bodies and selector skirts baked in",
+      "source_sha256": "b3f57110f630d271827d99d63bf4d71605c8a85937e030786716dc315dbdce9b"
+    },
+    "face:deck.raised": {
+      "file": "parts/night-dial-face-pull-raised.png",
+      "size": [
+        243,
+        92
+      ],
+      "anchor": [
+        121.5,
+        46.0
+      ],
+      "role": "the pull raised while the deck is open, over the clean housing that hides the pull at rest",
+      "alpha": true,
+      "motion": "shown while the deck is open",
+      "source": "skin-sources/assets-01.png (pull raised) over skin-sources/plate-face.png"
+    },
+    "face:backlight.lit": {
+      "file": "parts/night-dial-face-backlight-lit.png",
+      "size": [
+        1498,
+        145
+      ],
+      "anchor": [
+        749.0,
+        72.5
+      ],
+      "role": "the dial glass lit warm amber, its printing glowing",
+      "alpha": true,
+      "motion": "shown while the unit is enabled",
+      "source": "skin-sources/plate-face-lit.png's dial window"
+    },
+    "face:glow.rotor": {
+      "file": "parts/night-dial-face-glow-rotor.png",
+      "size": [
+        17,
+        16
+      ],
+      "anchor": [
+        8.29,
+        53.43
+      ],
+      "role": "the amber dot, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "skin-sources/assets-01.png (glow-knob.rotor)"
+    },
+    "face:knob.rotor": {
+      "file": "parts/night-dial-face-knob-rotor.png",
+      "size": [
+        17,
+        17
+      ],
+      "anchor": [
+        8.24,
+        39.28
+      ],
+      "role": "the amber dot, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "skin-sources/assets-01.png (face-knob.rotor)"
+    },
+    "deck:knob.rotor": {
+      "file": "parts/night-dial-deck-knob-rotor.png",
+      "size": [
+        17,
+        16
+      ],
+      "anchor": [
+        8.47,
+        33.55
+      ],
+      "role": "the amber dot, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "skin-sources/assets-01.png (deck-knob.rotor)"
+    },
+    "face:dial.rotor": {
+      "file": "parts/night-dial-face-dial-rotor.png",
+      "size": [
+        51,
+        70
+      ],
+      "anchor": [
+        24.0,
+        78.0
+      ],
+      "role": "the amber dot on its finger well's rim, stored at 12 o'clock about DIAL's pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "skin-sources/assets-01.png (dial-knob rotor): its dot and well cut apart at their narrowest row and placed as the concept's",
+      "composed": {
+        "neck_row": 26,
+        "sheet_well": [
+          36.2,
+          56.03,
+          29.65
+        ],
+        "dot_scale": 0.60329,
+        "well_scale": 0.48898
+      }
+    },
+    "deck:selector.bar": {
+      "file": "parts/night-dial-deck-selector-bar.png",
+      "size": [
+        19,
+        66
+      ],
+      "anchor": [
+        9.34,
+        32.06
+      ],
+      "role": "the black bar and its amber dot, stored at 12 o'clock about its middle",
+      "alpha": true,
+      "motion": "turns to each detent about the pivot",
+      "source": "skin-sources/assets-01.png (selector bar)"
+    },
+    "deck:lever.saw": {
+      "file": "parts/night-dial-deck-lever-saw.png",
+      "size": [
+        40,
+        79
+      ],
+      "anchor": [
+        19.46,
+        42.87
+      ],
+      "role": "the chrome lever up (SAW) on its plate, about the plate's centre",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "skin-sources/assets-01.png (lever SAW)"
+    },
+    "deck:lever.sqr": {
+      "file": "parts/night-dial-deck-lever-sqr.png",
+      "size": [
+        40,
+        76
+      ],
+      "anchor": [
+        19.77,
+        30.36
+      ],
+      "role": "the chrome lever down (SQR) on its plate, about the plate's centre",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "skin-sources/assets-01.png (lever SQR)"
+    },
+    "face:needle": {
+      "file": "parts/night-dial-face-needle.png",
+      "size": [
+        27,
+        144
+      ],
+      "anchor": [
+        13.83,
+        71.01
+      ],
+      "role": "the amber-red needle, about its middle",
+      "alpha": true,
+      "motion": "moves along the dial's scale with DIAL's value",
+      "source": "skin-sources/assets-01.png (needle)"
+    },
+    "procedural:lock-dot": {
+      "role": "lock dot",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "the stack's yellow lock dot at each element's geometry.dot"
+    },
+    "procedural:focus-ring": {
+      "role": "focus",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "2 px amber ring, 3 px outside the hit shape"
+    },
+    "procedural:tape": {
+      "role": "console tape",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "the house skin's tape blank and marker lettering, over geometry.tape while the printed legend is untrue"
+    }
+  },
+  "groups": [
+    {
+      "id": "face.face",
+      "view": "face",
+      "label": "Night Dial",
+      "members": [
+        "face.dial",
+        "face.sweep",
+        "face.spread",
+        "face.wander",
+        "face.glow",
+        "face.ring",
+        "face.swell",
+        "face.tail",
+        "face.backlight",
+        "face.needle",
+        "face.spread-tape",
+        "face.deck"
+      ],
+      "focus_order": [
+        "face.dial",
+        "face.sweep",
+        "face.spread",
+        "face.wander",
+        "face.glow",
+        "face.ring",
+        "face.swell",
+        "face.tail",
+        "face.deck"
+      ],
+      "visibility": "always"
+    },
+    {
+      "id": "face.deck-controls",
+      "view": "deck",
+      "label": "Deck",
+      "members": [
+        "face.osc1.voices",
+        "face.osc1.table",
+        "face.osc2.table",
+        "face.osc2.position",
+        "face.osc2.level",
+        "face.osc2.tune",
+        "face.osc2.voices",
+        "face.osc2.spread",
+        "face.width",
+        "face.filter.type",
+        "face.filter.mode",
+        "face.filter.size",
+        "face.curve",
+        "face.fenv.amount",
+        "face.fenv.decay",
+        "face.lfo.rate",
+        "face.noise"
+      ],
+      "focus_order": [
+        "face.osc1.voices",
+        "face.osc1.table",
+        "face.osc2.table",
+        "face.osc2.position",
+        "face.osc2.level",
+        "face.osc2.tune",
+        "face.osc2.voices",
+        "face.osc2.spread",
+        "face.width",
+        "face.filter.type",
+        "face.filter.mode",
+        "face.filter.size",
+        "face.curve",
+        "face.fenv.amount",
+        "face.fenv.decay",
+        "face.lfo.rate",
+        "face.noise"
+      ],
+      "visibility": "while the deck is open"
+    }
+  ],
+  "elements": [
+    {
+      "id": "face.dial",
+      "view": "face",
+      "label": "DIAL",
+      "section": "Signal",
+      "printed": "DIAL",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.position",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0,
+        "response": "linear"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1850.5,
+          138.5
+        ],
+        "face_r": 81.3,
+        "tick_center": [
+          1850.5,
+          138.5
+        ],
+        "tick_r": 81.3,
+        "hit_r": 93.43,
+        "dot": [
+          1915.06,
+          73.94
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -135.0,
+          135.0
+        ],
+        "ticks": [
+          [
+            0,
+            -135.0
+          ],
+          [
+            1,
+            135.0
+          ]
+        ],
+        "printed": [
+          "0.0",
+          "0.1",
+          "0.2",
+          "0.3",
+          "0.4",
+          "0.5",
+          "0.6",
+          "0.7",
+          "0.8",
+          "0.9",
+          "1.0"
+        ],
+        "note": "no printed scale: the needle reads DIAL on the glass; the knob turns the wireframe's 270 degrees"
+      },
+      "mockup": {
+        "pointer_angle": -21.29,
+        "drawn_value": 0.4498,
+        "brief_value": "0.45"
+      },
+      "layers": {
+        "pointer": "face:dial.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.sweep",
+      "view": "face",
+      "label": "SWEEP",
+      "section": "Signal",
+      "printed": "SWEEP",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "modulation.1.amount",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "linear"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          253.83,
+          370.45
+        ],
+        "face_r": 46.2,
+        "tick_center": [
+          253.83,
+          370.45
+        ],
+        "tick_r": 52.67,
+        "hit_r": 61.94,
+        "dot": [
+          293.57,
+          330.71
+        ],
+        "tape": [
+          220.0,
+          433.0,
+          65.0,
+          26.0
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -128.8,
+          130.46
+        ],
+        "ticks": [
+          [
+            0,
+            -128.8
+          ],
+          [
+            0.25,
+            -66.28
+          ],
+          [
+            0.5,
+            -0.34
+          ],
+          [
+            0.75,
+            66.19
+          ],
+          [
+            1,
+            130.46
+          ]
+        ],
+        "printed": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -41.02,
+        "drawn_value": 0.3458,
+        "brief_value": "30 %"
+      },
+      "layers": {
+        "pointer": "face:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "route": {
+        "slot": 1,
+        "source": "LFO 1",
+        "target": "Osc 1 position",
+        "bank": "Wavetable",
+        "note": "the printed legend is true while route 1 is enabled from LFO 1 to the Wavetable bank's Osc 1 position; otherwise the host's tape covers it"
+      }
+    },
+    {
+      "id": "face.spread",
+      "view": "face",
+      "label": "SPREAD",
+      "section": "Signal",
+      "printed": "SPREAD",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.unison_cents",
+        "type": "float",
+        "range": [
+          0,
+          50
+        ],
+        "unit": "cent",
+        "default": 10,
+        "response": "linear"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          489.47,
+          370.34
+        ],
+        "face_r": 46.2,
+        "tick_center": [
+          489.47,
+          370.34
+        ],
+        "tick_r": 52.81,
+        "hit_r": 62.09,
+        "dot": [
+          529.21,
+          330.6
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -128.94,
+          130.35
+        ],
+        "ticks": [
+          [
+            0,
+            -128.94
+          ],
+          [
+            10,
+            -77.19
+          ],
+          [
+            20,
+            -27.22
+          ],
+          [
+            30,
+            25.56
+          ],
+          [
+            40,
+            77.52
+          ],
+          [
+            50,
+            130.35
+          ]
+        ],
+        "printed": [
+          "0",
+          "10",
+          "20",
+          "30",
+          "40",
+          "50"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -51.56,
+        "drawn_value": 15.1296,
+        "brief_value": "15 cents"
+      },
+      "layers": {
+        "pointer": "face:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.wander",
+      "view": "face",
+      "label": "WANDER",
+      "section": "Warmth",
+      "printed": "WANDER",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.drift",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0,
+        "response": "linear"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          789.89,
+          370.74
+        ],
+        "face_r": 46.2,
+        "tick_center": [
+          789.89,
+          370.74
+        ],
+        "tick_r": 53.6,
+        "hit_r": 62.96,
+        "dot": [
+          829.63,
+          331.0
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -128.83,
+          129.47
+        ],
+        "ticks": [
+          [
+            0,
+            -128.83
+          ],
+          [
+            0.2,
+            -77.12
+          ],
+          [
+            0.4,
+            -26.33
+          ],
+          [
+            0.6,
+            26.81
+          ],
+          [
+            0.8,
+            77.23
+          ],
+          [
+            1,
+            129.47
+          ]
+        ],
+        "printed": [
+          "0",
+          "2",
+          "4",
+          "6",
+          "8",
+          "10"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -36.7,
+        "drawn_value": 0.3592,
+        "brief_value": "3.5"
+      },
+      "layers": {
+        "pointer": "face:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.glow",
+      "view": "face",
+      "label": "GLOW",
+      "section": "Warmth",
+      "printed": "GLOW",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.cutoff",
+        "type": "float",
+        "range": [
+          100,
+          12000
+        ],
+        "unit": "Hz",
+        "default": 4000,
+        "response": "logarithmic"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1061.97,
+          370.39
+        ],
+        "face_r": 62.5,
+        "tick_center": [
+          1061.97,
+          370.39
+        ],
+        "tick_r": 86.53,
+        "hit_r": 99.18,
+        "dot": [
+          1113.24,
+          319.12
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.37,
+          129.66
+        ],
+        "ticks": [
+          [
+            100,
+            -129.37
+          ],
+          [
+            200,
+            -93.03
+          ],
+          [
+            500,
+            -44.16
+          ],
+          [
+            1000,
+            -0.88
+          ],
+          [
+            2000,
+            36.38
+          ],
+          [
+            5000,
+            84.37
+          ],
+          [
+            12000,
+            129.66
+          ]
+        ],
+        "printed": [
+          "100",
+          "200",
+          "500",
+          "1k",
+          "2k",
+          "5k",
+          "12k"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": 14.76,
+        "drawn_value": 1337.6673,
+        "brief_value": "1.2 kHz"
+      },
+      "layers": {
+        "pointer": "face:glow.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.ring",
+      "view": "face",
+      "label": "RING",
+      "section": "Warmth",
+      "printed": "RING",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.resonance",
+        "type": "float",
+        "range": [
+          0,
+          0.9
+        ],
+        "unit": "",
+        "default": 0.25,
+        "response": "linear"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1327.96,
+          370.02
+        ],
+        "face_r": 46.2,
+        "tick_center": [
+          1327.96,
+          370.02
+        ],
+        "tick_r": 51.31,
+        "hit_r": 60.44,
+        "dot": [
+          1367.7,
+          330.28
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -131.16,
+          131.93
+        ],
+        "ticks": [
+          [
+            0,
+            -131.16
+          ],
+          [
+            0.3,
+            -42.42
+          ],
+          [
+            0.6,
+            42.01
+          ],
+          [
+            0.9,
+            131.93
+          ]
+        ],
+        "printed": [
+          "0",
+          "0.3",
+          "0.6",
+          "0.9"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -85.37,
+        "drawn_value": 0.1548,
+        "brief_value": "0.15"
+      },
+      "layers": {
+        "pointer": "face:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.swell",
+      "view": "face",
+      "label": "SWELL",
+      "section": "Contour",
+      "printed": "SWELL",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.amp.attack",
+        "type": "float",
+        "range": [
+          0.005,
+          8
+        ],
+        "unit": "s",
+        "default": 0.005,
+        "response": "logarithmic"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1627.98,
+          370.41
+        ],
+        "face_r": 46.2,
+        "tick_center": [
+          1627.98,
+          370.41
+        ],
+        "tick_r": 52.55,
+        "hit_r": 61.8,
+        "dot": [
+          1667.72,
+          330.67
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -130.68,
+          131.82
+        ],
+        "ticks": [
+          [
+            0.005,
+            -130.68
+          ],
+          [
+            0.02,
+            -81.25
+          ],
+          [
+            0.1,
+            -29.28
+          ],
+          [
+            0.5,
+            32.52
+          ],
+          [
+            2,
+            81.3
+          ],
+          [
+            8,
+            131.82
+          ]
+        ],
+        "printed": [
+          "5 ms",
+          "20 ms",
+          "100 ms",
+          "0.5 s",
+          "2 s",
+          "8 s"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": 69.94,
+        "drawn_value": 1.4482,
+        "brief_value": "1.5 s"
+      },
+      "layers": {
+        "pointer": "face:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.tail",
+      "view": "face",
+      "label": "TAIL",
+      "section": "Contour",
+      "printed": "TAIL",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.amp.release",
+        "type": "float",
+        "range": [
+          0.05,
+          10
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "logarithmic"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1883.67,
+          370.83
+        ],
+        "face_r": 46.2,
+        "tick_center": [
+          1883.67,
+          370.83
+        ],
+        "tick_r": 52.64,
+        "hit_r": 61.9,
+        "dot": [
+          1923.41,
+          331.09
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.56,
+          130.29
+        ],
+        "ticks": [
+          [
+            0.05,
+            -129.56
+          ],
+          [
+            0.2,
+            -62.52
+          ],
+          [
+            1,
+            0.83
+          ],
+          [
+            3,
+            71.08
+          ],
+          [
+            10,
+            130.29
+          ]
+        ],
+        "printed": [
+          "50 ms",
+          "200 ms",
+          "1 s",
+          "3 s",
+          "10 s"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": 60.73,
+        "drawn_value": 2.5518,
+        "brief_value": "3 s"
+      },
+      "layers": {
+        "pointer": "face:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.backlight",
+      "view": "face",
+      "kind": "lamp",
+      "label": "Dial backlight",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "enabled",
+        "type": "toggle",
+        "default": 1
+      },
+      "lit_value": 1,
+      "geometry": {
+        "led": [
+          916.0,
+          140.5
+        ],
+        "lens_r": 0
+      },
+      "layers": {
+        "lit": "face:backlight.lit"
+      },
+      "mockup": {
+        "drawn_value": 1
+      },
+      "input": {
+        "readback_only": true,
+        "note": "the dial glass is lit while unit 0 is enabled"
+      }
+    },
+    {
+      "id": "face.needle",
+      "view": "face",
+      "kind": "needle",
+      "label": "Needle",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.position",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "y": 140.5,
+        "top": 76,
+        "bottom": 205
+      },
+      "scale": {
+        "ticks": [
+          [
+            0.0,
+            244.63
+          ],
+          [
+            0.1,
+            377.3
+          ],
+          [
+            0.2,
+            511.11
+          ],
+          [
+            0.3,
+            644.48
+          ],
+          [
+            0.4,
+            777.15
+          ],
+          [
+            0.5,
+            909.71
+          ],
+          [
+            0.6,
+            1042.14
+          ],
+          [
+            0.7,
+            1175.48
+          ],
+          [
+            0.8,
+            1308.93
+          ],
+          [
+            0.9,
+            1441.48
+          ],
+          [
+            1.0,
+            1576.42
+          ]
+        ],
+        "note": "the glass's numbered ticks: [value, x]; linear between them, pinned at the ends"
+      },
+      "layers": {
+        "needle": "face:needle"
+      },
+      "mockup": {
+        "drawn_value": 0.4498,
+        "drawn_x": 843.19
+      },
+      "input": {
+        "readback_only": true,
+        "note": "reads DIAL's parameter; takes no mouse or focus"
+      }
+    },
+    {
+      "id": "face.spread-tape",
+      "view": "face",
+      "kind": "tape",
+      "label": "1 VOICE",
+      "group": "face.face",
+      "text": "1 VOICE",
+      "shown_when": {
+        "unit": 0,
+        "key": "wavetable.osc.1.unison",
+        "value": 0
+      },
+      "geometry": {
+        "center": [
+          490.0,
+          446.0
+        ],
+        "size": [
+          74.0,
+          26.0
+        ],
+        "angle": 0
+      },
+      "note": "SPREAD's legend is untrue while osc 1 has one voice; the knob still sets the spread"
+    },
+    {
+      "id": "face.deck",
+      "view": "face",
+      "kind": "action",
+      "label": "Open deck",
+      "group": "face.face",
+      "action": "toggle deck",
+      "titles": [
+        "Open deck",
+        "Close deck"
+      ],
+      "geometry": {
+        "rect": [
+          952.33,
+          550.0,
+          232.0,
+          44.0
+        ],
+        "lit_rect": [
+          955.05,
+          504.26,
+          226.0,
+          44.0
+        ],
+        "led": [
+          1068.5,
+          545.0
+        ],
+        "lens_r": 0,
+        "hit_rect": [
+          947,
+          499,
+          243,
+          92
+        ]
+      },
+      "layers": {
+        "lit": "face:deck.raised"
+      },
+      "input": {
+        "click": "opens the deck, or closes it while open",
+        "keys": "Space/Enter",
+        "note": "raised (its lit layer) while the deck is open; rect is the pull at rest, lit_rect the pull raised"
+      }
+    },
+    {
+      "id": "face.osc1.voices",
+      "view": "deck",
+      "label": "OSC 1 VOICES",
+      "section": "OSC 1",
+      "printed": "VOICES",
+      "group": "face.deck-controls",
+      "kind": "selector",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.unison",
+        "type": "choice",
+        "choices": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          201.5,
+          107.5
+        ],
+        "face_r": 34.0,
+        "rect": [
+          167.5,
+          73.5,
+          68.0,
+          68.0
+        ],
+        "hit_r": 40.8,
+        "hit_rect": [
+          133.0,
+          35.0,
+          143.0,
+          112.5
+        ],
+        "dot": [
+          231.2,
+          77.8
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "1",
+          "choice": "1",
+          "angle": -90.72,
+          "legend_rect": [
+            139.0,
+            99.0,
+            7.0,
+            17.0
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "2",
+          "choice": "2",
+          "angle": -62.71,
+          "legend_rect": [
+            147.0,
+            72.0,
+            10.0,
+            17.0
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "3",
+          "choice": "3",
+          "angle": -32.45,
+          "legend_rect": [
+            170.0,
+            52.0,
+            10.0,
+            15.0
+          ]
+        },
+        {
+          "value": 3,
+          "legend": "4",
+          "choice": "4",
+          "angle": 4.14,
+          "legend_rect": [
+            200.0,
+            41.0,
+            11.0,
+            17.0
+          ]
+        },
+        {
+          "value": 4,
+          "legend": "5",
+          "choice": "5",
+          "angle": 38.45,
+          "legend_rect": [
+            231.0,
+            53.0,
+            9.0,
+            16.0
+          ]
+        },
+        {
+          "value": 5,
+          "legend": "6",
+          "choice": "6",
+          "angle": 64.53,
+          "legend_rect": [
+            252.0,
+            72.0,
+            9.0,
+            17.0
+          ]
+        },
+        {
+          "value": 6,
+          "legend": "7",
+          "choice": "7",
+          "angle": 90.62,
+          "legend_rect": [
+            260.0,
+            99.0,
+            10.0,
+            16.0
+          ]
+        }
+      ],
+      "mockup": {
+        "pointer_angle": 33.48,
+        "drawn_value": 4,
+        "brief_value": "5"
+      },
+      "layers": {
+        "pointer": "deck:selector.bar"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "legend_click": "a click on a printed legend chooses that position",
+        "wheel": "steps to the next or previous position, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.osc1.table",
+      "view": "deck",
+      "label": "OSC 1 TABLE",
+      "section": "OSC 1",
+      "printed": "TABLE",
+      "group": "face.deck-controls",
+      "kind": "lever",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.table",
+        "type": "choice",
+        "choices": [
+          "0",
+          "1"
+        ],
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          356.43,
+          98.62
+        ],
+        "rect": [
+          339.66,
+          58.75,
+          33.0,
+          79.51
+        ],
+        "hit_rect": [
+          333.66,
+          33.0,
+          45.0,
+          130.0
+        ],
+        "dot": [
+          378.66,
+          66.75
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "SAW",
+          "choice": "0",
+          "asset": "deck:lever.saw",
+          "legend_rect": [
+            342.0,
+            39.0,
+            29.0,
+            17.0
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "SQR",
+          "choice": "1",
+          "asset": "deck:lever.sqr",
+          "legend_rect": [
+            344.0,
+            141.0,
+            25.0,
+            16.0
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": "SAW",
+        "drawn_position": "up"
+      },
+      "input": {
+        "click": "flips to the other position (one gesture)",
+        "wheel": "steps, stopping at the ends",
+        "keys": "Space/Enter flip; Up to SAW, Down to SQR, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.osc2.table",
+      "view": "deck",
+      "label": "OSC 2 TABLE",
+      "section": "OSC 2",
+      "printed": "TABLE",
+      "group": "face.deck-controls",
+      "kind": "lever",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.table",
+        "type": "choice",
+        "choices": [
+          "0",
+          "1"
+        ],
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          579.03,
+          98.62
+        ],
+        "rect": [
+          562.26,
+          58.75,
+          33.0,
+          79.51
+        ],
+        "hit_rect": [
+          556.26,
+          33.0,
+          45.0,
+          130.0
+        ],
+        "dot": [
+          601.26,
+          66.75
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "SAW",
+          "choice": "0",
+          "asset": "deck:lever.saw",
+          "legend_rect": [
+            566.0,
+            39.0,
+            28.0,
+            17.0
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "SQR",
+          "choice": "1",
+          "asset": "deck:lever.sqr",
+          "legend_rect": [
+            567.0,
+            141.0,
+            25.0,
+            16.0
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": "SAW",
+        "drawn_position": "up"
+      },
+      "input": {
+        "click": "flips to the other position (one gesture)",
+        "wheel": "steps, stopping at the ends",
+        "keys": "Space/Enter flip; Up to SAW, Down to SQR, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.osc2.position",
+      "view": "deck",
+      "label": "OSC 2 POSITION",
+      "section": "OSC 2",
+      "printed": "POSITION",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.position",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          758.0,
+          109.3
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          758.0,
+          109.3
+        ],
+        "tick_r": 38.8,
+        "hit_r": 46.68,
+        "dot": [
+          790.81,
+          76.49
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.41,
+          130.95
+        ],
+        "ticks": [
+          [
+            0,
+            -129.41
+          ],
+          [
+            0.5,
+            -1.43
+          ],
+          [
+            1,
+            130.95
+          ]
+        ],
+        "printed": [
+          "0",
+          "0.5",
+          "1"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -95.93,
+        "drawn_value": 0.1308,
+        "brief_value": "0.1"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc2.level",
+      "view": "deck",
+      "label": "OSC 2 LEVEL",
+      "section": "OSC 2",
+      "printed": "LEVEL",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.level",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          968.5,
+          109.52
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          968.5,
+          109.52
+        ],
+        "tick_r": 39.04,
+        "hit_r": 46.94,
+        "dot": [
+          1001.31,
+          76.71
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.72,
+          130.29
+        ],
+        "ticks": [
+          [
+            0,
+            -129.72
+          ],
+          [
+            0.5,
+            0.03
+          ],
+          [
+            1,
+            130.29
+          ]
+        ],
+        "printed": [
+          "0",
+          "5",
+          "10"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -63.77,
+        "drawn_value": 0.2542,
+        "brief_value": "2.5"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc2.tune",
+      "view": "deck",
+      "label": "OSC 2 TUNE",
+      "section": "OSC 2",
+      "printed": "TUNE",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.tune",
+        "type": "float",
+        "range": [
+          -24,
+          24
+        ],
+        "unit": "st",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1186.8,
+          109.46
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          1186.8,
+          109.46
+        ],
+        "tick_r": 39.96,
+        "hit_r": 47.96,
+        "dot": [
+          1219.61,
+          76.65
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.23,
+          131.53
+        ],
+        "ticks": [
+          [
+            -24,
+            -129.23
+          ],
+          [
+            -12,
+            -63.35
+          ],
+          [
+            0,
+            -1.64
+          ],
+          [
+            12,
+            63.03
+          ],
+          [
+            24,
+            131.53
+          ]
+        ],
+        "printed": [
+          "-24",
+          "-12",
+          "0",
+          "+12",
+          "+24"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -63.46,
+        "drawn_value": -12.0201,
+        "brief_value": "-12 st"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc2.voices",
+      "view": "deck",
+      "label": "OSC 2 VOICES",
+      "section": "OSC 2",
+      "printed": "VOICES",
+      "group": "face.deck-controls",
+      "kind": "selector",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.unison",
+        "type": "choice",
+        "choices": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          1395.5,
+          107.5
+        ],
+        "face_r": 34.9,
+        "rect": [
+          1360.6,
+          72.6,
+          69.8,
+          69.8
+        ],
+        "hit_r": 41.88,
+        "hit_rect": [
+          1326.0,
+          35.0,
+          141.0,
+          113.4
+        ],
+        "dot": [
+          1425.83,
+          77.17
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "1",
+          "choice": "1",
+          "angle": -90.7,
+          "legend_rect": [
+            1332.0,
+            99.0,
+            7.0,
+            16.0
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "2",
+          "choice": "2",
+          "angle": -64.24,
+          "legend_rect": [
+            1338.0,
+            72.0,
+            9.0,
+            17.0
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "3",
+          "choice": "3",
+          "angle": -34.65,
+          "legend_rect": [
+            1361.0,
+            52.0,
+            10.0,
+            17.0
+          ]
+        },
+        {
+          "value": 3,
+          "legend": "4",
+          "choice": "4",
+          "angle": 1.23,
+          "legend_rect": [
+            1391.0,
+            41.0,
+            11.0,
+            17.0
+          ]
+        },
+        {
+          "value": 4,
+          "legend": "5",
+          "choice": "5",
+          "angle": 35.7,
+          "legend_rect": [
+            1422.0,
+            52.0,
+            10.0,
+            17.0
+          ]
+        },
+        {
+          "value": 5,
+          "legend": "6",
+          "choice": "6",
+          "angle": 63.35,
+          "legend_rect": [
+            1443.0,
+            72.0,
+            10.0,
+            17.0
+          ]
+        },
+        {
+          "value": 6,
+          "legend": "7",
+          "choice": "7",
+          "angle": 90.95,
+          "legend_rect": [
+            1451.0,
+            99.0,
+            10.0,
+            17.0
+          ]
+        }
+      ],
+      "mockup": {
+        "pointer_angle": -90.54,
+        "drawn_value": 0,
+        "brief_value": "1"
+      },
+      "layers": {
+        "pointer": "deck:selector.bar"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "legend_click": "a click on a printed legend chooses that position",
+        "wheel": "steps to the next or previous position, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.osc2.spread",
+      "view": "deck",
+      "label": "OSC 2 SPREAD",
+      "section": "OSC 2",
+      "printed": "SPREAD",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.unison_cents",
+        "type": "float",
+        "range": [
+          0,
+          100
+        ],
+        "unit": "cent",
+        "default": 10,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1614.3,
+          108.59
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          1614.3,
+          108.59
+        ],
+        "tick_r": 40.31,
+        "hit_r": 48.34,
+        "dot": [
+          1647.11,
+          75.78
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.97,
+          131.88
+        ],
+        "ticks": [
+          [
+            0,
+            -129.97
+          ],
+          [
+            25,
+            -63.83
+          ],
+          [
+            50,
+            0.26
+          ],
+          [
+            75,
+            63.55
+          ],
+          [
+            100,
+            131.88
+          ]
+        ],
+        "printed": [
+          "0",
+          "25",
+          "50",
+          "75",
+          "100"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -97.86,
+        "drawn_value": 12.1366,
+        "brief_value": "10 cents"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.width",
+      "view": "deck",
+      "label": "STEREO WIDTH",
+      "section": "STEREO",
+      "printed": "WIDTH",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.unison_width",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 1,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1936.5,
+          110.0
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          1936.5,
+          110.0
+        ],
+        "tick_r": 39.51,
+        "hit_r": 47.46,
+        "dot": [
+          1969.31,
+          77.19
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -127.5,
+          128.52
+        ],
+        "ticks": [
+          [
+            0,
+            -127.5
+          ],
+          [
+            0.5,
+            1.24
+          ],
+          [
+            1,
+            128.52
+          ]
+        ],
+        "printed": [
+          "0",
+          "50",
+          "100"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": 51.69,
+        "drawn_value": 0.6982,
+        "brief_value": "70 %"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.filter.type",
+      "view": "deck",
+      "label": "FILTER TYPE",
+      "section": "FILTER",
+      "printed": "TYPE",
+      "group": "face.deck-controls",
+      "kind": "selector",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.type",
+        "type": "choice",
+        "choices": [
+          "Clean",
+          "Ladder",
+          "Classic",
+          "Vowel"
+        ],
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          238.5,
+          291.5
+        ],
+        "face_r": 36.0,
+        "rect": [
+          202.5,
+          255.5,
+          72.0,
+          72.0
+        ],
+        "hit_r": 43.2,
+        "hit_rect": [
+          134.0,
+          225.0,
+          216.0,
+          108.5
+        ],
+        "dot": [
+          269.61,
+          260.39
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "CLEAN",
+          "choice": "Clean",
+          "angle": -73.3,
+          "legend_rect": [
+            140.0,
+            265.0,
+            38.0,
+            17.0
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "LADDER",
+          "choice": "Ladder",
+          "angle": -29.5,
+          "legend_rect": [
+            186.0,
+            231.0,
+            46.0,
+            16.0
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "CLASSIC",
+          "choice": "Classic",
+          "angle": 30.48,
+          "legend_rect": [
+            255.0,
+            231.0,
+            49.0,
+            16.0
+          ]
+        },
+        {
+          "value": 3,
+          "legend": "VOWEL",
+          "choice": "Vowel",
+          "angle": 73.69,
+          "legend_rect": [
+            302.0,
+            266.0,
+            42.0,
+            16.0
+          ]
+        }
+      ],
+      "mockup": {
+        "pointer_angle": 32.0,
+        "drawn_value": 2,
+        "brief_value": "CLASSIC"
+      },
+      "layers": {
+        "pointer": "deck:selector.bar"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "legend_click": "a click on a printed legend chooses that position",
+        "wheel": "steps to the next or previous position, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.filter.mode",
+      "view": "deck",
+      "label": "FILTER MODE",
+      "section": "FILTER",
+      "printed": "MODE",
+      "group": "face.deck-controls",
+      "kind": "selector",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.mode",
+        "type": "choice",
+        "choices": [
+          "Lowpass",
+          "Bandpass",
+          "Highpass"
+        ],
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          445.5,
+          289.5
+        ],
+        "face_r": 35.5,
+        "rect": [
+          410.0,
+          254.0,
+          71.0,
+          71.0
+        ],
+        "hit_r": 42.6,
+        "hit_rect": [
+          386.0,
+          220.0,
+          121.0,
+          111.0
+        ],
+        "dot": [
+          476.26,
+          258.74
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "LP",
+          "choice": "Lowpass",
+          "angle": -49.59,
+          "legend_rect": [
+            392.0,
+            241.0,
+            17.0,
+            16.0
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "BP",
+          "choice": "Bandpass",
+          "angle": -0.11,
+          "legend_rect": [
+            439.0,
+            226.0,
+            17.0,
+            16.0
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "HP",
+          "choice": "Highpass",
+          "angle": 48.78,
+          "legend_rect": [
+            484.0,
+            241.0,
+            17.0,
+            16.0
+          ]
+        }
+      ],
+      "mockup": {
+        "pointer_angle": -49.09,
+        "drawn_value": 0,
+        "brief_value": "LP"
+      },
+      "layers": {
+        "pointer": "deck:selector.bar"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "legend_click": "a click on a printed legend chooses that position",
+        "wheel": "steps to the next or previous position, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.filter.size",
+      "view": "deck",
+      "label": "FILTER SIZE",
+      "section": "FILTER",
+      "printed": "SIZE",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.vowel_size",
+        "type": "float",
+        "range": [
+          0.5,
+          2
+        ],
+        "unit": "x",
+        "default": 1,
+        "response": "parameter",
+        "skew": 0.63092975,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          644.5,
+          295.25
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          644.5,
+          295.25
+        ],
+        "tick_r": 38.75,
+        "hit_r": 46.62,
+        "dot": [
+          677.31,
+          262.44
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -127.64,
+          127.73
+        ],
+        "ticks": [
+          [
+            0.5,
+            -127.64
+          ],
+          [
+            1,
+            -0.64
+          ],
+          [
+            2,
+            127.73
+          ]
+        ],
+        "printed": [
+          "0.5x",
+          "1x",
+          "2x"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -3.33,
+        "drawn_value": 0.9833,
+        "brief_value": "1x"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.curve",
+      "view": "deck",
+      "label": "CONTOUR CURVE",
+      "section": "CONTOUR",
+      "printed": "CURVE",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.amp.attack_curve",
+        "type": "float",
+        "range": [
+          -1,
+          1
+        ],
+        "unit": "",
+        "default": 0.25,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          917.5,
+          295.14
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          917.5,
+          295.14
+        ],
+        "tick_r": 38.64,
+        "hit_r": 46.5,
+        "dot": [
+          950.31,
+          262.33
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -127.19,
+          128.65
+        ],
+        "ticks": [
+          [
+            -1,
+            -127.19
+          ],
+          [
+            0,
+            0.03
+          ],
+          [
+            1,
+            128.65
+          ]
+        ],
+        "printed": [
+          "LATE",
+          "LIN",
+          "FAST"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -66.0,
+        "drawn_value": -0.519,
+        "brief_value": "-0.5"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.fenv.amount",
+      "view": "deck",
+      "label": "FILTER ENV AMOUNT",
+      "section": "FILTER ENV",
+      "printed": "AMOUNT",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter_env.octaves",
+        "type": "float",
+        "range": [
+          -8,
+          8
+        ],
+        "unit": "oct",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1185.99,
+          295.27
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          1185.99,
+          295.27
+        ],
+        "tick_r": 40.09,
+        "hit_r": 48.1,
+        "dot": [
+          1218.8,
+          262.46
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -126.59,
+          128.17
+        ],
+        "ticks": [
+          [
+            -8,
+            -126.59
+          ],
+          [
+            -4,
+            -64.93
+          ],
+          [
+            0,
+            -0.64
+          ],
+          [
+            4,
+            64.13
+          ],
+          [
+            8,
+            128.17
+          ]
+        ],
+        "printed": [
+          "-8",
+          "-4",
+          "0",
+          "+4",
+          "+8"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -3.13,
+        "drawn_value": -0.1547,
+        "brief_value": "0 oct"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.fenv.decay",
+      "view": "deck",
+      "label": "FILTER ENV DECAY",
+      "section": "FILTER ENV",
+      "printed": "DECAY",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter_env.decay",
+        "type": "float",
+        "range": [
+          0.01,
+          5
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "logarithmic"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1400.98,
+          294.14
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          1400.98,
+          294.14
+        ],
+        "tick_r": 39.75,
+        "hit_r": 47.73,
+        "dot": [
+          1433.79,
+          261.33
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -128.47,
+          130.57
+        ],
+        "ticks": [
+          [
+            0.01,
+            -128.47
+          ],
+          [
+            0.05,
+            -62.26
+          ],
+          [
+            0.2,
+            -1.24
+          ],
+          [
+            1,
+            63.33
+          ],
+          [
+            5,
+            130.57
+          ]
+        ],
+        "printed": [
+          "10 ms",
+          "50 ms",
+          "200 ms",
+          "1 s",
+          "5 s"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -24.61,
+        "drawn_value": 0.1176,
+        "brief_value": "150 ms"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.lfo.rate",
+      "view": "deck",
+      "label": "MOTION LFO RATE",
+      "section": "MOTION",
+      "printed": "LFO RATE",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.rate_hz",
+        "type": "float",
+        "range": [
+          0.05,
+          10
+        ],
+        "unit": "Hz",
+        "default": 1,
+        "response": "logarithmic"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1678.5,
+          294.32
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          1678.5,
+          294.32
+        ],
+        "tick_r": 41.79,
+        "hit_r": 49.97,
+        "dot": [
+          1711.31,
+          261.51
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -127.04,
+          129.64
+        ],
+        "ticks": [
+          [
+            0.05,
+            -127.04
+          ],
+          [
+            0.1,
+            -90.23
+          ],
+          [
+            0.5,
+            -24.37
+          ],
+          [
+            1,
+            21.92
+          ],
+          [
+            5,
+            87.01
+          ],
+          [
+            10,
+            129.64
+          ]
+        ],
+        "printed": [
+          "0.05",
+          "0.1",
+          "0.5",
+          "1",
+          "5",
+          "10"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -102.79,
+        "drawn_value": 0.0789,
+        "brief_value": "0.08 Hz"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.noise",
+      "view": "deck",
+      "label": "NOISE LEVEL",
+      "section": "NOISE",
+      "printed": "LEVEL",
+      "group": "face.deck-controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.noise",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1937.0,
+          295.5
+        ],
+        "face_r": 36.4,
+        "tick_center": [
+          1937.0,
+          295.5
+        ],
+        "tick_r": 39.0,
+        "hit_r": 46.9,
+        "dot": [
+          1969.81,
+          262.69
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -125.87,
+          127.09
+        ],
+        "ticks": [
+          [
+            0,
+            -125.87
+          ],
+          [
+            0.5,
+            0.61
+          ],
+          [
+            1,
+            127.09
+          ]
+        ],
+        "printed": [
+          "0",
+          "5",
+          "10"
+        ],
+        "note": "the plate's printed ticks, measured; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "mockup": {
+        "pointer_angle": -132.18,
+        "drawn_value": 0,
+        "brief_value": "0"
+      },
+      "layers": {
+        "pointer": "deck:knob.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    }
+  ]
+}

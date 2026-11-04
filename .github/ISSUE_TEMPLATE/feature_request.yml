@@ -1,0 +1,21 @@
+name: Feature suggestion
+description: A focused musical problem or improvement
+body:
+  - type: textarea
+    id: musical_goal
+    attributes:
+      label: What are you trying to make or do?
+      description: Explain the musical workflow and current limitation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Smallest useful improvement and current workaround
+    validations:
+      required: true
+  - type: textarea
+    id: participation
+    attributes:
+      label: How could you help?
+      description: Optional testing, presets, documentation or implementation. Suggestions do not imply acceptance, funding or a delivery date.

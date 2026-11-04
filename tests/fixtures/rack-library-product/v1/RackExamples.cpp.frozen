@@ -1,0 +1,239 @@
+#include "RackExamples.h"
+#include "ParameterRegistry.h"
+#include "RackReconciliation.h"
+#include <algorithm>
+namespace airack {
+namespace {
+void value(RackUnit& u,const juce::String& key,float physical){const auto index=rackParameterIndex(u.module,0,key);jassert(index);const auto& d=parameterRegistry()[*index];const juce::NormalisableRange<float> range(d.minimum,d.maximum,0,d.skew);u.defaults.push_back({u.id,key,range.convertTo0to1(physical)});}
+FocusedControl focus(const char* label,int unit,int section,const char* key,FocusWidget widget,float low,float high,FocusResponse response=FocusResponse::linear){return {label,std::uint8_t(unit),std::uint8_t(section),key,widget,response,low,high};}
+void route(RackUnit& u,float source,float target,float bank,float amount,int number=1){const auto key=[number](const char* field){return "modulation."+juce::String(number)+"."+field;};value(u,key("enabled"),1);value(u,key("source"),source);value(u,key("target"),target);value(u,key("bank"),bank);value(u,key("amount"),amount);}
+}
+std::array<RackDesign,6> exampleRackDesigns(){
+ std::array<RackDesign,6> result;auto& ember=result[0];ember.id=juce::Uuid("c83dab6a-1c4e-48c1-83c4-80d9212ca601");ember.name="Ember Reed";ember.intent="A warm, articulate pulse and triangle voice with a brief filter bloom and restrained native drive.";ember.role=RackRole::synth;
+ ember.units={{0,NativeModule::analog,{}},{1,NativeModule::drive,{}}};auto& a=ember.units[0];value(a,"enabled",1);value(a,"engine",0);value(a,"analog.osc.1.waveform",3);value(a,"analog.osc.2.waveform",1);value(a,"analog.osc.1.level",.45f);value(a,"analog.osc.2.level",.25f);value(a,"analog.osc.1.pulse_width",.45f);value(a,"analog.filter.mode",0);value(a,"analog.filter.cutoff",1800);value(a,"analog.filter.resonance",.2f);value(a,"analog.amp.attack",.01f);value(a,"analog.amp.release",.25f);value(a,"analog.filter_env.decay",.25f);value(a,"analog.filter_env.sustain",.1f);value(a,"analog.filter_env.octaves",1);route(a,5,14,1,.12f);value(ember.units[1],"drive.shape",0);value(ember.units[1],"drive.gain_db",3);value(ember.units[1],"drive.mix",.2f);
+ ember.panel.layout=PanelLayout::instrumentSections;ember.panel.sections={"Tone","Envelope","Grain"};ember.panel.surface=1;ember.panel.accent=0;ember.panel.frame=0;ember.panel.emphasis=1;ember.panel.spacing=1;ember.panel.density=0;
+ ember.panel.controls={focus("Air",0,0,"analog.filter.cutoff",FocusWidget::rotary,100,10000,FocusResponse::logarithmic),focus("Bite",0,0,"analog.filter.resonance",FocusWidget::rotary,0,.8f),focus("Bloom",0,1,"analog.filter_env.decay",FocusWidget::verticalSlider,.02f,2,FocusResponse::logarithmic),focus("Attack",0,1,"analog.amp.attack",FocusWidget::verticalSlider,.001f,1,FocusResponse::logarithmic),focus("Release",0,1,"analog.amp.release",FocusWidget::verticalSlider,.02f,2,FocusResponse::logarithmic),focus("Grain",1,2,"drive.gain_db",FocusWidget::rotary,0,12)};
+ auto& glass=result[1];glass.id=juce::Uuid("c83dab6a-1c4e-48c1-83c4-80d9212ca602");glass.name="Glass Current";glass.intent="A gently moving factory wavetable voice with independent echo and a longer spatial tail.";glass.role=RackRole::synth;glass.units={{0,NativeModule::wavetable,{}},{1,NativeModule::delay,{}},{2,NativeModule::reverb,{}}};auto& w=glass.units[0];value(w,"enabled",1);value(w,"engine",1);value(w,"wavetable.osc.1.table",0);value(w,"wavetable.osc.2.table",1);value(w,"wavetable.osc.1.position",.35f);value(w,"wavetable.osc.1.level",.4f);value(w,"wavetable.osc.2.level",.2f);value(w,"wavetable.filter.mode",0);value(w,"wavetable.filter.cutoff",6000);value(w,"wavetable.filter.resonance",.15f);value(w,"wavetable.amp.release",1.5f);value(w,"lfo.1.synced",0);value(w,"lfo.1.shape",0);value(w,"lfo.1.rate_hz",.35f);route(w,3,11,2,.08f);value(glass.units[1],"delay.synced",0);value(glass.units[1],"delay.seconds",.3f);value(glass.units[1],"delay.feedback",.2f);value(glass.units[1],"delay.mix",.15f);value(glass.units[2],"reverb.decay_seconds",3);value(glass.units[2],"reverb.mix",.18f);
+ glass.panel.layout=PanelLayout::performanceControls;glass.panel.sections={"Motion","Tail"};glass.panel.accent=1;glass.panel.emphasis=1;glass.panel.spacing=1;glass.panel.controls={focus("Facet",0,0,"wavetable.osc.1.position",FocusWidget::rotary,0,1),focus("Drift",0,0,"lfo.1.rate_hz",FocusWidget::rotary,.05f,5,FocusResponse::logarithmic),focus("Echo",1,1,"delay.mix",FocusWidget::rotary,0,.5f),focus("Horizon",2,1,"reverb.decay_seconds",FocusWidget::rotary,.3f,8,FocusResponse::logarithmic)};
+ auto& thread=result[2];thread.id=juce::Uuid("c83dab6a-1c4e-48c1-83c4-80d9212ca603");thread.name="Thread Press";thread.intent="An ordered dynamics then saturation strip for gentle front shaping and parallel density.";thread.role=RackRole::fx;thread.units={{0,NativeModule::compressor,{}},{1,NativeModule::drive,{}}};value(thread.units[0],"compressor.threshold_db",-18);value(thread.units[0],"compressor.ratio",2);value(thread.units[0],"compressor.attack_ms",15);value(thread.units[0],"compressor.release_ms",120);value(thread.units[0],"compressor.makeup_db",0);value(thread.units[0],"compressor.mix",.7f);value(thread.units[1],"drive.shape",1);value(thread.units[1],"drive.gain_db",2);value(thread.units[1],"drive.mix",.2f);
+ thread.panel.layout=PanelLayout::orderedFxStrip;thread.panel.sections={"Dynamics","Saturation"};thread.panel.accent=2;thread.panel.frame=1;thread.panel.density=1;thread.panel.controls={focus("Grip",0,0,"compressor.threshold_db",FocusWidget::verticalSlider,-36,0),focus("Front",0,0,"compressor.attack_ms",FocusWidget::verticalSlider,1,60,FocusResponse::logarithmic),focus("Blend",0,0,"compressor.mix",FocusWidget::verticalSlider,0,1),focus("Density",1,1,"drive.gain_db",FocusWidget::rotary,0,12)};
+ auto& oxide=result[3];oxide.id=juce::Uuid("330cb53b-cd9b-443c-94d8-2700bc8b88f7");oxide.name="Oxide Return";oxide.intent="A warm tape-style echo whose repeats saturate, darken and thin as they recirculate, with a gentle wow; time changes glide like a tape transport. Shape the echo time, how long the repeats return, how much tape grit and wobble they gather and the low and high cut on the repeats; the dry signal stays clean. Switch to host-synced note values, cross the repeats between the sides, or speed the wobble up toward flutter when needed.";oxide.role=RackRole::fx;
+ oxide.units={{0,NativeModule::delay,{},modernDelayAlgorithmRevision}};auto& tape=oxide.units[0];value(tape,"bypassed",0);value(tape,"delay.synced",0);value(tape,"delay.seconds",.3f);value(tape,"delay.beats",.5f);value(tape,"delay.feedback",.38f);value(tape,"delay.stereo",.3f);value(tape,"delay.filter_hz",5000);value(tape,"delay.mix",.25f);value(tape,"delay.saturation",.3f);value(tape,"delay.low_cut_hz",100);value(tape,"delay.wobble",.2f);value(tape,"delay.wobble_rate_hz",.8f);value(tape,"delay.glide",1);value(tape,"delay.note",11);
+ oxide.panel.layout=PanelLayout::orderedFxStrip;oxide.panel.sections={"Echo","Tape","Tone","Output"};oxide.panel.controls={focus("Time",0,0,"delay.seconds",FocusWidget::rotary,.02f,2,FocusResponse::logarithmic),focus("Repeats",0,0,"delay.feedback",FocusWidget::rotary,0,.95f),focus("Saturation",0,1,"delay.saturation",FocusWidget::rotary,0,1),focus("Wobble",0,1,"delay.wobble",FocusWidget::rotary,0,1),focus("Low cut",0,2,"delay.low_cut_hz",FocusWidget::rotary,20,2000,FocusResponse::logarithmic),focus("High cut",0,2,"delay.filter_hz",FocusWidget::rotary,1000,20000,FocusResponse::logarithmic),focus("Mix",0,3,"delay.mix",FocusWidget::rotary,0,1)};
+ auto& small=result[4];small.id=juce::Uuid("22d80511-2e4f-4a41-b1dd-203eabbcf32e");small.name="Small Hours";small.intent="A dark, vintage-coloured reverb voiced for cinematic future garage: lush slow-building pad washes, pitch-steady spaces for vocal chops and bells, tape-wobbled halls, dense plates for snares and claps, airy rooms, and gated or reverse swells. Shape the voicing, decay, size and swell, the era's darkness, the wobble's depth and speed and a little grit; low and high cut keep the tail clear of the sub and the hats.";small.role=RackRole::fx;
+ small.units={{0,NativeModule::eraReverb,{}}};auto& era=small.units[0];value(era,"bypassed",0);value(era,"era_reverb.voicing",1);value(era,"era_reverb.age",0);value(era,"era_reverb.decay_seconds",8);value(era,"era_reverb.size",.85f);value(era,"era_reverb.attack",.6f);value(era,"era_reverb.predelay_ms",25);value(era,"era_reverb.wobble",.4f);value(era,"era_reverb.wobble_rate_hz",.7f);value(era,"era_reverb.grit",.15f);value(era,"era_reverb.diffusion",1);value(era,"era_reverb.bass_multiplier",1.2f);value(era,"era_reverb.damping_hz",5000);value(era,"era_reverb.low_cut_hz",150);value(era,"era_reverb.high_cut_hz",9000);value(era,"era_reverb.mix",.3f);
+ small.panel.layout=PanelLayout::orderedFxStrip;small.panel.sections={"Space","Age","Blend"};small.panel.controls={focus("Program",0,0,"era_reverb.voicing",FocusWidget::choice,0,5),focus("Afterglow",0,0,"era_reverb.decay_seconds",FocusWidget::rotary,.2f,70,FocusResponse::logarithmic),focus("Depth",0,0,"era_reverb.size",FocusWidget::rotary,0,1),focus("Swell",0,0,"era_reverb.attack",FocusWidget::rotary,0,1),focus("Age",0,1,"era_reverb.age",FocusWidget::choice,0,2),focus("Wow",0,1,"era_reverb.wobble",FocusWidget::rotary,0,1),focus("Grit",0,1,"era_reverb.grit",FocusWidget::rotary,0,1),focus("Mix",0,2,"era_reverb.mix",FocusWidget::rotary,0,1)};
+ auto& night=result[5];night.id=juce::Uuid("cdeafe3f-9c29-4c7c-9013-8284b505af10");night.name="Night Dial";night.intent="A moving wavetable voice with analogue warmth for cinematic future garage: wide drifting pads, slow swells, evolving textures, reese and sub bass, vowel choirs and soft plucks. Shape the table position and its sweep, unison spread, drift, the filter (clean, ladder, classic or vowel) and the swell and tail. Space, tape and vinyl come from FX racks.";night.role=RackRole::synth;
+ night.units={{0,NativeModule::wavetable,{},2}};auto& n=night.units[0];value(n,"enabled",1);value(n,"engine",1);
+ value(n,"wavetable.osc.1.table",0);value(n,"wavetable.osc.1.position",.45f);value(n,"wavetable.osc.1.level",.5f);value(n,"wavetable.osc.1.unison",4);value(n,"wavetable.osc.1.unison_cents",15);
+ value(n,"wavetable.osc.2.table",0);value(n,"wavetable.osc.2.position",.1f);value(n,"wavetable.osc.2.tune",-12);value(n,"wavetable.osc.2.level",.25f);value(n,"wavetable.osc.2.unison",0);
+ value(n,"wavetable.unison_width",.7f);value(n,"wavetable.drift",.35f);value(n,"wavetable.filter.type",2);value(n,"wavetable.filter.mode",0);value(n,"wavetable.filter.cutoff",1200);value(n,"wavetable.filter.resonance",.15f);
+ value(n,"wavetable.amp.attack",1.5f);value(n,"wavetable.amp.attack_curve",-.5f);value(n,"wavetable.amp.sustain",.9f);value(n,"wavetable.amp.release",3);
+ value(n,"lfo.1.shape",0);value(n,"lfo.1.synced",0);value(n,"lfo.1.rate_hz",.08f);route(n,3,11,2,.3f);route(n,5,14,2,.06f,2);
+ night.panel.layout=PanelLayout::instrumentSections;night.panel.sections={"Signal","Warmth","Contour"};
+ night.panel.controls={focus("Dial",0,0,"wavetable.osc.1.position",FocusWidget::rotary,0,1),focus("Sweep",0,0,"modulation.1.amount",FocusWidget::rotary,0,1),focus("Spread",0,0,"wavetable.osc.1.unison_cents",FocusWidget::rotary,0,50),focus("Wander",0,1,"wavetable.drift",FocusWidget::rotary,0,1),focus("Glow",0,1,"wavetable.filter.cutoff",FocusWidget::rotary,100,12000,FocusResponse::logarithmic),focus("Ring",0,1,"wavetable.filter.resonance",FocusWidget::rotary,0,.9f),focus("Swell",0,2,"wavetable.amp.attack",FocusWidget::rotary,.005f,8,FocusResponse::logarithmic),focus("Tail",0,2,"wavetable.amp.release",FocusWidget::rotary,.05f,10,FocusResponse::logarithmic)};
+ return result;
+}
+RackDesign tileArrayRackDesign(){
+ RackDesign tile;
+ tile.id=juce::Uuid("f97641c2-cd64-46a9-a3ab-0cc027a5f8d4");
+ tile.name="Tile Array";
+ tile.intent="A sixteen-pad one-shot drum instrument. Import an isolated hit or request three local candidates for one pad, audition and keep one without disturbing its neighbours. Trim, tune, shape the attack and decay, assign notes and choke groups. Kit level and pan stay immediately available; source generation is optional and saved kits play offline.";
+ tile.role=RackRole::synth;
+ tile.units={{0,NativeModule::drum,{}}};
+ auto& unit=tile.units[0];
+ value(unit,"enabled",1);value(unit,"level",.5f);value(unit,"pan",0);
+ for(int pad=0;pad<16;++pad){
+  const auto key="drum.pad."+juce::String(pad+1)+".";
+  value(unit,key+"gain_db",0);value(unit,key+"pan",0);value(unit,key+"tune_semitones",0);
+  value(unit,key+"trim_start",0);value(unit,key+"trim_end",1);
+  value(unit,key+"attack_seconds",0);value(unit,key+"decay_seconds",0);
+  value(unit,key+"midi_note",float(36+pad));value(unit,key+"choke_group",0);
+ }
+ tile.panel.layout=PanelLayout::performanceControls;tile.panel.sections={"KIT"};
+ tile.panel.controls={focus("KIT LEVEL",0,0,"level",FocusWidget::verticalSlider,0,1),focus("KIT PAN",0,0,"pan",FocusWidget::rotary,-1,1)};
+ return tile;
+}
+std::vector<RackDesign> factoryRackDesigns(){
+ RackDesign copper;copper.id=juce::Uuid("91387715-13d3-4c57-a479-12251842a402");copper.name="Copper Arc";
+ copper.intent="A dry saw and triangle analog starting voice with a rounded filter contour and subtle slow motion. Shape bass, pluck, lead, brass and pad through ordinary native controls.";
+ copper.role=RackRole::synth;copper.units={{0,NativeModule::analog,{},2}};auto& a=copper.units[0];
+ value(a,"enabled",1);value(a,"engine",0);value(a,"level",.678f);value(a,"pan",0);
+ value(a,"analog.osc.1.waveform",2);value(a,"analog.osc.1.level",.46f);value(a,"analog.osc.1.tune",0);value(a,"analog.osc.1.detune",-3);value(a,"analog.osc.1.pulse_width",.46f);
+ value(a,"analog.osc.2.waveform",1);value(a,"analog.osc.2.level",.24f);value(a,"analog.osc.2.tune",0);value(a,"analog.osc.2.detune",3);value(a,"analog.osc.2.pulse_width",.54f);
+ value(a,"analog.noise",0);value(a,"analog.filter.mode",0);value(a,"analog.filter.cutoff",2200);value(a,"analog.filter.resonance",.22f);
+ value(a,"analog.amp.attack",.012f);value(a,"analog.amp.decay",.25f);value(a,"analog.amp.sustain",.72f);value(a,"analog.amp.release",.45f);
+ value(a,"analog.filter_env.attack",.02f);value(a,"analog.filter_env.decay",.3f);value(a,"analog.filter_env.sustain",.18f);value(a,"analog.filter_env.release",.4f);value(a,"analog.filter_env.octaves",.6f);
+ value(a,"lfo.1.shape",0);value(a,"lfo.1.synced",0);value(a,"lfo.1.rate_hz",.25f);route(a,3,14,1,.035f);
+ copper.panel.layout=PanelLayout::instrumentSections;copper.panel.sections={"Tone","Envelope","Motion"};
+ copper.panel.controls={focus("Brightness",0,0,"analog.filter.cutoff",FocusWidget::rotary,20,14000,FocusResponse::logarithmic),focus("Resonance",0,0,"analog.filter.resonance",FocusWidget::rotary,0,.85f),focus("Body",0,0,"analog.osc.2.level",FocusWidget::rotary,0,.65f),focus("Attack",0,1,"analog.amp.attack",FocusWidget::verticalSlider,.001f,2,FocusResponse::logarithmic),focus("Release",0,1,"analog.amp.release",FocusWidget::verticalSlider,.02f,3,FocusResponse::logarithmic),focus("Contour",0,1,"analog.filter_env.decay",FocusWidget::verticalSlider,.02f,2,FocusResponse::logarithmic),focus("Motion rate",0,2,"lfo.1.rate_hz",FocusWidget::rotary,.05f,5,FocusResponse::logarithmic),focus("Motion",0,2,"modulation.1.amount",FocusWidget::rotary,-.25f,.25f)};
+ RackDesign prism;prism.id=juce::Uuid("91387715-13d3-4c57-a479-12251842b402");prism.name="Prism Relay";
+ prism.intent="A dry focused digital voice with contrasting saw and square spectral morphs, a quick contour and restrained spectral motion. Shape bright bass, pluck, dense lead, moving chord and airy pad through ordinary native controls.";
+ prism.role=RackRole::synth;prism.units={{0,NativeModule::wavetable,{},2}};auto& w=prism.units[0];
+ value(w,"enabled",1);value(w,"engine",1);value(w,"level",.405f);value(w,"pan",0);
+ value(w,"wavetable.osc.1.table",0);value(w,"wavetable.osc.1.position",.62f);value(w,"wavetable.osc.1.level",.48f);value(w,"wavetable.osc.1.tune",0);value(w,"wavetable.osc.1.detune",-4);
+ value(w,"wavetable.osc.2.table",1);value(w,"wavetable.osc.2.position",.36f);value(w,"wavetable.osc.2.level",.22f);value(w,"wavetable.osc.2.tune",0);value(w,"wavetable.osc.2.detune",4);
+ value(w,"wavetable.noise",0);value(w,"wavetable.filter.mode",0);value(w,"wavetable.filter.cutoff",7200);value(w,"wavetable.filter.resonance",.16f);
+ value(w,"wavetable.amp.attack",.008f);value(w,"wavetable.amp.decay",.18f);value(w,"wavetable.amp.sustain",.68f);value(w,"wavetable.amp.release",.32f);
+ value(w,"wavetable.filter_env.attack",.006f);value(w,"wavetable.filter_env.decay",.22f);value(w,"wavetable.filter_env.sustain",.14f);value(w,"wavetable.filter_env.release",.24f);value(w,"wavetable.filter_env.octaves",.4f);
+ value(w,"lfo.1.shape",0);value(w,"lfo.1.synced",0);value(w,"lfo.1.rate_hz",.35f);route(w,3,11,2,.035f);
+ prism.panel.layout=PanelLayout::instrumentSections;prism.panel.sections={"Spectrum","Envelope","Motion"};
+ prism.panel.controls={focus("Color",0,0,"wavetable.osc.1.position",FocusWidget::rotary,0,1),focus("Density",0,0,"wavetable.osc.2.level",FocusWidget::rotary,0,.65f),focus("Brightness",0,0,"wavetable.filter.cutoff",FocusWidget::rotary,20,18000,FocusResponse::logarithmic),focus("Resonance",0,0,"wavetable.filter.resonance",FocusWidget::rotary,0,.85f),focus("Attack",0,1,"wavetable.amp.attack",FocusWidget::verticalSlider,.001f,2,FocusResponse::logarithmic),focus("Release",0,1,"wavetable.amp.release",FocusWidget::verticalSlider,.02f,3,FocusResponse::logarithmic),focus("Motion rate",0,2,"lfo.1.rate_hz",FocusWidget::rotary,.05f,5,FocusResponse::logarithmic),focus("Motion",0,2,"modulation.1.amount",FocusWidget::rotary,-.25f,.25f)};
+ RackDesign lumen;lumen.id=juce::Uuid("91387715-13d3-4c57-a479-12251842c401");lumen.name="Lumen Drift";
+ lumen.intent="A diffused, slowly modulated reverb starting space. Shape size, decay, damping, predelay and blend through the five native controls.";
+ lumen.role=RackRole::fx;lumen.units={{0,NativeModule::reverb,{},2}};auto& r=lumen.units[0];
+ value(r,"bypassed",0);value(r,"reverb.size",.9f);value(r,"reverb.decay_seconds",4);value(r,"reverb.damping",.2f);value(r,"reverb.predelay_ms",20);value(r,"reverb.mix",.25f);
+ lumen.panel.layout=PanelLayout::orderedFxStrip;lumen.panel.sections={"Space","Tone","Blend"};
+ lumen.panel.controls={focus("Size",0,0,"reverb.size",FocusWidget::rotary,0,1),focus("Decay",0,0,"reverb.decay_seconds",FocusWidget::rotary,.1f,20,FocusResponse::logarithmic),focus("Predelay",0,0,"reverb.predelay_ms",FocusWidget::rotary,0,250),focus("Damping",0,1,"reverb.damping",FocusWidget::rotary,0,1),focus("Mix",0,2,"reverb.mix",FocusWidget::rotary,0,1)};
+ RackDesign anchor;anchor.id=juce::Uuid("91387715-13d3-4c57-a479-12251842d402");anchor.name="Anchor Press";
+ anchor.intent="A linked peak compressor starting point with a measured gentle grip on the untouched Copper Arc voice. Adapt threshold, timing and blend to the actual input; makeup starts at unity.";
+ anchor.role=RackRole::fx;anchor.units={{0,NativeModule::compressor,{},2}};auto& c=anchor.units[0];
+ value(c,"bypassed",0);value(c,"compressor.threshold_db",-50.25f);value(c,"compressor.ratio",3);value(c,"compressor.attack_ms",15);value(c,"compressor.release_ms",150);value(c,"compressor.makeup_db",0);value(c,"compressor.mix",1);
+ anchor.panel.layout=PanelLayout::orderedFxStrip;anchor.panel.sections={"Grip","Timing","Blend"};
+ anchor.panel.controls={focus("Threshold",0,0,"compressor.threshold_db",FocusWidget::rotary,-60,0),focus("Ratio",0,0,"compressor.ratio",FocusWidget::rotary,1,20),focus("Attack",0,1,"compressor.attack_ms",FocusWidget::rotary,.1f,100,FocusResponse::logarithmic),focus("Release",0,1,"compressor.release_ms",FocusWidget::rotary,10,2000,FocusResponse::logarithmic),focus("Makeup",0,2,"compressor.makeup_db",FocusWidget::rotary,0,24),focus("Mix",0,2,"compressor.mix",FocusWidget::rotary,0,1)};
+ RackDesign cinder;cinder.id=juce::Uuid("91387715-13d3-4c57-a479-12251842e402");cinder.name="Cinder Coil";
+ cinder.intent="A restrained tanh saturation starting point with a softened wet tone and parallel blend. Shape bass body or lead edge through ordinary drive, shape, tone and mix controls.";
+ cinder.role=RackRole::fx;cinder.units={{0,NativeModule::drive,{},2}};auto& d=cinder.units[0];
+ value(d,"bypassed",0);value(d,"drive.gain_db",6);value(d,"drive.shape",0);value(d,"drive.tone_hz",6500);value(d,"drive.mix",.25f);
+ cinder.panel.layout=PanelLayout::orderedFxStrip;cinder.panel.sections={"Drive","Tone","Blend"};
+ cinder.panel.controls={focus("Drive",0,0,"drive.gain_db",FocusWidget::rotary,0,24),focus("Shape",0,0,"drive.shape",FocusWidget::choice,0,1),focus("Tone",0,1,"drive.tone_hz",FocusWidget::rotary,200,20000,FocusResponse::logarithmic),focus("Mix",0,2,"drive.mix",FocusWidget::rotary,0,1)};
+ RackDesign echo;echo.id=juce::Uuid("91387715-13d3-4c57-a479-12251842f402");echo.name="Echo Thread";
+ echo.intent="A quiet quarter-second free echo with filtered repeats and restrained stereo crossfeed. Switch to host beats or shape short and longer echoes through the existing timing and feedback controls.";
+ echo.role=RackRole::fx;echo.units={{0,NativeModule::delay,{},2}};auto& t=echo.units[0];
+ value(t,"bypassed",0);value(t,"delay.synced",0);value(t,"delay.seconds",.25f);value(t,"delay.beats",.5f);value(t,"delay.feedback",.28f);value(t,"delay.stereo",.35f);value(t,"delay.filter_hz",4500);value(t,"delay.mix",.18f);
+ echo.panel.layout=PanelLayout::orderedFxStrip;echo.panel.sections={"Time","Repeats","Blend"};
+ echo.panel.controls={focus("Sync",0,0,"delay.synced",FocusWidget::toggle,0,1),focus("Time",0,0,"delay.seconds",FocusWidget::rotary,.001f,4,FocusResponse::logarithmic),focus("Beats",0,0,"delay.beats",FocusWidget::rotary,.0625f,1,FocusResponse::logarithmic),focus("Feedback",0,1,"delay.feedback",FocusWidget::rotary,0,.95f),focus("Stereo",0,1,"delay.stereo",FocusWidget::rotary,0,1),focus("Filter",0,1,"delay.filter_hz",FocusWidget::rotary,20,20000,FocusResponse::logarithmic),focus("Mix",0,2,"delay.mix",FocusWidget::rotary,0,1)};
+ RackDesign contour;contour.id=juce::Uuid("91387715-13d3-4c57-a479-12251842a802");contour.name="Contour Loom";
+ contour.intent="A transparent three-band EQ starting point. Shape broad low and high shelves or focus the bell through all nine ordinary native controls.";
+ contour.role=RackRole::fx;contour.units={{0,NativeModule::eq,{},2}};auto& q=contour.units[0];
+ value(q,"bypassed",0);value(q,"eq.low_shelf.frequency_hz",160);value(q,"eq.low_shelf.gain_db",0);value(q,"eq.low_shelf.q",.70710678f);
+ value(q,"eq.bell.frequency_hz",1000);value(q,"eq.bell.gain_db",0);value(q,"eq.bell.q",1);
+ value(q,"eq.high_shelf.frequency_hz",8000);value(q,"eq.high_shelf.gain_db",0);value(q,"eq.high_shelf.q",.70710678f);
+ contour.panel.layout=PanelLayout::orderedFxStrip;contour.panel.sections={"Low shelf","Bell","High shelf"};
+ contour.panel.controls={focus("Low frequency",0,0,"eq.low_shelf.frequency_hz",FocusWidget::rotary,20,2000,FocusResponse::logarithmic),focus("Low gain",0,0,"eq.low_shelf.gain_db",FocusWidget::rotary,-18,18),focus("Low Q",0,0,"eq.low_shelf.q",FocusWidget::rotary,.25f,4),focus("Bell frequency",0,1,"eq.bell.frequency_hz",FocusWidget::rotary,20,20000,FocusResponse::logarithmic),focus("Bell gain",0,1,"eq.bell.gain_db",FocusWidget::rotary,-18,18),focus("Bell Q",0,1,"eq.bell.q",FocusWidget::rotary,.25f,4),focus("High frequency",0,2,"eq.high_shelf.frequency_hz",FocusWidget::rotary,1000,20000,FocusResponse::logarithmic),focus("High gain",0,2,"eq.high_shelf.gain_db",FocusWidget::rotary,-18,18)};
+ RackDesign veil;veil.id=juce::Uuid("91387715-13d3-4c57-a479-12251842b802");veil.name="Veil Current";
+ veil.intent="A low-pass tonal insert with neutral input drive. Choose normalized band-pass or high-pass, adjust resonance, and blend memoryless saturation through ordinary native controls.";
+ veil.role=RackRole::fx;veil.units={{0,NativeModule::filter,{},2}};auto& f=veil.units[0];
+ value(f,"bypassed",0);value(f,"filter_fx.mode",0);value(f,"filter_fx.cutoff_hz",4000);value(f,"filter_fx.resonance",.70710678f);value(f,"filter_fx.drive_db",0);value(f,"filter_fx.mix",1);
+ veil.panel.layout=PanelLayout::orderedFxStrip;veil.panel.sections={"Filter","Drive"};
+ veil.panel.controls={focus("Mode",0,0,"filter_fx.mode",FocusWidget::choice,0,2),focus("Cutoff",0,0,"filter_fx.cutoff_hz",FocusWidget::rotary,20,20000,FocusResponse::logarithmic),focus("Resonance",0,0,"filter_fx.resonance",FocusWidget::rotary,.5f,10),focus("Drive",0,1,"filter_fx.drive_db",FocusWidget::rotary,0,24),focus("Mix",0,1,"filter_fx.mix",FocusWidget::rotary,0,1)};
+ RackDesign orbit;orbit.id=juce::Uuid("91387715-13d3-4c57-a479-12251842c802");orbit.revision=1;orbit.name="Orbit Ribbon";
+ orbit.intent="Slow dual-mono delay motion with a light feedback ribbon.";orbit.role=RackRole::fx;orbit.units={{0,NativeModule::chorus,{},2}};auto& ch=orbit.units[0];
+ value(ch,"bypassed",0);value(ch,"chorus.rate_hz",.35f);value(ch,"chorus.depth",.25f);value(ch,"chorus.base_delay_ms",18);value(ch,"chorus.feedback",.1f);value(ch,"chorus.mix",.25f);
+ orbit.panel.layout=PanelLayout::orderedFxStrip;orbit.panel.sections={"Motion","Blend"};orbit.panel.surface=1;orbit.panel.accent=1;
+ orbit.panel.controls={focus("Rate",0,0,"chorus.rate_hz",FocusWidget::rotary,.1f,5),focus("Depth",0,0,"chorus.depth",FocusWidget::rotary,0,1),focus("Delay",0,0,"chorus.base_delay_ms",FocusWidget::rotary,12,40),focus("Feedback",0,1,"chorus.feedback",FocusWidget::rotary,-.8f,.8f),focus("Mix",0,1,"chorus.mix",FocusWidget::rotary,0,1)};
+ RackDesign aster;aster.id=juce::Uuid("91387715-13d3-4c57-a479-12251842d901");aster.revision=1;aster.name="Aster Sweep";
+ aster.intent="Slow dual-mono allpass motion with a blended notch sweep and restrained signed feedback.";aster.role=RackRole::fx;aster.units={{0,NativeModule::phaser,{}}};auto& ph=aster.units[0];
+ value(ph,"bypassed",0);value(ph,"phaser.rate_hz",.35f);value(ph,"phaser.depth",.6f);value(ph,"phaser.centre_hz",1300);value(ph,"phaser.feedback",.2f);value(ph,"phaser.mix",.5f);
+ aster.panel.layout=PanelLayout::orderedFxStrip;aster.panel.sections={"Motion","Blend"};aster.panel.surface=1;aster.panel.accent=1;
+ aster.panel.controls={focus("Rate",0,0,"phaser.rate_hz",FocusWidget::rotary,.1f,5),focus("Depth",0,0,"phaser.depth",FocusWidget::rotary,0,1),focus("Centre",0,0,"phaser.centre_hz",FocusWidget::rotary,20,20000,FocusResponse::logarithmic),focus("Feedback",0,1,"phaser.feedback",FocusWidget::rotary,-.8f,.8f),focus("Mix",0,1,"phaser.mix",FocusWidget::rotary,0,1)};
+ RackDesign silver;silver.id=juce::Uuid("91387715-13d3-4c57-a479-12251842e902");silver.revision=1;silver.name="Silver Loop";
+ silver.intent="Dual-mono short-delay comb motion with restrained signed feedback and an even wet/dry blend.";silver.role=RackRole::fx;silver.units={{0,NativeModule::flanger,{},2}};auto& fl=silver.units[0];
+ value(fl,"bypassed",0);value(fl,"flanger.rate_hz",.25f);value(fl,"flanger.depth",.6f);value(fl,"flanger.base_delay_ms",2);value(fl,"flanger.feedback",.35f);value(fl,"flanger.mix",.5f);
+ silver.panel.layout=PanelLayout::orderedFxStrip;silver.panel.sections={"Motion","Blend"};silver.panel.surface=1;silver.panel.accent=1;
+ silver.panel.controls={focus("Rate",0,0,"flanger.rate_hz",FocusWidget::rotary,.05f,5),focus("Depth",0,0,"flanger.depth",FocusWidget::rotary,0,1),focus("Delay",0,0,"flanger.base_delay_ms",FocusWidget::rotary,1,8),focus("Feedback",0,1,"flanger.feedback",FocusWidget::rotary,-.8f,.8f),focus("Mix",0,1,"flanger.mix",FocusWidget::rotary,0,1)};
+ RackDesign centre;centre.id=juce::Uuid("91387715-13d3-4c57-a479-12251842f901");centre.revision=1;centre.name="Centre Line";
+ centre.intent="Neutral stereo trim, unity-centre balance and existing-side width with explicit Stereo, Swap or Mono channels.";centre.role=RackRole::fx;centre.units={{0,NativeModule::stereo,{}}};auto& st=centre.units[0];
+ value(st,"bypassed",0);value(st,"stereo.gain_db",0);value(st,"stereo.pan",0);value(st,"stereo.width",1);value(st,"stereo.channel_mode",0);
+ centre.panel.layout=PanelLayout::orderedFxStrip;centre.panel.sections={"Level","Channels"};centre.panel.surface=1;centre.panel.accent=1;
+ centre.panel.controls={focus("Gain",0,0,"stereo.gain_db",FocusWidget::rotary,-24,12),focus("Balance",0,0,"stereo.pan",FocusWidget::rotary,-1,1),focus("Width",0,1,"stereo.width",FocusWidget::rotary,0,2),focus("Channels",0,1,"stereo.channel_mode",FocusWidget::choice,0,2)};
+ RackDesign twin;twin.id=juce::Uuid("91387715-13d3-4c57-a479-12251842aa02");twin.revision=1;twin.name="Twin Current";
+ twin.intent="Opposed moving taps add calibrated generated side to the original stereo image while retaining its mono fold.";twin.role=RackRole::fx;twin.units={{0,NativeModule::dimension,{},2}};auto& di=twin.units[0];
+ value(di,"bypassed",0);value(di,"dimension.depth",.6f);value(di,"dimension.rate_hz",.35f);value(di,"dimension.width",1);value(di,"dimension.mix",.5f);
+ twin.panel.layout=PanelLayout::orderedFxStrip;twin.panel.sections={"Motion","Width"};twin.panel.surface=1;twin.panel.accent=1;
+ twin.panel.controls={focus("Depth",0,0,"dimension.depth",FocusWidget::rotary,0,1),focus("Rate",0,0,"dimension.rate_hz",FocusWidget::rotary,.05f,2),focus("Width",0,1,"dimension.width",FocusWidget::rotary,0,2),focus("Mix",0,1,"dimension.mix",FocusWidget::rotary,0,1)};
+ RackDesign sideband;sideband.id=juce::Uuid("91387715-13d3-4c57-a479-12251842bb01");sideband.revision=1;sideband.name="Sideband Tide";
+ sideband.intent="A restrained upward single-sideband translation. Symmetric stereo offset gives independent channel shifts; zero shift retains quadrature colour.";sideband.role=RackRole::fx;sideband.units={{0,NativeModule::frequencyShift,{}}};auto& fs=sideband.units[0];
+ value(fs,"bypassed",0);value(fs,"frequency_shift.hz",7);value(fs,"frequency_shift.stereo_offset_hz",0);value(fs,"frequency_shift.mix",.25f);
+ sideband.panel.layout=PanelLayout::orderedFxStrip;sideband.panel.sections={"Translation","Blend"};sideband.panel.surface=1;sideband.panel.accent=1;
+ sideband.panel.controls={focus("Shift",0,0,"frequency_shift.hz",FocusWidget::rotary,-1000,1000),focus("Stereo offset",0,0,"frequency_shift.stereo_offset_hz",FocusWidget::rotary,-100,100),focus("Mix",0,1,"frequency_shift.mix",FocusWidget::rotary,0,1)};
+ RackDesign ember;ember.id=juce::Uuid("91387715-13d3-4c57-a479-12251842bc01");ember.revision=1;ember.name="Ember Room";
+ ember.intent="The original short stereo room adds a restrained diagonal reflection field; Unit Impulse is an exact-rate reference choice.";ember.role=RackRole::fx;ember.units={{0,NativeModule::convolution,{}}};auto& cv=ember.units[0];
+ value(cv,"bypassed",0);value(cv,"convolution.ir",1);value(cv,"convolution.predelay_ms",0);value(cv,"convolution.wet_trim_db",0);value(cv,"convolution.mix",.25f);
+ ember.panel.layout=PanelLayout::orderedFxStrip;ember.panel.sections={"Room","Blend"};ember.panel.surface=1;ember.panel.accent=1;
+ ember.panel.controls={focus("IR",0,0,"convolution.ir",FocusWidget::choice,0,1),focus("Predelay",0,0,"convolution.predelay_ms",FocusWidget::rotary,0,250),focus("Wet trim",0,1,"convolution.wet_trim_db",FocusWidget::rotary,-24,12),focus("Mix",0,1,"convolution.mix",FocusWidget::rotary,0,1)};
+ RackDesign balance;balance.id=juce::Uuid("91387715-13d3-4c57-a479-12251842bd02");balance.revision=1;balance.name="Band Balance";
+ balance.intent="Transparent complementary bands with independent gain, mute and spectral tone; ordinary low/high edits reveal their useful balance.";balance.role=RackRole::fx;balance.units={{0,NativeModule::frequencySplit,{},2}};auto& sp=balance.units[0];
+ value(sp,"bypassed",0);value(sp,"frequency_split.crossover_hz",1000);value(sp,"frequency_split.low_gain_db",0);value(sp,"frequency_split.low_mute",0);value(sp,"frequency_split.low_tone",0);value(sp,"frequency_split.high_gain_db",0);value(sp,"frequency_split.high_mute",0);value(sp,"frequency_split.high_tone",0);value(sp,"frequency_split.mix",1);
+ balance.panel.layout=PanelLayout::orderedFxStrip;balance.panel.sections={"Bands","Balance"};balance.panel.surface=1;balance.panel.accent=1;
+ balance.panel.controls={focus("Crossover",0,0,"frequency_split.crossover_hz",FocusWidget::rotary,20,20000),focus("Low gain",0,0,"frequency_split.low_gain_db",FocusWidget::rotary,-24,12),focus("Low mute",0,0,"frequency_split.low_mute",FocusWidget::toggle,0,1),focus("Low tone",0,0,"frequency_split.low_tone",FocusWidget::rotary,-1,1),focus("High gain",0,1,"frequency_split.high_gain_db",FocusWidget::rotary,-24,12),focus("High mute",0,1,"frequency_split.high_mute",FocusWidget::toggle,0,1),focus("High tone",0,1,"frequency_split.high_tone",FocusWidget::rotary,-1,1),focus("Mix",0,1,"frequency_split.mix",FocusWidget::rotary,0,1)};
+ RackDesign field;field.id=juce::Uuid("91387715-13d3-4c57-a479-12251842be01");field.revision=1;field.name="Field Balance";
+ field.intent="Transparent orthonormal Mid and existing Side with independent gain, mute and spectral tone; ordinary edits focus the centre or balance the stereo field.";field.role=RackRole::fx;field.units={{0,NativeModule::midSideSplit,{}}};auto& ms=field.units[0];
+ value(ms,"bypassed",0);value(ms,"mid_side_split.mid_gain_db",0);value(ms,"mid_side_split.mid_mute",0);value(ms,"mid_side_split.mid_tone",0);value(ms,"mid_side_split.side_gain_db",0);value(ms,"mid_side_split.side_mute",0);value(ms,"mid_side_split.side_tone",0);value(ms,"mid_side_split.mix",1);
+ field.panel.layout=PanelLayout::orderedFxStrip;field.panel.sections={"Mid","Side"};field.panel.surface=1;field.panel.accent=1;
+ field.panel.controls={focus("Mid gain",0,0,"mid_side_split.mid_gain_db",FocusWidget::rotary,-24,12),focus("Mid mute",0,0,"mid_side_split.mid_mute",FocusWidget::toggle,0,1),focus("Mid tone",0,0,"mid_side_split.mid_tone",FocusWidget::rotary,-1,1),focus("Side gain",0,1,"mid_side_split.side_gain_db",FocusWidget::rotary,-24,12),focus("Side mute",0,1,"mid_side_split.side_mute",FocusWidget::toggle,0,1),focus("Side tone",0,1,"mid_side_split.side_tone",FocusWidget::rotary,-1,1),focus("Mix",0,1,"mid_side_split.mix",FocusWidget::rotary,0,1)};
+ RackDesign dynamics;dynamics.id=juce::Uuid("72b0ea6d-4c2d-4d93-a3d8-7a904b050001");dynamics.revision=1;dynamics.name="Contour Dynamics";
+ dynamics.intent="Eight freely placed EQ bands with linked compression or expansion, manual timing and a neutral starting curve.";
+ dynamics.role=RackRole::fx;dynamics.units={{0,NativeModule::dynamicEq,{}}};auto& de=dynamics.units[0];
+ value(de,"bypassed",0);const auto defaults=defaultParameterValues();const auto registry=parameterRegistry();
+ for(std::size_t field=0;field<dynamicEqParametersPerSlot;++field){const auto index=dynamicEqParameterStart+field;
+  de.defaults.push_back({0,registry[index].id.substring(9),defaults[index]});}
+ dynamics.panel.layout=PanelLayout::orderedFxStrip;dynamics.panel.sections={"Band","Dynamics"};dynamics.panel.surface=1;dynamics.panel.accent=1;
+ dynamics.panel.controls={focus("Frequency",0,0,"dynamic_eq.band.1.frequency_hz",FocusWidget::rotary,20,20000,FocusResponse::logarithmic),
+  focus("Gain",0,0,"dynamic_eq.band.1.gain_db",FocusWidget::rotary,-24,24),focus("Q",0,0,"dynamic_eq.band.1.q",FocusWidget::rotary,.25f,18,FocusResponse::logarithmic),
+  focus("Range",0,1,"dynamic_eq.band.1.range_db",FocusWidget::rotary,-24,24),focus("Threshold",0,1,"dynamic_eq.band.1.threshold_db",FocusWidget::rotary,-60,0),
+  focus("Attack",0,1,"dynamic_eq.band.1.attack_ms",FocusWidget::rotary,.1f,200,FocusResponse::logarithmic),focus("Release",0,1,"dynamic_eq.band.1.release_ms",FocusWidget::rotary,10,2000,FocusResponse::logarithmic),
+  focus("Output",0,1,"dynamic_eq.output_gain_db",FocusWidget::rotary,-24,12)};
+ RackDesign character;character.id=juce::Uuid("91387715-13d3-4c57-a479-12251842bf01");character.revision=2;character.name="Character Drive";
+ character.intent="Full-band warmth and bite with Soft, Glow or Dense character, drive, input level, tilt and parallel wet blend. Retained three-band settings keep lows clean while shaping mids and highs.";
+ character.role=RackRole::fx;character.units={{0,NativeModule::saturation,{}}};auto& sat=character.units[0];
+ value(sat,"bypassed",1);value(sat,"saturation.mode",0);value(sat,"saturation.input_trim_db",0);value(sat,"saturation.output_trim_db",0);value(sat,"saturation.mix",1);value(sat,"saturation.drive_compensation",1);
+ value(sat,"saturation.low_crossover_hz",180);value(sat,"saturation.high_crossover_hz",3500);value(sat,"saturation.pre_low_cut_enabled",0);value(sat,"saturation.pre_low_cut_hz",20);value(sat,"saturation.post_high_cut_enabled",0);value(sat,"saturation.post_high_cut_hz",20000);
+ for(const auto* bank:{"full","low","mid","high"}){const auto prefix=juce::String("saturation.")+bank+".";const bool full=prefix=="saturation.full.";
+  value(sat,prefix+"bypassed",0);value(sat,prefix+"character",full?1.f:0.f);value(sat,prefix+"drive_db",full?12.f:0.f);value(sat,prefix+"pre_tilt_db",0);value(sat,prefix+"mix",full?.75f:1.f);value(sat,prefix+"trim_db",0);}
+ character.panel.layout=PanelLayout::orderedFxStrip;character.panel.sections={"Input","Character","Blend","Output"};
+ character.panel.controls={focus("INPUT",0,0,"saturation.input_trim_db",FocusWidget::rotary,-24,24),focus("PRE TILT",0,0,"saturation.full.pre_tilt_db",FocusWidget::rotary,-6,6),
+  focus("CHARACTER",0,1,"saturation.full.character",FocusWidget::choice,0,2),focus("DRIVE",0,1,"saturation.full.drive_db",FocusWidget::rotary,0,36),focus("LANE MIX",0,2,"saturation.full.mix",FocusWidget::rotary,0,1),
+  focus("MIX",0,2,"saturation.mix",FocusWidget::rotary,0,1),focus("WET TRIM",0,3,"saturation.full.trim_db",FocusWidget::rotary,-18,18),focus("OUTPUT",0,3,"saturation.output_trim_db",FocusWidget::rotary,-24,12)};
+ RackDesign band;band.id=juce::Uuid("91387715-13d3-4c57-a479-12251842bf02");band.revision=2;band.name="Band Color";
+ band.intent="Three-band saturation with clean lows, Dense parallel mids and Soft tilted highs. Shape each band's character, drive and blend around adjustable crossovers; retained Full settings remain neutral.";
+ band.role=RackRole::fx;band.units={{0,NativeModule::saturation,{}}};auto& color=band.units[0];
+ value(color,"bypassed",1);value(color,"saturation.mode",1);value(color,"saturation.input_trim_db",0);value(color,"saturation.output_trim_db",0);value(color,"saturation.mix",1);value(color,"saturation.drive_compensation",1);
+ value(color,"saturation.low_crossover_hz",180);value(color,"saturation.high_crossover_hz",3500);value(color,"saturation.pre_low_cut_enabled",0);value(color,"saturation.pre_low_cut_hz",20);value(color,"saturation.post_high_cut_enabled",0);value(color,"saturation.post_high_cut_hz",20000);
+ for(const auto* bank:{"full","low","mid","high"}){const auto prefix=juce::String("saturation.")+bank+".";const bool low=juce::String(bank)=="low",mid=juce::String(bank)=="mid",high=juce::String(bank)=="high";
+  value(color,prefix+"bypassed",low?1.f:0.f);value(color,prefix+"character",mid?2.f:0.f);value(color,prefix+"drive_db",mid?9.f:high?6.f:0.f);value(color,prefix+"pre_tilt_db",high?-1.f:0.f);value(color,prefix+"mix",mid||high?.5f:1.f);value(color,prefix+"trim_db",0);}
+ band.panel.layout=PanelLayout::orderedFxStrip;band.panel.sections={"Split","Mid","High","Blend"};
+ band.panel.controls={focus("Low crossover",0,0,"saturation.low_crossover_hz",FocusWidget::rotary,40,2000,FocusResponse::logarithmic),focus("High crossover",0,0,"saturation.high_crossover_hz",FocusWidget::rotary,500,16000,FocusResponse::logarithmic),
+  focus("Mid Drive",0,1,"saturation.mid.drive_db",FocusWidget::rotary,0,36),focus("Mid Mix",0,1,"saturation.mid.mix",FocusWidget::rotary,0,1),focus("High Drive",0,2,"saturation.high.drive_db",FocusWidget::rotary,0,36),focus("High Mix",0,2,"saturation.high.mix",FocusWidget::rotary,0,1),focus("High Tilt",0,2,"saturation.high.pre_tilt_db",FocusWidget::rotary,-6,6),focus("Global Mix",0,3,"saturation.mix",FocusWidget::rotary,0,1)};
+ RackDesign space;space.id=juce::Uuid("cc73c36a-696e-4b09-9cf3-dcd4dfac16f0");space.revision=1;space.name="Lumen Field";
+ space.intent="An original spacious stereo hall with softened high-frequency decay and a gentle wet low cut. Shape time with Decay, tone with Post EQ and busy parts with ducking.";
+ space.role=RackRole::fx;space.units={{0,NativeModule::spaceReverb,{}}};auto& sr=space.units[0];
+ value(sr,"bypassed",0);
+ for(std::size_t field=0;field<spaceReverbParametersPerSlot;++field){const auto index=spaceReverbParameterStart+field;
+  sr.defaults.push_back({0,registry[index].id.substring(9),defaults[index]});}
+ auto setSpace=[&](const char* key,float physical){const auto index=rackParameterIndex(sr.module,0,key);jassert(index);const auto& d=registry[*index];
+  const auto normalized=juce::NormalisableRange<float>(d.minimum,d.maximum,0,d.skew).convertTo0to1(physical);
+  const auto value=std::find_if(sr.defaults.begin(),sr.defaults.end(),[&](const auto& v){return v.key==key;});jassert(value!=sr.defaults.end());value->normalized=normalized;};
+ setSpace("space_reverb.size",.65f);setSpace("space_reverb.decay_seconds",3.2f);setSpace("space_reverb.predelay_ms",24);
+ setSpace("space_reverb.character",.3f);setSpace("space_reverb.distance",.6f);setSpace("space_reverb.width",1.15f);setSpace("space_reverb.mix",.22f);
+ setSpace("space_reverb.decay.1.active",1);setSpace("space_reverb.decay.1.shape",2);setSpace("space_reverb.decay.1.freq_hz",5000);
+ setSpace("space_reverb.decay.1.multiplier",.65f);setSpace("space_reverb.decay.1.q",.8f);
+ setSpace("space_reverb.post.1.active",1);setSpace("space_reverb.post.1.shape",3);setSpace("space_reverb.post.1.freq_hz",100);
+ space.panel.layout=PanelLayout::orderedFxStrip;space.panel.sections={"Space"};space.panel.surface=1;space.panel.accent=1;
+ space.panel.controls={focus("Size",0,0,"space_reverb.size",FocusWidget::rotary,0,1),focus("Decay",0,0,"space_reverb.decay_seconds",FocusWidget::rotary,.1f,20,FocusResponse::logarithmic),
+  focus("Predelay",0,0,"space_reverb.predelay_ms",FocusWidget::rotary,0,250),focus("Brightness",0,0,"space_reverb.brightness",FocusWidget::rotary,0,1),
+  focus("Character",0,0,"space_reverb.character",FocusWidget::rotary,0,1),focus("Distance",0,0,"space_reverb.distance",FocusWidget::rotary,0,1),
+  focus("Width",0,0,"space_reverb.width",FocusWidget::rotary,0,2),focus("Mix",0,0,"space_reverb.mix",FocusWidget::rotary,0,1)};
+ return {std::move(copper),std::move(prism),std::move(lumen),std::move(anchor),std::move(cinder),std::move(echo),std::move(contour),std::move(veil),std::move(orbit),std::move(aster),std::move(silver),std::move(centre),std::move(twin),std::move(sideband),std::move(ember),std::move(balance),std::move(field),std::move(dynamics),std::move(space),std::move(character),std::move(band)};
+}
+std::vector<RackDesign> libraryRackDesigns(){
+ const auto examples=exampleRackDesigns();std::vector<RackDesign> result(examples.begin(),examples.end());
+ for(auto& f:factoryRackDesigns())result.push_back(std::move(f));
+ result.push_back(tileArrayRackDesign());
+ return result;
+}
+SoundDocument newInstanceSound(){
+ SoundDocument empty;empty.compatibility=newInstanceKernelCompatibility();
+ empty.layout.synthUse.fill(SlotUse::neverUsed);empty.layout.synthOrder.fill(noSlot);empty.layout.synthCount=0;
+ return empty;
+}
+SoundDocument copperArcSound(){
+ SoundDocument blank;blank.compatibility=newInstanceKernelCompatibility();
+ RackOperation op;op.design=factoryRackDesigns()[0];op.newInstance=juce::Uuid("91387715-13d3-4c57-a479-12251842a4f1");
+ op.destination={RackRole::synth,masterChain,0};op.allocation={{0,0}};op.allowSlotReuse=true;
+ SoundDocument placed;RackDifference difference;
+ [[maybe_unused]]const auto status=makeRackCandidate(blank,op,SoundEditOrigin::manual,placed,difference);
+ jassert(status==RackCandidateStatus::ready);
+ return placed;
+}
+}

@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "status": "FROZEN_UNADOPTED_RESEARCH_SOURCE_SNAPSHOT",
+  "routing": "Inherited parent model; no overrides",
+  "originManifest": {
+    "path": "build/saturation-product-20261018/wide-direct-layout-1/manifest.json",
+    "sha256": "8d35e1e45744ab829a98297968149f355e18281570a7c014711a84996ae33041",
+    "requiredForVerification": false
+  },
+  "baselineCandidateSha256": "ecc591e7e84db9303da72efd5b658ad3344093a7e236b432eb28f55cc2a24353",
+  "rootCandidateSha256": "85474f21620e4a3dd1ca4269f42bd4761a4fcf6700462c68f61949abc9d3113c",
+  "proposedThreeFiles": {
+    "SaturationWideNetwork.h": "04f1731343d7931ddfeccd04cc3eea512f62c5516791ad6f1511df957149e3e0",
+    "SaturationWideNetwork.cpp": "a67943327cb2a43b30481923f29eab66c8258872b30d5c988d19cfd8dce18f24",
+    "SaturationCandidate.cpp": "5ab15b832a037e9db358a365886ea51e0881614fe658c91c3bcade280dd4b5e3"
+  },
+  "changedVariantFiles": [
+    "SaturationCandidate.cpp",
+    "SaturationWideNetwork.cpp",
+    "SaturationWideNetwork.h"
+  ],
+  "sharedFiles": [
+    "SaturationCalibration.h",
+    "SaturationCandidate.h",
+    "SaturationFeasibility.cpp",
+    "SaturationGain.h",
+    "SaturationMath.h"
+  ],
+  "files": {
+    "OriginalWrapper.cpp": "3f7bb6083a7567d742a9eab8278f46cf3897661faa68eee63dd86ace5f704024",
+    "ProposedWrapper.cpp": "59ec3dbaecfd22c95d790682b98cdfae1f01acb1bc686cb4b3654be3740505d6",
+    "README.md": "21577c12244978953175802115b0b714803e91d49ef36234d9f1f6262ef2c805",
+    "baseline/SaturationCandidate.cpp": "ecc591e7e84db9303da72efd5b658ad3344093a7e236b432eb28f55cc2a24353",
+    "baseline/SaturationWideNetwork.cpp": "d3df42ec3edece46aa1365b43523122a1a7f9667c086bf8c21e1767f34f819cf",
+    "baseline/SaturationWideNetwork.h": "7f7b3ebd1022e3a5bae0e7673a97468a99dbdeb68a1296449b367f6fbba7b276",
+    "proposed/SaturationCandidate.cpp": "5ab15b832a037e9db358a365886ea51e0881614fe658c91c3bcade280dd4b5e3",
+    "proposed/SaturationWideNetwork.cpp": "a67943327cb2a43b30481923f29eab66c8258872b30d5c988d19cfd8dce18f24",
+    "proposed/SaturationWideNetwork.h": "04f1731343d7931ddfeccd04cc3eea512f62c5516791ad6f1511df957149e3e0",
+    "shared/SaturationCalibration.h": "087410a429e28c3da6a941d43ec095c122eead940ce5a353da9c6d6821b5ef30",
+    "shared/SaturationCandidate.h": "3063fded18b683fa59794b3075cae1ffffbee00ff0146346800b383b7857255b",
+    "shared/SaturationFeasibility.cpp": "d5c5a3a9295c6207ab902c9fe76d9930062bb49d60989b3e3f8b9a8ed0ff0187",
+    "shared/SaturationGain.h": "2c9249536eb1829bdbced1331f31b6fb19849bb34dafd60fb897c871c61df82f",
+    "shared/SaturationMath.h": "44305ce49bde90833cdc9e74aea6bb78c0b53c8fa8f68ba85ee0d40ea3f06af3",
+    "tests/CppHeapWitness.inc": "dcbbc903d680e03aa89a8c6ac4e38da219363cea8e5846f706c07f0a18fded7a",
+    "tests/WideDirectApi.h": "663ae2171f3586665d2899f3b0305244f38eefb562823395e163e403397a69ef",
+    "tests/WideDirectWitness.cpp": "3a3fbeb7b1dcaea4a87ea1ccc8ef1f8c6c4ff1cf61a86cd1bf0b100262449a28",
+    "verify.py": "99ed3cf9d538de6e6145047f34d165b94f6259730444402826e01d6f8a202873"
+  },
+  "origins": {
+    "OriginalWrapper.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/OriginalWrapper.cpp",
+      "sha256": "3f7bb6083a7567d742a9eab8278f46cf3897661faa68eee63dd86ace5f704024"
+    },
+    "ProposedWrapper.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/ProposedWrapper.cpp",
+      "sha256": "59ec3dbaecfd22c95d790682b98cdfae1f01acb1bc686cb4b3654be3740505d6"
+    },
+    "baseline/SaturationCandidate.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationCandidate.cpp",
+      "sha256": "ecc591e7e84db9303da72efd5b658ad3344093a7e236b432eb28f55cc2a24353"
+    },
+    "baseline/SaturationWideNetwork.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationWideNetwork.cpp",
+      "sha256": "d3df42ec3edece46aa1365b43523122a1a7f9667c086bf8c21e1767f34f819cf"
+    },
+    "baseline/SaturationWideNetwork.h": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationWideNetwork.h",
+      "sha256": "7f7b3ebd1022e3a5bae0e7673a97468a99dbdeb68a1296449b367f6fbba7b276"
+    },
+    "proposed/SaturationCandidate.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/proposed/SaturationCandidate.cpp",
+      "sha256": "5ab15b832a037e9db358a365886ea51e0881614fe658c91c3bcade280dd4b5e3"
+    },
+    "proposed/SaturationWideNetwork.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/proposed/SaturationWideNetwork.cpp",
+      "sha256": "a67943327cb2a43b30481923f29eab66c8258872b30d5c988d19cfd8dce18f24"
+    },
+    "proposed/SaturationWideNetwork.h": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/proposed/SaturationWideNetwork.h",
+      "sha256": "04f1731343d7931ddfeccd04cc3eea512f62c5516791ad6f1511df957149e3e0"
+    },
+    "shared/SaturationCalibration.h": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationCalibration.h",
+      "sha256": "087410a429e28c3da6a941d43ec095c122eead940ce5a353da9c6d6821b5ef30"
+    },
+    "shared/SaturationCandidate.h": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationCandidate.h",
+      "sha256": "3063fded18b683fa59794b3075cae1ffffbee00ff0146346800b383b7857255b"
+    },
+    "shared/SaturationFeasibility.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationFeasibility.cpp",
+      "sha256": "d5c5a3a9295c6207ab902c9fe76d9930062bb49d60989b3e3f8b9a8ed0ff0187"
+    },
+    "shared/SaturationGain.h": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationGain.h",
+      "sha256": "2c9249536eb1829bdbced1331f31b6fb19849bb34dafd60fb897c871c61df82f"
+    },
+    "shared/SaturationMath.h": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/baseline/SaturationMath.h",
+      "sha256": "44305ce49bde90833cdc9e74aea6bb78c0b53c8fa8f68ba85ee0d40ea3f06af3"
+    },
+    "tests/CppHeapWitness.inc": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/tests/CppHeapWitness.inc",
+      "sha256": "dcbbc903d680e03aa89a8c6ac4e38da219363cea8e5846f706c07f0a18fded7a"
+    },
+    "tests/WideDirectApi.h": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/tests/WideDirectApi.h",
+      "sha256": "663ae2171f3586665d2899f3b0305244f38eefb562823395e163e403397a69ef"
+    },
+    "tests/WideDirectWitness.cpp": {
+      "source": "build/saturation-product-20261018/wide-direct-layout-1/tests/WideDirectWitness.cpp",
+      "sha256": "3a3fbeb7b1dcaea4a87ea1ccc8ef1f8c6c4ff1cf61a86cd1bf0b100262449a28"
+    }
+  },
+  "historicalRepositoryInputSha256": {
+    "SaturationCandidate.cpp": "85474f21620e4a3dd1ca4269f42bd4761a4fcf6700462c68f61949abc9d3113c",
+    "SaturationWideNetwork.cpp": "d3df42ec3edece46aa1365b43523122a1a7f9667c086bf8c21e1767f34f819cf",
+    "SaturationWideNetwork.h": "7f7b3ebd1022e3a5bae0e7673a97468a99dbdeb68a1296449b367f6fbba7b276",
+    "SaturationCalibration.h": "087410a429e28c3da6a941d43ec095c122eead940ce5a353da9c6d6821b5ef30",
+    "SaturationCandidate.h": "3063fded18b683fa59794b3075cae1ffffbee00ff0146346800b383b7857255b",
+    "SaturationFeasibility.cpp": "d5c5a3a9295c6207ab902c9fe76d9930062bb49d60989b3e3f8b9a8ed0ff0187",
+    "SaturationGain.h": "2c9249536eb1829bdbced1331f31b6fb19849bb34dafd60fb897c871c61df82f",
+    "SaturationMath.h": "44305ce49bde90833cdc9e74aea6bb78c0b53c8fa8f68ba85ee0d40ea3f06af3",
+    "SaturationAnalysis.cpp": "05565fdf5db5c7f01fc89e5fa1ddf9609b6be1b15a20803eaebb2601830900cc",
+    "SaturationAnalysis.h": "a3f9601d421bcba5b7225172b8af7d1055b48ad6e481311360c2310430d39a21"
+  },
+  "sharedOriginalAndProposedByteEqualityChecked": true,
+  "copiesCheckedAgainstOriginSeal": true,
+  "lineEndingsPreserved": true,
+  "CMakeRegistered": false,
+  "rootRuntimeChanged": false,
+  "nativeExecutedForThisRelocation": false,
+  "verifierExecutedDuringPreparation": false,
+  "adopted": false,
+  "selectedFactor": null,
+  "classifierComposed": false,
+  "qualificationLimits": "Historical evidence remains bound to its original source/build/images. This portable relocation supplies exact source bytes, not a new build/test/native/codegen/CPU/host/CI or UI qualification."
+}

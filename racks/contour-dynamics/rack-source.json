@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "status": "incomplete: native screenshot and sanitized runtime skin required in Task8",
+  "originalSkinPolicy": "Original skin bytes/hashes are frozen inputs. Release skins are derived sanitized copies with their own hashes; preserve runtime fields, controls and notices.",
+  "manifest": {
+    "schema": 1,
+    "id": "contour-dynamics",
+    "version": "1.0.0",
+    "metadata": {
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "canonical_sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "name": "Contour Dynamics",
+      "maker": "AIR",
+      "purpose": "A precise native dynamic equalizer.",
+      "description": "Eight freely placed EQ bands with linked compression or expansion, manual timing and a neutral starting curve.",
+      "role": "fx",
+      "tags": [
+        "eq",
+        "dynamic",
+        "precision"
+      ]
+    },
+    "design": "rack.json",
+    "skin": "",
+    "screenshot": "",
+    "files": [
+      {
+        "path": "rack.json",
+        "sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+        "kind": "design",
+        "bytes": 8873
+      }
+    ],
+    "capabilities": {
+      "airMin": "0.1.0",
+      "modules": [
+        {
+          "module": 17,
+          "algorithmRevision": 1
+        }
+      ],
+      "nativeEditor": ""
+    }
+  },
+  "sources": [
+    {
+      "path": "rack.json",
+      "source": "racks/contour-dynamics/rack.json"
+    }
+  ]
+}

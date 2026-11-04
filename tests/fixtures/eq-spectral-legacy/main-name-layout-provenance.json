@@ -1,0 +1,10 @@
+{
+  "kind": "synthetic extension of native-captured Sound23/Project22 using published main391230f3 Sound24/Project23 name-only layout",
+  "actual_main_plugin_replay": "PENDING; do not call these captured main binaries",
+  "name": "Precision café",
+  "sha256": {
+    "default-main-v24.soundstate": "48bd138fe1ad325063a874c9ca3fa05360a6c160e488332bb938b98d960edf68",
+    "named-main-v24.soundstate": "e98fb7ec2f0b451050fdb120ef083d07314b810d58502ffd10a8524f132301aa",
+    "named-main-v23.airackproject": "e452fcbea48caeab99bda56ad0014310380e579b1636ab7037e74e8e52e00339"
+  }
+}

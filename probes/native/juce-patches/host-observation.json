@@ -1,0 +1,24 @@
+{
+  "juce_commit": "be29c81492b6151c8ea8d14c840e1311963b3a83",
+  "relative_path": "modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp",
+  "pre_sha256": "e62c50f3e6fb6c93e2cd3934e40eac506d0affb4bbe63783e0aa7be414ebd47a",
+  "post_sha256": "30e665d5a26474972822a376a75cbb7cfa6b4c1db6e156347013feaa38780fa4",
+  "replacements": [
+    [
+      "#include <juce_audio_plugin_client/VST3/juce_VST3ModuleInfo.h>",
+      "#include <juce_audio_plugin_client/VST3/juce_VST3ModuleInfo.h>\r\n\r\n#if PROBE_HOST_DIAGNOSTICS\r\n #include \"ProbeHostDiagnostics.h\"\r\n#endif"
+    ],
+    [
+      "        if (auto* instance = getPluginInstance())\r\n        {\r\n            if (list != nullptr)",
+      "        if (auto* instance = getPluginInstance())\r\n        {\r\n           #if PROBE_HOST_DIAGNOSTICS\r\n            probe::recordChannel (*instance, list);\r\n           #endif\r\n            if (list != nullptr)"
+    ],
+    [
+      "        FUnknownPtr<IBStream> stateRefHolder (state);",
+      "       #if PROBE_HOST_DIAGNOSTICS\r\n        probe::recordState (*pluginInstance, state, false);\r\n       #endif\r\n        FUnknownPtr<IBStream> stateRefHolder (state);"
+    ],
+    [
+      "        MemoryBlock mem;\r\n        getStateInformation (mem);",
+      "       #if PROBE_HOST_DIAGNOSTICS\r\n        probe::recordState (*pluginInstance, state, true);\r\n       #endif\r\n        MemoryBlock mem;\r\n        getStateInformation (mem);"
+    ]
+  ]
+}

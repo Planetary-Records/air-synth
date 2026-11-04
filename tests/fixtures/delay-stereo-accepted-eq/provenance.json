@@ -1,0 +1,50 @@
+{
+  "accepted_source": "49ae569",
+  "production_sources_unmodified": true,
+  "fixture_writer_only_patch": "capture-accepted-eq21.patch",
+  "producer_sha256": "334d2df289c61d219c7b9a125e2ab9d9accc10b5653334bbb6611c6fff5618a5",
+  "producer_cpp_sha256": "88ac5bb1a2a41e1f94d7d0967baac1fa42ca67b9cbdcd3d50cb53e3823e9b196",
+  "producer_command": "RackSynthDynamicEqRackTests --capture-accepted-eq21 ABS_FRESH_DIRECTORY",
+  "producer_build": "git archive of 49ae569, the patch applied, configured with RACKSYNTH_BUILD_PROBES=OFF and the same JUCE be29c81, Debug",
+  "accepted_sound_version": 21,
+  "accepted_project_version": 20,
+  "accepted_parameter_count": 2191,
+  "files": [
+    {
+      "name": "capture-accepted-eq21.patch",
+      "bytes": 5437,
+      "sha256": "8165a0fb463fa4c56ba66dd07929e99e74afbc9e669a6492aadf04473249be58"
+    },
+    {
+      "name": "default-v21.soundstate",
+      "bytes": 20073,
+      "sha256": "c3e10638971089603605a0552f92322bfc63e697284131022c65dbfff50025fe"
+    },
+    {
+      "name": "embedded-v20.airackproject",
+      "bytes": 23076,
+      "sha256": "0869b6f913c3a28528e52ee0be777b50039700808d5e233283e4ff958e346580"
+    },
+    {
+      "name": "embedded-v21.soundstate",
+      "bytes": 22968,
+      "sha256": "3d9d4542ff6ba94312846fc70d7eafafe759bbde1e98a0015d2f493b29fc0666"
+    },
+    {
+      "name": "registry-v21.json",
+      "bytes": 487439,
+      "sha256": "190c858307b853e569674a9dfeb8039b2f0b29cd1726ea1dfa9e1dce4156dccb"
+    },
+    {
+      "name": "rich-v20.airackproject",
+      "bytes": 20181,
+      "sha256": "cf18eda70ce44da684b9fc90e30f54245d102da7014f4e378b4ecb0b4de2a4e3"
+    },
+    {
+      "name": "rich-v21.soundstate",
+      "bytes": 20073,
+      "sha256": "2e9b5a2d6ea8181af02e3b10984a71241bd57b46618135bf3f828aa643b00a96"
+    }
+  ],
+  "patch_application": "git apply capture-accepted-eq21.patch"
+}

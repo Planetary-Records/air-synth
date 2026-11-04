@@ -1,0 +1,63 @@
+{
+  "status": "CAPTURED_AND_SELF_ROUNDTRIPPED_WITH_ACCEPTED_MAIN_BEFORE_DETECTOR_CODEC_EDITS",
+  "main_commit": "8540d9858af052e6bd3e0f5c46fe81b0cfd9b633",
+  "archive_sha256": "abb964d1af8d71bcd6d2d12833747437f1596d756d5b38f2e3ab2722534514c0",
+  "unmodified_archived_files": 1583,
+  "only_fixture_target_change": "Two CMake lines add RackSynthAcceptedDelay22Writer linked to RackSynthProject; all codec/registry/product files exactly main.",
+  "writer_source_sha256": "dddeb2b2cff57f59da95020a1bf7dbc06e1653af35bcfe1d8f1dc6a79a235c5e",
+  "writer_exe_sha256": "b6189f26a4c23ad1923c4e68c4961905d93f982ea3b9a684bf736ec7d3870fe6",
+  "configure": "t11-main-writer-configure-2.log",
+  "build": "t11-main-writer-build-2.log",
+  "capture": "t11-main-writer-capture-2.log",
+  "private_build": "build/eq-main-codec-11",
+  "private_archive": "build/eq-dynamics-detection-20261019-a/accepted-main-8540-source-11",
+  "configuration": {
+    "compiler": "MSVC2022/x64",
+    "language": "C++20",
+    "config": "Release",
+    "probes": false,
+    "JUCE": "pinned source from existing .tools/juce cache, fully disconnected",
+    "coordination": "RackSynthNativeRun/shared",
+    "output": "fresh directory; refuse overwrite"
+  },
+  "main_parameter_count": 2215,
+  "main_sound_version": 22,
+  "main_project_version": 21,
+  "fixtures": [
+    {
+      "file": "default-v22.soundstate",
+      "bytes": 20289,
+      "sha256": "2dafa869d9a21f7ba77d52d601a582c92843e1eb5b83e51808527e9e6a564451"
+    },
+    {
+      "file": "embedded-v21.airackproject",
+      "bytes": 23404,
+      "sha256": "1e5e0ece3b0d3f672e10644f4941636621519ed57fee56f732da8b619fcac7ab"
+    },
+    {
+      "file": "embedded-v22.soundstate",
+      "bytes": 23258,
+      "sha256": "646230850fceacc898376faeadd454c1e625cda1320f70364d2da33eae2f0ac2"
+    },
+    {
+      "file": "registry-v22.json",
+      "bytes": 494192,
+      "sha256": "4414a58b067af08a26a1b8608f29e2849a66ccdd23e77ada83873d53762c3187"
+    },
+    {
+      "file": "rich-v21.airackproject",
+      "bytes": 20996,
+      "sha256": "de1f90d6fa02143c28249137a0a9a8a07d441971dcb7f854ca9f4fa9bc6150b0"
+    },
+    {
+      "file": "rich-v22.soundstate",
+      "bytes": 20289,
+      "sha256": "39f6535709d3e435b8d669d82ba12037b191ebb06e7d2810dd5d4acb7abf438e"
+    }
+  ],
+  "failed_attempts": [
+    "t11-main-writer-configure-1-not-launched.json: incorrect assumed JUCE cache path, no native command launched",
+    "t11-main-writer-capture-1.log: fixture guard wrongly expected16 Oxide defaults; source actually has14; partial registry-only capture retained and not used"
+  ],
+  "self_checks": "All three sound and both project encodes decode equal with archived main codec; the2215-row descriptor JSON is captured independently. All24 stereo controls are non-neutral in rich; locks/macros, embedded Oxide and project pattern/group represented."
+}

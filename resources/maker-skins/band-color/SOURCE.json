@@ -1,0 +1,307 @@
+{
+  "source_path": "build/sm20/task18-band-color-01/metadata-01",
+  "stage": "User-approved photo circles; original stationary bodies; source-supported moving needle/shadow",
+  "art_gate_status": "PASS",
+  "accepted": false,
+  "candidate_only": false,
+  "native_status": "PENDING_METADATA_REQUALIFICATION",
+  "fidelity": {
+    "label": "actual corrected Python composition",
+    "source_hashes": {
+      "face": [
+        "closed-wireframe-04.png",
+        "a15ab08e9c234f7fce5e4388b0a1da4e9faf6b396b6a1002806ede57c396d951"
+      ],
+      "setup": [
+        "open-wireframe-01.png",
+        "9dbb3d19773c627dbbf471703c273b6ac1271006359ca40a5ca3191175d341ee"
+      ]
+    },
+    "script_sha256": "cca5a26ac8a08b0053fa0802a9b797d4fdb5dccd557a7dc513372b22ec76c112",
+    "face": {
+      "mean": 0.08175040036439896,
+      "per_channel": [
+        0.07336567342281342,
+        0.08462688326835632,
+        0.08725864440202713
+      ],
+      "p99": 0.0,
+      "pixels": 843160
+    },
+    "recess": {
+      "mean": 0.48804089426994324,
+      "per_channel": [
+        0.47842174768447876,
+        0.49059954285621643,
+        0.4951013922691345
+      ],
+      "p99": 8.0,
+      "pixels": 127281
+    },
+    "controls": {
+      "face.low-crossover": {
+        "mean": 0.05078389495611191,
+        "per_channel": [
+          0.049909766763448715,
+          0.05275772511959076,
+          0.04968418553471565
+        ],
+        "p99": 1.0,
+        "pixels": 70928
+      },
+      "face.high-crossover": {
+        "mean": 0.25231993198394775,
+        "per_channel": [
+          0.2235502153635025,
+          0.26056262850761414,
+          0.27284693717956543
+        ],
+        "p99": 6.0,
+        "pixels": 75218
+      },
+      "face.mid-drive": {
+        "mean": 0.13261201977729797,
+        "per_channel": [
+          0.12133271247148514,
+          0.13699021935462952,
+          0.13951310515403748
+        ],
+        "p99": 4.0,
+        "pixels": 38448
+      },
+      "face.mid-mix": {
+        "mean": 0.056234195828437805,
+        "per_channel": [
+          0.04328424856066704,
+          0.05946006253361702,
+          0.06595827639102936
+        ],
+        "p99": 1.0,
+        "pixels": 35856
+      },
+      "face.high-drive": {
+        "mean": 0.1337650865316391,
+        "per_channel": [
+          0.12323137372732162,
+          0.1362619698047638,
+          0.14180190861225128
+        ],
+        "p99": 3.0,
+        "pixels": 38448
+      },
+      "face.high-mix": {
+        "mean": 0.018081584945321083,
+        "per_channel": [
+          0.017765507102012634,
+          0.01899263635277748,
+          0.017486613243818283
+        ],
+        "p99": 1.0,
+        "pixels": 35856
+      },
+      "face.high-tilt": {
+        "mean": 0.16508826613426208,
+        "per_channel": [
+          0.13241805136203766,
+          0.17411039769649506,
+          0.18873633444309235
+        ],
+        "p99": 2.0,
+        "pixels": 35690
+      },
+      "face.global-mix": {
+        "mean": 0.28988924622535706,
+        "per_channel": [
+          0.2650209367275238,
+          0.29968222975730896,
+          0.304964542388916
+        ],
+        "p99": 6.0,
+        "pixels": 95034
+      },
+      "face.input-trim": {
+        "mean": 0.057029176503419876,
+        "per_channel": [
+          0.04759378731250763,
+          0.061045851558446884,
+          0.06244789808988571
+        ],
+        "p99": 2.0,
+        "pixels": 26390
+      },
+      "face.output-trim": {
+        "mean": 0.146709606051445,
+        "per_channel": [
+          0.1348995864391327,
+          0.15172414481639862,
+          0.1535051167011261
+        ],
+        "p99": 4.0,
+        "pixels": 26390
+      },
+      "face.mode": {
+        "mean": 0.7719916701316833,
+        "per_channel": [
+          0.7523372173309326,
+          0.7885845303535461,
+          0.7750533223152161
+        ],
+        "p99": 27.0,
+        "pixels": 24388
+      },
+      "face.compensation": {
+        "mean": 0.8217292428016663,
+        "per_channel": [
+          0.8001065850257874,
+          0.8383631110191345,
+          0.8267180323600769
+        ],
+        "p99": 28.0,
+        "pixels": 24388
+      }
+    },
+    "gates": {
+      "face_mean_per_channel": 1,
+      "reveal_mean_per_channel": 2
+    },
+    "reference": "unaltered approved source artwork; registered open only within approved recess",
+    "pass": true
+  },
+  "candidate_authority": null,
+  "cpu_status": "DEFERRED",
+  "selected_factor": null,
+  "production_saturation": "FORCED AUDIO BYPASS",
+  "script": {
+    "path": "band_color_skin.py",
+    "sha256": "cca5a26ac8a08b0053fa0802a9b797d4fdb5dccd557a7dc513372b22ec76c112"
+  },
+  "drawings": [
+    {
+      "path": "closed-wireframe-04.png",
+      "sha256": "a15ab08e9c234f7fce5e4388b0a1da4e9faf6b396b6a1002806ede57c396d951"
+    },
+    {
+      "path": "open-wireframe-01.png",
+      "sha256": "9dbb3d19773c627dbbf471703c273b6ac1271006359ca40a5ca3191175d341ee"
+    }
+  ],
+  "layout": {
+    "path": "layout.json",
+    "sha256": "3f8dbcc72d10d81af6a082b34dc03ef1688189a1bc9ad4de40a783519c1cee07"
+  },
+  "files": [
+    {
+      "path": "band-color-elements.json",
+      "sha256": "b7a00ed8a51e116b398fbc2d99c242e6d393176ef183e39e5588ea249c4699f2"
+    },
+    {
+      "path": "parts/band-color-face-global-mix-pointer.png",
+      "sha256": "d8a04321c7e56f84b06edfbf29e65fdf78779b3e1618d38666405db7097cac53"
+    },
+    {
+      "path": "parts/band-color-face-high-crossover-pointer.png",
+      "sha256": "74544c9b0e5f4f9d3d6dce68f0c8129fbfafca8d7f80c5386c1dec485b6ede4e"
+    },
+    {
+      "path": "parts/band-color-face-high-drive-pointer.png",
+      "sha256": "6d2ddbcb825c336cce710d87763c70ca1027704df050cb3893be7758b7b8c683"
+    },
+    {
+      "path": "parts/band-color-face-high-mix-pointer.png",
+      "sha256": "6a8a6ed8d6188a2b3430f64d27bf809664914a90d590acbe5ed0109dffd90a37"
+    },
+    {
+      "path": "parts/band-color-face-high-tilt-pointer.png",
+      "sha256": "41ff782af53ae14715b843b9aa1923aa9b1eaca8e759b58cc4b30e1ddb601453"
+    },
+    {
+      "path": "parts/band-color-face-low-crossover-pointer.png",
+      "sha256": "c731a4bead5f571e8efe177c9d04af169c04edfd1ac143127b9ffbb89a2ced8f"
+    },
+    {
+      "path": "parts/band-color-face-mid-drive-pointer.png",
+      "sha256": "5b66f0d66734db473b71d577902857bf2dde7be42c4bfc321d238f8992f7d1c9"
+    },
+    {
+      "path": "parts/band-color-face-mid-mix-pointer.png",
+      "sha256": "e23f4a457a5aad89bfd4f6266c0bef2bbf3636190ef24fb5e2d7495b78b0b945"
+    },
+    {
+      "path": "parts/band-color-setup-compensation-down.png",
+      "sha256": "bfb769c2c8de9a589aa5d6fe8796642d8c83856600b5a0db9ec37232aef56de1"
+    },
+    {
+      "path": "parts/band-color-setup-compensation-up.png",
+      "sha256": "8e3dcf81a7d3e0106456ddb68ac092142745879c3a142036e52890669ff0e00c"
+    },
+    {
+      "path": "parts/band-color-setup-input-trim-pointer.png",
+      "sha256": "659c27820c0989261670b84f63ef0827c527fc907c94ac721307761ffbd172e9"
+    },
+    {
+      "path": "parts/band-color-setup-mode-down.png",
+      "sha256": "4dd58d33d4c1a208a9d28edc407328339fe404b62f05a6f6542ef264c2925412"
+    },
+    {
+      "path": "parts/band-color-setup-mode-up.png",
+      "sha256": "6e5e09188b92f6e3300e51b4d55c96cce9be960f038e4d70ae6eddddc5043c63"
+    },
+    {
+      "path": "parts/band-color-setup-output-trim-pointer.png",
+      "sha256": "6ee0848c89e457c1581673ce4c174d79b6d25090fc4107d4c870a6910033efb0"
+    },
+    {
+      "path": "plates/band-color-face.png",
+      "sha256": "06cecd870566b7a896178dbb5b87aaf3ef2c727fd2dfc2e03f5fe7af79498968"
+    },
+    {
+      "path": "plates/band-color-setup.png",
+      "sha256": "10b07b8113847244c5684859dd1d25085079fa64c2cffdbe134278a7420e3e99"
+    }
+  ],
+  "fixed_print_status": "PASS all same40 control/pose samples",
+  "human_appearance": "PENDING",
+  "verification_record": "docs/verification/band-color-calibration-20261020/README.md",
+  "calibration_inputs": [
+    {
+      "path": "docs/design/saturation/2026-10-20-band-color/photograph-calibration-01.json",
+      "sha256": "3aca6d2905bf7d6b1ecccfd2f9b263119cbdd4f2044c56304bb94bf58ef0f6fb"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-20-band-color/photograph-pointer-support-01.json",
+      "sha256": "56e8ba5c51bf72742f94a1f915c6c9daa819426dfe2c21261af9be10cb99ca4b"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-20-band-color/calibration-approval-01/approval.json",
+      "sha256": "0e00cc73463b8d831c8f5f0467327788299cb77ccbbdea7cf1ae22f762d7e45f"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-20-band-color/skin/native/cut-03/print-strokes-05.json",
+      "sha256": "209cc7fc8ccebcaaf88d1315d4c02580ccf9835fb33258a0280aa020a807d1ef"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-20-band-color/skin/native/test_cut_repair.py",
+      "sha256": "15f8cadca36490b15b1fc60aec7d13a5f602146a772300bf817714d663671bc9"
+    },
+    {
+      "path": "docs/design/saturation/2026-10-20-band-color/skin/native/band_color_repair.py",
+      "sha256": "098ceaaf715a71852f37365b7d4748b95ca749dc69f8efa8cceee98c9db0c2fb"
+    },
+    {
+      "path": "build/sm20/task18-band-color-01/metadata-01/extract.json",
+      "sha256": "16c7040e60840bc24f2bbc4ff27b4fb59f2371c93db90a0f1c3cd6b056a79530"
+    },
+    {
+      "path": "build/sm20/task18-band-color-01/metadata-01/measure.json",
+      "sha256": "617df4467847bbfb020853d0e0c3d2f284b0ed2de5b00bea3f48a508d72265db"
+    },
+    {
+      "path": "build/sm20/task18-band-color-01/metadata-01/compare/diff-report.json",
+      "sha256": "2b3888cb146f97730be102bbd41756180ffdb1d09378dcf2a908a04a014ab5f3"
+    },
+    {
+      "path": "build/sm20/task18-band-color-01/checks-metadata-01/regression.json",
+      "sha256": "5327a864fb3c73f01b6963a92ad0cb8e724fd78c3d03b7e1255d31db4740b5b8"
+    }
+  ]
+}

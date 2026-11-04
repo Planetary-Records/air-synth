@@ -1,0 +1,27 @@
+diff --git a/tests/native/DynamicEqRackTests.cpp b/tests/native/DynamicEqRackTests.cpp
+index 935372d..72f4a3b 100644
+--- a/tests/native/DynamicEqRackTests.cpp
++++ b/tests/native/DynamicEqRackTests.cpp
+@@ -717,0 +718,20 @@ void placementSketchUsesActualEnergy()
++}
++bool captureAcceptedDelay20(const juce::File& directory)
++{
++    if(parameterCount!=2063||currentSoundStateVersion!=20||currentProjectStateVersion!=19||directory.exists()||!directory.createDirectory().wasOk())return false;
++    const auto write=[&](const char* name,const juce::MemoryBlock& bytes){const auto file=directory.getChildFile(name);if(file.exists()||!file.replaceWithData(bytes.getData(),bytes.getSize()))return false;std::cout<<"ACCEPTED_DELAY20 "<<name<<" bytes="<<bytes.getSize()<<" sha256="<<juce::SHA256(bytes).toHexString()<<'\n';return true;};
++    juce::Array<juce::var> rows;
++    for(const auto& d:parameterRegistry()){
++        auto* row=new juce::DynamicObject;row->setProperty("id",d.id);row->setProperty("name",d.name);row->setProperty("unit",d.unit);row->setProperty("kind",int(d.kind));row->setProperty("minimum",double(d.minimum));row->setProperty("maximum",double(d.maximum));row->setProperty("default",double(d.defaultValue));row->setProperty("skew",double(d.skew));row->setProperty("key",juce::int64(d.stateKey));juce::Array<juce::var> choices;for(const auto& c:d.choices)choices.add(c);row->setProperty("choices",choices);rows.add(juce::var(row));
++    }
++    const auto json=juce::JSON::toString(rows,true,17);if(!write("registry-v20.json",juce::MemoryBlock(json.toRawUTF8(),json.getNumBytesAsUTF8())))return false;
++    SoundDocument empty,rich;
++    if(editRackLayout(rich.layout,{RackEditKind::addEffect,0,masterChain,0,EffectKind::delay},rich.layout)!=RackEditResult::applied)return false;
++    for(std::size_t slot=0;slot<8;++slot)for(std::size_t field=0;field<5;++field){const auto i=2023+slot*5+field;rich.values[i]=field==4?1.f:.1f*float(1+(slot+field)%8);rich.controlLocks[i]=(slot+field)%2==0;}
++    rich.values[0]=.37f;rich.macros[0]={parameterRegistry()[2023].stateKey,.21f};rich.macros[1]={parameterRegistry()[2061].stateKey,-.17f};rich.effectLocks[0]=true;
++    const auto factories=libraryRackDesigns();const auto factory=std::find_if(factories.begin(),factories.end(),[](const auto& d){return d.name=="Oxide Return";});if(factory==factories.end())return false;
++    RackOperation place;place.kind=RackOperationKind::place;place.design=*factory;place.newInstance=juce::Uuid("72b0ea6d-4c2d-4d93-a3d8-7a904b0500ac");place.destination={RackRole::fx,masterChain,0};place.allocation={{0,0}};SoundDocument embedded;RackDifference delta;if(makeRackCandidate(empty,place,SoundEditOrigin::manual,embedded,delta)!=RackCandidateStatus::ready)return false;
++    juce::MemoryBlock bytes;
++    for(const auto& item:std::array<std::pair<const char*,const SoundDocument*>,3>{{{"default-v20.soundstate",&empty},{"rich-v20.soundstate",&rich},{"embedded-v20.soundstate",&embedded}}})if(!encodeSoundState(*item.second,bytes)||!write(item.first,bytes))return false;
++    for(const auto& item:std::array<std::pair<const char*,const SoundDocument*>,2>{{{"rich-v19.airackproject",&rich},{"embedded-v19.airackproject",&embedded}}}){ProjectDocument project;project.sound=*item.second;if(!encodeProjectState(project,bytes)||!write(item.first,bytes))return false;}
++    return encodeRackDesign(*factory,bytes)&&write("oxide-return-v1.rackdesign",bytes);
+@@ -720,0 +741 @@ int main(int argc,char** argv)
++    if(argc==3&&juce::String(argv[1])=="--capture-accepted-delay20")return captureAcceptedDelay20(juce::File(juce::String::fromUTF8(argv[2])))?0:1;

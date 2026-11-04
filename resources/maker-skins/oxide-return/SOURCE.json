@@ -1,0 +1,144 @@
+{
+  "source_path": "docs/design/racks/2026-10-09-studio-rack/oxide-return/skin",
+  "command": "uv run --python 3.12 --with opencv-python-headless --with numpy python -B oxide_return_skin.py measure; extract; elements; compare; install",
+  "script": {
+    "path": "oxide_return_skin.py",
+    "sha256": "acb9809bd4bf8fff619899aab34ab0879e06cd396b7d24df220fddc1c0f178b2"
+  },
+  "drawings": [
+    {
+      "path": "oxide-return/closed.png",
+      "sha256": "44a0fcfb58385c170a50137c70d1d134f4b6331d9414f3a1dd07d86aeee8e1d8"
+    },
+    {
+      "path": "oxide-return/open.png",
+      "sha256": "c31f45ebcdadd66d8e8fb031f560b005a8d44aee9305b60db34285445834f2f3"
+    }
+  ],
+  "files": [
+    {
+      "path": "oxide-return-elements.json",
+      "sha256": "403789176ec14f27476bb371f3fbfa1b8354ad1e0aea59a63b1f79a6b4154fff"
+    },
+    {
+      "path": "parts/oxide-return-face-high-cut-knurl.png",
+      "sha256": "8902e8397267ba4a97cc91c652008fbd1e7d1c321943d174bbc3fb8588485813"
+    },
+    {
+      "path": "parts/oxide-return-face-high-cut-pointer.png",
+      "sha256": "21f0194635195d5d99ae267b0fba9203ffaa789193446c7cac18e37501134487"
+    },
+    {
+      "path": "parts/oxide-return-face-in-in.png",
+      "sha256": "a5d20b357c2bd49c8f933d0f63fcbfed211c8ee82385ee755605f30a2e29a6ed"
+    },
+    {
+      "path": "parts/oxide-return-face-in-out.png",
+      "sha256": "ae57b787c7ce7816090e9457b8fdf302ccc15d65503bd601e6ee06130011bae7"
+    },
+    {
+      "path": "parts/oxide-return-face-lamp-lit.png",
+      "sha256": "fd2e44c015791745e5c5493594070f735affff0be67653be03e8d7d1b85f9982"
+    },
+    {
+      "path": "parts/oxide-return-face-low-cut-knurl.png",
+      "sha256": "edca5323074cb1418250cd9bd0c3e914ebb61de9321ec4250fc8777443c8a26f"
+    },
+    {
+      "path": "parts/oxide-return-face-low-cut-pointer.png",
+      "sha256": "03cd238823c819a9cb8ba801281e720152df84c9622251825a61b23c11018f87"
+    },
+    {
+      "path": "parts/oxide-return-face-mix-knurl.png",
+      "sha256": "b097c224892782f366ba13a4c40e1d437b892f9f0316ae9b08fac7394bfb3cd3"
+    },
+    {
+      "path": "parts/oxide-return-face-mix-pointer.png",
+      "sha256": "1dd0db2afb5409b84c685d9f5d90ffcc7e26966d55a4daed0a1b66256756947e"
+    },
+    {
+      "path": "parts/oxide-return-face-repeats-knurl.png",
+      "sha256": "c5810dab7d46d7791c5bd8550eb7fe79db7805a0ea9a3f45e1f4f7dbff302c81"
+    },
+    {
+      "path": "parts/oxide-return-face-repeats-pointer.png",
+      "sha256": "8631a5b6d5957b3a22036345d4651c97302ce8e0c6b58174bda6a82eb8cf1a5c"
+    },
+    {
+      "path": "parts/oxide-return-face-saturation-knurl.png",
+      "sha256": "b44aa568ff62366f34fdd811ef8b4db0da4ec63d82c02edf1a6adec4f8971776"
+    },
+    {
+      "path": "parts/oxide-return-face-saturation-pointer.png",
+      "sha256": "2fb6d15702973ed05346e85bd0e91ce1242757fc4737d95a16d9b0a602300d07"
+    },
+    {
+      "path": "parts/oxide-return-face-time-hub.png",
+      "sha256": "2e9a947c32f5a9b08e8e4cb44e9da484e0bf8567261b9417553f1653c75fea46"
+    },
+    {
+      "path": "parts/oxide-return-face-time-knurl.png",
+      "sha256": "856ea379dd63e5db6d623eadf929aa0b92b7772f1a29505b043e64c0d6c9f938"
+    },
+    {
+      "path": "parts/oxide-return-face-time-needle.png",
+      "sha256": "8ad3158701f13e6e7a091c5ef612e24eaf3bf77918c70f0fa5c8e07dea240abe"
+    },
+    {
+      "path": "parts/oxide-return-face-wobble-knurl.png",
+      "sha256": "99659eeb6e10f842c70ae1eb05f6896f6456825373c032e9d8fe7c88500479f3"
+    },
+    {
+      "path": "parts/oxide-return-face-wobble-pointer.png",
+      "sha256": "9b9474973c6793dac9c53ddf4579a153bef501da0d8425558933029f157a8686"
+    },
+    {
+      "path": "parts/oxide-return-tempo-cross-knurl.png",
+      "sha256": "f43a11734a49f0b6accb1e039738be0e5b8d3ac9c2849ea28bca366401131e89"
+    },
+    {
+      "path": "parts/oxide-return-tempo-cross-pointer.png",
+      "sha256": "19b580abe6d263944089ad348a618935a99743d8aab372951221f835575ed528"
+    },
+    {
+      "path": "parts/oxide-return-tempo-note-knurl.png",
+      "sha256": "d2725f259abc4d5b3e998f6dc5a16f0d98f10e6a81ae468275fa4ef0447516df"
+    },
+    {
+      "path": "parts/oxide-return-tempo-note-pointer.png",
+      "sha256": "8124c6dd73d28ffd91736fa7a39e2dd692eb9687de712db512f729f58e3ab3d2"
+    },
+    {
+      "path": "parts/oxide-return-tempo-ping-pong-dual.png",
+      "sha256": "6b398842dea53b2bc3c4d0793cee2c630fc8d93668bb4a1cffb20ec5232cfca8"
+    },
+    {
+      "path": "parts/oxide-return-tempo-ping-pong-ping-pong.png",
+      "sha256": "67e6ad694ad980e7e3cf339ea53bb3300ab271f54fd0dc4b9183e294aaab09ae"
+    },
+    {
+      "path": "parts/oxide-return-tempo-sync-free.png",
+      "sha256": "59143925eeaf5303716f585c15ea1b4d545472035794ab9230d7ea471bceaef0"
+    },
+    {
+      "path": "parts/oxide-return-tempo-sync-sync.png",
+      "sha256": "6241397303701b9227be920b7b3b8692531495cff4cc8e73b0503ee048a382cf"
+    },
+    {
+      "path": "parts/oxide-return-tempo-wobble-rate-knurl.png",
+      "sha256": "80584ab67a86dfd541b976975f48c73f6806f2d762a980722843f54173887d6e"
+    },
+    {
+      "path": "parts/oxide-return-tempo-wobble-rate-pointer.png",
+      "sha256": "efcf79b375fd20acf1ed8abcca73e9985c9f4233cf28da5b606fdadd6bfc919a"
+    },
+    {
+      "path": "plates/oxide-return-face.png",
+      "sha256": "2ec408a050eadc94e27a0c10597378aee3a5d9d7cebf8802964940b939a7f02e"
+    },
+    {
+      "path": "plates/oxide-return-tempo.png",
+      "sha256": "07f07e84e7964a982207620f9bf49b1bd41f373704792a23e8777062cfe3c8e2"
+    }
+  ]
+}

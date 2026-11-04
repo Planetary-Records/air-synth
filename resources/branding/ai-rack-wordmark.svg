@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="173" viewBox="0 0 460 173" role="img" aria-labelledby="title desc">
+  <title id="title">AI Rack</title>
+  <desc id="desc">AI Rack wordmark with a horizontally mirrored R. The subtitle reads AI RACK.</desc>
+  <g fill="#282a29">
+    <path fill-rule="evenodd" d="M5 119Q0 119 3 113L55 7Q58 0 66 0H125Q132 0 135 7L190 113Q193 119 187 119H143Q138 119 136 114L126 94H66L56 114Q54 119 49 119ZM90 30L69 69H113Z"/>
+    <path d="M216 0H254Q258 0 258 4V115Q258 119 254 119H216Q212 119 212 115V4Q212 0 216 0Z"/>
+    <path transform="translate(460 0) scale(-1 1)" fill-rule="evenodd" d="M0 119V4Q0 0 4 0H137Q166 0 166 26V50Q166 69 140 75L171 119H118L80 80H46V119ZM46 28H114Q120 28 120 34V46Q120 52 114 52H46Z"/>
+  </g>
+  <g transform="translate(101 145)" fill="none" stroke="#282a29" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="square">
+    <path d="M0 20L8 0H10L18 20M4 12H14"/>
+    <path d="M50 0V20"/>
+    <path d="M96 20V0H108Q114 0 114 5V7Q114 12 108 12H96M106 12L115 20"/>
+    <path d="M142 20L150 0H152L160 20M146 12H156"/>
+    <path d="M210 0H197Q192 0 192 5V15Q192 20 197 20H210"/>
+    <path d="M240 0V20M258 0L240 11L258 20"/>
+  </g>
+</svg>

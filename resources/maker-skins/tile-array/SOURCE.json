@@ -1,0 +1,462 @@
+{
+  "format": "ai-rack-maker-skin-source",
+  "version": 1,
+  "status": "BUNDLE_ONLY_NOT_INSTALLED",
+  "method": "built-in image_gen for all art; recorded generated source copies; ordinary ROI/family registration and alpha composition only",
+  "selection_authority": "independent agents under user-delegated choices; no user visual acceptance claim",
+  "routing": "inherited parent model; no overrides",
+  "house_reference": {
+    "path": "Private authoring reference; original location retained outside the public source",
+    "sha256": "4dad678c64510220190470dfa9f65d7426c53d5c6d698805fff6243902d1e454",
+    "import": "dependency unavailable",
+    "missing": "cv2",
+    "fallback": "Approved existing System.Drawing+stdlib path; no package installation"
+  },
+  "source_files": {
+    "closed.png": "40eb1ba38319f4a6d17b55060dcdbceaa12c7b6a8c5a8b8fabe8ec1a545a0b4a",
+    "open.png": "a39ff8171d9da861eb67db628d3a2a2820c7fb616a466295a692836b6c657acc",
+    "rack-brief.json": "acaa7542e6256c7af7ba66b50f2badc6c43b81247b219edb2f218c0dcc022ea1",
+    "prompts.json": "061f3c9fc517a8113c507ded576b72f9d370e2114a4154577aae80c1368a409d",
+    "skin-sources/asset-map.json": "ca1294ceb82b5939a46b4d4d4f1d459a869db461384808247b32675d49edc25d",
+    "skin-sources/plate-face.png": "1569e7ba098973e3dfcf3ab448fc2610cc95e0a4af72ff7acc0a010f26df5937",
+    "skin-sources/plate-programmer.png": "77f3f471b64f061238b194d24f090ee747756b64ebd12c534a4e7b98c5fa9575",
+    "skin-sources/assets-01-v2.png": "e7b0db03b530d9a80e6728a3ceb81791bf10246bb8e1f312f9429f6ad924940e",
+    "skin-sources/assets-02-v1.png": "6d3c24fb41fc90d3559203fc848ffc05bdd1cb701b625b5144d7ec086be321c3",
+    "skin-sources/assets-03-v1.png": "00ee4efb73c10dc5753fd208504a134851745d3f2917ce21c08155f3fcdfa72a",
+    "skin-sources/assets-03-v2.png": "43bf7cd427542c0066715099dba9253aac4ea376f3f75f86819007e65c8e3b9c",
+    "skin/analyze_wheel_phases.py": "ca13ccaf8a40b382abedec358dd7a4c84ee6d6c11767bbb588c0da5ec57ad7df",
+    "skin/draw_asset_grids.py": "151b99fc50280c377ad78ecff5e58968eee374cf5d9a967344cf0463886820f3",
+    "skin/plan_actual_rois.py": "ace613743dbc23c5f91ef70d46b2a362cafc0d33c3eadab8254605450f9178f3",
+    "skin/tile_array_skin.py": "ee0882dc8cd83338ddf375d9362d230232dce55171e58bc91a82d165483af964",
+    "skin/compare_generated_edit.ps1": "b0f82ffce7921adc7cfa38c68588031c1515e6fdccd6a6a8d332b174da285d93",
+    "skin/compare_native_snapshots.ps1": "3e0bc924491835548039c11204c065c1da35924d5c29603cbee2199376c1cb72",
+    "skin/extract_registered_parts.ps1": "95b4d2d4c8327714672b9758c0624ff0d7f6684651f8113c85356ee2b4045324",
+    "skin/inspect_asset_alpha.ps1": "2c39750cdf7af18c16e366ed67a5147ea3611cdd472f62d806bccd805633d390",
+    "skin/inspect_runtime_alpha.ps1": "e21d5d17af8de8c6e43bed728044bd01f980bb82163d0b80d3607b8891f0a022",
+    "skin/measure_sheet_components.ps1": "0e2770a1c2d8b68bbc628ebcb5024af675591eb1ebe7814142c692e42a3114c3",
+    "skin/measure_wheel_phases.ps1": "287e6d30485f52725f81d24cc5acb64474e5752d4ccaa6b0a8f4845338fec6cf",
+    "skin/preview_sheet_alpha.ps1": "0484c29e2654cd1811f04379bf65de56af41b9c9bf0f2f9b48533506d87688c8",
+    "skin/regress_open_face_comparison.ps1": "ab4f480d869f9fed50b25f2a0a3fa7f10b81511932d251c9828a7b5e033a3af4",
+    "skin/render_asset_grids.ps1": "1ff5aaf4b56101e961569dc42bede0805a8abd3fe9528553f8b009f11d90eedb",
+    "skin/review_registered_parts.ps1": "222ae9b1510bc55cbe168c2cd3c56e53f9e41bf9c738a803bccc39473c2557fc",
+    "skin/measure.json": "1a2e16b3c1948417ed6837e0ab4a82c8d60779320d4fee8acd9faa2e04028932",
+    "skin/comparison-rois.json": "7dad62ae122f69c098a46471ac28ce1f0e800f2f272b5f2548d7fe31d93827b6",
+    "skin/native-text-rois.json": "32582dbc311708126d24d69686d3511db94f0f54270d6bf0cead69e7566383b9",
+    "skin/compare/approved/tile-array-reference-closed.png": "a9eaa6a56cdb1cd6ed4bd2bd80418b8b33a325acf75834c1c7e0d08499cc718d",
+    "skin/compare/approved/tile-array-reference-open.png": "777e1aa8f3efae1d9056d0bc26b09dd0d247748abd692fe4e137a80dc7a1955f"
+  },
+  "files": {
+    "parts/tile-array-ivory-performance-pad-idle.png": {
+      "sha256": "cedc5d17f9efcfc25532ffa344f827ed051071ed7862ec4150bfc87b6908e3d2",
+      "bytes": 55423,
+      "pixels": [
+        246,
+        192
+      ]
+    },
+    "parts/tile-array-ivory-performance-pad-hover.png": {
+      "sha256": "dc5f7ea99ec25ba2c01a3810836ea40e01e7a0c926cfee977bfa518a9f131802",
+      "bytes": 57360,
+      "pixels": [
+        246,
+        192
+      ]
+    },
+    "parts/tile-array-ivory-performance-pad-pressed.png": {
+      "sha256": "7ceea58b5fd8aceb21947a64d555ff6474dcc9c797cf2b7f0c48856a34598f55",
+      "bytes": 58857,
+      "pixels": [
+        246,
+        192
+      ]
+    },
+    "parts/tile-array-ivory-performance-pad-disabled.png": {
+      "sha256": "1a8579b3d3d63287501abcc769c7df41bd5d5396820748b97cb3ee97a470aca4",
+      "bytes": 55313,
+      "pixels": [
+        246,
+        192
+      ]
+    },
+    "parts/tile-array-selected-pad-outline-selected.png": {
+      "sha256": "5b7fcd451459a5535b7710ae92fc9681ded5ba22b4d58045ae544ae179d02177",
+      "bytes": 28231,
+      "pixels": [
+        259,
+        176
+      ]
+    },
+    "parts/tile-array-kit-level-fader-cap-idle.png": {
+      "sha256": "28fe464c6d8cb84d1ed5a5d0f0186286ab5c3e4b12c0a90a45f238ef7a7ffd50",
+      "bytes": 9781,
+      "pixels": [
+        110,
+        76
+      ]
+    },
+    "parts/tile-array-kit-level-fader-cap-hover.png": {
+      "sha256": "370b8965c791afdf1c2f83ee1bb55206c5ee5aecfaeb73c54151e3b90872365a",
+      "bytes": 10090,
+      "pixels": [
+        110,
+        76
+      ]
+    },
+    "parts/tile-array-kit-level-fader-cap-pressed.png": {
+      "sha256": "8010346c3b20542911e131251f2a9e7e049887a76152c77df070905c19528d9d",
+      "bytes": 10068,
+      "pixels": [
+        110,
+        76
+      ]
+    },
+    "parts/tile-array-kit-level-fader-cap-disabled.png": {
+      "sha256": "94d29c6205a957eab398347a7bf351159dedebf734e28f64358050a44b4ec818",
+      "bytes": 9407,
+      "pixels": [
+        110,
+        76
+      ]
+    },
+    "parts/tile-array-membrane-action-key-idle.png": {
+      "sha256": "cf37b418758c57f64460bd8d8a1deead5b2a433af7301037da1dc0d636b5cc0e",
+      "bytes": 32429,
+      "pixels": [
+        247,
+        108
+      ]
+    },
+    "parts/tile-array-membrane-action-key-hover.png": {
+      "sha256": "a28c5ac95413e65f49efa2d3cdb31783ccbf28c77ff836a73cf559e9af04400b",
+      "bytes": 32667,
+      "pixels": [
+        247,
+        108
+      ]
+    },
+    "parts/tile-array-membrane-action-key-pressed.png": {
+      "sha256": "3e529f4389cb71cbcfc0652374ccbc7cd5c694c779c6b1811a329b4588479175",
+      "bytes": 34365,
+      "pixels": [
+        247,
+        108
+      ]
+    },
+    "parts/tile-array-membrane-action-key-disabled.png": {
+      "sha256": "af84d147587fc0b085e3cc987c49dc3373764fbe7ec0ae721fc4779a91e25acf",
+      "bytes": 29917,
+      "pixels": [
+        247,
+        108
+      ]
+    },
+    "parts/tile-array-membrane-action-key-selected.png": {
+      "sha256": "1aa09b13650b61c61e2c3b982029f96fbb976e7a5b629abcb22bcfe8c2aac937",
+      "bytes": 34045,
+      "pixels": [
+        247,
+        108
+      ]
+    },
+    "parts/tile-array-enable-latching-key-off.png": {
+      "sha256": "84c15dfe5cee2195f8f63040c6bbad7bb61f957800c76d20bceaf01a6901cee4",
+      "bytes": 29787,
+      "pixels": [
+        202,
+        112
+      ]
+    },
+    "parts/tile-array-enable-latching-key-on.png": {
+      "sha256": "d98bb9bb6063b5235986576d864798fb0c18b60c66897512770af24f35fdba4d",
+      "bytes": 32627,
+      "pixels": [
+        202,
+        112
+      ]
+    },
+    "parts/tile-array-enable-latching-key-hover_off.png": {
+      "sha256": "f59a15d8963faf318b060f46c082562c2a85955ed54922b55314cdc3c53d15fb",
+      "bytes": 29745,
+      "pixels": [
+        202,
+        112
+      ]
+    },
+    "parts/tile-array-enable-latching-key-hover_on.png": {
+      "sha256": "b9d8f30a3ca980e509f71f0797532600f7d35f2afc5d0d4af4b9108db64759f8",
+      "bytes": 31080,
+      "pixels": [
+        202,
+        112
+      ]
+    },
+    "parts/tile-array-enable-latching-key-pressed_off.png": {
+      "sha256": "2600cc4e9805c2b3e9b1fa6f734482fc63d6cafe2fcdd47eca5bfd34d6001b33",
+      "bytes": 31072,
+      "pixels": [
+        202,
+        112
+      ]
+    },
+    "parts/tile-array-enable-latching-key-pressed_on.png": {
+      "sha256": "c8f94838101b3f9b9871a70a6651276fe7cc5b65c1fcf5c169af6a9702857f25",
+      "bytes": 32670,
+      "pixels": [
+        202,
+        112
+      ]
+    },
+    "parts/tile-array-enable-latching-key-disabled.png": {
+      "sha256": "70aecddaa30002b4c0d4ed50bc7fc37d2c64afcc7af3a86ea593de62614a1726",
+      "bytes": 27729,
+      "pixels": [
+        202,
+        112
+      ]
+    },
+    "parts/tile-array-enabled-indicator-off.png": {
+      "sha256": "f7af2e3b33ad4e412a3df5002267830b1346b1d514c14db5ff41f7ddb59e4c98",
+      "bytes": 2909,
+      "pixels": [
+        56,
+        34
+      ]
+    },
+    "parts/tile-array-enabled-indicator-on.png": {
+      "sha256": "6b8f92a80950ff744487c0b44722baea24c45f60caf6781d3bc7ec007c0f6a5b",
+      "bytes": 2999,
+      "pixels": [
+        56,
+        34
+      ]
+    },
+    "parts/tile-array-wheel-face-body.png": {
+      "sha256": "85a0a51190f9c5a08bb29a7d76f4c2e49d4a0a0bda36b9608ed627a68495e6f5",
+      "bytes": 49322,
+      "pixels": [
+        168,
+        170
+      ]
+    },
+    "parts/tile-array-wheel-face-rotor.png": {
+      "sha256": "6a53184bc9a3a815fc5caa8ca6036925038fe8e1d138a5e1404eb02689cc8aa2",
+      "bytes": 45079,
+      "pixels": [
+        208,
+        208
+      ]
+    },
+    "parts/tile-array-wheel-pad-body.png": {
+      "sha256": "dfd2774fd310f347acbc14695ec127cb17bd3ff9e3040cbcb1ee6b013a1d872e",
+      "bytes": 21330,
+      "pixels": [
+        110,
+        111
+      ]
+    },
+    "parts/tile-array-wheel-pad-rotor.png": {
+      "sha256": "d721af02309facdb5322075ac663e68514037bcd11310ee16971249a06a9c404",
+      "bytes": 19337,
+      "pixels": [
+        136,
+        136
+      ]
+    },
+    "plates/tile-array-face.png": {
+      "sha256": "9e9f12e31b209335dbe64d9d0872f63bf025c8889adb5977c4478ddd31f715d0",
+      "bytes": 2919666,
+      "pixels": [
+        2140,
+        788
+      ]
+    },
+    "plates/tile-array-programmer.png": {
+      "sha256": "35e2af173395e2be4f1d3aae2497a8b35a530473e56d8496d176be378285a840",
+      "bytes": 1982299,
+      "pixels": [
+        2140,
+        788
+      ]
+    },
+    "elements.json": {
+      "sha256": "3a27aa09248c97b9be50396e148cefc1e381c2fbbb2fc9cebd91f089b17e118d",
+      "bytes": 400095
+    }
+  },
+  "native_pixel_targets": {
+    "compare/tile-array-runtime-closed.png": {
+      "sha256": "8442e5fe5526cbebe638cefff9884c3762e7265e4cb361c521b7abbece7c9e63",
+      "pixels": [
+        2140,
+        788
+      ]
+    },
+    "compare/tile-array-runtime-open.png": {
+      "sha256": "f0710444e528fc6082a3052aa9c63bfc44c49f13196e123e0b5f947ac63c03e2",
+      "pixels": [
+        2140,
+        1576
+      ]
+    }
+  },
+  "native_acceptance": "NOT_MEASURED: F19.7 adapter, native loading/fonts/snapshots and product installation still required",
+  "native_installation_20261023": {
+    "status": "SOURCE_INSTALLED_NATIVE_RUNTIME_VISUAL_ACCEPTANCE_PENDING",
+    "source": "docs/design/racks/2026-10-09-studio-rack/tile-array/skin",
+    "sourceRecordSHA256": "03cb94e894d3b84769e33606c9b3e75bea2f1e48f05b5cb66c69f7da2d551d0d",
+    "operation": "Byte-exact copy of29 frozen PNGs and unchanged elements JSON; no new extraction/install command or artwork changes",
+    "routing": "Inherited parent model/reasoning; delegated agent authority, no human acceptance claim",
+    "files": [
+      {
+        "path": "parts/tile-array-enable-latching-key-disabled.png",
+        "sha256": "70aecddaa30002b4c0d4ed50bc7fc37d2c64afcc7af3a86ea593de62614a1726",
+        "bytes": 27729
+      },
+      {
+        "path": "parts/tile-array-enable-latching-key-hover_off.png",
+        "sha256": "f59a15d8963faf318b060f46c082562c2a85955ed54922b55314cdc3c53d15fb",
+        "bytes": 29745
+      },
+      {
+        "path": "parts/tile-array-enable-latching-key-hover_on.png",
+        "sha256": "b9d8f30a3ca980e509f71f0797532600f7d35f2afc5d0d4af4b9108db64759f8",
+        "bytes": 31080
+      },
+      {
+        "path": "parts/tile-array-enable-latching-key-off.png",
+        "sha256": "84c15dfe5cee2195f8f63040c6bbad7bb61f957800c76d20bceaf01a6901cee4",
+        "bytes": 29787
+      },
+      {
+        "path": "parts/tile-array-enable-latching-key-on.png",
+        "sha256": "d98bb9bb6063b5235986576d864798fb0c18b60c66897512770af24f35fdba4d",
+        "bytes": 32627
+      },
+      {
+        "path": "parts/tile-array-enable-latching-key-pressed_off.png",
+        "sha256": "2600cc4e9805c2b3e9b1fa6f734482fc63d6cafe2fcdd47eca5bfd34d6001b33",
+        "bytes": 31072
+      },
+      {
+        "path": "parts/tile-array-enable-latching-key-pressed_on.png",
+        "sha256": "c8f94838101b3f9b9871a70a6651276fe7cc5b65c1fcf5c169af6a9702857f25",
+        "bytes": 32670
+      },
+      {
+        "path": "parts/tile-array-enabled-indicator-off.png",
+        "sha256": "f7af2e3b33ad4e412a3df5002267830b1346b1d514c14db5ff41f7ddb59e4c98",
+        "bytes": 2909
+      },
+      {
+        "path": "parts/tile-array-enabled-indicator-on.png",
+        "sha256": "6b8f92a80950ff744487c0b44722baea24c45f60caf6781d3bc7ec007c0f6a5b",
+        "bytes": 2999
+      },
+      {
+        "path": "parts/tile-array-ivory-performance-pad-disabled.png",
+        "sha256": "1a8579b3d3d63287501abcc769c7df41bd5d5396820748b97cb3ee97a470aca4",
+        "bytes": 55313
+      },
+      {
+        "path": "parts/tile-array-ivory-performance-pad-hover.png",
+        "sha256": "dc5f7ea99ec25ba2c01a3810836ea40e01e7a0c926cfee977bfa518a9f131802",
+        "bytes": 57360
+      },
+      {
+        "path": "parts/tile-array-ivory-performance-pad-idle.png",
+        "sha256": "cedc5d17f9efcfc25532ffa344f827ed051071ed7862ec4150bfc87b6908e3d2",
+        "bytes": 55423
+      },
+      {
+        "path": "parts/tile-array-ivory-performance-pad-pressed.png",
+        "sha256": "7ceea58b5fd8aceb21947a64d555ff6474dcc9c797cf2b7f0c48856a34598f55",
+        "bytes": 58857
+      },
+      {
+        "path": "parts/tile-array-kit-level-fader-cap-disabled.png",
+        "sha256": "94d29c6205a957eab398347a7bf351159dedebf734e28f64358050a44b4ec818",
+        "bytes": 9407
+      },
+      {
+        "path": "parts/tile-array-kit-level-fader-cap-hover.png",
+        "sha256": "370b8965c791afdf1c2f83ee1bb55206c5ee5aecfaeb73c54151e3b90872365a",
+        "bytes": 10090
+      },
+      {
+        "path": "parts/tile-array-kit-level-fader-cap-idle.png",
+        "sha256": "28fe464c6d8cb84d1ed5a5d0f0186286ab5c3e4b12c0a90a45f238ef7a7ffd50",
+        "bytes": 9781
+      },
+      {
+        "path": "parts/tile-array-kit-level-fader-cap-pressed.png",
+        "sha256": "8010346c3b20542911e131251f2a9e7e049887a76152c77df070905c19528d9d",
+        "bytes": 10068
+      },
+      {
+        "path": "parts/tile-array-membrane-action-key-disabled.png",
+        "sha256": "af84d147587fc0b085e3cc987c49dc3373764fbe7ec0ae721fc4779a91e25acf",
+        "bytes": 29917
+      },
+      {
+        "path": "parts/tile-array-membrane-action-key-hover.png",
+        "sha256": "a28c5ac95413e65f49efa2d3cdb31783ccbf28c77ff836a73cf559e9af04400b",
+        "bytes": 32667
+      },
+      {
+        "path": "parts/tile-array-membrane-action-key-idle.png",
+        "sha256": "cf37b418758c57f64460bd8d8a1deead5b2a433af7301037da1dc0d636b5cc0e",
+        "bytes": 32429
+      },
+      {
+        "path": "parts/tile-array-membrane-action-key-pressed.png",
+        "sha256": "3e529f4389cb71cbcfc0652374ccbc7cd5c694c779c6b1811a329b4588479175",
+        "bytes": 34365
+      },
+      {
+        "path": "parts/tile-array-membrane-action-key-selected.png",
+        "sha256": "1aa09b13650b61c61e2c3b982029f96fbb976e7a5b629abcb22bcfe8c2aac937",
+        "bytes": 34045
+      },
+      {
+        "path": "parts/tile-array-selected-pad-outline-selected.png",
+        "sha256": "5b7fcd451459a5535b7710ae92fc9681ded5ba22b4d58045ae544ae179d02177",
+        "bytes": 28231
+      },
+      {
+        "path": "parts/tile-array-wheel-face-body.png",
+        "sha256": "85a0a51190f9c5a08bb29a7d76f4c2e49d4a0a0bda36b9608ed627a68495e6f5",
+        "bytes": 49322
+      },
+      {
+        "path": "parts/tile-array-wheel-face-rotor.png",
+        "sha256": "6a53184bc9a3a815fc5caa8ca6036925038fe8e1d138a5e1404eb02689cc8aa2",
+        "bytes": 45079
+      },
+      {
+        "path": "parts/tile-array-wheel-pad-body.png",
+        "sha256": "dfd2774fd310f347acbc14695ec127cb17bd3ff9e3040cbcb1ee6b013a1d872e",
+        "bytes": 21330
+      },
+      {
+        "path": "parts/tile-array-wheel-pad-rotor.png",
+        "sha256": "d721af02309facdb5322075ac663e68514037bcd11310ee16971249a06a9c404",
+        "bytes": 19337
+      },
+      {
+        "path": "plates/tile-array-face.png",
+        "sha256": "9e9f12e31b209335dbe64d9d0872f63bf025c8889adb5977c4478ddd31f715d0",
+        "bytes": 2919666
+      },
+      {
+        "path": "plates/tile-array-programmer.png",
+        "sha256": "35e2af173395e2be4f1d3aae2497a8b35a530473e56d8496d176be378285a840",
+        "bytes": 1982299
+      },
+      {
+        "path": "tile-array-elements.json",
+        "sha256": "3a27aa09248c97b9be50396e148cefc1e381c2fbbb2fc9cebd91f089b17e118d",
+        "bytes": 400095
+      }
+    ]
+  }
+}

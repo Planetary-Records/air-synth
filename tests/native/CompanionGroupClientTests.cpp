@@ -1,0 +1,197 @@
+#include "OwnedFixture.h"
+#include "CompanionClient.h"
+#include "CompanionRuntimeServer.h"
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#include <dbghelp.h>
+#include <atomic>
+#include <iostream>
+#include <mutex>
+#include <thread>
+
+using namespace airack;
+using namespace airack::companion;
+namespace
+{
+using Test=airack::companion::detail::CompanionClientTestAccess;
+int checks=0,failures=0,sections=0;const char* section="";
+void check(bool value,const char* expression,int line){++checks;if(!value){++failures;if(failures<150)std::cerr<<section<<':'<<line<<' '<<expression<<'\n';}}
+#define CHECK(x) check(bool(x),#x,__LINE__)
+void begin(const char* name){section=name;++sections;std::cout<<name<<'\n';}
+template<class F>bool observe(F f,std::uint64_t ms=3000){const auto end=GetTickCount64()+ms;do{if(f())return true;SwitchToThread();}while(GetTickCount64()<end);return false;}
+WireBytes bytes(const juce::MemoryBlock& b){return {static_cast<const std::byte*>(b.getData()),b.getSize()};}
+std::uint64_t creation(){FILETIME a{},b{},c{},d{};CHECK(GetProcessTimes(GetCurrentProcess(),&a,&b,&c,&d));return (std::uint64_t(a.dwHighDateTime)<<32)|a.dwLowDateTime;}
+bool nativePeer(PipePeer peer){return peer.processId==GetCurrentProcessId()&&peer.creationTime==creation();}
+juce::String suffix(){return juce::Uuid().toString().removeCharacters("-");}
+GroupUuid id(unsigned n){GroupUuid value;value.bytes[0]=std::uint8_t(n);value.bytes[15]=0x91;return value;}
+GroupText text(std::string_view value){GroupText result;CHECK(setGroupText(value,result));return result;}
+GroupIntent intent(){GroupIntent value;value.group=id(90);value.member=id(1);value.name=text("Cr\xc3\xa8me ensemble");value.role=text("bass");value.key=text("A");value.scale=text("minor");value.bpm=120;CHECK(validateGroupIntent(value));return value;}
+ProjectDocument project(){ProjectDocument result;result.group=intent();result.pattern.noteCount=2;result.pattern.notes[0]={0,.25,36,96,1};result.pattern.notes[1]={1,.5,43,88,2};CHECK(validateProjectDocument(result));return result;}
+struct Temp
+{
+ juce::File parent=juce::File(RACKSYNTH_WORKSPACE).getChildFile(".superpowers/sdd/2026-10-06-m5-group-client/task-1/fixtures");juce::File root=parent.getChildFile(juce::Uuid().toString());
+ Temp(){CHECK(root.isAChildOf(parent)&&root.getParentDirectory()==parent);CHECK(root.createDirectory().wasOk());}
+ ~Temp(){if(root.isAChildOf(parent)&&root.getParentDirectory()==parent)CHECK(root.deleteRecursively());}
+};
+ClientOptions options(const Temp& temp,const juce::String& name){return {{juce::File{},name,temp.root},false};}
+ai::GenerationRequest request(const CompanionClient& client,std::uint64_t n,std::string instruction="normal"){ai::GenerationRequest r;r.tag={client.runtime(),n,7,11};r.model="synthetic-model";r.instruction=std::move(instruction);return r;}
+GroupCommand command(const CompanionClient& client,std::uint64_t n,GroupAction action=GroupAction::browse,const ProjectDocument& p=project(),std::uint64_t edit=7)
+{
+ GroupCommand result;result.operationId=n;result.action=action;result.runtime=client.runtime();result.loadRevision=action==GroupAction::browse?0:1;
+ if(action==GroupAction::admit||action==GroupAction::publish)result.publication=GroupPublication{result.runtime,1,edit,p,false,{}};
+ if(action==GroupAction::validateProposal)result.proposal=ai::RequestTag{client.runtime(),2,edit,11};juce::MemoryBlock encoded;CHECK(encodeGroupCommand(result,encoded));return result;
+}
+GroupReply reply(const GroupCommand& c,GroupReplyStatus status=GroupReplyStatus::ready)
+{
+ GroupReply r;r.operationId=c.operationId;r.action=c.action;r.runtime=c.runtime;r.loadRevision=c.loadRevision;r.status=status;r.proposal=c.proposal;
+ if(status==GroupReplyStatus::ready&&(c.action==GroupAction::admit||c.action==GroupAction::publish)){r.normalized=c.publication->project.group;r.registryRevision=8;}return r;
+}
+Frame groupFrame(const GroupReply& r,juce::Uuid session){Frame f{MessageKind::groupReply,session,{}};CHECK(encodeGroupReply(r,f.payload));return f;}
+Frame control(juce::Uuid session,ai::RequestTag tag,RuntimeStatus status){Frame f{MessageKind::failure,session,{}};CHECK(encodeControl({tag,status},f.payload));return f;}
+Frame accountFrame(juce::Uuid session){AccountReply r;r.providerStatus=rack::oauth::Status::signedOut;Frame f{MessageKind::accountResult,session,{}};CHECK(encodeAccountReply(r,f.payload));return f;}
+ai::GenerationResult result(const ai::GenerationRequest& r)
+{
+ ai::GenerationResult g;g.tag=r.tag;g.status=ai::GenerationStatus::ready;g.inferenceCalls=1;g.proposalStatus=ai::ProposalStatus::accepted;g.renderStatus=ai::RenderStatus::ready;g.providerStatus=rack::oauth::Status::connected;g.httpStatus=200;g.edits.parameters.push_back({"output.gain_db",.4f});ProjectDocument candidate;CHECK(ai::admitProposal(r.source,r.policy,g.edits,candidate)==ai::ProposalStatus::accepted);g.candidate=candidate;g.audio.bodyFrames=1;g.audio.left.resize(ai::previewTailFrames+1);g.audio.right.resize(g.audio.left.size());g.audio.left[0]=.1f;g.audio.right[0]=.05f;CHECK(ai::measurePreview(g.audio.left,g.audio.right,g.audio.bodyFrames,g.measurements)==ai::RenderStatus::ready);return g;
+}
+Frame resultFrame(const ai::GenerationRequest& r,juce::Uuid session){Frame f{MessageKind::result,session,{}};CHECK(encodeResult(r,result(r),f.payload));return f;}
+bool take(CompanionClient& c,ClientGenerationReply& r){return observe([&]{c.poll();return c.takeGeneration(r);});}
+bool take(CompanionClient& c,AccountReply& r){return observe([&]{c.poll();return c.takeAccount(r);});}
+bool take(CompanionClient& c,GroupReply& r){return observe([&]{c.poll();return c.takeGroup(r);});}
+void sentinel(CompanionClient& client){GroupReply r;r.operationId=777;r.runtime=id(7);r.status=GroupReplyStatus::conflict;const auto old=r;CHECK(!client.takeGroup(r));CHECK(r==old);}
+struct Pair
+{
+ Temp temp;juce::String name=suffix();PipeListener listener;PipeConnection pipe;CompanionClient client;juce::Uuid session=juce::Uuid();bool reading=false;
+ explicit Pair(ClientClock clock={}):client(juce::Uuid(),std::move(clock)){CHECK(listener.open(name)==PipeStatus::ready);}
+ ~Pair(){Test::withholdCompletion(client,false);client.close();pipe.close();listener.close();airack::companion::detail::PipeTestAccess::reapRetired();}
+ void pump(){client.poll();}
+ bool receive(Frame& f){if(!reading){if(pipe.beginRead()!=PipeStatus::ready)return false;reading=true;}const auto s=pipe.pollRead(f);if(s!=PipeStatus::pending)reading=false;return s==PipeStatus::complete;}
+ bool read(Frame& f,bool pumpClient=true){const bool done=observe([&]{if(pumpClient)pump();return receive(f);});CHECK(done);return done;}
+ bool send(const Frame& f){const bool ok=pipe.beginWrite(f)==PipeStatus::ready;CHECK(ok);if(!ok)return false;PipeStatus status=PipeStatus::pending;const bool done=observe([&]{status=pipe.pollWrite();if(status==PipeStatus::pending)pump();return status!=PipeStatus::pending;});CHECK(done&&status==PipeStatus::complete);pump();return done&&status==PipeStatus::complete;}
+ bool open(){CHECK(client.start(options(temp,name)));const bool accepted=observe([&]{pump();return listener.pollAccept(pipe)==PipeStatus::complete;});CHECK(accepted);if(!accepted)return false;CHECK(nativePeer(client.peer())&&nativePeer(pipe.peer()));Frame hello;if(!read(hello))return false;ControlMessage h;CHECK(hello.kind==MessageKind::hello&&hello.session.isNull()&&decodeControl(bytes(hello.payload),h));CHECK((h.tag==ai::RequestTag{client.runtime(),0,0,0}));Frame welcome{MessageKind::welcome,session,{}};CHECK(encodeControl({h.tag,RuntimeStatus::ready},welcome.payload));CHECK(send(welcome));const bool ready=observe([&]{pump();return client.status().phase==ClientPhase::ready;});CHECK(ready);return ready;}
+ bool restart(){Test::withholdCompletion(client,false);client.close();pipe.close();reading=false;session=juce::Uuid();return open();}
+ bool submit(const GroupCommand& c,Frame* output=nullptr){const bool accepted=client.group(c);CHECK(accepted);if(!accepted)return false;Frame f;if(!read(f))return false;GroupCommand decoded;CHECK(f.kind==MessageKind::groupCommand&&f.session==session&&decodeGroupCommand(bytes(f.payload),decoded)&&decoded==c);if(output)*output=f;return true;}
+ bool submitted(const ai::GenerationRequest& r){CHECK(client.generate(r));Frame f;if(!read(f))return false;ai::GenerationRequest actual;CHECK(f.kind==MessageKind::generate&&f.session==session&&decodeRequest(bytes(f.payload),actual)&&actual.tag==r.tag);return f.kind==MessageKind::generate;}
+ void failed(const char* code="invalid_message"){CHECK(observe([&]{pump();return client.status().phase==ClientPhase::failed;}));CHECK(client.status().errorCode==code);CHECK(client.session().isNull()&&client.peer().processId==0);sentinel(client);}
+};
+struct Backend
+{
+ std::mutex mutex;std::vector<RuntimeJob> jobs;std::atomic_uint calls{0},cancels{0};HANDLE release=CreateEventW(nullptr,TRUE,FALSE,nullptr);
+ ~Backend(){CloseHandle(release);}
+ Frame run(const RuntimeJob& job){calls.fetch_add(1);{std::lock_guard lock(mutex);jobs.push_back(job);}if(const auto* r=std::get_if<ai::GenerationRequest>(&job.input)){if(r->instruction=="hold")WaitForSingleObject(release,5000);return resultFrame(*r,job.session);}if(std::get<AccountCommand>(job.input).model=="hold")WaitForSingleObject(release,5000);return accountFrame(job.session);}
+ void cancel(const RuntimeJob& job){if(job.cancellation&&job.cancellation->cancelled())cancels.fetch_add(1);SetEvent(release);}
+ std::vector<RuntimeJob> snapshot(){std::lock_guard lock(mutex);return jobs;}
+};
+struct Service
+{
+ Temp temp;std::shared_ptr<Backend> backend=std::make_shared<Backend>();std::atomic_bool stop{false};juce::String name=suffix();RuntimeServer server;std::thread io;
+ Service():server([b=backend](const auto& j){return b->run(j);},[b=backend](const auto& j){b->cancel(j);}),io([this]{const auto r=server.run(stop,name);if(r.workerRetained)std::terminate();}){PipeConnection probe;CHECK(observe([&]{return probe.connect(name)==PipeStatus::ready;}));CHECK(nativePeer(probe.peer()));probe.close();}
+ ~Service(){SetEvent(backend->release);stop.store(true);io.join();}
+ bool ready(CompanionClient& c){CHECK(c.start(options(temp,name)));const bool done=observe([&]{c.poll();return c.status().phase!=ClientPhase::connecting;});CHECK(done&&c.status().phase==ClientPhase::ready);CHECK(nativePeer(c.peer()));const auto state=c.status();if(!done||state.phase!=ClientPhase::ready){const auto peer=c.peer();std::cout<<"SERVICE_READY_SNAPSHOT done="<<done<<" phase="<<int(state.phase)<<" status="<<int(state.status)<<" error="<<state.errorCode<<" peer_present="<<(peer.processId!=0)<<" peer_pid_matches="<<(peer.processId==GetCurrentProcessId())<<std::endl;}return done&&c.status().phase==ClientPhase::ready;}
+};
+void native_admission_publication_and_generation()
+{
+ // Keep large returned protocol fixtures off the default test stack.
+ begin(__func__);auto service=std::make_unique<Service>();auto a=std::make_unique<CompanionClient>();auto b=std::make_unique<CompanionClient>();if(!service->ready(*a)||!service->ready(*b))return;sentinel(*a);
+ CHECK(a->account({}));AccountReply account;CHECK(take(*a,account));CHECK(account.providerStatus==rack::oauth::Status::signedOut);
+ auto ownedNativeStandalone=airack::testing::fixtureValue([&]{return request(*a,1);});const auto& standalone=*ownedNativeStandalone;CHECK(a->generate(standalone));ClientGenerationReply generated;CHECK(take(*a,generated));CHECK(std::holds_alternative<ai::GenerationResult>(generated));if(const auto* g=std::get_if<ai::GenerationResult>(&generated))CHECK(g->candidate&&!g->candidate->group&&g->tag==standalone.tag);
+ auto sourceA=std::make_unique<ProjectDocument>(project());auto sourceB=std::make_unique<ProjectDocument>(*sourceA);auto ownedNativeAdmitA=airack::testing::fixtureValue([&]{return command(*a,1,GroupAction::admit,*sourceA);});const auto& admitA=*ownedNativeAdmitA;if(!a->group(admitA)){CHECK(false);return;}GroupReply admittedA;CHECK(take(*a,admittedA));CHECK(admittedA.status==GroupReplyStatus::ready&&admittedA.normalized==sourceA->group);
+ auto ownedNativeAdmitB=airack::testing::fixtureValue([&]{return command(*b,1,GroupAction::admit,*sourceB);});const auto& admitB=*ownedNativeAdmitB;CHECK(b->group(admitB));GroupReply admittedB;CHECK(take(*b,admittedB));CHECK(admittedB.status==GroupReplyStatus::ready&&admittedB.normalized);if(!admittedB.normalized)return;const auto copied=sourceB->group->member;sourceB->group=admittedB.normalized;CHECK(sourceB->group->member!=copied&&sourceB->group->group==sourceA->group->group);auto ownedNativePeerBefore=airack::testing::fixtureValue([&]{return *sourceB;});const auto& peerBefore=*ownedNativePeerBefore;
+ auto ownedNativePublish=airack::testing::fixtureValue([&]{return command(*a,2,GroupAction::publish,*sourceA,8);});const auto& publish=*ownedNativePublish;CHECK(a->group(publish));GroupReply published;CHECK(take(*a,published));CHECK(published.status==GroupReplyStatus::ready&&published.normalized==sourceA->group);
+ CHECK(a->group(command(*a,3)));GroupReply roster;CHECK(take(*a,roster));CHECK(roster.status==GroupReplyStatus::ready&&roster.members.size()==2);if(roster.members.size()==2)CHECK(roster.members[0].runtime!=roster.members[1].runtime&&roster.members[0].intent.member!=roster.members[1].intent.member);
+ auto ownedNativeSelected=airack::testing::fixtureValue([]{return GroupGenerationCommand{};});auto& selected=*ownedNativeSelected;selected.request=request(*a,2);selected.request.tag.editRevision=8;selected.request.source=*sourceA;selected.request.role="bass";selected.request.key="A";selected.request.scale="minor";selected.request.capturedBpm=120;selected.selection.loadRevision=1;selected.selection.peerCount=1;selected.selection.members[0]=sourceB->group->member;
+ CHECK(a->generateGroup(selected));CHECK(take(*a,generated));CHECK(std::holds_alternative<ai::GenerationResult>(generated));if(const auto* g=std::get_if<ai::GenerationResult>(&generated)){CHECK(g->status==ai::GenerationStatus::ready&&g->candidate&&g->candidate->group==sourceA->group);CHECK(g->edits.parameters.size()==1&&g->edits.parameters[0].id=="output.gain_db");}
+ const auto jobs=service->backend->snapshot();CHECK(jobs.size()==3);if(jobs.size()==3){const auto& job=jobs[2];CHECK(job.session==a->session()&&job.groupContext&&job.groupContext->peerCount==1);if(job.groupContext){CHECK(job.groupContext->ownership.requesterRuntime==GroupUuid(a->runtime())&&job.groupContext->requesterEditRevision==8);CHECK(job.groupContext->ownership.peers[0].runtime==GroupUuid(b->runtime())&&job.groupContext->ownership.peers[0].project==peerBefore);CHECK(std::get<ai::GenerationRequest>(job.input).tag==selected.request.tag);}}CHECK(*sourceB==peerBefore);
+ for(unsigned n=4;n<=5;++n){auto ownedNativeValidate=airack::testing::fixtureValue([&]{return command(*a,n,GroupAction::validateProposal,*sourceA,8);});auto& validate=*ownedNativeValidate;CHECK(a->group(validate));GroupReply checked;CHECK(take(*a,checked));CHECK(checked.status==GroupReplyStatus::ready&&checked.proposal==validate.proposal&&checked.operationId==n);}
+ CHECK(b->group(command(*b,2,GroupAction::withdraw,*sourceB)));GroupReply withdrawn;CHECK(take(*b,withdrawn));CHECK(withdrawn.status==GroupReplyStatus::ready);auto ownedNativeStale=airack::testing::fixtureValue([&]{return command(*a,6,GroupAction::validateProposal,*sourceA,8);});auto& stale=*ownedNativeStale;CHECK(a->group(stale));GroupReply checked;CHECK(take(*a,checked));CHECK(checked.status==GroupReplyStatus::staleContext&&checked.proposal==stale.proposal);CHECK(a->group(command(*a,7)));CHECK(take(*a,roster));CHECK(roster.members.size()==1);CHECK(*sourceB==peerBefore);
+ CHECK(a->group(command(*a,8,GroupAction::withdraw,*sourceA)));CHECK(take(*a,withdrawn));CHECK(withdrawn.status==GroupReplyStatus::ready);sentinel(*a);
+}
+void reply_authority_deadlines_and_native_ownership()
+{
+ begin(__func__);
+ for(int mutation=0;mutation<12;++mutation){auto p=std::make_unique<Pair>();if(!p->open())continue;auto ownedAuthority1=airack::testing::fixtureValue([&]{return command(p->client,1,GroupAction::admit);});auto& c=*ownedAuthority1;if(!p->submit(c))continue;auto r=reply(c);auto session=p->session;
+  switch(mutation){case 0:r.runtime=id(44);break;case 1:++r.loadRevision;break;case 2:r.action=GroupAction::publish;break;case 3:++r.operationId;break;case 4:session=juce::Uuid();break;case 5:r.normalized->group=id(44);break;case 6:r.normalized->name=text("other");break;case 7:r.normalized->role=text("other");break;case 8:r.normalized->key=text("D");break;case 9:r.normalized->scale=text("major");break;case 10:r.normalized->bpm=121;break;case 11:break;}
+  auto f=groupFrame(r,session);if(mutation==11)f.payload.setSize(f.payload.getSize()-1);CHECK(p->send(f));p->failed();}
+ {auto p=std::make_unique<Pair>();if(p->open()){auto ownedAuthority2=airack::testing::fixtureValue([&]{return command(p->client,1,GroupAction::admit);});auto& c=*ownedAuthority2;if(p->submit(c)){auto ownedAuthority3=airack::testing::fixtureValue([&]{return c;});auto& original=*ownedAuthority3;c.publication->project.group->role=text("mutated caller");auto normalized=reply(original);normalized.normalized->member=id(88);CHECK(p->send(groupFrame(normalized,p->session)));GroupReply out;CHECK(take(p->client,out));CHECK(out==normalized);sentinel(p->client);}}}
+ {auto p=std::make_unique<Pair>();if(p->open()){auto ownedAuthority4=airack::testing::fixtureValue([&]{return command(p->client,1,GroupAction::publish);});auto& c=*ownedAuthority4;if(p->submit(c)){auto r=reply(c);r.normalized->member=id(88);CHECK(p->send(groupFrame(r,p->session)));p->failed();}}}
+ for(int mutation=0;mutation<3;++mutation){auto p=std::make_unique<Pair>();if(!p->open())continue;auto ownedAuthority5=airack::testing::fixtureValue([&]{return command(p->client,1,GroupAction::validateProposal);});auto& c=*ownedAuthority5;if(!p->submit(c))continue;auto r=reply(c);if(mutation==0)++r.proposal->requestId;if(mutation==1)++r.proposal->editRevision;if(mutation==2)++r.proposal->contextRevision;CHECK(p->send(groupFrame(r,p->session)));p->failed();}
+ for(int buffered=0;buffered<2;++buffered){auto p=std::make_unique<Pair>();if(!p->open())continue;auto ownedAuthority6=airack::testing::fixtureValue([&]{return command(p->client,1);});auto& c=*ownedAuthority6;if(!p->submit(c))continue;const auto f=groupFrame(reply(c),p->session);CHECK(p->send(f));CHECK(observe([&]{p->pump();return Test::hasGroupReply(p->client);}));if(!buffered){GroupReply out;CHECK(p->client.takeGroup(out));}CHECK(p->send(f));p->failed();}
+ for(int malformed=0;malformed<2;++malformed){auto p=std::make_unique<Pair>();if(!p->open())continue;auto ownedAuthority7=airack::testing::fixtureValue([&]{return command(p->client,1);});auto& first=*ownedAuthority7;if(!p->submit(first))continue;CHECK(p->send(groupFrame(reply(first),p->session)));GroupReply out;CHECK(take(p->client,out));auto ownedAuthority8=airack::testing::fixtureValue([&]{return command(p->client,2,GroupAction::admit);});auto& current=*ownedAuthority8;if(!p->submit(current))continue;auto ownedAuthority9=airack::testing::fixtureValue([&]{return first;});auto& older=*ownedAuthority9;older.action=GroupAction::withdraw;older.loadRevision=999;auto f=groupFrame(reply(older,GroupReplyStatus::notAdmitted),p->session);if(malformed)static_cast<unsigned char*>(f.payload.getData())[33]=255;CHECK(p->send(f));if(malformed)p->failed();else{CHECK(p->client.status().phase==ClientPhase::ready);CHECK(!Test::hasGroupReply(p->client));CHECK(p->send(groupFrame(reply(current),p->session)));CHECK(take(p->client,out));CHECK(out.operationId==2&&out.action==GroupAction::admit);}}
+ for(int received=0;received<2;++received){auto now=std::chrono::steady_clock::time_point{};auto p=std::make_unique<Pair>([&]{return now;});if(!p->open())continue;auto ownedAuthority10=airack::testing::fixtureValue([&]{return command(p->client,1);});auto& c=*ownedAuthority10;if(!p->submit(c))continue;if(received){CHECK(p->send(groupFrame(reply(c),p->session)));CHECK(observe([&]{p->pump();return Test::hasGroupReply(p->client);}));CHECK(!p->client.group(command(p->client,2)));CHECK(!p->client.generate(request(p->client,1)));CHECK(!p->client.account({}));}now+=std::chrono::milliseconds(4999);p->pump();CHECK(p->client.status().phase==ClientPhase::ready);now+=std::chrono::milliseconds(1);p->pump();p->failed("group_timeout");}
+ for(int job=0;job<2;++job){auto now=std::chrono::steady_clock::time_point{};auto p=std::make_unique<Pair>([&]{return now;});if(!p->open())continue;if(job==0){if(!p->submitted(request(p->client,1)))continue;}else{CHECK(p->client.account({}));Frame frame;CHECK(p->read(frame)&&frame.kind==MessageKind::account);}now+=std::chrono::milliseconds(355001);if(!p->submit(command(p->client,1)))continue;now+=std::chrono::milliseconds(4998);p->pump();CHECK(p->client.status().phase==ClientPhase::ready);now+=std::chrono::milliseconds(1);p->pump();p->failed("request_timeout");}
+ for(int mode=0;mode<2;++mode){auto now=std::chrono::steady_clock::time_point{};bool throwing=false;auto p=std::make_unique<Pair>([&]{if(throwing)throw std::runtime_error("synthetic clock");return now;});if(!p->open()||!p->submit(command(p->client,1)))continue;if(mode==0)now-=std::chrono::milliseconds(1);else throwing=true;p->pump();p->failed("clock_failure");}
+ {auto p=std::make_unique<Pair>();if(p->open()){auto ownedAuthority11=airack::testing::fixtureValue([&]{return command(p->client,1);});auto& c=*ownedAuthority11;if(p->submit(c)){auto ownedAuthority12=airack::testing::fixtureValue([&]{return c;});auto& invalid=*ownedAuthority12;invalid.operationId=0;CHECK(!p->client.group(invalid));invalid=c;invalid.runtime=id(77);invalid.operationId=2;CHECK(!p->client.group(invalid));CHECK(!p->client.group(command(p->client,2)));CHECK(p->send(groupFrame(reply(c),p->session)));GroupReply out;CHECK(take(p->client,out));CHECK(out==reply(c));CHECK(!p->client.group(c));CHECK(p->restart());CHECK(!p->client.group(c));auto ownedAuthority13=airack::testing::fixtureValue([&]{return command(p->client,UINT64_MAX);});auto& max=*ownedAuthority13;if(p->submit(max)){CHECK(p->send(groupFrame(reply(max),p->session)));CHECK(take(p->client,out));CHECK(p->restart());CHECK(!p->client.group(max));CHECK(!p->client.group(command(p->client,UINT64_MAX-1)));}}}}
+ for(int heldKind=0;heldKind<2;++heldKind){auto p=std::make_unique<Pair>();if(!p->open())continue;auto ownedAuthority14=airack::testing::fixtureValue([&]{return request(p->client,1);});auto& a=*ownedAuthority14;auto ownedAuthority15=airack::testing::fixtureValue([&]{return command(p->client,1,GroupAction::admit);});const auto& c=*ownedAuthority15;Frame submitted;
+  if(heldKind==0){Test::withholdCompletion(p->client,true);CHECK(p->client.generate(a));CHECK(Test::hasStartedWrite(p->client));CHECK(p->read(submitted,false));CHECK(submitted.kind==MessageKind::generate);CHECK(p->client.group(c));auto ownedAuthority16=airack::testing::fixtureValue([&]{return request(p->client,2);});auto& newer=*ownedAuthority16;CHECK(!p->client.generate(newer));}
+  else{if(!p->submitted(a))continue;Test::withholdCompletion(p->client,true);CHECK(p->client.group(c));CHECK(Test::hasStartedWrite(p->client));CHECK(p->read(submitted,false));CHECK(submitted.kind==MessageKind::groupCommand);}
+  const auto owned=submitted.payload;p->client.cancelGeneration();auto ownedAuthority17=airack::testing::fixtureValue([&]{return c;});auto& invalid=*ownedAuthority17;invalid.operationId=2;invalid.loadRevision=0;CHECK(!p->client.group(invalid));p->pump();CHECK(Test::hasStartedWrite(p->client));CHECK(submitted.payload==owned);Test::withholdCompletion(p->client,false);Frame cancel;CHECK(p->read(cancel));ControlMessage tag;CHECK(cancel.kind==MessageKind::cancel&&decodeControl(bytes(cancel.payload),tag)&&tag.tag==a.tag);if(heldKind==0){Frame group;CHECK(p->read(group));auto ownedAuthority18=airack::testing::fixtureValue([&]{return GroupCommand{};});auto& actual=*ownedAuthority18;CHECK(group.kind==MessageKind::groupCommand&&decodeGroupCommand(bytes(group.payload),actual)&&actual==c);}CHECK(p->send(control(p->session,a.tag,RuntimeStatus::cancelled)));CHECK(p->send(groupFrame(reply(c),p->session)));GroupReply out;CHECK(take(p->client,out));CHECK(out==reply(c));ClientGenerationReply untouched=ControlMessage{{p->client.runtime(),99,0,0},RuntimeStatus::busy};CHECK(!p->client.takeGeneration(untouched));CHECK(std::get<ControlMessage>(untouched).tag.requestId==99);}
+}
+void cancellation_account_and_namespace_isolation()
+{
+ begin(__func__);CHECK(clientGroupOperationTimeoutMs==5000&&clientOperationTimeoutMs==360000);CHECK(wireVersion==9);const auto endpoint=currentUserPipeName();CHECK(endpoint.startsWith("\\\\.\\pipe\\AIRackSynth-v9-S-1-"));CHECK(!endpoint.contains("AIRackSynth-v1-"));const auto name=suffix();CHECK(currentUserPipeName(name)==endpoint+"-"+name);CHECK(currentUserPipeName("invalid/suffix").isEmpty());
+ for(int provider=0;provider<2;++provider){auto p=std::make_unique<Pair>();if(!p->open())continue;auto ownedCancellation1=airack::testing::fixtureValue([&]{return request(p->client,1);});auto& r=*ownedCancellation1;Frame job;if(provider==0){if(!p->submitted(r))continue;}else{CHECK(p->client.account({}));CHECK(p->read(job)&&job.kind==MessageKind::account);}auto ownedCancellation2=airack::testing::fixtureValue([&]{return command(p->client,1);});auto& c=*ownedCancellation2;if(!p->submit(c))continue;CHECK(p->send(provider?accountFrame(p->session):resultFrame(r,p->session)));if(provider){AccountReply out;CHECK(take(p->client,out));CHECK(out.providerStatus==rack::oauth::Status::signedOut);}else{auto ownedCancellation9=airack::testing::fixtureValue([&]{return ClientGenerationReply{};});auto& out=*ownedCancellation9;CHECK(take(p->client,out));CHECK(std::holds_alternative<ai::GenerationResult>(out));}CHECK(!p->client.account({}));CHECK(!p->client.generate(*airack::testing::fixtureValue([&]{return request(p->client,2);})));CHECK(p->send(groupFrame(reply(c),p->session)));GroupReply out;CHECK(take(p->client,out));CHECK(p->client.status().phase==ClientPhase::ready);CHECK(p->client.account({}));CHECK(p->read(job));CHECK(p->send(accountFrame(p->session)));AccountReply account;CHECK(take(p->client,account));}
+ for(int deadline=0;deadline<2;++deadline){auto now=std::chrono::steady_clock::time_point{};auto p=std::make_unique<Pair>([&]{return now;});if(!p->open())continue;auto ownedCancellation3=airack::testing::fixtureValue([&]{return request(p->client,1);});const auto& a=*ownedCancellation3;auto ownedCancellation4=airack::testing::fixtureValue([&]{return request(p->client,2);});auto& b=*ownedCancellation4;if(!p->submitted(a))continue;p->client.cancelGeneration();Frame cancel;CHECK(p->read(cancel)&&cancel.kind==MessageKind::cancel);CHECK(p->client.generate(b));Frame frame;CHECK(p->read(frame)&&frame.kind==MessageKind::generate);auto ownedCancellation5=airack::testing::fixtureValue([&]{return command(p->client,1);});auto& c=*ownedCancellation5;if(!p->submit(c))continue;CHECK(p->send(control(p->session,a.tag,RuntimeStatus::cancelled)));auto ownedCancellation14=airack::testing::fixtureValue([&]{return ClientGenerationReply{ControlMessage{{p->client.runtime(),99,0,0},RuntimeStatus::busy}};});auto& out=*ownedCancellation14;CHECK(!p->client.takeGeneration(out));CHECK(std::get<ControlMessage>(out).tag.requestId==99);CHECK(!p->client.account({}));if(deadline==0){now+=std::chrono::milliseconds(5000);p->pump();p->failed("group_timeout");}else{CHECK(p->send(groupFrame(reply(c),p->session)));GroupReply group;CHECK(take(p->client,group));now+=std::chrono::milliseconds(clientOperationTimeoutMs);p->pump();p->failed("request_timeout");}}
+ {auto p=std::make_unique<Pair>();if(p->open()){CHECK(p->client.account({}));Frame job;CHECK(p->read(job));if(p->submit(*airack::testing::fixtureValue([&]{return command(p->client,1);}))){p->client.cancelAccount();CHECK(p->client.status().phase==ClientPhase::closed&&p->client.session().isNull());sentinel(p->client);CHECK(p->restart());CHECK(!p->client.group(*airack::testing::fixtureValue([&]{return command(p->client,1);})));CHECK(p->submit(*airack::testing::fixtureValue([&]{return command(p->client,2);})));}}}
+ {auto p=std::make_unique<Pair>();if(p->open()){auto ownedCancellation6=airack::testing::fixtureValue([&]{return command(p->client,1);});auto& c=*ownedCancellation6;if(p->submit(c)){const auto old=p->session;CHECK(p->restart());CHECK(p->submit(*airack::testing::fixtureValue([&]{return command(p->client,2);})));CHECK(p->send(groupFrame(reply(c),old)));p->failed();}}}
+ {auto p=std::make_unique<Pair>();if(p->open()){auto ownedCancellation10=airack::testing::fixtureValue([&]{return GroupGenerationCommand{};});auto& linked=*ownedCancellation10;linked.request=std::move(*airack::testing::fixtureValue([&]{return request(p->client,1);}));linked.request.source=std::move(*airack::testing::fixtureValue([&]{return project();}));linked.selection.loadRevision=1;linked.selection.peerCount=1;linked.selection.members[0]=id(2);CHECK(p->client.generateGroup(linked));Frame f;if(p->read(f)){auto ownedCancellation11=airack::testing::fixtureValue([&]{return GroupGenerationCommand{};});auto& decoded=*ownedCancellation11;CHECK(f.kind==MessageKind::generateGroup&&decodeGroupGeneration(bytes(f.payload),decoded)&&decoded.request.tag==linked.request.tag&&decoded.selection==linked.selection);auto ownedCancellation7=airack::testing::fixtureValue([&]{return linked;});auto& bad=*ownedCancellation7;bad.request.tag.requestId=2;bad.selection.members[0]=bad.request.source.group->member;CHECK(!p->client.generateGroup(bad));CHECK(p->send(resultFrame(linked.request,p->session)));auto ownedCancellation12=airack::testing::fixtureValue([&]{return ClientGenerationReply{};});auto& out=*ownedCancellation12;CHECK(take(p->client,out));if(const auto* g=std::get_if<ai::GenerationResult>(&out))CHECK(g->candidate&&g->candidate->group==linked.request.source.group);else CHECK(false);CHECK(!p->client.generate(linked.request));CHECK(p->restart());CHECK(!p->client.generateGroup(linked));}}}
+ {auto p=std::make_unique<Pair>();if(p->open()){auto ownedCancellation13=airack::testing::fixtureValue([&]{return GroupGenerationCommand{};});auto& linked=*ownedCancellation13;linked.request=std::move(*airack::testing::fixtureValue([&]{return request(p->client,1);}));linked.request.source=std::move(*airack::testing::fixtureValue([&]{return project();}));linked.selection.loadRevision=1;Test::withholdCompletion(p->client,true);CHECK(p->client.generateGroup(linked));Frame sent;CHECK(p->read(sent,false));CHECK(sent.kind==MessageKind::generateGroup);auto ownedCancellation8=airack::testing::fixtureValue([&]{return linked;});auto& second=*ownedCancellation8;second.request.tag.requestId=2;CHECK(p->client.generateGroup(second));p->client.cancelGeneration();Test::withholdCompletion(p->client,false);Frame cancel;CHECK(p->read(cancel));ControlMessage decoded;CHECK(cancel.kind==MessageKind::cancel&&decodeControl(bytes(cancel.payload),decoded)&&decoded.tag==linked.request.tag);CHECK(p->send(control(p->session,linked.request.tag,RuntimeStatus::cancelled)));CHECK(observe([&]{p->pump();return p->client.status().status==RuntimeStatus::ready;}));}}
+ {auto service=std::make_unique<Service>();auto a=std::make_unique<CompanionClient>();auto b=std::make_unique<CompanionClient>();if(service->ready(*a)&&service->ready(*b)){CHECK(a->account({AccountAction::selectModel,"hold"}));CHECK(observe([&]{a->poll();return service->backend->calls.load()==1;}));if(a->group(*airack::testing::fixtureValue([&]{return command(*a,1);}))){a->cancelAccount();CHECK(a->status().phase==ClientPhase::closed);CHECK(observe([&]{return service->backend->cancels.load()==1;}));CHECK(b->account({}));AccountReply out;CHECK(take(*b,out));CHECK(b->status().phase==ClientPhase::ready);}}}
+ CHECK(airack::companion::detail::PipeTestAccess::retainedOwners()==0);CHECK(airack::companion::detail::RuntimeServerTestAccess::retainedWorkers()==0);
+}
+void late_poll_takes_arrived_group_reply()
+{
+ // A host that stops polling past the deadline still gets one take of a reply that had arrived.
+ begin(__func__);
+ for(int taken=0;taken<2;++taken){auto now=std::chrono::steady_clock::time_point{};auto p=std::make_unique<Pair>([&]{return now;});if(!p->open())continue;auto c=command(p->client,1);if(!p->submit(c))continue;const auto f=groupFrame(reply(c),p->session);PipeStatus written=PipeStatus::pending;CHECK(p->pipe.beginWrite(f)==PipeStatus::ready);CHECK(observe([&]{written=p->pipe.pollWrite();return written!=PipeStatus::pending;})&&written==PipeStatus::complete);
+  now+=std::chrono::milliseconds(6000);p->pump();CHECK(p->client.status().phase==ClientPhase::ready&&Test::hasGroupReply(p->client));if(taken){GroupReply out;CHECK(p->client.takeGroup(out));CHECK(out==reply(c));p->pump();CHECK(p->client.status().phase==ClientPhase::ready);sentinel(p->client);}else{p->pump();p->failed("group_timeout");}}
+}
+void native_completed_proposal_discard()
+{
+ begin(__func__);Pair p;if(!p.open())return;GroupGenerationCommand command;command.request=request(p.client,1);command.request.source=project();command.selection.loadRevision=1;CHECK(p.client.generateGroup(command));Frame outgoing;CHECK(p.read(outgoing));CHECK(outgoing.kind==MessageKind::generateGroup);CHECK(p.send(resultFrame(command.request,p.session)));ClientGenerationReply ready;CHECK(take(p.client,ready));CHECK(std::holds_alternative<ai::GenerationResult>(ready));p.client.cancelGeneration();Frame cancel;const bool received=observe([&]{p.pump();return p.receive(cancel);},200);CHECK(received);if(received){ControlMessage message;CHECK(cancel.kind==MessageKind::cancel&&decodeControl(bytes(cancel.payload),message)&&message.tag==command.request.tag);CHECK(p.send(control(p.session,command.request.tag,RuntimeStatus::cancelled)));CHECK(observe([&]{p.pump();return p.client.status().status==RuntimeStatus::ready;}));}
+}
+
+// Test-only: a separate default-stack observer walks the faulting CONTEXT.
+struct GroupClientStackTrace final {
+    inline static GroupClientStackTrace* active=nullptr;
+    HANDLE signal=CreateEventW(nullptr,FALSE,FALSE,nullptr),done=CreateEventW(nullptr,FALSE,FALSE,nullptr),observer=nullptr,faulting=nullptr;
+    void* token=nullptr;CONTEXT context{};DWORD exceptionCode=0;volatile LONG captured=0;std::atomic_bool stopping{false};
+    static LONG CALLBACK capture(EXCEPTION_POINTERS* value) noexcept {
+        auto* self=active;if(!self||value->ExceptionRecord->ExceptionCode!=EXCEPTION_STACK_OVERFLOW||InterlockedCompareExchange(&self->captured,1,0)!=0)return EXCEPTION_CONTINUE_SEARCH;
+        self->context=*value->ContextRecord;self->exceptionCode=value->ExceptionRecord->ExceptionCode;
+        if(DuplicateHandle(GetCurrentProcess(),GetCurrentThread(),GetCurrentProcess(),&self->faulting,0,FALSE,DUPLICATE_SAME_ACCESS)){SetEvent(self->signal);WaitForSingleObject(self->done,30000);}
+        return EXCEPTION_CONTINUE_SEARCH;
+    }
+    static DWORD WINAPI observe(void* pointer) noexcept {
+        auto& self=*static_cast<GroupClientStackTrace*>(pointer);WaitForSingleObject(self.signal,INFINITE);if(self.stopping)return 0;
+        try {
+            const auto process=GetCurrentProcess();const auto library=LoadLibraryW(L"DbgHelp.dll");
+            if(library){
+                const auto initialize=reinterpret_cast<decltype(&SymInitialize)>(GetProcAddress(library,"SymInitialize"));
+                const auto symbol=reinterpret_cast<decltype(&SymFromAddr)>(GetProcAddress(library,"SymFromAddr"));
+                const auto line=reinterpret_cast<decltype(&SymGetLineFromAddr64)>(GetProcAddress(library,"SymGetLineFromAddr64"));
+                const auto walk=reinterpret_cast<decltype(&StackWalk64)>(GetProcAddress(library,"StackWalk64"));
+                const auto table=reinterpret_cast<decltype(&SymFunctionTableAccess64)>(GetProcAddress(library,"SymFunctionTableAccess64"));
+                const auto base=reinterpret_cast<decltype(&SymGetModuleBase64)>(GetProcAddress(library,"SymGetModuleBase64"));
+                const auto cleanup=reinterpret_cast<decltype(&SymCleanup)>(GetProcAddress(library,"SymCleanup"));
+                if(initialize)initialize(process,nullptr,TRUE);
+                const auto print=[&](DWORD64 at){alignas(SYMBOL_INFO) char storage[sizeof(SYMBOL_INFO)+1024]{};auto* info=reinterpret_cast<SYMBOL_INFO*>(storage);info->SizeOfStruct=sizeof(SYMBOL_INFO);info->MaxNameLen=1023;DWORD64 displacement=0;IMAGEHLP_LINE64 source{};source.SizeOfStruct=sizeof(source);DWORD offset=0;
+                    std::cerr<<"GROUP_CLIENT_STACK_FRAME "<<reinterpret_cast<void*>(at);if(symbol&&symbol(process,at,&displacement,info))std::cerr<<" "<<info->Name<<"+"<<displacement;if(line&&line(process,at,&offset,&source))std::cerr<<" "<<source.FileName<<":"<<source.LineNumber;std::cerr<<std::endl;};
+                auto context=self.context;std::cerr<<"GROUP_CLIENT_ACTUAL_EXCEPTION code="<<std::hex<<self.exceptionCode<<" flags="<<context.ContextFlags<<" rip="<<context.Rip<<" rsp="<<context.Rsp<<" rbp="<<context.Rbp<<std::dec<<std::endl;
+                print(context.Rip);STACKFRAME64 frame{};frame.AddrPC={context.Rip,0,AddrModeFlat};frame.AddrStack={context.Rsp,0,AddrModeFlat};frame.AddrFrame={context.Rbp,0,AddrModeFlat};
+                if(walk&&table&&base)for(unsigned n=0;n<64&&walk(IMAGE_FILE_MACHINE_AMD64,process,self.faulting,&frame,&context,nullptr,table,base,nullptr)&&frame.AddrPC.Offset;++n)print(frame.AddrPC.Offset);
+                if(cleanup)cleanup(process);FreeLibrary(library);
+            }
+        }catch(...){}
+        SetEvent(self.done);return 0;
+    }
+    GroupClientStackTrace(){if(signal&&done){observer=CreateThread(nullptr,0,observe,this,0,nullptr);if(observer){active=this;token=AddVectoredExceptionHandler(1,capture);}}}
+    ~GroupClientStackTrace(){if(token)RemoveVectoredExceptionHandler(token);active=nullptr;stopping=true;if(signal)SetEvent(signal);if(observer){WaitForSingleObject(observer,30000);CloseHandle(observer);}if(faulting)CloseHandle(faulting);if(signal)CloseHandle(signal);if(done)CloseHandle(done);}
+};
+}
+int main(int argc,char** argv)
+{
+ if(argc!=1&&(argc!=2||juce::String(argv[1])!="--cancellation-stack-trace")){std::cerr<<"Unknown argument"<<std::endl;return 2;}
+ std::unique_ptr<GroupClientStackTrace> stackTrace;if(argc==2){stackTrace=std::make_unique<GroupClientStackTrace>();std::cout<<std::unitbuf;std::cerr<<std::unitbuf;std::cout<<"GROUP_CLIENT_FIXTURE_SIZE ProjectDocument="<<sizeof(ProjectDocument)<<" GenerationRequest="<<sizeof(ai::GenerationRequest)<<" GroupCommand="<<sizeof(GroupCommand)<<" GroupGenerationCommand="<<sizeof(GroupGenerationCommand)<<" ClientGenerationReply="<<sizeof(ClientGenerationReply)<<std::endl;cancellation_account_and_namespace_isolation();std::cout<<"GroupClient checks="<<checks<<" sections="<<sections<<" failures="<<failures<<std::endl;return failures?1:0;}
+ std::cout<<std::unitbuf;std::cerr<<std::unitbuf;std::cout<<"NATIVE PID="<<GetCurrentProcessId()<<" FILETIME="<<creation()<<'\n';native_completed_proposal_discard();native_admission_publication_and_generation();reply_authority_deadlines_and_native_ownership();late_poll_takes_arrived_group_reply();cancellation_account_and_namespace_isolation();CHECK(sections==5);std::cout<<"GroupClient checks="<<checks<<" sections="<<sections<<" failures="<<failures<<'\n';return failures?1:0;
+}

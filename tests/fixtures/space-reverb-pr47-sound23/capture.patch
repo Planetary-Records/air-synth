@@ -1,0 +1,37 @@
+diff --git a/tests/native/SpaceReverbProductModelTests.cpp b/tests/native/SpaceReverbProductModelTests.cpp
+index 37cf092..161f8a8 100644
+--- a/tests/native/SpaceReverbProductModelTests.cpp
++++ b/tests/native/SpaceReverbProductModelTests.cpp
+@@ -263,7 +263,31 @@ void historicalSound19And20() {
+ }
+ 
+ }
+-int main() {
++int main(int argc,char** argv) {
++    if(argc==3&&juce::String(argv[1])=="--capture-premerge"){
++        const juce::File directory(argv[2]);CHECK(directory.createDirectory());
++        const auto write=[&](const char* name,const juce::MemoryBlock& bytes){CHECK(directory.getChildFile(name).replaceWithData(bytes.getData(),bytes.getSize()));};
++        SoundDocument initial;juce::MemoryBlock bytes;CHECK(encodeSoundState(initial,bytes));write("default-v23.soundstate",bytes);
++        const auto input=juce::File::getCurrentWorkingDirectory().getChildFile("build/space-reverb-completion-20261020/shipping-render3/data/long-hall-realtime-48000.soundstate");
++        bytes.reset();CHECK(input.loadFileAsData(bytes));SoundDocument rich;CHECK(decodeSoundState(bytes.getData(),bytes.getSize(),rich));
++        CHECK(rich.personalities&&std::any_of(rich.personalities->instances.begin(),rich.personalities->instances.end(),[](const auto& i){return i.design.name=="Lumen Field";}));
++        rich.controlLocks[13]=true;rich.controlLocks[currentPreSpace]=true;rich.controlLocks[parameterCount-1]=true;
++        rich.effectLocks[7]=true;rich.synthLocks[2]=true;
++        rich.macros[0]={parameterRegistry()[currentPreSpace].stateKey,.375f};
++        rich.macros[7]={parameterRegistry()[parameterCount-3].stateKey,-.25f};
++        CHECK(encodeSoundState(rich,bytes));write("rich-v23.soundstate",bytes);
++        SoundDocument recalled;CHECK(decodeSoundState(bytes.getData(),bytes.getSize(),recalled)&&recalled==rich);
++        ProjectDocument project;project.sound=rich;CHECK(encodeProjectState(project,bytes));write("rich-v22.airackproject",bytes);
++        ProjectDocument again;CHECK(decodeProjectState(bytes.getData(),bytes.getSize(),again)&&again==project);
++        juce::Array<juce::var> rows;
++        for(const auto& d:parameterRegistry()){
++            auto* row=new juce::DynamicObject;row->setProperty("id",d.id);row->setProperty("name",d.name);row->setProperty("unit",d.unit);
++            row->setProperty("kind",int(d.kind));row->setProperty("minimum",d.minimum);row->setProperty("maximum",d.maximum);row->setProperty("default",d.defaultValue);
++            row->setProperty("skew",d.skew);row->setProperty("key",juce::int64(d.stateKey));juce::Array<juce::var> choices;for(const auto& c:d.choices)choices.add(c);row->setProperty("choices",choices);rows.add(juce::var(row));
++        }
++        CHECK(directory.getChildFile("registry-v23.json").replaceWithText(juce::JSON::toString(juce::var(rows),true)));
++        std::cout<<"PREMERGE_CAPTURE checks="<<checks<<" failures="<<failures<<'\n';return failures?1:0;
++    }
+     frozenRegistryPrefix();
+     descriptorsAndRetainedMapping();
+     directInvalidRetained(RoutedPatch{});

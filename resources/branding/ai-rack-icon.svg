@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">AI Rack app icon</title>
+  <rect width="256" height="256" rx="40" fill="#282a29"/>
+  <g transform="translate(38 72) scale(.505)" fill="#eeeae0">
+    <path d="M0 220L96 6Q99 0 105 0H156Q162 0 164 6L189 73Q191 78 185 78H86L77 98H177L166 122H66L58 141H157L146 166H46L38 184H138L126 215Q124 220 118 220Z"/>
+    <path d="M180 0H245Q251 0 254 6L356 214Q359 220 352 220H272Q267 220 264 214Z"/>
+  </g>
+</svg>

@@ -1,0 +1,1286 @@
+{
+  "format": "ai-rack-maker-skin",
+  "version": 1,
+  "status": "GENERATED_SHARED_ASSETS_NATIVE_VALIDATION_PENDING",
+  "design_id": "cc73c36a-696e-4b09-9cf3-dcd4dfac16f0",
+  "maker": "MONEVIK AKUSTIK",
+  "model": "Lumen Field",
+  "units": 4,
+  "rack_pitch": {
+    "panel_w": 2140,
+    "u_px": 197.11
+  },
+  "reveal": {
+    "kind": "drawer",
+    "view": "deck",
+    "front": "front",
+    "units": 3,
+    "opener": "front.voicing",
+    "titles": [
+      "Open voicing",
+      "Close voicing"
+    ],
+    "motion": {
+      "ms": 220
+    },
+    "native_editor": {
+      "type": "space_reverb",
+      "rack_unit": 0,
+      "rect": [
+        154.878,
+        127.605,
+        1379.012,
+        376.771
+      ],
+      "theme": "amber_crt"
+    }
+  },
+  "views": {
+    "face": {
+      "plate": "face:plate",
+      "rack_units": 3,
+      "source": "skin-sources/plate-closed-v2.png"
+    },
+    "front": {
+      "plate": "front:plate",
+      "rack_units": 1,
+      "source": "skin-sources/plate-closed-v2.png"
+    },
+    "deck": {
+      "plate": "deck:plate",
+      "rack_units": 3,
+      "source": "skin-sources/plate-open-v1.png"
+    }
+  },
+  "assets": {
+    "face:plate": {
+      "file": "plates/lumen-field-face.png",
+      "size": [
+        2140,
+        591
+      ],
+      "alpha": false,
+      "sha256": "f5dc3ee403be83f6e2fc8045204328498023a3e5064af0be5cc7c639a4124f11",
+      "source": "generated clean plate plus generated lamp-off cell"
+    },
+    "front:plate": {
+      "file": "plates/lumen-field-front.png",
+      "size": [
+        2140,
+        197
+      ],
+      "alpha": false,
+      "sha256": "44e5341ca04c587867e37f7717b246ff7bf7ff91b3c555c71bab3b968ccce2c0",
+      "source": "generated clean plate"
+    },
+    "deck:plate": {
+      "file": "plates/lumen-field-deck.png",
+      "size": [
+        2140,
+        592
+      ],
+      "alpha": false,
+      "sha256": "427c1bc3c932a53c8ade47383adda35581f2f9a9e41c3dd4d3acb29e9f90a02e",
+      "source": "generated clean plate"
+    },
+    "face:decay.pointer": {
+      "file": "parts/lumen-field-face-decay-pointer.png",
+      "size": [
+        250,
+        250
+      ],
+      "anchor": [
+        117.789,
+        174.343
+      ],
+      "alpha": true,
+      "sha256": "3b17192a0b2cf6f01205f210138633b8fdba2e90052263aa75c6da547b5186cb",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "wheel-rotor"
+    },
+    "face:size.pointer": {
+      "file": "parts/lumen-field-face-shared-pointer.png",
+      "size": [
+        85,
+        85
+      ],
+      "anchor": [
+        42.659,
+        82.926
+      ],
+      "alpha": true,
+      "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "face:predelay.pointer": {
+      "file": "parts/lumen-field-face-shared-pointer.png",
+      "size": [
+        85,
+        85
+      ],
+      "anchor": [
+        42.659,
+        82.926
+      ],
+      "alpha": true,
+      "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "face:brightness.pointer": {
+      "file": "parts/lumen-field-face-shared-pointer.png",
+      "size": [
+        85,
+        85
+      ],
+      "anchor": [
+        42.659,
+        82.926
+      ],
+      "alpha": true,
+      "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "face:character.pointer": {
+      "file": "parts/lumen-field-face-shared-pointer.png",
+      "size": [
+        85,
+        85
+      ],
+      "anchor": [
+        42.659,
+        82.926
+      ],
+      "alpha": true,
+      "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "face:distance.pointer": {
+      "file": "parts/lumen-field-face-shared-pointer.png",
+      "size": [
+        85,
+        85
+      ],
+      "anchor": [
+        42.659,
+        82.926
+      ],
+      "alpha": true,
+      "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "deck:duck-range.pointer": {
+      "file": "parts/lumen-field-deck-shared-pointer.png",
+      "size": [
+        70,
+        70
+      ],
+      "anchor": [
+        34.99,
+        68.017
+      ],
+      "alpha": true,
+      "sha256": "5d79d463569bb62af26d5661b05127ee1b95f637131b9e1435e46cddb0d52971",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "deck:duck-threshold.pointer": {
+      "file": "parts/lumen-field-deck-shared-pointer.png",
+      "size": [
+        70,
+        70
+      ],
+      "anchor": [
+        34.99,
+        68.017
+      ],
+      "alpha": true,
+      "sha256": "5d79d463569bb62af26d5661b05127ee1b95f637131b9e1435e46cddb0d52971",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "deck:duck-attack.pointer": {
+      "file": "parts/lumen-field-deck-shared-pointer.png",
+      "size": [
+        70,
+        70
+      ],
+      "anchor": [
+        34.99,
+        68.017
+      ],
+      "alpha": true,
+      "sha256": "5d79d463569bb62af26d5661b05127ee1b95f637131b9e1435e46cddb0d52971",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "deck:duck-release.pointer": {
+      "file": "parts/lumen-field-deck-shared-pointer.png",
+      "size": [
+        70,
+        70
+      ],
+      "anchor": [
+        34.99,
+        68.017
+      ],
+      "alpha": true,
+      "sha256": "5d79d463569bb62af26d5661b05127ee1b95f637131b9e1435e46cddb0d52971",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "small-pointer"
+    },
+    "face:width.cap": {
+      "file": "parts/lumen-field-face-shared-cap.png",
+      "size": [
+        103,
+        103
+      ],
+      "anchor": [
+        48.728,
+        68.381
+      ],
+      "alpha": true,
+      "sha256": "420af8130d7c3b339c12483e0488a88d134788234b72285281c75715f8c0f7c1",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "fader-cap"
+    },
+    "face:mix.cap": {
+      "file": "parts/lumen-field-face-shared-cap.png",
+      "size": [
+        103,
+        103
+      ],
+      "anchor": [
+        48.728,
+        68.381
+      ],
+      "alpha": true,
+      "sha256": "420af8130d7c3b339c12483e0488a88d134788234b72285281c75715f8c0f7c1",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "fader-cap"
+    },
+    "face:in.up": {
+      "file": "parts/lumen-field-face-in-up.png",
+      "size": [
+        128,
+        128
+      ],
+      "anchor": [
+        63.755,
+        64.081
+      ],
+      "alpha": true,
+      "sha256": "f36526c912daf44f95a764d0f13c6c41f498a48b10697e1237b5decee50d6570",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "in-bat"
+    },
+    "face:in.down": {
+      "file": "parts/lumen-field-face-in-down.png",
+      "size": [
+        128,
+        128
+      ],
+      "anchor": [
+        63.631,
+        63.916
+      ],
+      "alpha": true,
+      "sha256": "914e6fa0380b752227a510daf89187f37aaa13df12b96b5e31068e17e9e5b71c",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "out-bat"
+    },
+    "face:lamp.lit": {
+      "file": "parts/lumen-field-face-lamp-lit.png",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        31.907,
+        32.211
+      ],
+      "alpha": true,
+      "sha256": "9133277dc0aa5b31363e3c9978411524f82198b9e602bda9c5ef7eedef8fffad",
+      "source": "generated shared sheet cell",
+      "sheet": "assets-01.png",
+      "cell": "lamp-on"
+    }
+  },
+  "groups": [
+    {
+      "id": "face.controls",
+      "view": "face",
+      "label": "Lumen Field",
+      "members": [
+        "face.decay",
+        "face.size",
+        "face.predelay",
+        "face.brightness",
+        "face.character",
+        "face.distance",
+        "face.width",
+        "face.mix",
+        "face.in",
+        "face.lamp"
+      ],
+      "focus_order": [
+        "face.size",
+        "face.decay",
+        "face.predelay",
+        "face.brightness",
+        "face.character",
+        "face.distance",
+        "face.width",
+        "face.mix",
+        "face.in"
+      ]
+    },
+    {
+      "id": "deck.controls",
+      "view": "deck",
+      "label": "Voicing",
+      "members": [
+        "deck.duck-range",
+        "deck.duck-threshold",
+        "deck.duck-attack",
+        "deck.duck-release"
+      ],
+      "focus_order": [
+        "deck.duck-range",
+        "deck.duck-threshold",
+        "deck.duck-attack",
+        "deck.duck-release"
+      ]
+    },
+    {
+      "id": "front.controls",
+      "view": "front",
+      "label": "Drawer front",
+      "members": [
+        "front.voicing"
+      ],
+      "focus_order": [
+        "front.voicing"
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "face.decay",
+      "view": "face",
+      "kind": "rotary",
+      "label": "Decay",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.decay_seconds",
+        "type": "float",
+        "range": [
+          0.1,
+          20
+        ],
+        "unit": "s",
+        "default": 2,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          348.849,
+          323.742
+        ],
+        "face_r": 148.9205479452055,
+        "tick_center": [
+          348.849,
+          323.742
+        ],
+        "tick_r": 174.7178082191781,
+        "hit_r": 174.7178082191781,
+        "hit_rect": [
+          147.748,
+          117.951,
+          416.27400000000006,
+          446.76099999999997
+        ],
+        "dot": [
+          558.159,
+          124.986
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -135.514,
+          137.614
+        ],
+        "ticks": [
+          [
+            0.1,
+            -135.514
+          ],
+          [
+            0.3,
+            -77.065
+          ],
+          [
+            1,
+            -16.178
+          ],
+          [
+            3,
+            38.168
+          ],
+          [
+            10,
+            100.392
+          ],
+          [
+            20,
+            137.614
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 3.139605369846244,
+        "brief_value": 3.2,
+        "pointer_angle": 40.519
+      },
+      "layers": {
+        "pointer": "face:decay.pointer"
+      }
+    },
+    {
+      "id": "face.size",
+      "view": "face",
+      "kind": "rotary",
+      "label": "Size",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.size",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          804.405,
+          235.211
+        ],
+        "face_r": 56.28493150684932,
+        "tick_center": [
+          804.405,
+          235.211
+        ],
+        "tick_r": 82.08219178082192,
+        "hit_r": 82.08219178082192,
+        "hit_rect": [
+          703.562,
+          88.636,
+          196.99699999999996,
+          233.34799999999998
+        ],
+        "dot": [
+          894.696,
+          95.671
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -133.995,
+          136.061
+        ],
+        "ticks": [
+          [
+            0,
+            -133.995
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            1,
+            136.061
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 0.6305832554656954,
+        "brief_value": 0.65,
+        "pointer_angle": 35.535
+      },
+      "layers": {
+        "pointer": "face:size.pointer"
+      }
+    },
+    {
+      "id": "face.predelay",
+      "view": "face",
+      "kind": "rotary",
+      "label": "Predelay",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.predelay_ms",
+        "type": "float",
+        "range": [
+          0,
+          250
+        ],
+        "unit": "ms",
+        "default": 20,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1094.038,
+          235.211
+        ],
+        "face_r": 56.28493150684932,
+        "tick_center": [
+          1094.038,
+          235.211
+        ],
+        "tick_r": 82.08219178082192,
+        "hit_r": 82.08219178082192,
+        "hit_rect": [
+          992.022,
+          88.636,
+          202.86,
+          233.34799999999998
+        ],
+        "dot": [
+          1189.019,
+          95.671
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -133.995,
+          133.479
+        ],
+        "ticks": [
+          [
+            0,
+            -133.995
+          ],
+          [
+            125,
+            0.0
+          ],
+          [
+            250,
+            133.479
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 25.463408864142675,
+        "brief_value": 24,
+        "pointer_angle": -106.699
+      },
+      "layers": {
+        "pointer": "face:predelay.pointer"
+      }
+    },
+    {
+      "id": "face.brightness",
+      "view": "face",
+      "kind": "rotary",
+      "label": "Brightness",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.brightness",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1383.671,
+          235.211
+        ],
+        "face_r": 56.28493150684932,
+        "tick_center": [
+          1383.671,
+          235.211
+        ],
+        "tick_r": 82.08219178082192,
+        "hit_r": 82.08219178082192,
+        "hit_rect": [
+          1280.482,
+          88.636,
+          213.414,
+          233.34799999999998
+        ],
+        "dot": [
+          1488.033,
+          95.671
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -135.0,
+          133.977
+        ],
+        "ticks": [
+          [
+            0,
+            -135.0
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            1,
+            133.977
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 0.505090155517749,
+        "brief_value": 0.5,
+        "pointer_angle": 1.364
+      },
+      "layers": {
+        "pointer": "face:brightness.pointer"
+      }
+    },
+    {
+      "id": "face.character",
+      "view": "face",
+      "kind": "rotary",
+      "label": "Character",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.character",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.25,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          928.701,
+          434.553
+        ],
+        "face_r": 56.28493150684932,
+        "tick_center": [
+          928.701,
+          434.553
+        ],
+        "tick_r": 82.08219178082192,
+        "hit_r": 82.08219178082192,
+        "hit_rect": [
+          827.858,
+          327.847,
+          212.24099999999999,
+          236.865
+        ],
+        "dot": [
+          1034.236,
+          334.882
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -136.023,
+          135.507
+        ],
+        "ticks": [
+          [
+            0,
+            -136.023
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            1,
+            135.507
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 0.3192915691114118,
+        "brief_value": 0.3,
+        "pointer_angle": -49.161
+      },
+      "layers": {
+        "pointer": "face:character.pointer"
+      }
+    },
+    {
+      "id": "face.distance",
+      "view": "face",
+      "kind": "rotary",
+      "label": "Distance",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.distance",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1247.649,
+          435.726
+        ],
+        "face_r": 56.28493150684932,
+        "tick_center": [
+          1247.649,
+          435.726
+        ],
+        "tick_r": 82.08219178082192,
+        "hit_r": 82.08219178082192,
+        "hit_rect": [
+          1142.115,
+          327.847,
+          222.79500000000007,
+          236.865
+        ],
+        "dot": [
+          1359.047,
+          334.882
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -135.0,
+          134.493
+        ],
+        "ticks": [
+          [
+            0,
+            -135.0
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            1,
+            134.493
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 0.6136960054989373,
+        "brief_value": 0.6,
+        "pointer_angle": 30.583
+      },
+      "layers": {
+        "pointer": "face:distance.pointer"
+      }
+    },
+    {
+      "id": "deck.duck-range",
+      "view": "deck",
+      "kind": "rotary",
+      "label": "Range",
+      "group": "deck.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.duck_range_db",
+        "type": "float",
+        "range": [
+          0,
+          24
+        ],
+        "unit": "dB",
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1706.639,
+          196.109
+        ],
+        "face_r": 46.165622825330544,
+        "tick_center": [
+          1706.639,
+          196.109
+        ],
+        "tick_r": 78.92832289491997,
+        "hit_r": 78.92832289491997,
+        "hit_rect": [
+          1630.689,
+          97.82,
+          172.74900000000002,
+          211.469
+        ],
+        "dot": [
+          1795.992,
+          106.756
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -134.236,
+          133.493
+        ],
+        "ticks": [
+          [
+            0,
+            -134.236
+          ],
+          [
+            12,
+            0.0
+          ],
+          [
+            24,
+            133.493
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 0.07800384769659903,
+        "brief_value": 0,
+        "pointer_angle": -133.363
+      },
+      "layers": {
+        "pointer": "deck:duck-range.pointer"
+      }
+    },
+    {
+      "id": "deck.duck-threshold",
+      "view": "deck",
+      "kind": "rotary",
+      "label": "Threshold",
+      "group": "deck.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.duck_threshold_db",
+        "type": "float",
+        "range": [
+          -60,
+          0
+        ],
+        "unit": "dB",
+        "default": -24,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1938.956,
+          196.109
+        ],
+        "face_r": 46.165622825330544,
+        "tick_center": [
+          1938.956,
+          196.109
+        ],
+        "tick_r": 78.92832289491997,
+        "hit_r": 78.92832289491997,
+        "hit_rect": [
+          1839.179,
+          97.82,
+          199.55399999999986,
+          211.469
+        ],
+        "dot": [
+          2031.287,
+          106.756
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -134.236,
+          135.0
+        ],
+        "ticks": [
+          [
+            -60,
+            -134.236
+          ],
+          [
+            -30,
+            0.0
+          ],
+          [
+            0,
+            135.0
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": -24.778096516455093,
+        "brief_value": -24,
+        "pointer_angle": 23.499
+      },
+      "layers": {
+        "pointer": "deck:duck-threshold.pointer"
+      }
+    },
+    {
+      "id": "deck.duck-attack",
+      "view": "deck",
+      "kind": "rotary",
+      "label": "Attack",
+      "group": "deck.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.duck_attack_ms",
+        "type": "float",
+        "range": [
+          0.1,
+          200
+        ],
+        "unit": "ms",
+        "default": 10,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1708.128,
+          431.404
+        ],
+        "face_r": 46.165622825330544,
+        "tick_center": [
+          1708.128,
+          431.404
+        ],
+        "tick_r": 78.92832289491997,
+        "hit_r": 78.92832289491997,
+        "hit_rect": [
+          1620.264,
+          330.138,
+          193.59800000000018,
+          215.93599999999998
+        ],
+        "dot": [
+          1806.416,
+          339.073
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -133.493,
+          134.236
+        ],
+        "ticks": [
+          [
+            0.1,
+            -133.493
+          ],
+          [
+            10,
+            17.281
+          ],
+          [
+            200,
+            134.236
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 7.095569955220805,
+        "brief_value": 10,
+        "pointer_angle": 6.047
+      },
+      "layers": {
+        "pointer": "deck:duck-attack.pointer"
+      }
+    },
+    {
+      "id": "deck.duck-release",
+      "view": "deck",
+      "kind": "rotary",
+      "label": "Release",
+      "group": "deck.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.duck_release_ms",
+        "type": "float",
+        "range": [
+          10,
+          2000
+        ],
+        "unit": "ms",
+        "default": 250,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1937.467,
+          431.404
+        ],
+        "face_r": 46.165622825330544,
+        "tick_center": [
+          1937.467,
+          431.404
+        ],
+        "tick_r": 78.92832289491997,
+        "hit_r": 78.92832289491997,
+        "hit_rect": [
+          1851.093,
+          330.138,
+          199.55399999999986,
+          215.93599999999998
+        ],
+        "dot": [
+          2043.201,
+          339.073
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -135.0,
+          132.769
+        ],
+        "ticks": [
+          [
+            10,
+            -135.0
+          ],
+          [
+            250,
+            17.281
+          ],
+          [
+            2000,
+            132.769
+          ]
+        ]
+      },
+      "mockup": {
+        "drawn_value": 182.10764857121742,
+        "brief_value": 250,
+        "pointer_angle": 2.291
+      },
+      "layers": {
+        "pointer": "deck:duck-release.pointer"
+      }
+    },
+    {
+      "id": "face.width",
+      "view": "face",
+      "kind": "fader",
+      "label": "Width",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.width",
+        "type": "float",
+        "range": [
+          0,
+          2
+        ],
+        "unit": "%",
+        "default": 1,
+        "response": "linear"
+      },
+      "geometry": {
+        "cap_center_x": 1719.036,
+        "y0": 472.077,
+        "y1": 223.485,
+        "hit_rect": [
+          1662.751,
+          207.068,
+          167.68200000000002,
+          328.32900000000006
+        ],
+        "dot": [
+          1652.751,
+          223.485
+        ]
+      },
+      "mockup": {
+        "drawn_value": 1.1415094339622642,
+        "brief_value": 1.15
+      },
+      "layers": {
+        "cap": "face:width.cap"
+      }
+    },
+    {
+      "id": "face.mix",
+      "view": "face",
+      "kind": "fader",
+      "label": "Mix",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "space_reverb.mix",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.25,
+        "response": "linear"
+      },
+      "geometry": {
+        "cap_center_x": 1939.485,
+        "y0": 472.077,
+        "y1": 224.071,
+        "hit_rect": [
+          1883.2,
+          207.068,
+          167.68200000000002,
+          328.32900000000006
+        ],
+        "dot": [
+          1873.2,
+          224.071
+        ]
+      },
+      "mockup": {
+        "drawn_value": 0.2222222222222222,
+        "brief_value": 0.22
+      },
+      "layers": {
+        "cap": "face:mix.cap"
+      }
+    },
+    {
+      "id": "face.in",
+      "view": "face",
+      "kind": "lever",
+      "label": "IN / OUT",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "bypassed",
+        "type": "toggle",
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          616.789,
+          434.553
+        ],
+        "rect": [
+          592.164,
+          388.822,
+          50.422000000000025,
+          93.80799999999999
+        ],
+        "dot": [
+          652.586,
+          388.822
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "IN",
+          "asset": "face:in.up"
+        },
+        {
+          "value": 1,
+          "legend": "OUT",
+          "asset": "face:in.down"
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0
+      }
+    },
+    {
+      "id": "face.lamp",
+      "view": "face",
+      "kind": "lamp",
+      "label": "IN pilot",
+      "group": "face.controls",
+      "binding": {
+        "rack_unit": 0,
+        "key": "bypassed",
+        "type": "toggle",
+        "default": 0
+      },
+      "lit_value": 0,
+      "geometry": {
+        "led": [
+          617.962,
+          350.126
+        ],
+        "lens_r": 15.243835616438357
+      },
+      "layers": {
+        "lit": "face:lamp.lit"
+      },
+      "mockup": {
+        "drawn_value": 0
+      }
+    },
+    {
+      "id": "front.voicing",
+      "view": "front",
+      "kind": "action",
+      "label": "Open voicing",
+      "group": "front.controls",
+      "geometry": {
+        "rect": [
+          803.673,
+          46.717,
+          527.961,
+          105.592
+        ],
+        "hit_rect": [
+          301.524,
+          46.717,
+          1466.5570175438597,
+          105.592
+        ]
+      },
+      "action": "toggle voicing"
+    }
+  ],
+  "coverage": {
+    "total_unit_parameters": 97,
+    "face_unique": 9,
+    "duck_trims": 4,
+    "native_graph": 66,
+    "all_controls_only": 18,
+    "all_97_also_in_operations": true
+  },
+  "source_sha256": {
+    "closed": "cd52d80264295c449aa8dc4ad733ab9ecc1e0e96b5e5b5722fba222502c4f818",
+    "open": "28a74fade16025960a225f50e162f8127adfacd8d4cb8a3e3263d6c25978b7f8"
+  }
+}

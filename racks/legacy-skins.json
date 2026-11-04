@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "entries": [
+    {
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+      "revision": "1",
+      "canonical_sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a",
+      "id": "ember-reed",
+      "version": "1.0.0",
+      "skin": "skin/ember-reed-elements.json",
+      "sha256": "14b4f5f907054a35a9d6f95513cc1f5ae57b6ad4e4a383b2975bd17700d8f328"
+    },
+    {
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca602",
+      "revision": "1",
+      "canonical_sha256": "8b1afcfbcef817e372928a9d8ff80ef53b8731043b77096968e2dd966dcfe8f4",
+      "id": "glass-current",
+      "version": "1.0.0",
+      "skin": "skin/glass-current-elements.json",
+      "sha256": "de4271ed345bad7614652855bcce0d16210f34453a10d3645d957d1b020a8af0"
+    },
+    {
+      "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca603",
+      "revision": "1",
+      "canonical_sha256": "cff62f76f8baec2a7f8d153a953f55b1ce69ba6fab0432d99577ddaeac6569ed",
+      "id": "thread-press",
+      "version": "1.0.0",
+      "skin": "skin/thread-press-elements.json",
+      "sha256": "e6d72527612f86d102ad761a6f60be5417dc8d5f5ac493bbe5a181e0cd47e656"
+    },
+    {
+      "design": "330cb53b-cd9b-443c-94d8-2700bc8b88f7",
+      "revision": "1",
+      "canonical_sha256": "61fb7252e7e804e9742fee81ee7befa5f5778e3bac43c344dca85609037952c0",
+      "id": "oxide-return",
+      "version": "1.0.0",
+      "skin": "skin/oxide-return-elements.json",
+      "sha256": "5a5081b0d1e6a2f013b28744af4c79fe1f08b11a4d8564f455145536c01401d0"
+    },
+    {
+      "design": "22d80511-2e4f-4a41-b1dd-203eabbcf32e",
+      "revision": "1",
+      "canonical_sha256": "82154ffc00dbe85e4af0d2041da99b1f52a3b9888bea29f16b4bd2d2bfe61c69",
+      "id": "small-hours",
+      "version": "1.0.0",
+      "skin": "skin/small-hours-elements.json",
+      "sha256": "e16f62fcd6c76f0a97568db2f7aeaac9b88e207ba060338c9a6cf3658b8eb764"
+    },
+    {
+      "design": "cdeafe3f-9c29-4c7c-9013-8284b505af10",
+      "revision": "1",
+      "canonical_sha256": "55eb1f05ca9ba938034ede012941c197498a87e89c0af5fa52ef29b936064054",
+      "id": "night-dial",
+      "version": "1.0.0",
+      "skin": "skin/night-dial-elements.json",
+      "sha256": "7997493ffae0559b3ab57ade97b3bf81ccc560924d5f89c8b24cf09f9cb4e853"
+    },
+    {
+      "design": "f97641c2-cd64-46a9-a3ab-0cc027a5f8d4",
+      "revision": "1",
+      "canonical_sha256": "dd207988425c8356961fbc26a065034d6d49c2cf1709bd05a08671bd76b8c5a8",
+      "id": "tile-array",
+      "version": "1.0.0",
+      "skin": "skin/tile-array-elements.json",
+      "sha256": "f9aebab44fcaecec16276e1cb7c11f7a422bf73d06c1213ef1d497d076bb25e4"
+    },
+    {
+      "design": "72b0ea6d-4c2d-4d93-a3d8-7a904b050001",
+      "revision": "1",
+      "canonical_sha256": "629c009553850112c958a236a0facedd3d99b6eaa5ae5f47e4caa9c2569a0b6e",
+      "id": "contour-dynamics",
+      "version": "1.0.0",
+      "skin": "",
+      "sha256": "d5acce992ab4e96b5d33feea3280b4585ebc90d68beb5d26cf8ec77fbf586b30"
+    },
+    {
+      "design": "cc73c36a-696e-4b09-9cf3-dcd4dfac16f0",
+      "revision": "1",
+      "canonical_sha256": "f5ee9cc529ec5a1e7092f645f9bf3a62f49a5e4cf3816d10014f230dd60f2191",
+      "id": "lumen-field",
+      "version": "1.0.0",
+      "skin": "skin/lumen-field-elements.json",
+      "sha256": "5d24c141a237a89030587ba8c9f918461511f8ee04a2e2e1973618f1b5f22f40"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842bf01",
+      "revision": "2",
+      "canonical_sha256": "84303af35953521165929e3455a2e3f3cfe7d8cda0abf3761462b4d6bf409874",
+      "id": "character-drive",
+      "version": "1.0.0",
+      "skin": "skin/character-drive-elements.json",
+      "sha256": "9a718b828bd40b2d26912e38fdb1fa55faeaa11860a79a84d398469efa46425a"
+    },
+    {
+      "design": "91387715-13d3-4c57-a479-12251842bf02",
+      "revision": "2",
+      "canonical_sha256": "236d6a5ce909e3385fc0e458979b05cd373246fb67f05174c97a7a890f10bdaf",
+      "id": "band-color",
+      "version": "1.0.0",
+      "skin": "skin/band-color-elements.json",
+      "sha256": "00ac0e796dd620a542c8a839c9e83ef4d43901b3561ad8e0ee7461a64846e818"
+    }
+  ],
+  "policy": "Exact canonical identities only; edited/historical artwork has no inferred mapping."
+}

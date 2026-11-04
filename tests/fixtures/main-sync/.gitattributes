@@ -1,0 +1,4 @@
+* -text
+
+# Keep the raw producer-provenance CRLF bytes without hiding ordinary spaces.
+saturation-release-mvp-20261026-provenance.json whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

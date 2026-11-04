@@ -1,0 +1,85 @@
+{
+  "about": "Era Reverb against ValhallaVintageVerb, one row per behaviour in docs/superpowers/specs/2026-10-22-era-reverb-design.md. RackSynthRender --era-reverb renders each source dry and each row processed through the actual VST3; tools/era_reverb_comparison.py feeds the same dry source through VintageVerb and measures both. Gate rows run Era at Decay 0.2 s, as its DSP contract does: there Decay sets the close (0.1 x Decay) after the burst, while VintageVerb's Nonlin ignores Decay. Development evidence, not a parity claim.",
+  "rate": 48000,
+  "block": 512,
+  "neutral": {
+    "voicing": 0, "age": 2, "decay_seconds": 2, "predelay_ms": 0, "size": 1, "attack": 0.5, "diffusion": 1,
+    "wobble": 0, "wobble_rate_hz": 2.53, "grit": 0, "bass_multiplier": 1, "damping_hz": 20000,
+    "low_cut_hz": 10, "high_cut_hz": 20000, "mix": 1
+  },
+  "vintageverb_neutral": {
+    "mix": 100, "predelay": 0, "decay": 2.0, "size": 100, "attack": 50, "bassmult": 1.0, "bassxover": 300,
+    "highshelf": 0, "highfreq": 6000, "earlydiffusion": 100, "latediffusion": 100, "modrate": 2.53, "moddepth": 0,
+    "highcut": 20000, "lowcut": 10
+  },
+  "sources": {
+    "click": "Noise click: the analog voice's noise alone, 3 ms decay, filter open",
+    "burst": "Noise burst held 50 ms, filter open",
+    "sine220": "220 Hz sine (MIDI 57) held 2 s, peak calibrated to -6 dBFS",
+    "sine220_quiet": "The same 220 Hz sine, peak calibrated to -36 dBFS",
+    "sine1k": "1 kHz sine (MIDI 83 plus 21.31 cents) held 2 s, peak calibrated to -12 dBFS"
+  },
+  "rows": [
+    { "id": "predelay-0", "behaviour": "pre-delay", "source": "click", "seconds": 3, "ours": {}, "vintageverb": { "mode": "Concert Hall", "colour": "now" }, "metric": "onset_ms", "tolerance": "Pre-delay adds exactly its time, to the sample, to the voicing's own onset" },
+    { "id": "predelay-100", "behaviour": "pre-delay", "source": "click", "seconds": 3, "ours": { "predelay_ms": 100 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "predelay": 100 }, "metric": "onset_ms", "tolerance": "Onset 100 ms after predelay-0's" },
+
+    { "id": "grit-hall-loud", "behaviour": "grit", "source": "sine220", "seconds": 4, "ours": { "grit": 0.5 }, "vintageverb": { "mode": "Dirty Hall", "colour": "seventies" }, "metric": "harmonics_db", "tolerance": "Third harmonic -70 to -40 dB relative to the fundamental at -6 dBFS; second at least 40 dB below the third" },
+    { "id": "grit-hall-quiet", "behaviour": "grit", "source": "sine220_quiet", "seconds": 4, "ours": { "grit": 0.5 }, "vintageverb": { "mode": "Dirty Hall", "colour": "seventies" }, "metric": "harmonics_db", "tolerance": "Third harmonic at least 20 dB lower than grit-hall-loud's" },
+    { "id": "grit-tape-loud", "behaviour": "grit", "source": "sine220", "seconds": 4, "ours": { "voicing": 2, "grit": 0.5 }, "vintageverb": { "mode": "Chaotic Hall", "colour": "seventies" }, "metric": "harmonics_db", "tolerance": "Third harmonic -70 to -40 dB; second no more than 35 dB below the third" },
+    { "id": "grit-tape-quiet", "behaviour": "grit", "source": "sine220_quiet", "seconds": 4, "ours": { "voicing": 2, "grit": 0.5 }, "vintageverb": { "mode": "Chaotic Hall", "colour": "seventies" }, "metric": "harmonics_db", "tolerance": "Third harmonic at least 20 dB lower than grit-tape-loud's" },
+
+    { "id": "attack-hall-0", "behaviour": "attack", "source": "click", "seconds": 4, "ours": { "attack": 0 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "attack": 0 }, "metric": "attack_ms", "tolerance": "10 ms RMS envelope peaks within 20 ms of onset" },
+    { "id": "attack-hall-1", "behaviour": "attack", "source": "click", "seconds": 4, "ours": { "attack": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "attack": 100 }, "metric": "attack_ms", "tolerance": "Peak 200 to 300 ms after onset (Concert Hall 253 ms)" },
+    { "id": "attack-room-0", "behaviour": "attack", "source": "click", "seconds": 4, "ours": { "voicing": 4, "attack": 0 }, "vintageverb": { "mode": "Ambience", "colour": "now", "attack": 0 }, "metric": "early_late_db", "tolerance": "Late tail at least 20 dB below the early reflections" },
+    { "id": "attack-room-1", "behaviour": "attack", "source": "click", "seconds": 4, "ours": { "voicing": 4, "attack": 1 }, "vintageverb": { "mode": "Ambience", "colour": "now", "attack": 100 }, "metric": "early_late_db", "tolerance": "Early reflections at least 20 dB below the tail, which peaks 120 to 200 ms after onset (Ambience 158 ms)" },
+
+    { "id": "decay-hall-1", "behaviour": "decay", "source": "click", "seconds": 3.2, "ours": { "decay_seconds": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 1 }, "metric": "rt60_mid_s", "tolerance": "Mid RT60 within 25% of 1 s" },
+    { "id": "decay-hall-4", "behaviour": "decay", "source": "click", "seconds": 6.8, "ours": { "decay_seconds": 4 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4 }, "metric": "rt60_mid_s", "tolerance": "Mid RT60 within 10% of 4 s" },
+    { "id": "decay-hall-16", "behaviour": "decay", "source": "click", "seconds": 21.2, "ours": { "decay_seconds": 16 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 16 }, "metric": "rt60_mid_s", "tolerance": "Mid RT60 within 10% of 16 s" },
+
+    { "id": "size-hall-0", "behaviour": "size", "source": "click", "seconds": 6, "ours": { "size": 0 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "size": 0 }, "metric": "rt60_mid_and_density", "tolerance": "Mid RT60 within 10% of size-hall-1's; diffuse echo density at least three times sooner than size-hall-1's" },
+    { "id": "size-hall-1", "behaviour": "size", "source": "click", "seconds": 6, "ours": { "size": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "size": 100 }, "metric": "rt60_mid_and_density", "tolerance": "Reference for size-hall-0" },
+
+    { "id": "diffusion-plate-0", "behaviour": "diffusion", "source": "click", "seconds": 3, "ours": { "voicing": 3, "diffusion": 0 }, "vintageverb": { "mode": "Plate", "colour": "now", "earlydiffusion": 0 }, "metric": "density_ms", "tolerance": "Time to a diffuse echo density at least three times diffusion-plate-1's" },
+    { "id": "diffusion-plate-1", "behaviour": "diffusion", "source": "click", "seconds": 3, "ours": { "voicing": 3, "diffusion": 1 }, "vintageverb": { "mode": "Plate", "colour": "now", "earlydiffusion": 100 }, "metric": "density_ms", "tolerance": "Reference for diffusion-plate-0" },
+
+    { "id": "damping-20k", "behaviour": "damping", "source": "click", "seconds": 9, "ours": { "decay_seconds": 4, "damping_hz": 20000 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "highshelf": 0 }, "metric": "rt60_octaves_s", "tolerance": "8 kHz RT60 within 15% of the 1 kHz RT60" },
+    { "id": "damping-3k", "behaviour": "damping", "source": "click", "seconds": 9, "ours": { "decay_seconds": 4, "damping_hz": 3000 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "highshelf": -24, "highfreq": 3000 }, "metric": "rt60_octaves_s", "tolerance": "8 kHz RT60 0.3 to 0.5 of the 500 Hz RT60 (record 0.40)" },
+    { "id": "bass-0.5", "behaviour": "bass", "source": "click", "seconds": 9, "ours": { "decay_seconds": 4, "bass_multiplier": 0.5 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "bassmult": 0.5 }, "metric": "rt60_octaves_s", "tolerance": "63 Hz RT60 over 1 kHz RT60 within 20% of 0.5 (record 0.62)" },
+    { "id": "bass-2", "behaviour": "bass", "source": "click", "seconds": 9, "ours": { "decay_seconds": 4, "bass_multiplier": 2 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "bassmult": 2.0 }, "metric": "rt60_octaves_s", "tolerance": "63 Hz RT60 over 1 kHz RT60 within 20% of 2 (record 1.97)" },
+
+    { "id": "wobble-depth-0.25", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.25, "wobble_rate_hz": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 25, "modrate": 1.0 }, "metric": "mod_width_hz", "tolerance": "Monotonic in Wobble over 0.25, 0.5, 0.75, 1 at 1 Hz" },
+    { "id": "wobble-depth-0.5", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.5, "wobble_rate_hz": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 50, "modrate": 1.0 }, "metric": "mod_width_hz", "tolerance": "Monotonic in Wobble" },
+    { "id": "wobble-depth-0.75", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.75, "wobble_rate_hz": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 75, "modrate": 1.0 }, "metric": "mod_width_hz", "tolerance": "Monotonic in Wobble" },
+    { "id": "wobble-depth-1", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 1, "wobble_rate_hz": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 100, "modrate": 1.0 }, "metric": "mod_width_hz", "tolerance": "6 to 15 Hz in Hall at Wobble 1 and 1 Hz (Concert Hall 8.8 Hz)" },
+    { "id": "wobble-rate-0.3", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.5, "wobble_rate_hz": 0.3 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 50, "modrate": 0.3 }, "metric": "mod_width_hz", "tolerance": "Monotonic in rate over 0.3, 1, 3, 10 Hz at 0.5" },
+    { "id": "wobble-rate-1", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.5, "wobble_rate_hz": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 50, "modrate": 1.0 }, "metric": "mod_width_hz", "tolerance": "Monotonic in rate" },
+    { "id": "wobble-rate-3", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.5, "wobble_rate_hz": 3 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 50, "modrate": 3.0 }, "metric": "mod_width_hz", "tolerance": "Monotonic in rate" },
+    { "id": "wobble-rate-10", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.5, "wobble_rate_hz": 10 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 50, "modrate": 10.0 }, "metric": "mod_width_hz", "tolerance": "At least 15 Hz at Wobble 0.5 and 10 Hz (Concert Hall 27 Hz)" },
+    { "id": "wobble-default-hall", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "decay_seconds": 4, "wobble": 0.38, "wobble_rate_hz": 2.53 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "moddepth": 38, "modrate": 2.53 }, "metric": "mod_width_hz", "tolerance": "Hall 6 to 14 Hz at the defaults in Clear (Concert Hall 9.3 Hz)" },
+    { "id": "wobble-default-space", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "voicing": 1, "decay_seconds": 4, "wobble": 0.38, "wobble_rate_hz": 2.53 }, "vintageverb": { "mode": "Random Space", "colour": "now", "decay": 4, "moddepth": 38, "modrate": 2.53 }, "metric": "mod_width_hz", "tolerance": "Space at most 6 Hz (Random Space 4.5 Hz)" },
+    { "id": "wobble-default-tape", "behaviour": "wobble", "source": "sine1k", "seconds": 5, "ours": { "voicing": 2, "decay_seconds": 4, "wobble": 0.38, "wobble_rate_hz": 2.53 }, "vintageverb": { "mode": "Chaotic Hall", "colour": "now", "decay": 4, "moddepth": 38, "modrate": 2.53 }, "metric": "mod_width_hz", "tolerance": "Tape at least wobble-default-hall's width" },
+
+    { "id": "age-dark", "behaviour": "age", "source": "click", "seconds": 3, "ours": { "age": 0 }, "vintageverb": { "mode": "Concert Hall", "colour": "seventies" }, "metric": "tail_bandwidth_hz", "tolerance": "Tail -20 dB bandwidth 10 to 13 kHz (1970s Concert Hall 12.3 kHz)" },
+    { "id": "age-warm", "behaviour": "age", "source": "click", "seconds": 3, "ours": { "age": 1 }, "vintageverb": { "mode": "Concert Hall", "colour": "eighties" }, "metric": "tail_bandwidth_hz", "tolerance": "15 to 19 kHz, deliberately darker than the 1980s colour (21.5 kHz)" },
+    { "id": "age-clear", "behaviour": "age", "source": "click", "seconds": 3, "ours": { "age": 2 }, "vintageverb": { "mode": "Concert Hall", "colour": "now" }, "metric": "tail_bandwidth_hz", "tolerance": "At least 19 kHz (NOW Concert Hall 22.6 kHz)" },
+
+    { "id": "gate-size-0", "behaviour": "gate", "source": "click", "seconds": 3, "ours": { "voicing": 5, "decay_seconds": 0.2, "size": 0 }, "vintageverb": { "mode": "Nonlin", "colour": "now", "size": 0 }, "metric": "gate_span_ms", "tolerance": "Span within 20 dB of the peak 100 ms within 15% (record 99 ms)" },
+    { "id": "gate-size-0.5", "behaviour": "gate", "source": "click", "seconds": 3, "ours": { "voicing": 5, "decay_seconds": 0.2, "size": 0.5 }, "vintageverb": { "mode": "Nonlin", "colour": "now", "size": 50 }, "metric": "gate_span_ms", "tolerance": "380 ms within 15% (record 383 ms)" },
+    { "id": "gate-size-1", "behaviour": "gate", "source": "click", "seconds": 3, "ours": { "voicing": 5, "decay_seconds": 0.2, "size": 1 }, "vintageverb": { "mode": "Nonlin", "colour": "now", "size": 100 }, "metric": "gate_span_ms", "tolerance": "1210 ms within 15% (record 1214 ms)" },
+    { "id": "gate-attack-0", "behaviour": "gate", "source": "click", "seconds": 3, "ours": { "voicing": 5, "decay_seconds": 0.2, "size": 0.5, "attack": 0 }, "vintageverb": { "mode": "Nonlin", "colour": "now", "size": 50, "attack": 0 }, "metric": "gate_shape_db", "tolerance": "Decaying: the end at least 10 dB below the start" },
+    { "id": "gate-attack-1", "behaviour": "gate", "source": "click", "seconds": 3, "ours": { "voicing": 5, "decay_seconds": 0.2, "size": 0.5, "attack": 1 }, "vintageverb": { "mode": "Nonlin", "colour": "now", "size": 50, "attack": 100 }, "metric": "gate_shape_db", "tolerance": "Reverse swell: rising at least 10 dB to a peak in the last quarter" },
+
+    { "id": "highcut-1k", "behaviour": "output filters", "source": "click", "seconds": 5, "ours": { "decay_seconds": 4, "high_cut_hz": 1000 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "highcut": 1000 }, "metric": "filter_response_db", "tolerance": "-3 dB within 1 dB at 1 kHz; -26 dB within 3 dB at 20 kHz (record -25 dB), early and late alike" },
+    { "id": "lowcut-300", "behaviour": "output filters", "source": "click", "seconds": 5, "ours": { "decay_seconds": 4, "low_cut_hz": 300 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "decay": 4, "lowcut": 300 }, "metric": "filter_response_db", "tolerance": "-3 dB within 1 dB at 300 Hz, first order; no plateau below 50 Hz (deliberate difference)" },
+
+    { "id": "iacc-hall", "behaviour": "stereo", "source": "click", "seconds": 3, "ours": {}, "vintageverb": { "mode": "Concert Hall", "colour": "now" }, "metric": "iacc_tail", "tolerance": "Tail IACC at most 0.1" },
+    { "id": "iacc-space", "behaviour": "stereo", "source": "click", "seconds": 3, "ours": { "voicing": 1 }, "vintageverb": { "mode": "Random Space", "colour": "now" }, "metric": "iacc_tail", "tolerance": "Tail IACC at most 0.1" },
+    { "id": "iacc-plate", "behaviour": "stereo", "source": "click", "seconds": 3, "ours": { "voicing": 3 }, "vintageverb": { "mode": "Plate", "colour": "now" }, "metric": "iacc_tail", "tolerance": "Tail IACC at most 0.1" },
+    { "id": "iacc-room", "behaviour": "stereo", "source": "click", "seconds": 3, "ours": { "voicing": 4 }, "vintageverb": { "mode": "Room", "colour": "now" }, "metric": "iacc_tail", "tolerance": "Tail IACC at most 0.1" },
+
+    { "id": "mix-0.25", "behaviour": "mix", "source": "click", "seconds": 3, "ours": { "mix": 0.25 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "mix": 25 }, "metric": "dry_gain", "tolerance": "Dry gain cos(pi m / 2) = 0.924 within 0.01" },
+    { "id": "mix-0.5", "behaviour": "mix", "source": "click", "seconds": 3, "ours": { "mix": 0.5 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "mix": 50 }, "metric": "dry_gain", "tolerance": "Dry gain 0.707 within 0.01" },
+    { "id": "mix-0.75", "behaviour": "mix", "source": "click", "seconds": 3, "ours": { "mix": 0.75 }, "vintageverb": { "mode": "Concert Hall", "colour": "now", "mix": 75 }, "metric": "dry_gain", "tolerance": "Dry gain 0.383 within 0.01" }
+  ]
+}

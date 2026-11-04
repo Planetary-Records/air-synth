@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "status": "incomplete: native screenshot and sanitized runtime skin required in Task8",
+  "originalSkinPolicy": "Original skin bytes/hashes are frozen inputs. Release skins are derived sanitized copies with their own hashes; preserve runtime fields, controls and notices.",
+  "manifest": {
+    "schema": 1,
+    "id": "band-color",
+    "version": "1.0.0",
+    "metadata": {
+      "design": "91387715-13d3-4c57-a479-12251842bf02",
+      "revision": "2",
+      "canonical_sha256": "236d6a5ce909e3385fc0e458979b05cd373246fb67f05174c97a7a890f10bdaf",
+      "name": "Band Color",
+      "maker": "VELDRUM AUDIO",
+      "purpose": "Three-band saturation with clean lows, Dense parallel mids and Soft tilted highs.",
+      "description": "Three-band saturation with clean lows, Dense parallel mids and Soft tilted highs. Shape each band's character, drive and blend around adjustable crossovers; retained Full settings remain neutral.",
+      "role": "fx",
+      "tags": [
+        "saturator",
+        "multiband",
+        "colour"
+      ]
+    },
+    "design": "rack.json",
+    "skin": "skin/band-color-elements.json",
+    "screenshot": "",
+    "files": [
+      {
+        "path": "rack.json",
+        "sha256": "236d6a5ce909e3385fc0e458979b05cd373246fb67f05174c97a7a890f10bdaf",
+        "kind": "design",
+        "bytes": 4412
+      },
+      {
+        "path": "skin/band-color-elements.json",
+        "sha256": "b7a00ed8a51e116b398fbc2d99c242e6d393176ef183e39e5588ea249c4699f2",
+        "kind": "skin",
+        "bytes": 29451
+      },
+      {
+        "path": "skin/parts/band-color-face-global-mix-pointer.png",
+        "sha256": "d8a04321c7e56f84b06edfbf29e65fdf78779b3e1618d38666405db7097cac53",
+        "kind": "png",
+        "bytes": 7903
+      },
+      {
+        "path": "skin/parts/band-color-face-high-crossover-pointer.png",
+        "sha256": "74544c9b0e5f4f9d3d6dce68f0c8129fbfafca8d7f80c5386c1dec485b6ede4e",
+        "kind": "png",
+        "bytes": 5309
+      },
+      {
+        "path": "skin/parts/band-color-face-high-drive-pointer.png",
+        "sha256": "6d2ddbcb825c336cce710d87763c70ca1027704df050cb3893be7758b7b8c683",
+        "kind": "png",
+        "bytes": 2740
+      },
+      {
+        "path": "skin/parts/band-color-face-high-mix-pointer.png",
+        "sha256": "6a8a6ed8d6188a2b3430f64d27bf809664914a90d590acbe5ed0109dffd90a37",
+        "kind": "png",
+        "bytes": 2314
+      },
+      {
+        "path": "skin/parts/band-color-face-high-tilt-pointer.png",
+        "sha256": "41ff782af53ae14715b843b9aa1923aa9b1eaca8e759b58cc4b30e1ddb601453",
+        "kind": "png",
+        "bytes": 1994
+      },
+      {
+        "path": "skin/parts/band-color-face-low-crossover-pointer.png",
+        "sha256": "c731a4bead5f571e8efe177c9d04af169c04edfd1ac143127b9ffbb89a2ced8f",
+        "kind": "png",
+        "bytes": 5075
+      },
+      {
+        "path": "skin/parts/band-color-face-mid-drive-pointer.png",
+        "sha256": "5b66f0d66734db473b71d577902857bf2dde7be42c4bfc321d238f8992f7d1c9",
+        "kind": "png",
+        "bytes": 2900
+      },
+      {
+        "path": "skin/parts/band-color-face-mid-mix-pointer.png",
+        "sha256": "e23f4a457a5aad89bfd4f6266c0bef2bbf3636190ef24fb5e2d7495b78b0b945",
+        "kind": "png",
+        "bytes": 2190
+      },
+      {
+        "path": "skin/parts/band-color-setup-compensation-down.png",
+        "sha256": "bfb769c2c8de9a589aa5d6fe8796642d8c83856600b5a0db9ec37232aef56de1",
+        "kind": "png",
+        "bytes": 1767
+      },
+      {
+        "path": "skin/parts/band-color-setup-compensation-up.png",
+        "sha256": "8e3dcf81a7d3e0106456ddb68ac092142745879c3a142036e52890669ff0e00c",
+        "kind": "png",
+        "bytes": 1777
+      },
+      {
+        "path": "skin/parts/band-color-setup-input-trim-pointer.png",
+        "sha256": "659c27820c0989261670b84f63ef0827c527fc907c94ac721307761ffbd172e9",
+        "kind": "png",
+        "bytes": 2364
+      },
+      {
+        "path": "skin/parts/band-color-setup-mode-down.png",
+        "sha256": "4dd58d33d4c1a208a9d28edc407328339fe404b62f05a6f6542ef264c2925412",
+        "kind": "png",
+        "bytes": 1756
+      },
+      {
+        "path": "skin/parts/band-color-setup-mode-up.png",
+        "sha256": "6e5e09188b92f6e3300e51b4d55c96cce9be960f038e4d70ae6eddddc5043c63",
+        "kind": "png",
+        "bytes": 1771
+      },
+      {
+        "path": "skin/parts/band-color-setup-output-trim-pointer.png",
+        "sha256": "6ee0848c89e457c1581673ce4c174d79b6d25090fc4107d4c870a6910033efb0",
+        "kind": "png",
+        "bytes": 2959
+      },
+      {
+        "path": "skin/plates/band-color-face.png",
+        "sha256": "06cecd870566b7a896178dbb5b87aaf3ef2c727fd2dfc2e03f5fe7af79498968",
+        "kind": "png",
+        "bytes": 975690
+      },
+      {
+        "path": "skin/plates/band-color-setup.png",
+        "sha256": "10b07b8113847244c5684859dd1d25085079fa64c2cffdbe134278a7420e3e99",
+        "kind": "png",
+        "bytes": 219896
+      }
+    ],
+    "capabilities": {
+      "airMin": "0.1.0",
+      "modules": [
+        {
+          "module": 21,
+          "algorithmRevision": 1
+        }
+      ],
+      "nativeEditor": ""
+    }
+  },
+  "sources": [
+    {
+      "path": "rack.json",
+      "source": "racks/band-color/rack.json"
+    },
+    {
+      "path": "skin/band-color-elements.json",
+      "source": "resources/maker-skins/band-color/band-color-elements.json"
+    },
+    {
+      "path": "skin/parts/band-color-face-global-mix-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-global-mix-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-face-high-crossover-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-high-crossover-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-face-high-drive-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-high-drive-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-face-high-mix-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-high-mix-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-face-high-tilt-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-high-tilt-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-face-low-crossover-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-low-crossover-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-face-mid-drive-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-mid-drive-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-face-mid-mix-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-face-mid-mix-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-setup-compensation-down.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-setup-compensation-down.png"
+    },
+    {
+      "path": "skin/parts/band-color-setup-compensation-up.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-setup-compensation-up.png"
+    },
+    {
+      "path": "skin/parts/band-color-setup-input-trim-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-setup-input-trim-pointer.png"
+    },
+    {
+      "path": "skin/parts/band-color-setup-mode-down.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-setup-mode-down.png"
+    },
+    {
+      "path": "skin/parts/band-color-setup-mode-up.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-setup-mode-up.png"
+    },
+    {
+      "path": "skin/parts/band-color-setup-output-trim-pointer.png",
+      "source": "resources/maker-skins/band-color/parts/band-color-setup-output-trim-pointer.png"
+    },
+    {
+      "path": "skin/plates/band-color-face.png",
+      "source": "resources/maker-skins/band-color/plates/band-color-face.png"
+    },
+    {
+      "path": "skin/plates/band-color-setup.png",
+      "source": "resources/maker-skins/band-color/plates/band-color-setup.png"
+    }
+  ]
+}

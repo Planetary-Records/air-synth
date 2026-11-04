@@ -1,0 +1,4586 @@
+{
+  "format": "ai-rack-maker-skin",
+  "version": 1,
+  "status": "PROTOTYPE, not a product schema",
+  "design_id": "c83dab6a-1c4e-48c1-83c4-80d9212ca602",
+  "maker": "KUROSHIO",
+  "model": "GLASS CURRENT GC-86 DIGITAL WAVETABLE SYNTHESIZER",
+  "units": 2,
+  "reveal": {
+    "kind": "door",
+    "view": "panel",
+    "hang": "door",
+    "units": 2,
+    "opener": "face.edit",
+    "closers": [
+      "face.close"
+    ],
+    "titles": [
+      "Open edit door",
+      "Close edit door"
+    ],
+    "drawn_screen": "delay.1",
+    "drawn_touch": "face.delay.time",
+    "motion": {
+      "ms": 180,
+      "door": [
+        1525.65,
+        32.47,
+        513.04,
+        346.38
+      ]
+    }
+  },
+  "readout": "display",
+  "strip": "strip",
+  "pages": [
+    {
+      "id": "osc",
+      "button": "face.page.osc",
+      "label": "OSC",
+      "screens": [
+        "osc.1",
+        "osc.2",
+        "osc.3"
+      ]
+    },
+    {
+      "id": "filter",
+      "button": "face.page.filter",
+      "label": "FILTER",
+      "screens": [
+        "filter.1"
+      ]
+    },
+    {
+      "id": "env",
+      "button": "face.page.env",
+      "label": "ENV",
+      "screens": [
+        "env.1",
+        "env.2",
+        "env.3"
+      ]
+    },
+    {
+      "id": "lfo",
+      "button": "face.page.lfo",
+      "label": "LFO",
+      "screens": [
+        "lfo.1"
+      ]
+    },
+    {
+      "id": "delay",
+      "button": "face.page.delay",
+      "label": "DELAY",
+      "screens": [
+        "delay.1",
+        "delay.2"
+      ]
+    },
+    {
+      "id": "reverb",
+      "button": "face.page.reverb",
+      "label": "REVERB",
+      "screens": [
+        "reverb.1",
+        "reverb.2"
+      ]
+    }
+  ],
+  "screens": {
+    "osc.1": [
+      "face.osc1.table",
+      "face.osc1.pos",
+      "face.osc1.tune",
+      "face.osc1.fine"
+    ],
+    "osc.2": [
+      "face.osc2.table",
+      "face.osc2.pos",
+      "face.osc2.tune",
+      "face.osc2.fine"
+    ],
+    "osc.3": [
+      "face.osc1.level",
+      "face.osc2.level",
+      "face.noise"
+    ],
+    "filter.1": [
+      "face.filter.cutoff",
+      "face.filter.reso",
+      "face.filter.mode"
+    ],
+    "env.1": [
+      "face.amp.attack",
+      "face.amp.decay",
+      "face.amp.sustain",
+      "face.amp.release"
+    ],
+    "env.2": [
+      "face.fenv.attack",
+      "face.fenv.decay",
+      "face.fenv.sustain",
+      "face.fenv.release"
+    ],
+    "env.3": [
+      "face.fenv.amount"
+    ],
+    "lfo.1": [
+      "face.lfo.rate",
+      "face.lfo.shape",
+      "face.lfo.sync",
+      "face.lfo.beats"
+    ],
+    "delay.1": [
+      "face.delay.time",
+      "face.delay.beats",
+      "face.delay.fdbk",
+      "face.delay.sync",
+      "face.delay.mix"
+    ],
+    "delay.2": [
+      "face.delay.stereo",
+      "face.delay.filter"
+    ],
+    "reverb.1": [
+      "face.reverb.size",
+      "face.reverb.decay",
+      "face.reverb.damp",
+      "face.reverb.predly"
+    ],
+    "reverb.2": [
+      "face.reverb.mix"
+    ]
+  },
+  "rack": "GLASS CURRENT, KUROSHIO's digital wavetable voice (an example rack's faceplate)",
+  "coordinate_space": "the face's plate pixels at the house pitch for the face, the panel over it and the door hung below it (the open faceplate is 2140 x 788); the strip's own pixels; the host scales the whole rack uniformly",
+  "rack_pitch": {
+    "panel_w": 2140,
+    "u_px": 197.11,
+    "note": "EIA: 19 in panel, 1.75 in per unit"
+  },
+  "views": {
+    "face": {
+      "plate": "face:plate",
+      "rack_units": 2,
+      "source": "glass-current/closed.png",
+      "conversion": "closed.png's box from x 14 y 175 scaled by 0.998134 on both axes, then 363 scaled rows planned to 394"
+    },
+    "panel": {
+      "plate": "panel:plate",
+      "over": "face",
+      "source": "glass-current/open.png",
+      "conversion": "registered to closed.png by a shift of [-0.4699999988079071, -118.91999816894531] px, then scaled and its rows planned as the face's"
+    },
+    "door": {
+      "plate": "door:plate",
+      "below": "face",
+      "rack_units": 2,
+      "source": "glass-current/open.png",
+      "conversion": "as the panel, its rows continued below the face to the door's foot (664 rows)"
+    },
+    "strip": {
+      "plate": "strip:plate",
+      "rack_units": 1,
+      "source": "rack/overview-r2.png",
+      "conversion": "overview-r2.png's strip scaled by 1.9022 on both axes, its drawn proportion kept and centred in its unit (120 of 197 rows); its pixels strip-sharp.png's, registered by ECC onto that box and given overview-r2.png's tone"
+    }
+  },
+  "bindings": "each element binds its rack unit (an index into the design's units) and the unit module's local key; the host resolves the registry parameter per placed rack",
+  "assets": {
+    "face:plate": {
+      "file": "plates/glass-current-face.png",
+      "size": [
+        2140,
+        394
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d",
+      "note": "the face scaled to the panel, its rows planned to 2U; the VFD's letters and bar, the POWER LED's light and the knobs' lines taken off"
+    },
+    "panel:plate": {
+      "file": "plates/glass-current-panel.png",
+      "size": [
+        537,
+        394
+      ],
+      "role": "plate",
+      "alpha": true,
+      "motion": "drawn over the face plate at its anchor while the door is open",
+      "source": "glass-current/open.png, registered",
+      "source_sha256": "59a5413291e1fd96800c98dcec583a3be24131c3db8a30f136cc276d1b73afb6",
+      "note": "the open panel over the door's quarter, the hinges and the door's top: the lit page LED unlit, the LCD's labels and the soft knobs' lines taken off; its sides fade into the face",
+      "anchor": [
+        1513,
+        0
+      ]
+    },
+    "door:plate": {
+      "file": "plates/glass-current-door.png",
+      "size": [
+        529,
+        269
+      ],
+      "role": "plate",
+      "alpha": true,
+      "motion": "drawn below the face at its anchor while the door is open",
+      "source": "glass-current/open.png, registered",
+      "source_sha256": "59a5413291e1fd96800c98dcec583a3be24131c3db8a30f136cc276d1b73afb6",
+      "note": "the hanging door below the face with its chart, at the face's scale; transparent round it",
+      "anchor": [
+        1523,
+        394
+      ]
+    },
+    "strip:plate": {
+      "file": "plates/glass-current-strip.png",
+      "size": [
+        2140,
+        120
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static, while folded",
+      "source": "glass-current/strip-sharp.png, registered onto rack/overview-r2.png's strip",
+      "source_sha256": "c0555ff1425057b70df4e0c58aab2a531ecaa5d950eb5fcff36abba35401f016",
+      "note": "KUROSHIO's strip from strip-sharp.png, registered onto overview-r2.png's strip and sampled at 0.985 of its size, its drawn proportion kept and centred in its unit; the display's letters and the LED's light taken off",
+      "anchor": [
+        0,
+        38
+      ]
+    },
+    "face:vfd.segment.lit": {
+      "file": "parts/glass-current-face-vfd-segment-lit.png",
+      "size": [
+        23,
+        33
+      ],
+      "anchor": [
+        11.04,
+        16.09
+      ],
+      "role": "one lit segment of the VFD's bar with its half of the gaps either side, anchored at its middle",
+      "alpha": true,
+      "motion": "drawn at each segment's middle while the bar shows",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d"
+    },
+    "face:vfd.segment.unlit": {
+      "file": "parts/glass-current-face-vfd-segment-unlit.png",
+      "size": [
+        23,
+        33
+      ],
+      "anchor": [
+        11.26,
+        16.09
+      ],
+      "role": "one unlit segment of the VFD's bar with its half of the gaps either side, anchored at its middle",
+      "alpha": true,
+      "motion": "drawn at each segment's middle while the bar shows",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d"
+    },
+    "face:power.lit": {
+      "file": "parts/glass-current-face-power-lit.png",
+      "size": [
+        60,
+        55
+      ],
+      "anchor": [
+        29.89,
+        29.24
+      ],
+      "role": "the lit POWER LED's lens and glow, anchored at the lens's middle",
+      "alpha": true,
+      "motion": "shown while unit 0 is enabled",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d"
+    },
+    "face:facet.rotor": {
+      "file": "parts/glass-current-face-facet-rotor.png",
+      "size": [
+        14,
+        60
+      ],
+      "anchor": [
+        6.73,
+        58.01
+      ],
+      "role": "the coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d"
+    },
+    "face:drift.rotor": {
+      "file": "parts/glass-current-face-drift-rotor.png",
+      "size": [
+        14,
+        50
+      ],
+      "anchor": [
+        6.59,
+        45.78
+      ],
+      "role": "the coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d"
+    },
+    "face:echo.rotor": {
+      "file": "parts/glass-current-face-echo-rotor.png",
+      "size": [
+        14,
+        49
+      ],
+      "anchor": [
+        6.49,
+        46.35
+      ],
+      "role": "the coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d"
+    },
+    "face:horizon.rotor": {
+      "file": "parts/glass-current-face-horizon-rotor.png",
+      "size": [
+        14,
+        52
+      ],
+      "anchor": [
+        6.23,
+        47.32
+      ],
+      "role": "the coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/closed.png",
+      "source_sha256": "4c022105a3bb94d423ac9acc13c68d4bfb6aeaceaca3be2800bac493dcdd683d"
+    },
+    "panel:page.lit": {
+      "file": "parts/glass-current-panel-page-lit.png",
+      "size": [
+        138,
+        59
+      ],
+      "anchor": [
+        28.06,
+        29.79
+      ],
+      "role": "DELAY's lit page LED with its glow on the button, anchored at the lens's middle",
+      "alpha": true,
+      "motion": "shown on the chosen page's button",
+      "source": "glass-current/open.png",
+      "source_sha256": "59a5413291e1fd96800c98dcec583a3be24131c3db8a30f136cc276d1b73afb6"
+    },
+    "panel:soft1.rotor": {
+      "file": "parts/glass-current-panel-soft1-rotor.png",
+      "size": [
+        12,
+        34
+      ],
+      "anchor": [
+        5.41,
+        30.53
+      ],
+      "role": "soft knob 1's coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/open.png",
+      "source_sha256": "59a5413291e1fd96800c98dcec583a3be24131c3db8a30f136cc276d1b73afb6"
+    },
+    "panel:soft2.rotor": {
+      "file": "parts/glass-current-panel-soft2-rotor.png",
+      "size": [
+        14,
+        35
+      ],
+      "anchor": [
+        6.18,
+        30.52
+      ],
+      "role": "soft knob 2's coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/open.png",
+      "source_sha256": "59a5413291e1fd96800c98dcec583a3be24131c3db8a30f136cc276d1b73afb6"
+    },
+    "panel:soft3.rotor": {
+      "file": "parts/glass-current-panel-soft3-rotor.png",
+      "size": [
+        14,
+        36
+      ],
+      "anchor": [
+        6.66,
+        31.37
+      ],
+      "role": "soft knob 3's coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/open.png",
+      "source_sha256": "59a5413291e1fd96800c98dcec583a3be24131c3db8a30f136cc276d1b73afb6"
+    },
+    "panel:soft4.rotor": {
+      "file": "parts/glass-current-panel-soft4-rotor.png",
+      "size": [
+        15,
+        35
+      ],
+      "anchor": [
+        7.43,
+        30.55
+      ],
+      "role": "soft knob 4's coloured line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "glass-current/open.png",
+      "source_sha256": "59a5413291e1fd96800c98dcec583a3be24131c3db8a30f136cc276d1b73afb6"
+    },
+    "strip:power.lit": {
+      "file": "parts/glass-current-strip-power-lit.png",
+      "size": [
+        80,
+        79
+      ],
+      "anchor": [
+        39.43,
+        39.24
+      ],
+      "role": "the strip's lit POWER LED, anchored at the lens's middle",
+      "alpha": true,
+      "motion": "shown while unit 0 is enabled",
+      "source": "glass-current/strip-sharp.png",
+      "source_sha256": "c0555ff1425057b70df4e0c58aab2a531ecaa5d950eb5fcff36abba35401f016"
+    },
+    "procedural:lock-dot": {
+      "role": "lock dot",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "the stack's yellow lock dot at each element's geometry.dot"
+    },
+    "procedural:focus-ring": {
+      "role": "focus",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "2 px amber ring, 3 px outside the hit shape"
+    }
+  },
+  "groups": [
+    {
+      "id": "face.face",
+      "view": "face",
+      "label": "Glass Current",
+      "members": [
+        "face.facet",
+        "face.drift",
+        "face.echo",
+        "face.horizon",
+        "face.power",
+        "face.vfd",
+        "face.edit"
+      ],
+      "focus_order": [
+        "face.facet",
+        "face.drift",
+        "face.echo",
+        "face.horizon",
+        "face.edit"
+      ],
+      "visibility": "always"
+    },
+    {
+      "id": "face.panel",
+      "view": "panel",
+      "label": "Edit",
+      "members": [
+        "face.page.osc",
+        "face.page.filter",
+        "face.page.env",
+        "face.page.lfo",
+        "face.page.delay",
+        "face.page.reverb",
+        "panel.lcd",
+        "face.osc1.table",
+        "face.osc1.pos",
+        "face.osc1.tune",
+        "face.osc1.fine",
+        "face.osc2.table",
+        "face.osc2.pos",
+        "face.osc2.tune",
+        "face.osc2.fine",
+        "face.osc1.level",
+        "face.osc2.level",
+        "face.noise",
+        "face.filter.cutoff",
+        "face.filter.reso",
+        "face.filter.mode",
+        "face.amp.attack",
+        "face.amp.decay",
+        "face.amp.sustain",
+        "face.amp.release",
+        "face.fenv.attack",
+        "face.fenv.decay",
+        "face.fenv.sustain",
+        "face.fenv.release",
+        "face.fenv.amount",
+        "face.lfo.rate",
+        "face.lfo.shape",
+        "face.lfo.sync",
+        "face.lfo.beats",
+        "face.delay.time",
+        "face.delay.beats",
+        "face.delay.fdbk",
+        "face.delay.sync",
+        "face.delay.mix",
+        "face.delay.stereo",
+        "face.delay.filter",
+        "face.reverb.size",
+        "face.reverb.decay",
+        "face.reverb.damp",
+        "face.reverb.predly",
+        "face.reverb.mix",
+        "panel.still.1",
+        "panel.still.2",
+        "panel.still.3",
+        "panel.still.4"
+      ],
+      "focus_order": [
+        "face.page.osc",
+        "face.page.filter",
+        "face.page.env",
+        "face.page.lfo",
+        "face.page.delay",
+        "face.page.reverb",
+        "face.osc1.table",
+        "face.osc1.pos",
+        "face.osc1.tune",
+        "face.osc1.fine",
+        "face.osc2.table",
+        "face.osc2.pos",
+        "face.osc2.tune",
+        "face.osc2.fine",
+        "face.osc1.level",
+        "face.osc2.level",
+        "face.noise",
+        "face.filter.cutoff",
+        "face.filter.reso",
+        "face.filter.mode",
+        "face.amp.attack",
+        "face.amp.decay",
+        "face.amp.sustain",
+        "face.amp.release",
+        "face.fenv.attack",
+        "face.fenv.decay",
+        "face.fenv.sustain",
+        "face.fenv.release",
+        "face.fenv.amount",
+        "face.lfo.rate",
+        "face.lfo.shape",
+        "face.lfo.sync",
+        "face.lfo.beats",
+        "face.delay.time",
+        "face.delay.beats",
+        "face.delay.fdbk",
+        "face.delay.sync",
+        "face.delay.mix",
+        "face.delay.stereo",
+        "face.delay.filter",
+        "face.reverb.size",
+        "face.reverb.decay",
+        "face.reverb.damp",
+        "face.reverb.predly",
+        "face.reverb.mix"
+      ],
+      "visibility": "while the door is open",
+      "note": "the page buttons are one Tab stop; only the current screen's shown items take focus, left to right"
+    },
+    {
+      "id": "face.door",
+      "view": "door",
+      "label": "Edit door",
+      "members": [
+        "face.close"
+      ],
+      "focus_order": [
+        "face.close"
+      ],
+      "visibility": "while the door is open"
+    },
+    {
+      "id": "face.strip",
+      "view": "strip",
+      "label": "Strip",
+      "members": [
+        "strip.power",
+        "strip.name"
+      ],
+      "focus_order": [],
+      "visibility": "while folded"
+    }
+  ],
+  "elements": [
+    {
+      "id": "face.facet",
+      "view": "face",
+      "kind": "rotary",
+      "label": "FACET",
+      "vfd": "FACET",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.position",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0.0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          900.73,
+          226.01
+        ],
+        "face_r": 59.41,
+        "tick_center": [
+          901.26,
+          226.24
+        ],
+        "tick_r": 63.35,
+        "hit_r": 70.37,
+        "dot": [
+          951.9,
+          174.84
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.97
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.97
+          ]
+        ],
+        "printed_ticks": 15,
+        "note": "first tick to last over the design's focused range; the printed ticks between are unnumbered; a value beyond the range pins the pointer at its end"
+      },
+      "mockup": {
+        "pointer_angle": -29.09,
+        "drawn_value": 0.381,
+        "brief_value": "0.35"
+      },
+      "layers": {
+        "pointer": "face:facet.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.drift",
+      "view": "face",
+      "kind": "rotary",
+      "label": "DRIFT",
+      "vfd": "DRIFT",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.rate_hz",
+        "type": "float",
+        "range": [
+          0.05,
+          5
+        ],
+        "unit": "Hz",
+        "default": 1.0,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1071.59,
+          225.78
+        ],
+        "face_r": 48.29,
+        "tick_center": [
+          1071.95,
+          226.17
+        ],
+        "tick_r": 52.32,
+        "hit_r": 58.79,
+        "dot": [
+          1114.58,
+          182.79
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -121.55,
+          121.22
+        ],
+        "ticks": [
+          [
+            0.05,
+            -121.55
+          ],
+          [
+            5,
+            121.22
+          ]
+        ],
+        "printed_ticks": 15,
+        "note": "first tick to last over the design's focused range; the printed ticks between are unnumbered; a value beyond the range pins the pointer at its end"
+      },
+      "mockup": {
+        "pointer_angle": -26.09,
+        "drawn_value": 0.3058,
+        "brief_value": "0.35 Hz"
+      },
+      "layers": {
+        "pointer": "face:drift.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.echo",
+      "view": "face",
+      "kind": "rotary",
+      "label": "ECHO",
+      "vfd": "ECHO",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.mix",
+        "type": "float",
+        "range": [
+          0,
+          0.5
+        ],
+        "unit": "%",
+        "default": 0.25,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1260.49,
+          226.35
+        ],
+        "face_r": 50.08,
+        "tick_center": [
+          1261.07,
+          226.62
+        ],
+        "tick_r": 53.74,
+        "hit_r": 63.98,
+        "dot": [
+          1307.14,
+          179.7
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.3,
+          121.91
+        ],
+        "ticks": [
+          [
+            0,
+            -122.3
+          ],
+          [
+            0.5,
+            121.91
+          ]
+        ],
+        "printed_ticks": 15,
+        "note": "first tick to last over the design's focused range; the printed ticks between are unnumbered; a value beyond the range pins the pointer at its end"
+      },
+      "mockup": {
+        "pointer_angle": -44.99,
+        "drawn_value": 0.1583,
+        "brief_value": "15%"
+      },
+      "layers": {
+        "pointer": "face:echo.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.horizon",
+      "view": "face",
+      "kind": "rotary",
+      "label": "HORIZON",
+      "vfd": "HORIZON",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 2,
+        "key": "reverb.decay_seconds",
+        "type": "float",
+        "range": [
+          0.3,
+          8
+        ],
+        "unit": "s",
+        "default": 2.0,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1436.23,
+          226.32
+        ],
+        "face_r": 50.19,
+        "tick_center": [
+          1436.86,
+          226.7
+        ],
+        "tick_r": 54.04,
+        "hit_r": 64.38,
+        "dot": [
+          1483.17,
+          179.38
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.33,
+          121.94
+        ],
+        "ticks": [
+          [
+            0.3,
+            -122.33
+          ],
+          [
+            8,
+            121.94
+          ]
+        ],
+        "printed_ticks": 15,
+        "note": "first tick to last over the design's focused range; the printed ticks between are unnumbered; a value beyond the range pins the pointer at its end"
+      },
+      "mockup": {
+        "pointer_angle": 13.29,
+        "drawn_value": 1.8571,
+        "brief_value": "3.0 s"
+      },
+      "layers": {
+        "pointer": "face:horizon.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.power",
+      "view": "face",
+      "kind": "lamp",
+      "label": "POWER",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "enabled",
+        "type": "toggle",
+        "default": 1
+      },
+      "lit_value": 1,
+      "geometry": {
+        "led": [
+          134.89,
+          302.24
+        ],
+        "lens_r": 10.1
+      },
+      "layers": {
+        "lit": "face:power.lit"
+      },
+      "mockup": {
+        "drawn_value": 1
+      },
+      "input": {
+        "readback_only": true,
+        "note": "lit while unit 0 is enabled"
+      }
+    },
+    {
+      "id": "face.vfd",
+      "view": "face",
+      "kind": "display",
+      "role": "vfd",
+      "label": "VFD",
+      "group": "face.face",
+      "geometry": {
+        "glass": [
+          215.6,
+          133.78,
+          543.98,
+          143.73
+        ]
+      },
+      "display": {
+        "glass": [
+          215.6,
+          133.78,
+          543.98,
+          143.73
+        ],
+        "dots": {
+          "origin": [
+            258.72,
+            171.6
+          ],
+          "pitch": [
+            3.94,
+            4.14
+          ],
+          "profile": [
+            0.0
+          ],
+          "profile_step": 0.25,
+          "tint_bgr": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "peak": 0.0
+        },
+        "ink": {
+          "bgr": [
+            246,
+            236,
+            18
+          ],
+          "ripple": 0.313,
+          "ripple_radii": [
+            0.5,
+            2.0
+          ],
+          "ripple_measured": 0.313
+        },
+        "min_hscale": 0.8,
+        "lines": {
+          "line1": {
+            "text": "DELAY TIME 300ms",
+            "ink": [
+              256.99,
+              170.63,
+              614.32,
+              199.58
+            ],
+            "align": "left",
+            "max_right": 718.19,
+            "source": "open.png's line, its 16 cells; closed.png's FACET 0.35 sits on the same cells"
+          },
+          "line2": {
+            "text": "FDBK 20% MIX 15%",
+            "ink": [
+              256.99,
+              220.54,
+              613.32,
+              249.48
+            ],
+            "align": "left",
+            "max_right": 718.19,
+            "source": "open.png's line, its 16 cells; closed.png's FACET 0.35 sits on the same cells"
+          }
+        },
+        "bar": {
+          "lit": "face:vfd.segment.lit",
+          "unlit": "face:vfd.segment.unlit",
+          "centers": [
+            [
+              264.01,
+              233.09
+            ],
+            [
+              285.04,
+              233.09
+            ],
+            [
+              306.07,
+              233.09
+            ],
+            [
+              327.1,
+              233.09
+            ],
+            [
+              348.14,
+              233.09
+            ],
+            [
+              369.17,
+              233.09
+            ],
+            [
+              390.2,
+              233.09
+            ],
+            [
+              411.23,
+              233.09
+            ],
+            [
+              432.26,
+              233.09
+            ],
+            [
+              453.29,
+              233.09
+            ],
+            [
+              474.32,
+              233.09
+            ],
+            [
+              495.36,
+              233.09
+            ],
+            [
+              516.39,
+              233.09
+            ],
+            [
+              537.43,
+              233.09
+            ],
+            [
+              558.46,
+              233.09
+            ]
+          ],
+          "rule": "line 2 for a face knob: at each of the n segment centres the lit segment for the first ceil(p * n - 1e-6), p the touched face knob's pointer proportion, and the unlit segment for the rest",
+          "drawn_lit": 6
+        }
+      },
+      "mockup": {
+        "drawn_lines": [
+          "FACET 0.35",
+          "bar"
+        ],
+        "drawn_touch": "face.facet"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "the last control touched, its name and value over the bar or its screen"
+      }
+    },
+    {
+      "id": "face.edit",
+      "view": "face",
+      "kind": "action",
+      "label": "Open edit",
+      "group": "face.face",
+      "action": "toggle door",
+      "titles": [
+        "Open edit door",
+        "Close edit door"
+      ],
+      "geometry": {
+        "rect": [
+          1740.75,
+          29.97,
+          67.87,
+          28.95
+        ],
+        "hit_rect": [
+          1734.76,
+          29.97,
+          79.85,
+          34.94
+        ],
+        "dot": [
+          1812.61,
+          35.96
+        ]
+      },
+      "input": {
+        "click": "opens the edit door",
+        "keys": "Space/Enter",
+        "note": "the notch in the door's top edge; the open panel covers it"
+      }
+    },
+    {
+      "id": "face.page.osc",
+      "view": "panel",
+      "kind": "action",
+      "label": "OSC",
+      "group": "face.panel",
+      "action": "page",
+      "page": "osc",
+      "geometry": {
+        "rect": [
+          1587.5,
+          75.81,
+          120.78,
+          44.91
+        ],
+        "led": [
+          1606.21,
+          96.93
+        ],
+        "lens_r": 5.37,
+        "dot": [
+          1700.29,
+          83.79
+        ]
+      },
+      "layers": {
+        "lit": "panel:page.lit"
+      },
+      "input": {
+        "click": "chooses the page, or steps the chosen page's screens",
+        "keys": "Space/Enter steps; arrows choose",
+        "note": "one Tab stop for the six"
+      }
+    },
+    {
+      "id": "face.page.filter",
+      "view": "panel",
+      "kind": "action",
+      "label": "FILTER",
+      "group": "face.panel",
+      "action": "page",
+      "page": "filter",
+      "geometry": {
+        "rect": [
+          1725.25,
+          75.81,
+          119.77,
+          44.91
+        ],
+        "led": [
+          1743.85,
+          96.89
+        ],
+        "lens_r": 5.37,
+        "dot": [
+          1837.04,
+          83.79
+        ]
+      },
+      "layers": {
+        "lit": "panel:page.lit"
+      },
+      "input": {
+        "click": "chooses the page, or steps the chosen page's screens",
+        "keys": "Space/Enter steps; arrows choose",
+        "note": "one Tab stop for the six"
+      }
+    },
+    {
+      "id": "face.page.env",
+      "view": "panel",
+      "kind": "action",
+      "label": "ENV",
+      "group": "face.panel",
+      "action": "page",
+      "page": "env",
+      "geometry": {
+        "rect": [
+          1861.99,
+          75.81,
+          120.77,
+          44.91
+        ],
+        "led": [
+          1881.85,
+          96.71
+        ],
+        "lens_r": 5.37,
+        "dot": [
+          1974.78,
+          83.79
+        ]
+      },
+      "layers": {
+        "lit": "panel:page.lit"
+      },
+      "input": {
+        "click": "chooses the page, or steps the chosen page's screens",
+        "keys": "Space/Enter steps; arrows choose",
+        "note": "one Tab stop for the six"
+      }
+    },
+    {
+      "id": "face.page.lfo",
+      "view": "panel",
+      "kind": "action",
+      "label": "LFO",
+      "group": "face.panel",
+      "action": "page",
+      "page": "lfo",
+      "geometry": {
+        "rect": [
+          1587.5,
+          129.71,
+          120.78,
+          40.92
+        ],
+        "led": [
+          1606.24,
+          148.82
+        ],
+        "lens_r": 4.61,
+        "dot": [
+          1700.29,
+          137.69
+        ]
+      },
+      "layers": {
+        "lit": "panel:page.lit"
+      },
+      "input": {
+        "click": "chooses the page, or steps the chosen page's screens",
+        "keys": "Space/Enter steps; arrows choose",
+        "note": "one Tab stop for the six"
+      }
+    },
+    {
+      "id": "face.page.delay",
+      "view": "panel",
+      "kind": "action",
+      "label": "DELAY",
+      "group": "face.panel",
+      "action": "page",
+      "page": "delay",
+      "geometry": {
+        "rect": [
+          1725.25,
+          129.71,
+          119.77,
+          40.92
+        ],
+        "led": [
+          1744.06,
+          150.79
+        ],
+        "lens_r": 5.49,
+        "dot": [
+          1837.04,
+          137.69
+        ]
+      },
+      "layers": {
+        "lit": "panel:page.lit"
+      },
+      "input": {
+        "click": "chooses the page, or steps the chosen page's screens",
+        "keys": "Space/Enter steps; arrows choose",
+        "note": "one Tab stop for the six"
+      }
+    },
+    {
+      "id": "face.page.reverb",
+      "view": "panel",
+      "kind": "action",
+      "label": "REVERB",
+      "group": "face.panel",
+      "action": "page",
+      "page": "reverb",
+      "geometry": {
+        "rect": [
+          1861.99,
+          129.71,
+          120.77,
+          40.92
+        ],
+        "led": [
+          1882.01,
+          149.54
+        ],
+        "lens_r": 5.11,
+        "dot": [
+          1974.78,
+          137.69
+        ]
+      },
+      "layers": {
+        "lit": "panel:page.lit"
+      },
+      "input": {
+        "click": "chooses the page, or steps the chosen page's screens",
+        "keys": "Space/Enter steps; arrows choose",
+        "note": "one Tab stop for the six"
+      }
+    },
+    {
+      "id": "panel.lcd",
+      "view": "panel",
+      "kind": "display",
+      "role": "lcd",
+      "label": "LCD",
+      "group": "face.panel",
+      "geometry": {
+        "glass": [
+          1588.5,
+          199.58,
+          393.27,
+          38.92
+        ]
+      },
+      "display": {
+        "glass": [
+          1588.5,
+          199.58,
+          393.27,
+          38.92
+        ],
+        "dots": {
+          "origin": [
+            1588.5,
+            199.58
+          ],
+          "pitch": [
+            1.0,
+            1.0
+          ],
+          "profile": [
+            0.0
+          ],
+          "profile_step": 0.25,
+          "tint_bgr": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "peak": 0.0
+        },
+        "ink": {
+          "bgr": [
+            14,
+            27,
+            16
+          ],
+          "ripple": 0.0,
+          "ripple_radii": [
+            1.0,
+            2.0
+          ],
+          "ripple_measured": 0.0
+        },
+        "min_hscale": 0.8,
+        "lines": {
+          "slot1": {
+            "text": "TIME",
+            "ink": [
+              1619.44,
+              208.56,
+              1675.34,
+              228.52
+            ],
+            "align": "centre",
+            "column": [
+              1591.5,
+              1695.8
+            ]
+          },
+          "slot2": {
+            "text": "FDBK",
+            "ink": [
+              1715.26,
+              208.56,
+              1773.16,
+              228.52
+            ],
+            "align": "centre",
+            "column": [
+              1695.8,
+              1791.12
+            ]
+          },
+          "slot3": {
+            "text": "SYNC",
+            "ink": [
+              1809.09,
+              208.56,
+              1866.98,
+              228.52
+            ],
+            "align": "centre",
+            "column": [
+              1791.12,
+              1884.45
+            ]
+          },
+          "slot4": {
+            "text": "MIX",
+            "ink": [
+              1910.9,
+              208.56,
+              1950.82,
+              228.52
+            ],
+            "align": "centre",
+            "column": [
+              1884.45,
+              1978.77
+            ]
+          }
+        },
+        "glass_bgr": [
+          81,
+          167,
+          116
+        ],
+        "note": "solid strokes, no dots; each slot's label is centred on its drawn word and squeezed into its column"
+      },
+      "mockup": {
+        "drawn_lines": [
+          "TIME",
+          "FDBK",
+          "SYNC",
+          "MIX"
+        ],
+        "drawn_screen": "delay.1"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "each shown item's label over its slot; unused slots blank"
+      }
+    },
+    {
+      "id": "face.osc1.table",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 1 TABLE",
+      "vfd": "OSC 1 TABLE",
+      "lcd": "TABLE",
+      "group": "face.panel",
+      "screen": "osc.1",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.table",
+        "type": "choice",
+        "choices": [
+          "0",
+          "1"
+        ],
+        "range": [
+          0,
+          1
+        ],
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation; one detent per choice, spread over the sweep"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel, landing on the nearest detent",
+        "wheel": "steps one detent",
+        "double_click": "the parameter's default",
+        "keys": "arrows step one detent, Home/End"
+      },
+      "detents": true,
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc1.pos",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 1 POSITION",
+      "vfd": "OSC 1 POSITION",
+      "lcd": "POS",
+      "group": "face.panel",
+      "screen": "osc.1",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.position",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": "0.35",
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc1.tune",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 1 TUNE",
+      "vfd": "OSC 1 TUNE",
+      "lcd": "TUNE",
+      "group": "face.panel",
+      "screen": "osc.1",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.tune",
+        "type": "float",
+        "range": [
+          -24,
+          24
+        ],
+        "unit": "st",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            -24,
+            -122.06
+          ],
+          [
+            24,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc1.fine",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 1 FINE",
+      "vfd": "OSC 1 FINE",
+      "lcd": "FINE",
+      "group": "face.panel",
+      "screen": "osc.1",
+      "slot": 4,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.detune",
+        "type": "float",
+        "range": [
+          -100,
+          100
+        ],
+        "unit": "cent",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39,
+        "tick_center": [
+          1937.43,
+          291.55
+        ],
+        "tick_r": 33.39,
+        "hit_r": 37.39,
+        "dot": [
+          1963.87,
+          265.11
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            -100,
+            -122.06
+          ],
+          [
+            100,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc2.table",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 2 TABLE",
+      "vfd": "OSC 2 TABLE",
+      "lcd": "TABLE",
+      "group": "face.panel",
+      "screen": "osc.2",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.table",
+        "type": "choice",
+        "choices": [
+          "0",
+          "1"
+        ],
+        "range": [
+          0,
+          1
+        ],
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation; one detent per choice, spread over the sweep"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel, landing on the nearest detent",
+        "wheel": "steps one detent",
+        "double_click": "the parameter's default",
+        "keys": "arrows step one detent, Home/End"
+      },
+      "detents": true,
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc2.pos",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 2 POSITION",
+      "vfd": "OSC 2 POSITION",
+      "lcd": "POS",
+      "group": "face.panel",
+      "screen": "osc.2",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.position",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc2.tune",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 2 TUNE",
+      "vfd": "OSC 2 TUNE",
+      "lcd": "TUNE",
+      "group": "face.panel",
+      "screen": "osc.2",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.tune",
+        "type": "float",
+        "range": [
+          -24,
+          24
+        ],
+        "unit": "st",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            -24,
+            -122.06
+          ],
+          [
+            24,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc2.fine",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 2 FINE",
+      "vfd": "OSC 2 FINE",
+      "lcd": "FINE",
+      "group": "face.panel",
+      "screen": "osc.2",
+      "slot": 4,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.detune",
+        "type": "float",
+        "range": [
+          -100,
+          100
+        ],
+        "unit": "cent",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39,
+        "tick_center": [
+          1937.43,
+          291.55
+        ],
+        "tick_r": 33.39,
+        "hit_r": 37.39,
+        "dot": [
+          1963.87,
+          265.11
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            -100,
+            -122.06
+          ],
+          [
+            100,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc1.level",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 1 LEVEL",
+      "vfd": "OSC 1 LEVEL",
+      "lcd": "LEVEL",
+      "group": "face.panel",
+      "screen": "osc.3",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.1.level",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.5,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.osc2.level",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "OSC 2 LEVEL",
+      "vfd": "OSC 2 LEVEL",
+      "lcd": "LEVEL",
+      "group": "face.panel",
+      "screen": "osc.3",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.osc.2.level",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.5,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.noise",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "NOISE",
+      "vfd": "NOISE",
+      "lcd": "NOISE",
+      "group": "face.panel",
+      "screen": "osc.3",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.noise",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.filter.cutoff",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FILTER CUTOFF",
+      "vfd": "FILTER CUTOFF",
+      "lcd": "CUTOFF",
+      "group": "face.panel",
+      "screen": "filter.1",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.cutoff",
+        "type": "float",
+        "range": [
+          20,
+          20000
+        ],
+        "unit": "Hz",
+        "default": 4000,
+        "response": "parameter",
+        "skew": 0.25,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            20,
+            -122.06
+          ],
+          [
+            20000,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 4000,
+        "brief_value": "6.0 kHz",
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.filter.reso",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FILTER RESO",
+      "vfd": "FILTER RESO",
+      "lcd": "RESO",
+      "group": "face.panel",
+      "screen": "filter.1",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.resonance",
+        "type": "float",
+        "range": [
+          0,
+          0.95
+        ],
+        "unit": "",
+        "default": 0.25,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            0.95,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.25,
+        "brief_value": "0.15",
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.filter.mode",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FILTER MODE",
+      "vfd": "FILTER MODE",
+      "lcd": "MODE",
+      "group": "face.panel",
+      "screen": "filter.1",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter.mode",
+        "type": "choice",
+        "choices": [
+          "Lowpass",
+          "Bandpass",
+          "Highpass"
+        ],
+        "range": [
+          0,
+          2
+        ],
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            2,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation; one detent per choice, spread over the sweep"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel, landing on the nearest detent",
+        "wheel": "steps one detent",
+        "double_click": "the parameter's default",
+        "keys": "arrows step one detent, Home/End"
+      },
+      "detents": true,
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.amp.attack",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "AMP ATTACK",
+      "vfd": "AMP ATTACK",
+      "lcd": "ATK",
+      "group": "face.panel",
+      "screen": "env.1",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.amp.attack",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.005,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            20,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.005,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.amp.decay",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "AMP DECAY",
+      "vfd": "AMP DECAY",
+      "lcd": "DEC",
+      "group": "face.panel",
+      "screen": "env.1",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.amp.decay",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            20,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.15,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.amp.sustain",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "AMP SUSTAIN",
+      "vfd": "AMP SUSTAIN",
+      "lcd": "SUS",
+      "group": "face.panel",
+      "screen": "env.1",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.amp.sustain",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.65,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.65,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.amp.release",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "AMP RELEASE",
+      "vfd": "AMP RELEASE",
+      "lcd": "REL",
+      "group": "face.panel",
+      "screen": "env.1",
+      "slot": 4,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.amp.release",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39,
+        "tick_center": [
+          1937.43,
+          291.55
+        ],
+        "tick_r": 33.39,
+        "hit_r": 37.39,
+        "dot": [
+          1963.87,
+          265.11
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            20,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.15,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.fenv.attack",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FENV ATTACK",
+      "vfd": "FENV ATTACK",
+      "lcd": "ATK",
+      "group": "face.panel",
+      "screen": "env.2",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter_env.attack",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.005,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            20,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.005,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.fenv.decay",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FENV DECAY",
+      "vfd": "FENV DECAY",
+      "lcd": "DEC",
+      "group": "face.panel",
+      "screen": "env.2",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter_env.decay",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            20,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.15,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.fenv.sustain",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FENV SUSTAIN",
+      "vfd": "FENV SUSTAIN",
+      "lcd": "SUS",
+      "group": "face.panel",
+      "screen": "env.2",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter_env.sustain",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.65,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.65,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.fenv.release",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FENV RELEASE",
+      "vfd": "FENV RELEASE",
+      "lcd": "REL",
+      "group": "face.panel",
+      "screen": "env.2",
+      "slot": 4,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter_env.release",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39,
+        "tick_center": [
+          1937.43,
+          291.55
+        ],
+        "tick_r": 33.39,
+        "hit_r": 37.39,
+        "dot": [
+          1963.87,
+          265.11
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            20,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.15,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.fenv.amount",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "FENV AMOUNT",
+      "vfd": "FENV AMOUNT",
+      "lcd": "AMT",
+      "group": "face.panel",
+      "screen": "env.3",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "wavetable.filter_env.octaves",
+        "type": "float",
+        "range": [
+          -8,
+          8
+        ],
+        "unit": "oct",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            -8,
+            -122.06
+          ],
+          [
+            8,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.lfo.rate",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "LFO RATE",
+      "vfd": "LFO RATE",
+      "lcd": "RATE",
+      "group": "face.panel",
+      "screen": "lfo.1",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.rate_hz",
+        "type": "float",
+        "range": [
+          0.05,
+          40
+        ],
+        "unit": "Hz",
+        "default": 1,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0.05,
+            -122.06
+          ],
+          [
+            40,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 1,
+        "brief_value": "0.35 Hz",
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.lfo.shape",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "LFO SHAPE",
+      "vfd": "LFO SHAPE",
+      "lcd": "SHAPE",
+      "group": "face.panel",
+      "screen": "lfo.1",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.shape",
+        "type": "choice",
+        "choices": [
+          "Sine",
+          "Triangle",
+          "Saw",
+          "Square"
+        ],
+        "range": [
+          0,
+          3
+        ],
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            3,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation; one detent per choice, spread over the sweep"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel, landing on the nearest detent",
+        "wheel": "steps one detent",
+        "double_click": "the parameter's default",
+        "keys": "arrows step one detent, Home/End"
+      },
+      "detents": true,
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.lfo.sync",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "LFO SYNC",
+      "vfd": "LFO SYNC",
+      "lcd": "SYNC",
+      "group": "face.panel",
+      "screen": "lfo.1",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.synced",
+        "type": "toggle",
+        "choices": [
+          "Off",
+          "On"
+        ],
+        "range": [
+          0,
+          1
+        ],
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation; one detent per choice, spread over the sweep"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel, landing on the nearest detent",
+        "wheel": "steps one detent",
+        "double_click": "the parameter's default",
+        "keys": "arrows step one detent, Home/End"
+      },
+      "detents": true,
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.lfo.beats",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "LFO BEATS",
+      "vfd": "LFO BEATS",
+      "lcd": "BEATS",
+      "group": "face.panel",
+      "screen": "lfo.1",
+      "slot": 4,
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.beats",
+        "type": "float",
+        "range": [
+          0.0625,
+          16
+        ],
+        "unit": "beats",
+        "default": 1,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39,
+        "tick_center": [
+          1937.43,
+          291.55
+        ],
+        "tick_r": 33.39,
+        "hit_r": 37.39,
+        "dot": [
+          1963.87,
+          265.11
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0.0625,
+            -122.06
+          ],
+          [
+            16,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 1,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.delay.time",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "DELAY TIME",
+      "vfd": "DELAY TIME",
+      "lcd": "TIME",
+      "group": "face.panel",
+      "screen": "delay.1",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.seconds",
+        "type": "float",
+        "range": [
+          0.001,
+          4
+        ],
+        "unit": "s",
+        "default": 0.25,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0.001,
+            -122.06
+          ],
+          [
+            4,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "shown_when": {
+        "unit": 1,
+        "key": "delay.synced",
+        "value": 0
+      },
+      "mockup": {
+        "pointer_angle": -0.06,
+        "drawn_value": 2.002,
+        "brief_value": "300 ms"
+      }
+    },
+    {
+      "id": "face.delay.beats",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "DELAY TIME",
+      "vfd": "DELAY TIME",
+      "lcd": "TIME",
+      "group": "face.panel",
+      "screen": "delay.1",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.beats",
+        "type": "float",
+        "range": [
+          0.0625,
+          1
+        ],
+        "unit": "beats",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0.0625,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "shown_when": {
+        "unit": 1,
+        "key": "delay.synced",
+        "value": 1
+      },
+      "mockup": {
+        "drawn_value": 0.5,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.delay.fdbk",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "DELAY FDBK",
+      "vfd": "DELAY FDBK",
+      "lcd": "FDBK",
+      "group": "face.panel",
+      "screen": "delay.1",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.feedback",
+        "type": "float",
+        "range": [
+          0,
+          0.95
+        ],
+        "unit": "%",
+        "default": 0.35,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            0.95,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "pointer_angle": -0.37,
+        "drawn_value": 0.4741,
+        "brief_value": "20%"
+      }
+    },
+    {
+      "id": "face.delay.sync",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "DELAY SYNC",
+      "vfd": "DELAY SYNC",
+      "lcd": "SYNC",
+      "group": "face.panel",
+      "screen": "delay.1",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.synced",
+        "type": "toggle",
+        "choices": [
+          "Off",
+          "On"
+        ],
+        "range": [
+          0,
+          1
+        ],
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation; one detent per choice, spread over the sweep"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel, landing on the nearest detent",
+        "wheel": "steps one detent",
+        "double_click": "the parameter's default",
+        "keys": "arrows step one detent, Home/End"
+      },
+      "detents": true,
+      "mockup": {
+        "pointer_angle": 0.63,
+        "drawn_value": 0,
+        "brief_value": "OFF",
+        "note": "drawn between its detents; OFF, as the drawn VFD's TIME is the seconds"
+      }
+    },
+    {
+      "id": "face.delay.mix",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "DELAY MIX",
+      "vfd": "DELAY MIX",
+      "lcd": "MIX",
+      "group": "face.panel",
+      "screen": "delay.1",
+      "slot": 4,
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.mix",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.25,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39,
+        "tick_center": [
+          1937.43,
+          291.55
+        ],
+        "tick_r": 33.39,
+        "hit_r": 37.39,
+        "dot": [
+          1963.87,
+          265.11
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "pointer_angle": 2.42,
+        "drawn_value": 0.5105,
+        "brief_value": "15%"
+      }
+    },
+    {
+      "id": "face.delay.stereo",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "DELAY STEREO",
+      "vfd": "DELAY STEREO",
+      "lcd": "STEREO",
+      "group": "face.panel",
+      "screen": "delay.2",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.stereo",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.delay.filter",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "DELAY FILTER",
+      "vfd": "DELAY FILTER",
+      "lcd": "FILTER",
+      "group": "face.panel",
+      "screen": "delay.2",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 1,
+        "key": "delay.filter_hz",
+        "type": "float",
+        "range": [
+          20,
+          20000
+        ],
+        "unit": "Hz",
+        "default": 12000,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            20,
+            -122.06
+          ],
+          [
+            20000,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 12000,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.reverb.size",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "REVERB SIZE",
+      "vfd": "REVERB SIZE",
+      "lcd": "SIZE",
+      "group": "face.panel",
+      "screen": "reverb.1",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 2,
+        "key": "reverb.size",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.5,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.reverb.decay",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "REVERB DECAY",
+      "vfd": "REVERB DECAY",
+      "lcd": "DECAY",
+      "group": "face.panel",
+      "screen": "reverb.1",
+      "slot": 2,
+      "binding": {
+        "rack_unit": 2,
+        "key": "reverb.decay_seconds",
+        "type": "float",
+        "range": [
+          0.1,
+          20
+        ],
+        "unit": "s",
+        "default": 2,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1730.18,
+          291.52
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1756.63,
+          265.07
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0.1,
+            -122.06
+          ],
+          [
+            20,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 2,
+        "brief_value": "3.0 s",
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.reverb.damp",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "REVERB DAMP",
+      "vfd": "REVERB DAMP",
+      "lcd": "DAMP",
+      "group": "face.panel",
+      "screen": "reverb.1",
+      "slot": 3,
+      "binding": {
+        "rack_unit": 2,
+        "key": "reverb.damping",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41,
+        "tick_center": [
+          1832.66,
+          291.37
+        ],
+        "tick_r": 33.41,
+        "hit_r": 37.41,
+        "dot": [
+          1859.11,
+          264.92
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.5,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.reverb.predly",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "REVERB PREDLY",
+      "vfd": "REVERB PREDLY",
+      "lcd": "PREDLY",
+      "group": "face.panel",
+      "screen": "reverb.1",
+      "slot": 4,
+      "binding": {
+        "rack_unit": 2,
+        "key": "reverb.predelay_ms",
+        "type": "float",
+        "range": [
+          0,
+          250
+        ],
+        "unit": "ms",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39,
+        "tick_center": [
+          1937.43,
+          291.55
+        ],
+        "tick_r": 33.39,
+        "hit_r": 37.39,
+        "dot": [
+          1963.87,
+          265.11
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            250,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": null,
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "face.reverb.mix",
+      "view": "panel",
+      "kind": "rotary",
+      "label": "REVERB MIX",
+      "vfd": "REVERB MIX",
+      "lcd": "MIX",
+      "group": "face.panel",
+      "screen": "reverb.2",
+      "slot": 1,
+      "binding": {
+        "rack_unit": 2,
+        "key": "reverb.mix",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.25,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47,
+        "tick_center": [
+          1627.41,
+          291.53
+        ],
+        "tick_r": 33.47,
+        "hit_r": 37.47,
+        "dot": [
+          1653.91,
+          265.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.06,
+          121.76
+        ],
+        "ticks": [
+          [
+            0,
+            -122.06
+          ],
+          [
+            1,
+            121.76
+          ]
+        ],
+        "note": "the face knobs' sweep over the registry range, through its normalisation"
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "mockup": {
+        "drawn_value": 0.25,
+        "brief_value": "18%",
+        "note": "not on the drawn screen; the registry's default"
+      }
+    },
+    {
+      "id": "panel.still.1",
+      "view": "panel",
+      "kind": "still",
+      "label": "Spare knob 1",
+      "group": "face.panel",
+      "slot": 1,
+      "geometry": {
+        "pivot": [
+          1627.41,
+          291.53
+        ],
+        "face_r": 33.47
+      },
+      "layers": {
+        "pointer": "panel:soft1.rotor"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "drawn upright where the screen leaves its slot unused; not focusable"
+      }
+    },
+    {
+      "id": "panel.still.2",
+      "view": "panel",
+      "kind": "still",
+      "label": "Spare knob 2",
+      "group": "face.panel",
+      "slot": 2,
+      "geometry": {
+        "pivot": [
+          1730.18,
+          291.52
+        ],
+        "face_r": 33.41
+      },
+      "layers": {
+        "pointer": "panel:soft2.rotor"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "drawn upright where the screen leaves its slot unused; not focusable"
+      }
+    },
+    {
+      "id": "panel.still.3",
+      "view": "panel",
+      "kind": "still",
+      "label": "Spare knob 3",
+      "group": "face.panel",
+      "slot": 3,
+      "geometry": {
+        "pivot": [
+          1832.66,
+          291.37
+        ],
+        "face_r": 33.41
+      },
+      "layers": {
+        "pointer": "panel:soft3.rotor"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "drawn upright where the screen leaves its slot unused; not focusable"
+      }
+    },
+    {
+      "id": "panel.still.4",
+      "view": "panel",
+      "kind": "still",
+      "label": "Spare knob 4",
+      "group": "face.panel",
+      "slot": 4,
+      "geometry": {
+        "pivot": [
+          1937.43,
+          291.55
+        ],
+        "face_r": 33.39
+      },
+      "layers": {
+        "pointer": "panel:soft4.rotor"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "drawn upright where the screen leaves its slot unused; not focusable"
+      }
+    },
+    {
+      "id": "face.close",
+      "view": "door",
+      "kind": "action",
+      "label": "Close edit",
+      "group": "face.door",
+      "action": "toggle door",
+      "titles": [
+        "Open edit door",
+        "Close edit door"
+      ],
+      "geometry": {
+        "rect": [
+          1756.19,
+          628.8,
+          57.89,
+          24.96
+        ],
+        "hit_rect": [
+          1750.2,
+          622.81,
+          69.87,
+          30.95
+        ],
+        "dot": [
+          1818.07,
+          647.77
+        ]
+      },
+      "input": {
+        "click": "closes the edit door",
+        "keys": "Space/Enter",
+        "note": "the notch in the hanging door's foot"
+      }
+    },
+    {
+      "id": "strip.power",
+      "view": "strip",
+      "kind": "lamp",
+      "label": "POWER",
+      "group": "face.strip",
+      "binding": {
+        "rack_unit": 0,
+        "key": "enabled",
+        "type": "toggle",
+        "default": 1
+      },
+      "lit_value": 1,
+      "geometry": {
+        "led": [
+          476.43,
+          86.24
+        ],
+        "lens_r": 9.25
+      },
+      "layers": {
+        "lit": "strip:power.lit"
+      },
+      "mockup": {
+        "drawn_value": 1
+      },
+      "input": {
+        "readback_only": true,
+        "note": "lit while unit 0 is enabled"
+      }
+    },
+    {
+      "id": "strip.name",
+      "view": "strip",
+      "kind": "display",
+      "role": "name",
+      "label": "Name",
+      "group": "face.strip",
+      "geometry": {
+        "glass": [
+          525.01,
+          68.44,
+          403.26,
+          64.67
+        ]
+      },
+      "display": {
+        "glass": [
+          525.01,
+          68.44,
+          403.26,
+          64.67
+        ],
+        "dots": {
+          "origin": [
+            563.05,
+            85.56
+          ],
+          "pitch": [
+            3.76,
+            3.94
+          ],
+          "profile": [
+            0.0
+          ],
+          "profile_step": 0.25,
+          "tint_bgr": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "peak": 0.0
+        },
+        "ink": {
+          "bgr": [
+            253,
+            241,
+            25
+          ],
+          "ripple": 0.313,
+          "ripple_radii": [
+            0.48,
+            1.9
+          ],
+          "ripple_measured": null
+        },
+        "min_hscale": 0.8,
+        "lines": {
+          "name": {
+            "text": "GLASS CURRENT",
+            "ink": [
+              563.05,
+              85.56,
+              835.07,
+              112.19
+            ],
+            "align": "left",
+            "text_fixed": "GLASS CURRENT",
+            "max_right": 890.23
+          }
+        },
+        "note": "drawn as solid strokes at the overview's scale; lettered as the face's VFD is, its dots scaled to the name"
+      },
+      "mockup": {
+        "drawn_lines": [
+          "GLASS CURRENT"
+        ]
+      },
+      "input": {
+        "readback_only": true,
+        "note": "the model's name"
+      }
+    }
+  ]
+}

@@ -1,0 +1,3296 @@
+{
+  "format": "ai-rack-maker-skin",
+  "version": 1,
+  "status": "PROTOTYPE, not a product schema",
+  "design_id": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+  "maker": "HALLORAN ELECTRONIC MUSIC CO.",
+  "model": "ANALOG VOICE MODEL 74",
+  "units": 3,
+  "reveal": {
+    "kind": "drawer",
+    "view": "deck",
+    "front": "front",
+    "units": 4,
+    "opener": "face.programmer",
+    "titles": [
+      "Open programmer",
+      "Close programmer"
+    ],
+    "motion": {
+      "ms": 200
+    }
+  },
+  "rack": "EMBER REED, HALLORAN's analog voice (an example rack's faceplate)",
+  "coordinate_space": "each view's own plate pixels at the house pitch; the host stacks the face, the deck while open, and the front, and scales the whole rack uniformly",
+  "rack_pitch": {
+    "panel_w": 2140,
+    "u_px": 197.11,
+    "note": "EIA: 19 in panel, 1.75 in per unit"
+  },
+  "views": {
+    "face": {
+      "plate": "face:plate",
+      "rack_units": 2,
+      "source": "ember-reed/closed.png",
+      "conversion": "closed.png's box from x 13 y 80 scaled by 0.9972041006523765 on both axes, then 409 scaled rows planned to 394"
+    },
+    "deck": {
+      "plate": "deck:plate",
+      "rack_units": 4,
+      "between": [
+        "face",
+        "front"
+      ],
+      "source": "ember-reed/open.png",
+      "conversion": "open.png's box from x 9.8100004196167 y 346.12 scaled by 1.411470772331743 on both axes, then 700 scaled rows planned to 788; the runners outside the flat panel stretched; its pixels deck-sharp.png's, registered by ECC onto that box and given open.png's tone"
+    },
+    "front": {
+      "plate": "front:plate",
+      "rack_units": 1,
+      "source": "ember-reed/closed.png",
+      "conversion": "closed.png's box from x 13 y 493 scaled by 0.9972041006523765 on both axes, then 96 scaled rows planned to 197"
+    }
+  },
+  "bindings": "each element binds its rack unit (an index into the design's units) and the unit module's local key; the host resolves the registry parameter per placed rack",
+  "assets": {
+    "face:plate": {
+      "file": "plates/ember-reed-face.png",
+      "size": [
+        2140,
+        394
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "ember-reed/closed.png, through the approved spike's extracted plate (pointers, fader caps and the lamp's glow removed, the lens unlit)",
+      "source_sha256": "d347b40b5856227d3f76c29e0dc4a06118150063a3c96c8ee073f4c73c836b5b",
+      "note": "the approved spike's plate (pointers, fader caps and the lamp's glow removed, the lens unlit), scaled to the panel and 15 plain rows dropped"
+    },
+    "front:plate": {
+      "file": "plates/ember-reed-front.png",
+      "size": [
+        2140,
+        197
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "ember-reed/closed.png",
+      "source_sha256": "d347b40b5856227d3f76c29e0dc4a06118150063a3c96c8ee073f4c73c836b5b",
+      "note": "the drawer front with its finger pull, scaled and plain rows repeated above and below the pull"
+    },
+    "deck:plate": {
+      "file": "plates/ember-reed-deck.png",
+      "size": [
+        2140,
+        788
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck (pointers and bats removed)",
+      "source_sha256": "0a5a208244d8e4aa530e75ba27572e8dd508d447ff2664aad38779d4d6a78f64",
+      "note": "the PROGRAMMER deck from deck-sharp.png, registered onto open.png's deck and sampled at 0.985 of its size, its pointers and bats removed (caps rebuilt from their own pixels), plain rows repeated"
+    },
+    "face:air.rotor": {
+      "file": "parts/ember-reed-face-air-rotor.png",
+      "size": [
+        19,
+        106
+      ],
+      "anchor": [
+        8.82,
+        102.61
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/closed.png, through the approved spike's extracted plate"
+    },
+    "face:air.knurl": {
+      "file": "parts/ember-reed-face-air-knurl.png",
+      "size": [
+        229,
+        5496
+      ],
+      "anchor": [
+        114.11,
+        113.74
+      ],
+      "role": "the grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "the approved spike's grip strip (the drawn ring rebuilt with even teeth), resampled to the face's scale",
+      "frames": 24,
+      "teeth": 101,
+      "rest_angle": 24.83,
+      "frame_size": [
+        229,
+        229
+      ]
+    },
+    "face:bite.rotor": {
+      "file": "parts/ember-reed-face-bite-rotor.png",
+      "size": [
+        18,
+        63
+      ],
+      "anchor": [
+        8.43,
+        60.7
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/closed.png, through the approved spike's extracted plate"
+    },
+    "face:bite.knurl": {
+      "file": "parts/ember-reed-face-bite-knurl.png",
+      "size": [
+        150,
+        3600
+      ],
+      "anchor": [
+        74.09,
+        74.37
+      ],
+      "role": "the grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "the approved spike's grip strip (the drawn ring rebuilt with even teeth), resampled to the face's scale",
+      "frames": 24,
+      "teeth": 86,
+      "rest_angle": -63.74,
+      "frame_size": [
+        150,
+        150
+      ]
+    },
+    "face:grain.rotor": {
+      "file": "parts/ember-reed-face-grain-rotor.png",
+      "size": [
+        20,
+        63
+      ],
+      "anchor": [
+        9.99,
+        60.46
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/closed.png, through the approved spike's extracted plate"
+    },
+    "face:grain.knurl": {
+      "file": "parts/ember-reed-face-grain-knurl.png",
+      "size": [
+        148,
+        3552
+      ],
+      "anchor": [
+        73.13,
+        73.13
+      ],
+      "role": "the grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "the approved spike's grip strip (the drawn ring rebuilt with even teeth), resampled to the face's scale",
+      "frames": 24,
+      "teeth": 92,
+      "rest_angle": -52.88,
+      "frame_size": [
+        148,
+        148
+      ]
+    },
+    "face:fader.cap": {
+      "file": "parts/ember-reed-face-fader-cap.png",
+      "size": [
+        56,
+        67
+      ],
+      "anchor": [
+        27.0,
+        32.5
+      ],
+      "role": "BLOOM's burnt-orange cap and its contact shadow, shared by the three faders",
+      "alpha": true,
+      "motion": "slides with the value",
+      "source": "ember-reed/closed.png, through the approved spike's extracted plate"
+    },
+    "face:lamp.lit": {
+      "file": "parts/ember-reed-face-lamp-lit.png",
+      "size": [
+        58,
+        58
+      ],
+      "anchor": [
+        28.2,
+        28.8
+      ],
+      "role": "the lit lamp, lens and glow",
+      "alpha": true,
+      "motion": "shown while the lamp's value is lit",
+      "source": "ember-reed/closed.png, through the approved spike's extracted plate",
+      "lens_r": 26.92
+    },
+    "deck:osc1.wave.pointer": {
+      "file": "parts/ember-reed-deck-osc1-wave-pointer.png",
+      "size": [
+        18,
+        53
+      ],
+      "anchor": [
+        9.15,
+        60.52
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc1.tune.pointer": {
+      "file": "parts/ember-reed-deck-osc1-tune-pointer.png",
+      "size": [
+        17,
+        41
+      ],
+      "anchor": [
+        8.03,
+        37.5
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc1.fine.pointer": {
+      "file": "parts/ember-reed-deck-osc1-fine-pointer.png",
+      "size": [
+        18,
+        39
+      ],
+      "anchor": [
+        8.13,
+        37.48
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc1.width.pointer": {
+      "file": "parts/ember-reed-deck-osc1-width-pointer.png",
+      "size": [
+        18,
+        41
+      ],
+      "anchor": [
+        8.61,
+        38.36
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc1.level.pointer": {
+      "file": "parts/ember-reed-deck-osc1-level-pointer.png",
+      "size": [
+        18,
+        39
+      ],
+      "anchor": [
+        8.73,
+        38.54
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc2.wave.pointer": {
+      "file": "parts/ember-reed-deck-osc2-wave-pointer.png",
+      "size": [
+        21,
+        47
+      ],
+      "anchor": [
+        9.49,
+        60.27
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc2.tune.pointer": {
+      "file": "parts/ember-reed-deck-osc2-tune-pointer.png",
+      "size": [
+        18,
+        39
+      ],
+      "anchor": [
+        7.82,
+        37.71
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc2.fine.pointer": {
+      "file": "parts/ember-reed-deck-osc2-fine-pointer.png",
+      "size": [
+        18,
+        39
+      ],
+      "anchor": [
+        8.55,
+        37.74
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc2.level.pointer": {
+      "file": "parts/ember-reed-deck-osc2-level-pointer.png",
+      "size": [
+        18,
+        42
+      ],
+      "anchor": [
+        9.24,
+        38.51
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:osc2.noise.pointer": {
+      "file": "parts/ember-reed-deck-osc2-noise-pointer.png",
+      "size": [
+        18,
+        40
+      ],
+      "anchor": [
+        8.55,
+        38.66
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:fenv.amount.pointer": {
+      "file": "parts/ember-reed-deck-fenv-amount-pointer.png",
+      "size": [
+        19,
+        39
+      ],
+      "anchor": [
+        8.77,
+        37.52
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:fenv.attack.pointer": {
+      "file": "parts/ember-reed-deck-fenv-attack-pointer.png",
+      "size": [
+        16,
+        41
+      ],
+      "anchor": [
+        8.02,
+        39.22
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:fenv.sustain.pointer": {
+      "file": "parts/ember-reed-deck-fenv-sustain-pointer.png",
+      "size": [
+        16,
+        32
+      ],
+      "anchor": [
+        8.08,
+        30.53
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:fenv.release.pointer": {
+      "file": "parts/ember-reed-deck-fenv-release-pointer.png",
+      "size": [
+        18,
+        40
+      ],
+      "anchor": [
+        9.47,
+        38.41
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:amp.decay.pointer": {
+      "file": "parts/ember-reed-deck-amp-decay-pointer.png",
+      "size": [
+        17,
+        44
+      ],
+      "anchor": [
+        7.39,
+        41.85
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:amp.sustain.pointer": {
+      "file": "parts/ember-reed-deck-amp-sustain-pointer.png",
+      "size": [
+        17,
+        45
+      ],
+      "anchor": [
+        8.36,
+        43.67
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:lfo.rate.pointer": {
+      "file": "parts/ember-reed-deck-lfo-rate-pointer.png",
+      "size": [
+        17,
+        44
+      ],
+      "anchor": [
+        7.25,
+        43.16
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:lfo.shape.pointer": {
+      "file": "parts/ember-reed-deck-lfo-shape-pointer.png",
+      "size": [
+        17,
+        48
+      ],
+      "anchor": [
+        8.27,
+        53.3
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:vel-air.pointer": {
+      "file": "parts/ember-reed-deck-vel-air-pointer.png",
+      "size": [
+        17,
+        38
+      ],
+      "anchor": [
+        8.4,
+        40.21
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:drive.tone.pointer": {
+      "file": "parts/ember-reed-deck-drive-tone-pointer.png",
+      "size": [
+        18,
+        45
+      ],
+      "anchor": [
+        8.31,
+        41.7
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:drive.mix.pointer": {
+      "file": "parts/ember-reed-deck-drive-mix-pointer.png",
+      "size": [
+        18,
+        43
+      ],
+      "anchor": [
+        7.68,
+        40.69
+      ],
+      "role": "white line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "motion": "rotates about the pivot",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:fenv.mode.up": {
+      "file": "parts/ember-reed-deck-fenv-mode-up.png",
+      "size": [
+        42,
+        69
+      ],
+      "anchor": [
+        17.0,
+        59.57
+      ],
+      "role": "bat up (LP), as drawn",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:fenv.mode.down": {
+      "file": "parts/ember-reed-deck-fenv-mode-down.png",
+      "size": [
+        42,
+        49
+      ],
+      "anchor": [
+        17.0,
+        5.57
+      ],
+      "role": "bat down (HP): the drawn bat's shaft mirrored about the pivot and foreshortened by 0.608, its end upright",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck, derived"
+    },
+    "deck:fenv.mode.middle": {
+      "file": "parts/ember-reed-deck-fenv-mode-middle.png",
+      "size": [
+        30,
+        30
+      ],
+      "anchor": [
+        14.5,
+        14.5
+      ],
+      "role": "bat in the middle (BP): seen end-on, its rounded end over the pivot",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck, derived",
+      "anchor_is": "the bat's end, drawn at the pivot"
+    },
+    "deck:lfo.sync.up": {
+      "file": "parts/ember-reed-deck-lfo-sync-up.png",
+      "size": [
+        42,
+        66
+      ],
+      "anchor": [
+        16.86,
+        56.85
+      ],
+      "role": "bat up (FREE), as drawn",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:lfo.sync.down": {
+      "file": "parts/ember-reed-deck-lfo-sync-down.png",
+      "size": [
+        42,
+        47
+      ],
+      "anchor": [
+        16.86,
+        5.85
+      ],
+      "role": "bat down (SYNC): the drawn bat's shaft mirrored about the pivot and foreshortened by 0.608, its end upright",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck, derived"
+    },
+    "deck:drive.shape.up": {
+      "file": "parts/ember-reed-deck-drive-shape-up.png",
+      "size": [
+        41,
+        69
+      ],
+      "anchor": [
+        15.79,
+        59.61
+      ],
+      "role": "bat up (TANH), as drawn",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck"
+    },
+    "deck:drive.shape.down": {
+      "file": "parts/ember-reed-deck-drive-shape-down.png",
+      "size": [
+        41,
+        48
+      ],
+      "anchor": [
+        15.79,
+        5.61
+      ],
+      "role": "bat down (SOFT): the drawn bat's shaft mirrored about the pivot and foreshortened by 0.608, its end upright",
+      "alpha": true,
+      "motion": "static per position",
+      "source": "ember-reed/deck-sharp.png, registered onto open.png's deck, derived"
+    },
+    "procedural:lock-dot": {
+      "role": "lock dot",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "the stack's yellow lock dot at each element's geometry.dot"
+    },
+    "procedural:focus-ring": {
+      "role": "focus",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "2 px amber ring, 3 px outside the hit shape"
+    },
+    "procedural:tape": {
+      "role": "console tape",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "the house skin's tape blank and marker lettering, over geometry.tape while the printed legend is untrue"
+    }
+  },
+  "groups": [
+    {
+      "id": "face.face",
+      "view": "face",
+      "label": "Ember Reed",
+      "members": [
+        "face.air",
+        "face.bite",
+        "face.bloom",
+        "face.attack",
+        "face.release",
+        "face.grain",
+        "face.lamp"
+      ],
+      "focus_order": [
+        "face.air",
+        "face.bite",
+        "face.bloom",
+        "face.attack",
+        "face.release",
+        "face.grain"
+      ],
+      "visibility": "always"
+    },
+    {
+      "id": "face.deck",
+      "view": "deck",
+      "label": "Programmer",
+      "members": [
+        "face.osc1.wave",
+        "face.osc1.tune",
+        "face.osc1.fine",
+        "face.osc1.width",
+        "face.osc1.level",
+        "face.osc2.wave",
+        "face.osc2.tune",
+        "face.osc2.fine",
+        "face.osc2.level",
+        "face.osc2.noise",
+        "face.fenv.mode",
+        "face.fenv.amount",
+        "face.fenv.attack",
+        "face.fenv.sustain",
+        "face.fenv.release",
+        "face.amp.decay",
+        "face.amp.sustain",
+        "face.lfo.rate",
+        "face.lfo.shape",
+        "face.vel-air",
+        "face.lfo.sync",
+        "face.drive.shape",
+        "face.drive.tone",
+        "face.drive.mix"
+      ],
+      "focus_order": [
+        "face.osc1.wave",
+        "face.osc1.tune",
+        "face.osc1.fine",
+        "face.osc1.width",
+        "face.osc1.level",
+        "face.osc2.wave",
+        "face.osc2.tune",
+        "face.osc2.fine",
+        "face.osc2.level",
+        "face.osc2.noise",
+        "face.fenv.mode",
+        "face.fenv.amount",
+        "face.fenv.attack",
+        "face.fenv.sustain",
+        "face.fenv.release",
+        "face.amp.decay",
+        "face.amp.sustain",
+        "face.lfo.rate",
+        "face.lfo.shape",
+        "face.vel-air",
+        "face.lfo.sync",
+        "face.drive.shape",
+        "face.drive.tone",
+        "face.drive.mix"
+      ],
+      "visibility": "while the drawer is open"
+    },
+    {
+      "id": "face.front",
+      "view": "front",
+      "label": "Drawer front",
+      "members": [
+        "face.programmer"
+      ],
+      "focus_order": [
+        "face.programmer"
+      ],
+      "visibility": "always"
+    }
+  ],
+  "elements": [
+    {
+      "id": "face.air",
+      "view": "face",
+      "label": "AIR",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter.cutoff",
+        "type": "float",
+        "range": [
+          100,
+          10000
+        ],
+        "unit": "Hz",
+        "default": 4000,
+        "response": "logarithmic"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          636.82,
+          224.61
+        ],
+        "face_r": 80.77,
+        "tick_center": [
+          636.82,
+          224.61
+        ],
+        "tick_r": 109.69,
+        "hit_r": 113.68,
+        "dot": [
+          717.21,
+          144.22
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -132.07,
+          131.03
+        ],
+        "ticks": [
+          [
+            100.0,
+            -132.07
+          ],
+          [
+            300.0,
+            -69.61
+          ],
+          [
+            1000.0,
+            1.39
+          ],
+          [
+            3000.0,
+            70.15
+          ],
+          [
+            10000.0,
+            131.03
+          ]
+        ],
+        "note": "the spike's calibration through the printed ticks; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "knurl": {
+        "asset": "face:air.knurl",
+        "frames": 24,
+        "teeth": 101,
+        "rest_angle": 24.83,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": 24.83,
+        "drawn_value": 1454.2821,
+        "brief_value": "1.80 kHz"
+      },
+      "layers": {
+        "pointer": "face:air.rotor",
+        "knurl": "face:air.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.bite",
+      "view": "face",
+      "label": "BITE",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter.resonance",
+        "type": "float",
+        "range": [
+          0,
+          0.95
+        ],
+        "unit": "",
+        "default": 0.25,
+        "response": "linear"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          949.43,
+          239.7
+        ],
+        "face_r": 51.85,
+        "tick_center": [
+          949.43,
+          239.7
+        ],
+        "tick_r": 69.8,
+        "hit_r": 73.79,
+        "dot": [
+          1001.61,
+          187.52
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -131.16,
+          130.38
+        ],
+        "ticks": [
+          [
+            0.0,
+            -131.16
+          ],
+          [
+            0.095,
+            -101.47
+          ],
+          [
+            0.19,
+            -73.5
+          ],
+          [
+            0.285,
+            -48.53
+          ],
+          [
+            0.38,
+            -24.04
+          ],
+          [
+            0.475,
+            0.99
+          ],
+          [
+            0.57,
+            25.6
+          ],
+          [
+            0.665,
+            49.39
+          ],
+          [
+            0.76,
+            73.7
+          ],
+          [
+            0.855,
+            101.35
+          ],
+          [
+            0.95,
+            130.38
+          ]
+        ],
+        "note": "the spike's calibration through the printed ticks; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "knurl": {
+        "asset": "face:bite.knurl",
+        "frames": 24,
+        "teeth": 86,
+        "rest_angle": -63.74,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -63.74,
+        "drawn_value": 0.2271,
+        "brief_value": "0.20"
+      },
+      "layers": {
+        "pointer": "face:bite.rotor",
+        "knurl": "face:bite.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.bloom",
+      "view": "face",
+      "label": "BLOOM",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter_env.decay",
+        "type": "float",
+        "range": [
+          0.02,
+          2
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "logarithmic"
+      },
+      "kind": "fader",
+      "geometry": {
+        "slot": [
+          1169.72,
+          79.78,
+          18.95,
+          250.29
+        ],
+        "cap_center_x": 1179.69,
+        "y0": 312.34,
+        "y1": 100.17,
+        "hit_rect": [
+          1155.76,
+          69.8,
+          47.87,
+          272.24
+        ],
+        "dot": [
+          1160.72,
+          90.17
+        ]
+      },
+      "scale": {
+        "printed": [
+          0,
+          10
+        ],
+        "note": "cap line y = y0 + (y1 - y0) * the response's proportion; y0 and y1 are the printed 0 and 10"
+      },
+      "mockup": {
+        "cap_line_y": 269.74,
+        "drawn_value": 0.0504,
+        "brief_value": "250 ms"
+      },
+      "layers": {
+        "cap": "face:fader.cap"
+      },
+      "input": {
+        "drag": "relative vertical drag from anywhere on the fader, 1:1 with the cap; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.attack",
+      "view": "face",
+      "label": "ATTACK",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.amp.attack",
+        "type": "float",
+        "range": [
+          0.001,
+          1
+        ],
+        "unit": "s",
+        "default": 0.005,
+        "response": "logarithmic"
+      },
+      "kind": "fader",
+      "geometry": {
+        "slot": [
+          1349.22,
+          78.78,
+          17.95,
+          251.29
+        ],
+        "cap_center_x": 1357.69,
+        "y0": 312.34,
+        "y1": 100.17,
+        "hit_rect": [
+          1333.26,
+          69.8,
+          48.86,
+          272.24
+        ],
+        "dot": [
+          1340.22,
+          90.17
+        ]
+      },
+      "scale": {
+        "printed": [
+          0,
+          10
+        ],
+        "note": "cap line y = y0 + (y1 - y0) * the response's proportion; y0 and y1 are the printed 0 and 10"
+      },
+      "mockup": {
+        "cap_line_y": 305.14,
+        "drawn_value": 0.0013,
+        "brief_value": "10 ms"
+      },
+      "layers": {
+        "cap": "face:fader.cap"
+      },
+      "input": {
+        "drag": "relative vertical drag from anywhere on the fader, 1:1 with the cap; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.release",
+      "view": "face",
+      "label": "RELEASE",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.amp.release",
+        "type": "float",
+        "range": [
+          0.02,
+          2
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "logarithmic"
+      },
+      "kind": "fader",
+      "geometry": {
+        "slot": [
+          1529.71,
+          79.78,
+          18.95,
+          250.29
+        ],
+        "cap_center_x": 1540.18,
+        "y0": 312.34,
+        "y1": 100.17,
+        "hit_rect": [
+          1515.75,
+          69.8,
+          48.86,
+          272.24
+        ],
+        "dot": [
+          1520.71,
+          90.17
+        ]
+      },
+      "scale": {
+        "printed": [
+          0,
+          10
+        ],
+        "note": "cap line y = y0 + (y1 - y0) * the response's proportion; y0 and y1 are the printed 0 and 10"
+      },
+      "mockup": {
+        "cap_line_y": 270.24,
+        "drawn_value": 0.0499,
+        "brief_value": "250 ms"
+      },
+      "layers": {
+        "cap": "face:fader.cap"
+      },
+      "input": {
+        "drag": "relative vertical drag from anywhere on the fader, 1:1 with the cap; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.grain",
+      "view": "face",
+      "label": "GRAIN",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.gain_db",
+        "type": "float",
+        "range": [
+          0,
+          12
+        ],
+        "unit": "dB",
+        "default": 6,
+        "response": "linear"
+      },
+      "kind": "rotary",
+      "geometry": {
+        "pivot": [
+          1831.99,
+          240.46
+        ],
+        "face_r": 50.86,
+        "tick_center": [
+          1831.99,
+          240.46
+        ],
+        "tick_r": 68.81,
+        "hit_r": 72.8,
+        "dot": [
+          1883.47,
+          188.98
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -129.4,
+          131.13
+        ],
+        "ticks": [
+          [
+            0.0,
+            -129.4
+          ],
+          [
+            1.5,
+            -94.45
+          ],
+          [
+            3.0,
+            -60.75
+          ],
+          [
+            4.5,
+            -30.31
+          ],
+          [
+            6.0,
+            -0.83
+          ],
+          [
+            7.5,
+            28.82
+          ],
+          [
+            9.0,
+            59.74
+          ],
+          [
+            10.5,
+            94.39
+          ],
+          [
+            12.0,
+            131.13
+          ]
+        ],
+        "note": "the spike's calibration through the printed ticks; between ticks the angle is linear in the response's proportion, pinned at the end ticks"
+      },
+      "knurl": {
+        "asset": "face:grain.knurl",
+        "frames": 24,
+        "teeth": 92,
+        "rest_angle": -52.88,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -52.88,
+        "drawn_value": 3.3878,
+        "brief_value": "+3.0 dB"
+      },
+      "layers": {
+        "pointer": "face:grain.rotor",
+        "knurl": "face:grain.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.lamp",
+      "view": "face",
+      "kind": "lamp",
+      "label": "Pilot lamp",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "enabled",
+        "type": "toggle",
+        "default": 1
+      },
+      "lit_value": 1,
+      "geometry": {
+        "led": [
+          300.36,
+          214.2
+        ],
+        "lens_r": 26.92
+      },
+      "layers": {
+        "lit": "face:lamp.lit"
+      },
+      "mockup": {
+        "drawn_value": 1
+      },
+      "input": {
+        "readback_only": true,
+        "note": "lit while unit 0 is enabled"
+      }
+    },
+    {
+      "id": "face.programmer",
+      "view": "front",
+      "kind": "action",
+      "label": "Open programmer",
+      "group": "face.front",
+      "action": "toggle programmer",
+      "titles": [
+        "Open programmer",
+        "Close programmer"
+      ],
+      "geometry": {
+        "rect": [
+          949.34,
+          71.93,
+          241.32,
+          53.85
+        ],
+        "hit_rect": [
+          943.36,
+          65.95,
+          426.8,
+          64.75
+        ]
+      },
+      "input": {
+        "click": "opens the drawer, or closes it while open",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "face.osc1.wave",
+      "view": "deck",
+      "label": "OSC 1 WAVE",
+      "section": "OSC 1",
+      "printed": "WAVE",
+      "group": "face.deck",
+      "kind": "selector",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.1.waveform",
+        "type": "choice",
+        "choices": [
+          "Sine",
+          "Triangle",
+          "Saw",
+          "Pulse"
+        ],
+        "default": 2
+      },
+      "geometry": {
+        "pivot": [
+          288.15,
+          271.52
+        ],
+        "face_r": 56.81,
+        "rect": [
+          231.34,
+          214.71,
+          113.62,
+          113.62
+        ],
+        "hit_r": 84.3,
+        "hit_rect": [
+          145.1,
+          100.0,
+          294.6,
+          264.0
+        ],
+        "dot": [
+          328.53,
+          231.14
+        ]
+      },
+      "positions": [
+        {
+          "value": 1,
+          "legend": "TRI",
+          "choice": "Triangle",
+          "angle": -70.75,
+          "legend_rect": [
+            180.0,
+            234,
+            25.0,
+            16
+          ]
+        },
+        {
+          "value": 0,
+          "legend": "SINE",
+          "choice": "Sine",
+          "angle": 2.84,
+          "legend_rect": [
+            273.0,
+            174,
+            38.0,
+            16
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "SAW",
+          "choice": "Saw",
+          "angle": 72.87,
+          "legend_rect": [
+            377.0,
+            234,
+            37.0,
+            16
+          ]
+        },
+        {
+          "value": 3,
+          "legend": "PULSE",
+          "choice": "Pulse",
+          "angle": 121.7,
+          "legend_rect": [
+            373.0,
+            307,
+            52.0,
+            16
+          ]
+        }
+      ],
+      "mockup": {
+        "pointer_angle": 121.35,
+        "drawn_value": 3,
+        "brief_value": "Pulse"
+      },
+      "layers": {
+        "pointer": "deck:osc1.wave.pointer"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "legend_click": "a click on a printed legend chooses that position",
+        "wheel": "steps to the next or previous position, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.osc1.tune",
+      "view": "deck",
+      "label": "OSC 1 TUNE",
+      "section": "OSC 1",
+      "printed": "TUNE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.1.tune",
+        "type": "float",
+        "range": [
+          -24,
+          24
+        ],
+        "unit": "st",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          216.03,
+          462.5
+        ],
+        "face_r": 34.33,
+        "tick_center": [
+          216.03,
+          462.5
+        ],
+        "tick_r": 47.88,
+        "hit_r": 59.7,
+        "hit_rect": [
+          145.1,
+          364,
+          142.5,
+          174
+        ],
+        "dot": [
+          247.41,
+          431.12
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -124.09,
+          122.61
+        ],
+        "ticks": [
+          [
+            -24,
+            -124.09
+          ],
+          [
+            24,
+            122.61
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -39.38,
+        "drawn_value": -7.5181,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:osc1.tune.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc1.fine",
+      "view": "deck",
+      "label": "OSC 1 FINE",
+      "section": "OSC 1",
+      "printed": "FINE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.1.detune",
+        "type": "float",
+        "range": [
+          -100,
+          100
+        ],
+        "unit": "cent",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          359.13,
+          462.48
+        ],
+        "face_r": 34.15,
+        "tick_center": [
+          359.13,
+          462.48
+        ],
+        "tick_r": 47.21,
+        "hit_r": 61.8,
+        "hit_rect": [
+          287.6,
+          364,
+          152.1,
+          174
+        ],
+        "dot": [
+          390.04,
+          431.57
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -124.18,
+          123.33
+        ],
+        "ticks": [
+          [
+            -100,
+            -124.18
+          ],
+          [
+            100,
+            123.33
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -40.21,
+        "drawn_value": -32.1482,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:osc1.fine.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc1.width",
+      "view": "deck",
+      "label": "OSC 1 WIDTH",
+      "section": "OSC 1",
+      "printed": "WIDTH",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.1.pulse_width",
+        "type": "float",
+        "range": [
+          0.05,
+          0.95
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          214.61,
+          609.36
+        ],
+        "face_r": 33.92,
+        "tick_center": [
+          214.61,
+          609.36
+        ],
+        "tick_r": 47.32,
+        "hit_r": 53.8,
+        "hit_rect": [
+          145.1,
+          538,
+          141.1,
+          173.0
+        ],
+        "dot": [
+          245.6,
+          578.37
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.87,
+          122.48
+        ],
+        "ticks": [
+          [
+            0.05,
+            -123.87
+          ],
+          [
+            0.95,
+            122.48
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -41.41,
+        "drawn_value": 0.3513,
+        "brief_value": "0.45"
+      },
+      "layers": {
+        "pointer": "deck:osc1.width.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc1.level",
+      "view": "deck",
+      "label": "OSC 1 LEVEL",
+      "section": "OSC 1",
+      "printed": "LEVEL",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.1.level",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          357.73,
+          609.54
+        ],
+        "face_r": 33.76,
+        "tick_center": [
+          357.73,
+          609.54
+        ],
+        "tick_r": 46.83,
+        "hit_r": 53.3,
+        "hit_rect": [
+          286.2,
+          538,
+          153.5,
+          173.0
+        ],
+        "dot": [
+          388.37,
+          578.9
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.94,
+          122.58
+        ],
+        "ticks": [
+          [
+            0,
+            -123.94
+          ],
+          [
+            1,
+            122.58
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -44.87,
+        "drawn_value": 0.3207,
+        "brief_value": "45%"
+      },
+      "layers": {
+        "pointer": "deck:osc1.level.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc2.wave",
+      "view": "deck",
+      "label": "OSC 2 WAVE",
+      "section": "OSC 2",
+      "printed": "WAVE",
+      "group": "face.deck",
+      "kind": "selector",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.2.waveform",
+        "type": "choice",
+        "choices": [
+          "Sine",
+          "Triangle",
+          "Saw",
+          "Pulse"
+        ],
+        "default": 2
+      },
+      "geometry": {
+        "pivot": [
+          615.49,
+          272.27
+        ],
+        "face_r": 57.4,
+        "rect": [
+          558.09,
+          214.87,
+          114.8,
+          114.8
+        ],
+        "hit_r": 85.2,
+        "hit_rect": [
+          448.3,
+          100.0,
+          334.6,
+          266.0
+        ],
+        "dot": [
+          656.36,
+          231.4
+        ]
+      },
+      "positions": [
+        {
+          "value": 1,
+          "legend": "TRI",
+          "choice": "Triangle",
+          "angle": -69.87,
+          "legend_rect": [
+            501.0,
+            234,
+            26.0,
+            16
+          ]
+        },
+        {
+          "value": 0,
+          "legend": "SINE",
+          "choice": "Sine",
+          "angle": 1.94,
+          "legend_rect": [
+            599.0,
+            174,
+            38.0,
+            16
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "SAW",
+          "choice": "Saw",
+          "angle": 72.37,
+          "legend_rect": [
+            706.0,
+            234,
+            37.0,
+            16
+          ]
+        },
+        {
+          "value": 3,
+          "legend": "PULSE",
+          "choice": "Pulse",
+          "angle": 119.38,
+          "legend_rect": [
+            704.0,
+            307,
+            53.0,
+            16
+          ]
+        }
+      ],
+      "mockup": {
+        "pointer_angle": -68.01,
+        "drawn_value": 1,
+        "brief_value": "Triangle"
+      },
+      "layers": {
+        "pointer": "deck:osc2.wave.pointer"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "legend_click": "a click on a printed legend chooses that position",
+        "wheel": "steps to the next or previous position, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.osc2.tune",
+      "view": "deck",
+      "label": "OSC 2 TUNE",
+      "section": "OSC 2",
+      "printed": "TUNE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.2.tune",
+        "type": "float",
+        "range": [
+          -24,
+          24
+        ],
+        "unit": "st",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          540.82,
+          462.71
+        ],
+        "face_r": 34.36,
+        "tick_center": [
+          540.82,
+          462.71
+        ],
+        "tick_r": 47.73,
+        "hit_r": 54.2,
+        "hit_rect": [
+          448.3,
+          366,
+          165.9,
+          172
+        ],
+        "dot": [
+          572.1,
+          431.43
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.86,
+          122.67
+        ],
+        "ticks": [
+          [
+            -24,
+            -123.86
+          ],
+          [
+            24,
+            122.67
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -42.78,
+        "drawn_value": -8.2135,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:osc2.tune.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc2.fine",
+      "view": "deck",
+      "label": "OSC 2 FINE",
+      "section": "OSC 2",
+      "printed": "FINE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.2.detune",
+        "type": "float",
+        "range": [
+          -100,
+          100
+        ],
+        "unit": "cent",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          687.55,
+          462.74
+        ],
+        "face_r": 34.24,
+        "tick_center": [
+          687.55,
+          462.74
+        ],
+        "tick_r": 47.4,
+        "hit_r": 59.2,
+        "hit_rect": [
+          614.2,
+          366,
+          168.7,
+          172
+        ],
+        "dot": [
+          718.59,
+          431.7
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.81,
+          123.19
+        ],
+        "ticks": [
+          [
+            -100,
+            -123.81
+          ],
+          [
+            100,
+            123.19
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -41.89,
+        "drawn_value": -33.668,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:osc2.fine.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc2.level",
+      "view": "deck",
+      "label": "OSC 2 LEVEL",
+      "section": "OSC 2",
+      "printed": "LEVEL",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.osc.2.level",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          540.24,
+          609.51
+        ],
+        "face_r": 33.88,
+        "tick_center": [
+          540.24,
+          609.51
+        ],
+        "tick_r": 46.92,
+        "hit_r": 59.7,
+        "hit_rect": [
+          448.3,
+          538,
+          165.1,
+          173.0
+        ],
+        "dot": [
+          570.94,
+          578.81
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.91,
+          122.6
+        ],
+        "ticks": [
+          [
+            0,
+            -123.91
+          ],
+          [
+            1,
+            122.6
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -44.27,
+        "drawn_value": 0.3231,
+        "brief_value": "25%"
+      },
+      "layers": {
+        "pointer": "deck:osc2.level.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.osc2.noise",
+      "view": "deck",
+      "label": "OSC 2 NOISE",
+      "section": "OSC 2",
+      "printed": "NOISE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.noise",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          686.55,
+          609.66
+        ],
+        "face_r": 33.81,
+        "tick_center": [
+          686.55,
+          609.66
+        ],
+        "tick_r": 47.1,
+        "hit_r": 53.5,
+        "hit_rect": [
+          613.4,
+          538,
+          169.5,
+          173.0
+        ],
+        "dot": [
+          717.38,
+          578.83
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.51,
+          122.75
+        ],
+        "ticks": [
+          [
+            0,
+            -123.51
+          ],
+          [
+            1,
+            122.75
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -45.63,
+        "drawn_value": 0.3163,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:osc2.noise.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.fenv.mode",
+      "view": "deck",
+      "label": "FILTER ENV MODE",
+      "section": "FILTER ENV",
+      "printed": "MODE",
+      "group": "face.deck",
+      "kind": "lever",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter.mode",
+        "type": "choice",
+        "default": 0,
+        "choices": [
+          "Lowpass",
+          "Bandpass",
+          "Highpass"
+        ]
+      },
+      "geometry": {
+        "pivot": [
+          935.0,
+          264.57
+        ],
+        "rect": [
+          905.11,
+          206,
+          59.78,
+          94.96
+        ],
+        "hit_rect": [
+          787.4,
+          100.0,
+          317.6,
+          260.0
+        ],
+        "dot": [
+          968.89,
+          238.68
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "LP",
+          "asset": "deck:fenv.mode.up",
+          "legend_rect": [
+            984.0,
+            213,
+            19.0,
+            15
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "BP",
+          "asset": "deck:fenv.mode.middle",
+          "legend_rect": [
+            984.0,
+            255,
+            20.0,
+            16
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "HP",
+          "asset": "deck:fenv.mode.down",
+          "legend_rect": [
+            984.0,
+            296,
+            21.0,
+            16
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": "Lowpass",
+        "drawn_position": "up"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "wheel": "steps, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.fenv.amount",
+      "view": "deck",
+      "label": "FILTER ENV AMOUNT",
+      "section": "FILTER ENV",
+      "printed": "AMOUNT",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter_env.octaves",
+        "type": "float",
+        "range": [
+          -8,
+          8
+        ],
+        "unit": "oct",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          866.77,
+          462.52
+        ],
+        "face_r": 34.57,
+        "tick_center": [
+          866.77,
+          462.52
+        ],
+        "tick_r": 48.04,
+        "hit_r": 59.7,
+        "hit_rect": [
+          787.4,
+          360.0,
+          154.5,
+          178.0
+        ],
+        "dot": [
+          898.26,
+          431.03
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -124.13,
+          123.14
+        ],
+        "ticks": [
+          [
+            -8,
+            -124.13
+          ],
+          [
+            8,
+            123.14
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -46.22,
+        "drawn_value": -2.9587,
+        "brief_value": "1 oct"
+      },
+      "layers": {
+        "pointer": "deck:fenv.amount.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.fenv.attack",
+      "view": "deck",
+      "label": "FILTER ENV ATTACK",
+      "section": "FILTER ENV",
+      "printed": "ATTACK",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter_env.attack",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.005,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1017.02,
+          462.22
+        ],
+        "face_r": 34.37,
+        "tick_center": [
+          1017.02,
+          462.22
+        ],
+        "tick_r": 47.73,
+        "hit_r": 59.4,
+        "hit_rect": [
+          941.9,
+          360.0,
+          163.1,
+          178.0
+        ],
+        "dot": [
+          1048.3,
+          430.94
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -124.08,
+          123.65
+        ],
+        "ticks": [
+          [
+            0,
+            -124.08
+          ],
+          [
+            20,
+            123.65
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -43.39,
+        "drawn_value": 0.4755,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:fenv.attack.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.fenv.sustain",
+      "view": "deck",
+      "label": "FILTER ENV SUSTAIN",
+      "section": "FILTER ENV",
+      "printed": "SUSTAIN",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter_env.sustain",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.65,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          866.08,
+          609.53
+        ],
+        "face_r": 34.2,
+        "tick_center": [
+          866.08,
+          609.53
+        ],
+        "tick_r": 47.52,
+        "hit_r": 54.0,
+        "hit_rect": [
+          787.4,
+          538,
+          153.9,
+          173.0
+        ],
+        "dot": [
+          897.21,
+          578.4
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.97,
+          121.89
+        ],
+        "ticks": [
+          [
+            0,
+            -123.97
+          ],
+          [
+            1,
+            121.89
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -50.91,
+        "drawn_value": 0.2972,
+        "brief_value": "10%"
+      },
+      "layers": {
+        "pointer": "deck:fenv.sustain.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.fenv.release",
+      "view": "deck",
+      "label": "FILTER ENV RELEASE",
+      "section": "FILTER ENV",
+      "printed": "RELEASE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.filter_env.release",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1016.47,
+          609.41
+        ],
+        "face_r": 33.8,
+        "tick_center": [
+          1016.47,
+          609.41
+        ],
+        "tick_r": 47.21,
+        "hit_r": 53.6,
+        "hit_rect": [
+          941.3,
+          538,
+          163.7,
+          173.0
+        ],
+        "dot": [
+          1047.38,
+          578.5
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.27,
+          122.93
+        ],
+        "ticks": [
+          [
+            0,
+            -123.27
+          ],
+          [
+            20,
+            122.93
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -45.91,
+        "drawn_value": 0.4218,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:fenv.release.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.amp.decay",
+      "view": "deck",
+      "label": "AMP DECAY",
+      "section": "AMP",
+      "printed": "DECAY",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.amp.decay",
+        "type": "float",
+        "range": [
+          0,
+          20
+        ],
+        "unit": "s",
+        "default": 0.15,
+        "response": "parameter",
+        "skew": 0.3,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1208.39,
+          342.85
+        ],
+        "face_r": 39.11,
+        "tick_center": [
+          1208.39,
+          342.85
+        ],
+        "tick_r": 54.26,
+        "hit_r": 68.9,
+        "hit_rect": [
+          1107.0,
+          100.0,
+          204.9,
+          357.3
+        ],
+        "dot": [
+          1244.28,
+          306.96
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -124.73,
+          124.69
+        ],
+        "ticks": [
+          [
+            0,
+            -124.73
+          ],
+          [
+            20,
+            124.69
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -43.37,
+        "drawn_value": 0.4779,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:amp.decay.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.amp.sustain",
+      "view": "deck",
+      "label": "AMP SUSTAIN",
+      "section": "AMP",
+      "printed": "SUSTAIN",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "analog.amp.sustain",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.65,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1208.36,
+          564.67
+        ],
+        "face_r": 38.96,
+        "tick_center": [
+          1208.36,
+          564.67
+        ],
+        "tick_r": 54.27,
+        "hit_r": 70.0,
+        "hit_rect": [
+          1107.0,
+          457.3,
+          204.9,
+          253.7
+        ],
+        "dot": [
+          1244.26,
+          528.77
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -123.02,
+          124.46
+        ],
+        "ticks": [
+          [
+            0,
+            -123.02
+          ],
+          [
+            1,
+            124.46
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -42.37,
+        "drawn_value": 0.3259,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:amp.sustain.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.lfo.rate",
+      "view": "deck",
+      "label": "MOTION LFO RATE",
+      "section": "MOTION",
+      "printed": "LFO RATE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.rate_hz",
+        "type": "float",
+        "range": [
+          0.05,
+          40
+        ],
+        "unit": "Hz",
+        "default": 1,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1409.25,
+          342.16
+        ],
+        "face_r": 38.74,
+        "tick_center": [
+          1409.25,
+          342.16
+        ],
+        "tick_r": 53.49,
+        "hit_r": 65.9,
+        "hit_rect": [
+          1315.3,
+          100.0,
+          176.7,
+          341.4
+        ],
+        "dot": [
+          1444.6,
+          306.81
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -124.79,
+          126.37
+        ],
+        "ticks": [
+          [
+            0.05,
+            -124.79
+          ],
+          [
+            40,
+            126.37
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -42.14,
+        "drawn_value": 13.1965,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:lfo.rate.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.lfo.shape",
+      "view": "deck",
+      "label": "MOTION LFO SHAPE",
+      "section": "MOTION",
+      "printed": "LFO SHAPE",
+      "group": "face.deck",
+      "kind": "selector",
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.shape",
+        "type": "choice",
+        "choices": [
+          "Sine",
+          "Triangle",
+          "Saw",
+          "Square"
+        ],
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          1588.27,
+          283.3
+        ],
+        "face_r": 49.79,
+        "rect": [
+          1538.48,
+          233.51,
+          99.58,
+          99.58
+        ],
+        "hit_r": 74.0,
+        "hit_rect": [
+          1492.0,
+          100.0,
+          215.2,
+          341.4
+        ],
+        "dot": [
+          1623.7,
+          247.87
+        ]
+      },
+      "positions": [
+        {
+          "value": 1,
+          "legend": "TRI",
+          "choice": "Triangle",
+          "angle": -70.12,
+          "legend_rect": [
+            1493.0,
+            249,
+            26.0,
+            16
+          ]
+        },
+        {
+          "value": 0,
+          "legend": "SIN",
+          "choice": "Sine",
+          "angle": -1.66,
+          "legend_rect": [
+            1573.0,
+            191,
+            26.0,
+            16
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "SAW",
+          "choice": "Saw",
+          "angle": 70.73,
+          "legend_rect": [
+            1659.0,
+            249,
+            36.0,
+            16
+          ]
+        },
+        {
+          "value": 3,
+          "legend": "SQR",
+          "choice": "Square",
+          "angle": 124.98,
+          "legend_rect": [
+            1661.0,
+            319,
+            33.0,
+            18
+          ]
+        }
+      ],
+      "mockup": {
+        "pointer_angle": -1.74,
+        "drawn_value": 0,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:lfo.shape.pointer"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "legend_click": "a click on a printed legend chooses that position",
+        "wheel": "steps to the next or previous position, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.vel-air",
+      "view": "deck",
+      "label": "MOTION VEL TO AIR",
+      "section": "MOTION",
+      "printed": "VEL TO AIR",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 0,
+        "key": "modulation.1.amount",
+        "type": "float",
+        "range": [
+          -1,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1409.4,
+          563.21
+        ],
+        "face_r": 37.96,
+        "tick_center": [
+          1409.4,
+          563.21
+        ],
+        "tick_r": 52.5,
+        "hit_r": 59.0,
+        "hit_rect": [
+          1315.3,
+          441.4,
+          181.8,
+          269.6
+        ],
+        "dot": [
+          1444.05,
+          528.56
+        ],
+        "tape": [
+          1334.0,
+          620.0,
+          150.0,
+          32.0
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -121.34,
+          123.22
+        ],
+        "ticks": [
+          [
+            -1,
+            -121.34
+          ],
+          [
+            1,
+            123.22
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -103.34,
+        "drawn_value": -0.8528,
+        "brief_value": "0.12"
+      },
+      "layers": {
+        "pointer": "deck:vel-air.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "route": {
+        "slot": 1,
+        "source": "Velocity",
+        "target": "Cutoff",
+        "bank": "Analog",
+        "note": "the printed legend is true while route 1 is enabled from Velocity to the Analog bank's Cutoff; otherwise the host's tape covers it"
+      }
+    },
+    {
+      "id": "face.lfo.sync",
+      "view": "deck",
+      "label": "MOTION LFO FREE / SYNC",
+      "section": "MOTION",
+      "printed": "LFO",
+      "group": "face.deck",
+      "kind": "lever",
+      "binding": {
+        "rack_unit": 0,
+        "key": "lfo.1.synced",
+        "type": "toggle",
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          1584.86,
+          562.85
+        ],
+        "rect": [
+          1555.51,
+          507,
+          58.7,
+          90.59
+        ],
+        "hit_rect": [
+          1497.1,
+          441.4,
+          210.1,
+          269.6
+        ],
+        "dot": [
+          1618.21,
+          537.5
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "FREE",
+          "asset": "deck:lfo.sync.up",
+          "legend_rect": [
+            1615.0,
+            503,
+            39.0,
+            15
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "SYNC",
+          "asset": "deck:lfo.sync.down",
+          "legend_rect": [
+            1612.0,
+            600,
+            43.0,
+            17
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": "FREE",
+        "drawn_position": "up"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "wheel": "steps, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.drive.shape",
+      "view": "deck",
+      "label": "DRIVE SHAPE",
+      "section": "DRIVE",
+      "printed": "SHAPE",
+      "group": "face.deck",
+      "kind": "lever",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.shape",
+        "type": "choice",
+        "default": 0,
+        "choices": [
+          "Tanh",
+          "Soft sign"
+        ]
+      },
+      "geometry": {
+        "pivot": [
+          1844.79,
+          264.61
+        ],
+        "rect": [
+          1814.78,
+          207,
+          60.02,
+          93.42
+        ],
+        "hit_rect": [
+          1713.3,
+          100.0,
+          279.7,
+          317.2
+        ],
+        "dot": [
+          1878.8,
+          238.6
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "TANH",
+          "asset": "deck:drive.shape.up",
+          "legend_rect": [
+            1879.0,
+            206,
+            44.0,
+            16
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "SOFT",
+          "asset": "deck:drive.shape.down",
+          "legend_rect": [
+            1881.0,
+            305,
+            42.0,
+            16
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0,
+        "brief_value": "TANH",
+        "drawn_position": "up"
+      },
+      "input": {
+        "click": "steps to the next position, wrapping",
+        "wheel": "steps, stopping at the ends",
+        "keys": "Space/Enter step; arrows step, stopping at the ends"
+      }
+    },
+    {
+      "id": "face.drive.tone",
+      "view": "deck",
+      "label": "DRIVE TONE",
+      "section": "DRIVE",
+      "printed": "TONE",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.tone_hz",
+        "type": "float",
+        "range": [
+          200,
+          20000
+        ],
+        "unit": "Hz",
+        "default": 12000,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1787.31,
+          562.7
+        ],
+        "face_r": 36.71,
+        "tick_center": [
+          1787.31,
+          562.7
+        ],
+        "tick_r": 50.69,
+        "hit_r": 61.3,
+        "hit_rect": [
+          1713.3,
+          417.2,
+          143.7,
+          293.8
+        ],
+        "dot": [
+          1820.68,
+          529.33
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -122.32,
+          123.9
+        ],
+        "ticks": [
+          [
+            200,
+            -122.32
+          ],
+          [
+            20000,
+            123.9
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -42.73,
+        "drawn_value": 6600.3005,
+        "brief_value": null
+      },
+      "layers": {
+        "pointer": "deck:drive.tone.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.drive.mix",
+      "view": "deck",
+      "label": "DRIVE MIX",
+      "section": "DRIVE",
+      "printed": "MIX",
+      "group": "face.deck",
+      "kind": "rotary",
+      "binding": {
+        "rack_unit": 1,
+        "key": "drive.mix",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.5,
+        "response": "parameter",
+        "skew": 1,
+        "note": "range and skew are the registry parameter's, read when a rack binds it"
+      },
+      "geometry": {
+        "pivot": [
+          1926.68,
+          562.69
+        ],
+        "face_r": 36.91,
+        "tick_center": [
+          1926.68,
+          562.69
+        ],
+        "tick_r": 50.86,
+        "hit_r": 66.7,
+        "hit_rect": [
+          1857.0,
+          417.2,
+          136.0,
+          293.8
+        ],
+        "dot": [
+          1960.17,
+          529.2
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -121.72,
+          124.12
+        ],
+        "ticks": [
+          [
+            0,
+            -121.72
+          ],
+          [
+            1,
+            124.12
+          ]
+        ],
+        "printed_ticks": 9,
+        "note": "first tick to last over the registry range, through its normalisation; the printed ticks between are unnumbered"
+      },
+      "mockup": {
+        "pointer_angle": -42.61,
+        "drawn_value": 0.3218,
+        "brief_value": "20%"
+      },
+      "layers": {
+        "pointer": "deck:drive.mix.pointer"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    }
+  ]
+}

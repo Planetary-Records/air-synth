@@ -1,0 +1,2157 @@
+{
+  "format": "ai-rack-maker-skin",
+  "version": 1,
+  "status": "PROTOTYPE, not a product schema",
+  "design_id": "330cb53b-cd9b-443c-94d8-2700bc8b88f7",
+  "maker": "ARDENTI",
+  "model": "OXIDE RETURN TAPE ECHO MODEL AR-62",
+  "units": 3,
+  "reveal": {
+    "kind": "recess",
+    "view": "tempo",
+    "opener": "face.tempo",
+    "closers": [
+      "face.close"
+    ],
+    "motion": {
+      "ms": 260,
+      "lid": [
+        1737.88,
+        55.79,
+        305.57,
+        467.49
+      ],
+      "slide": [
+        277.7,
+        0
+      ],
+      "note": "the tambour's pixels slide right by `slide` as it opens, cut off at the lid's right edge where its slats roll away behind the ear; the recess shows where it has gone"
+    }
+  },
+  "rack": "OXIDE RETURN, Ardenti's tape echo (an example rack's faceplate)",
+  "coordinate_space": "face pixels: the clean face plate at the house pitch, for both views; the host scales the whole rack uniformly",
+  "rack_pitch": {
+    "panel_w": 2140,
+    "u_px": 197.11,
+    "note": "EIA: 19 in panel, 1.75 in per unit"
+  },
+  "views": {
+    "face": {
+      "plate": "face:plate",
+      "rack_units": 3,
+      "source": "oxide-return/closed.png",
+      "source_face_rect": [
+        11,
+        75,
+        2161,
+        615
+      ],
+      "conversion": "scaled by 0.995349 to 2140x537, then the trim's flat bars (scaled rows [[8, 15], [506, 513], [525, 532]]) stretched by [18, 18, 18] rows to 591"
+    },
+    "tempo": {
+      "plate": "tempo:plate",
+      "over": "face",
+      "source": "oxide-return/open.png, registered",
+      "conversion": "registered to closed.png by a shift of [-0.072, 0.167] px, then converted as the face"
+    }
+  },
+  "bindings": "each element binds its rack unit (an index into the design's units) and the unit module's local key; the host resolves the registry parameter per placed rack",
+  "assets": {
+    "face:plate": {
+      "file": "plates/oxide-return-face.png",
+      "size": [
+        2140,
+        591
+      ],
+      "role": "plate",
+      "alpha": false,
+      "motion": "static",
+      "source": "oxide-return/closed.png",
+      "source_sha256": "44a0fcfb58385c170a50137c70d1d134f4b6331d9414f3a1dd07d86aeee8e1d8",
+      "note": "the knobs' index lines, TIME's needle and the lamp's light removed (polar fills, the needle's round the scale's centre, its hidden 300 ms tick copied from the 150 ms one, the lamp unlit); the hub, the buttons, legends, ticks, ears and the closed tambour kept"
+    },
+    "tempo:plate": {
+      "file": "plates/oxide-return-tempo.png",
+      "size": [
+        332,
+        496
+      ],
+      "anchor": [
+        1728,
+        49
+      ],
+      "role": "plate",
+      "alpha": true,
+      "motion": "drawn over the face plate at its anchor while the tambour is open",
+      "source": "oxide-return/open.png, registered",
+      "source_sha256": "c31f45ebcdadd66d8e8fb031f560b005a8d44aee9305b60db34285445834f2f3",
+      "note": "the tambour's footprint and wherever the drawings differ: the recess, NOTE's, CROSS's and WOBBLE RATE's lines removed; alpha feathers its edge into the face plate"
+    },
+    "face:saturation.pointer": {
+      "file": "parts/oxide-return-face-saturation-pointer.png",
+      "size": [
+        18,
+        54
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        9.51,
+        55.15
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/closed.png"
+    },
+    "face:wobble.pointer": {
+      "file": "parts/oxide-return-face-wobble-pointer.png",
+      "size": [
+        19,
+        51
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        9.34,
+        53.57
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/closed.png"
+    },
+    "face:repeats.pointer": {
+      "file": "parts/oxide-return-face-repeats-pointer.png",
+      "size": [
+        18,
+        66
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        10.14,
+        70.95
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/closed.png"
+    },
+    "face:mix.pointer": {
+      "file": "parts/oxide-return-face-mix-pointer.png",
+      "size": [
+        16,
+        68
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        7.78,
+        74.62
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/closed.png"
+    },
+    "face:low-cut.pointer": {
+      "file": "parts/oxide-return-face-low-cut-pointer.png",
+      "size": [
+        19,
+        58
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        7.93,
+        58.61
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/closed.png"
+    },
+    "face:high-cut.pointer": {
+      "file": "parts/oxide-return-face-high-cut-pointer.png",
+      "size": [
+        26,
+        49
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        12.29,
+        49.93
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/closed.png"
+    },
+    "tempo:note.pointer": {
+      "file": "parts/oxide-return-tempo-note-pointer.png",
+      "size": [
+        14,
+        36
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        5.86,
+        37.24
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/open.png, registered"
+    },
+    "tempo:cross.pointer": {
+      "file": "parts/oxide-return-tempo-cross-pointer.png",
+      "size": [
+        17,
+        24
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        6.78,
+        24.66
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/open.png, registered"
+    },
+    "tempo:wobble-rate.pointer": {
+      "file": "parts/oxide-return-tempo-wobble-rate-pointer.png",
+      "size": [
+        9,
+        28
+      ],
+      "role": "black index line, stored at 12 o'clock about its pivot",
+      "alpha": true,
+      "anchor": [
+        3.95,
+        28.0
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/open.png, registered"
+    },
+    "face:time.needle": {
+      "file": "parts/oxide-return-face-time-needle.png",
+      "size": [
+        46,
+        154
+      ],
+      "role": "red needle over its soft shadow, stored at 12 o'clock about its pivot, its base carried on under the hub",
+      "alpha": true,
+      "anchor": [
+        21.45,
+        172.77
+      ],
+      "motion": "rotates about the pivot",
+      "source": "oxide-return/closed.png"
+    },
+    "face:time.hub": {
+      "file": "parts/oxide-return-face-time-hub.png",
+      "size": [
+        73,
+        77
+      ],
+      "role": "the needle's hub, drawn over the needle",
+      "alpha": true,
+      "anchor": [
+        35.45,
+        35.28
+      ],
+      "motion": "static",
+      "source": "oxide-return/closed.png"
+    },
+    "face:in.in": {
+      "file": "parts/oxide-return-face-in-in.png",
+      "size": [
+        244,
+        113
+      ],
+      "role": "IN pushed in, OUT out",
+      "alpha": true,
+      "anchor": [
+        120.97,
+        55.71
+      ],
+      "motion": "static per position",
+      "source": "oxide-return/closed.png, the pushed cap derived"
+    },
+    "face:in.out": {
+      "file": "parts/oxide-return-face-in-out.png",
+      "size": [
+        244,
+        113
+      ],
+      "role": "OUT pushed in, IN out",
+      "alpha": true,
+      "anchor": [
+        120.97,
+        55.71
+      ],
+      "motion": "static per position",
+      "source": "oxide-return/closed.png, the pushed cap derived"
+    },
+    "tempo:sync.free": {
+      "file": "parts/oxide-return-tempo-sync-free.png",
+      "size": [
+        60,
+        124
+      ],
+      "role": "FREE pushed in, SYNC out",
+      "alpha": true,
+      "anchor": [
+        29.92,
+        61.82
+      ],
+      "motion": "static per position",
+      "source": "oxide-return/open.png, registered, the pushed cap derived"
+    },
+    "tempo:sync.sync": {
+      "file": "parts/oxide-return-tempo-sync-sync.png",
+      "size": [
+        60,
+        124
+      ],
+      "role": "SYNC pushed in, FREE out",
+      "alpha": true,
+      "anchor": [
+        29.92,
+        61.82
+      ],
+      "motion": "static per position",
+      "source": "oxide-return/open.png, registered, the pushed cap derived"
+    },
+    "tempo:ping-pong.dual": {
+      "file": "parts/oxide-return-tempo-ping-pong-dual.png",
+      "size": [
+        60,
+        122
+      ],
+      "role": "DUAL pushed in, PING PONG out",
+      "alpha": true,
+      "anchor": [
+        29.74,
+        59.62
+      ],
+      "motion": "static per position",
+      "source": "oxide-return/open.png, registered, the pushed cap derived"
+    },
+    "tempo:ping-pong.ping-pong": {
+      "file": "parts/oxide-return-tempo-ping-pong-ping-pong.png",
+      "size": [
+        60,
+        122
+      ],
+      "role": "PING PONG pushed in, DUAL out",
+      "alpha": true,
+      "anchor": [
+        29.74,
+        59.62
+      ],
+      "motion": "static per position",
+      "source": "oxide-return/open.png, registered, the pushed cap derived"
+    },
+    "face:lamp.lit": {
+      "file": "parts/oxide-return-face-lamp-lit.png",
+      "size": [
+        61,
+        61
+      ],
+      "role": "the lit lamp, jewel and glow",
+      "alpha": true,
+      "anchor": [
+        30.35,
+        30.19
+      ],
+      "motion": "shown while the lamp's value is lit",
+      "source": "oxide-return/closed.png",
+      "lens_r": 25.98
+    },
+    "face:saturation.knurl": {
+      "file": "parts/oxide-return-face-saturation-knurl.png",
+      "size": [
+        125,
+        3000
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        61.68,
+        61.74
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/closed.png, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 69,
+      "rest_angle": -29.3,
+      "frame_size": [
+        125,
+        125
+      ]
+    },
+    "face:wobble.knurl": {
+      "file": "parts/oxide-return-face-wobble-knurl.png",
+      "size": [
+        127,
+        3048
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        62.5,
+        62.98
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/closed.png, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 67,
+      "rest_angle": -56.69,
+      "frame_size": [
+        127,
+        127
+      ]
+    },
+    "face:repeats.knurl": {
+      "file": "parts/oxide-return-face-repeats-knurl.png",
+      "size": [
+        153,
+        3672
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        76.27,
+        76.05
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/closed.png, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 73,
+      "rest_angle": -30.11,
+      "frame_size": [
+        153,
+        153
+      ]
+    },
+    "face:mix.knurl": {
+      "file": "parts/oxide-return-face-mix-knurl.png",
+      "size": [
+        153,
+        3672
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        75.66,
+        75.71
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/closed.png, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 67,
+      "rest_angle": -53.39,
+      "frame_size": [
+        153,
+        153
+      ]
+    },
+    "face:low-cut.knurl": {
+      "file": "parts/oxide-return-face-low-cut-knurl.png",
+      "size": [
+        121,
+        2904
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        59.86,
+        60.21
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/closed.png, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 43,
+      "rest_angle": -28.79,
+      "frame_size": [
+        121,
+        121
+      ]
+    },
+    "face:high-cut.knurl": {
+      "file": "parts/oxide-return-face-high-cut-knurl.png",
+      "size": [
+        115,
+        2760
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        56.74,
+        56.8
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/closed.png, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 63,
+      "rest_angle": 17.34,
+      "frame_size": [
+        115,
+        115
+      ]
+    },
+    "tempo:note.knurl": {
+      "file": "parts/oxide-return-tempo-note-knurl.png",
+      "size": [
+        83,
+        1992
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        40.83,
+        41.2
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/open.png, registered, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 87,
+      "rest_angle": 31.28,
+      "frame_size": [
+        83,
+        83
+      ]
+    },
+    "tempo:cross.knurl": {
+      "file": "parts/oxide-return-tempo-cross-knurl.png",
+      "size": [
+        65,
+        1560
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        32.09,
+        32.48
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/open.png, registered, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 54,
+      "rest_angle": -53.48,
+      "frame_size": [
+        65,
+        65
+      ]
+    },
+    "tempo:wobble-rate.knurl": {
+      "file": "parts/oxide-return-tempo-wobble-rate-knurl.png",
+      "size": [
+        67,
+        1608
+      ],
+      "role": "the knurled grip ring over one tooth period, frames stacked downwards",
+      "alpha": true,
+      "anchor": [
+        32.79,
+        32.82
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/open.png, registered, the drawn ring rebuilt with even teeth",
+      "frames": 24,
+      "teeth": 58,
+      "rest_angle": -16.2,
+      "frame_size": [
+        67,
+        67
+      ]
+    },
+    "face:time.knurl": {
+      "file": "parts/oxide-return-face-time-knurl.png",
+      "size": [
+        465,
+        3720
+      ],
+      "role": "the bezel's knurl over one tooth period, frames stacked downwards, anchored at the needle's pivot",
+      "alpha": true,
+      "anchor": [
+        232.46,
+        256.17
+      ],
+      "motion": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames",
+      "source": "oxide-return/closed.png, the drawn ring rebuilt with even teeth",
+      "frames": 8,
+      "teeth": 252,
+      "rest_angle": 1.81,
+      "frame_size": [
+        465,
+        465
+      ]
+    },
+    "procedural:lock-dot": {
+      "role": "lock dot",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "the stack's yellow lock dot at each element's geometry.dot"
+    },
+    "procedural:focus-ring": {
+      "role": "focus",
+      "alpha": true,
+      "motion": "host-drawn",
+      "renderer": "2 px amber ring, 3 px outside the hit shape"
+    }
+  },
+  "groups": [
+    {
+      "id": "face.face",
+      "view": "face",
+      "label": "Oxide Return",
+      "members": [
+        "face.time",
+        "face.repeats",
+        "face.mix",
+        "face.saturation",
+        "face.wobble",
+        "face.low-cut",
+        "face.high-cut",
+        "face.in",
+        "face.lamp",
+        "face.hub",
+        "face.tempo"
+      ],
+      "focus_order": [
+        "face.time",
+        "face.repeats",
+        "face.mix",
+        "face.saturation",
+        "face.wobble",
+        "face.low-cut",
+        "face.high-cut",
+        "face.in",
+        "face.tempo"
+      ],
+      "visibility": "always"
+    },
+    {
+      "id": "face.tempo",
+      "view": "tempo",
+      "label": "Tempo and motion",
+      "members": [
+        "face.sync",
+        "face.note",
+        "face.ping-pong",
+        "face.cross",
+        "face.wobble-rate",
+        "face.close"
+      ],
+      "focus_order": [
+        "face.sync",
+        "face.note",
+        "face.ping-pong",
+        "face.cross",
+        "face.wobble-rate",
+        "face.close"
+      ],
+      "visibility": "while the tambour is open"
+    }
+  ],
+  "elements": [
+    {
+      "id": "face.time",
+      "view": "face",
+      "kind": "rotary",
+      "label": "TIME",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.seconds",
+        "type": "float",
+        "range": [
+          0.02,
+          2
+        ],
+        "unit": "s",
+        "default": 0.25,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1068.46,
+          305.17
+        ],
+        "face_r": 233.08,
+        "tick_center": [
+          1066.17,
+          320.85
+        ],
+        "tick_r": 140.5,
+        "hit_r": 233.08,
+        "hit_center": [
+          1068.45,
+          280.77
+        ],
+        "dot": [
+          1214.88,
+          134.34
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -100.32,
+          100.28
+        ],
+        "ticks": [
+          [
+            0.02,
+            -100.32
+          ],
+          [
+            0.05,
+            -75.86
+          ],
+          [
+            0.1,
+            -47.87
+          ],
+          [
+            0.2,
+            -17.38
+          ],
+          [
+            0.5,
+            27.09
+          ],
+          [
+            1,
+            61.1
+          ],
+          [
+            2,
+            100.28
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "face:time.knurl",
+        "frames": 8,
+        "teeth": 252,
+        "rest_angle": 1.81,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": 1.809999942779541,
+        "drawn_value": 0.297,
+        "brief_value": 0.3
+      },
+      "layers": {
+        "pointer": "face:time.needle",
+        "knurl": "face:time.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      },
+      "note": "the needle turns about the hub; the bezel's teeth turn with it about the bezel's own centre, 24 px above"
+    },
+    {
+      "id": "face.repeats",
+      "view": "face",
+      "kind": "rotary",
+      "label": "REPEATS",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.feedback",
+        "type": "float",
+        "range": [
+          0,
+          0.95
+        ],
+        "unit": "%",
+        "default": 0.35,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          719.27,
+          269.05
+        ],
+        "face_r": 71.42,
+        "tick_center": [
+          723.09,
+          269.6
+        ],
+        "tick_r": 81.86,
+        "hit_r": 81.86,
+        "dot": [
+          774.68,
+          213.64
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -137.61,
+          134.39
+        ],
+        "ticks": [
+          [
+            0,
+            -137.61
+          ],
+          [
+            0.95,
+            134.39
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "face:repeats.knurl",
+        "frames": 24,
+        "teeth": 73,
+        "rest_angle": -30.11,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -30.110000610351562,
+        "drawn_value": 0.3755,
+        "brief_value": 0.38
+      },
+      "layers": {
+        "pointer": "face:repeats.pointer",
+        "knurl": "face:repeats.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.mix",
+      "view": "face",
+      "kind": "rotary",
+      "label": "MIX",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.mix",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0.25,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1416.66,
+          269.71
+        ],
+        "face_r": 71.17,
+        "tick_center": [
+          1414.57,
+          269.75
+        ],
+        "tick_r": 81.39,
+        "hit_r": 81.39,
+        "dot": [
+          1471.74,
+          214.63
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -134.9,
+          137.31
+        ],
+        "ticks": [
+          [
+            0,
+            -134.9
+          ],
+          [
+            1,
+            137.31
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "face:mix.knurl",
+        "frames": 24,
+        "teeth": 67,
+        "rest_angle": -53.39,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -53.38999938964844,
+        "drawn_value": 0.2994,
+        "brief_value": 0.25
+      },
+      "layers": {
+        "pointer": "face:mix.pointer",
+        "knurl": "face:mix.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.saturation",
+      "view": "face",
+      "kind": "rotary",
+      "label": "SATURATION",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.saturation",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          499.68,
+          178.74
+        ],
+        "face_r": 57.61,
+        "tick_center": [
+          505.35,
+          179.54
+        ],
+        "tick_r": 66.9,
+        "hit_r": 66.9,
+        "dot": [
+          544.51,
+          133.91
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -138.27,
+          131.94
+        ],
+        "ticks": [
+          [
+            0,
+            -138.27
+          ],
+          [
+            1,
+            131.94
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "face:saturation.knurl",
+        "frames": 24,
+        "teeth": 69,
+        "rest_angle": -29.3,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -29.299999237060547,
+        "drawn_value": 0.4033,
+        "brief_value": 0.3
+      },
+      "layers": {
+        "pointer": "face:saturation.pointer",
+        "knurl": "face:saturation.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.wobble",
+      "view": "face",
+      "kind": "rotary",
+      "label": "WOBBLE",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.wobble",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          499.5,
+          391.98
+        ],
+        "face_r": 58.35,
+        "tick_center": [
+          505.23,
+          392.32
+        ],
+        "tick_r": 67.44,
+        "hit_r": 67.44,
+        "dot": [
+          544.71,
+          346.77
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -139.28,
+          132.69
+        ],
+        "ticks": [
+          [
+            0,
+            -139.28
+          ],
+          [
+            1,
+            132.69
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "face:wobble.knurl",
+        "frames": 24,
+        "teeth": 67,
+        "rest_angle": -56.69,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -56.689998626708984,
+        "drawn_value": 0.3037,
+        "brief_value": 0.2
+      },
+      "layers": {
+        "pointer": "face:wobble.pointer",
+        "knurl": "face:wobble.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.low-cut",
+      "view": "face",
+      "kind": "rotary",
+      "label": "LOW CUT",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.low_cut_hz",
+        "type": "float",
+        "range": [
+          20,
+          2000
+        ],
+        "unit": "Hz",
+        "default": 20,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1619.86,
+          179.21
+        ],
+        "face_r": 55.01,
+        "tick_center": [
+          1615.73,
+          181.82
+        ],
+        "tick_r": 61.18,
+        "hit_r": 61.18,
+        "dot": [
+          1660.65,
+          138.42
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -68.73,
+          92.98
+        ],
+        "ticks": [
+          [
+            20,
+            -68.73
+          ],
+          [
+            100,
+            -21.38
+          ],
+          [
+            500,
+            37.29
+          ],
+          [
+            2000,
+            92.98
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "face:low-cut.knurl",
+        "frames": 24,
+        "teeth": 43,
+        "rest_angle": -28.79,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -28.790000915527344,
+        "drawn_value": 77.7348,
+        "brief_value": 100
+      },
+      "layers": {
+        "pointer": "face:low-cut.pointer",
+        "knurl": "face:low-cut.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.high-cut",
+      "view": "face",
+      "kind": "rotary",
+      "label": "HIGH CUT",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.filter_hz",
+        "type": "float",
+        "range": [
+          1000,
+          20000
+        ],
+        "unit": "Hz",
+        "default": 12000,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1616.74,
+          398.8
+        ],
+        "face_r": 52.68,
+        "tick_center": [
+          1616.14,
+          404.12
+        ],
+        "tick_r": 59.83,
+        "hit_r": 59.83,
+        "dot": [
+          1656.57,
+          358.97
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -108.96,
+          109.2
+        ],
+        "ticks": [
+          [
+            1000,
+            -108.96
+          ],
+          [
+            2000,
+            -57.87
+          ],
+          [
+            5000,
+            0.14
+          ],
+          [
+            10000,
+            56.48
+          ],
+          [
+            20000,
+            109.2
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "face:high-cut.knurl",
+        "frames": 24,
+        "teeth": 63,
+        "rest_angle": 17.34,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": 17.34000015258789,
+        "drawn_value": 6178.3321,
+        "brief_value": 5000
+      },
+      "layers": {
+        "pointer": "face:high-cut.pointer",
+        "knurl": "face:high-cut.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.in",
+      "view": "face",
+      "kind": "lever",
+      "label": "IN / OUT",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "bypassed",
+        "type": "toggle",
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          248.31,
+          430.9
+        ],
+        "rect": [
+          126.26,
+          374.34,
+          244.33,
+          113.25
+        ],
+        "dot": [
+          356.12,
+          388.75
+        ]
+      },
+      "positions": [
+        {
+          "value": 1,
+          "legend": "OUT",
+          "asset": "face:in.out",
+          "legend_rect": [
+            260.22,
+            377.32,
+            107.38,
+            107.28
+          ]
+        },
+        {
+          "value": 0,
+          "legend": "IN",
+          "asset": "face:in.in",
+          "legend_rect": [
+            129.25,
+            377.42,
+            106.92,
+            106.83
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0
+      },
+      "input": {
+        "click": "pushes in the button pressed, and the other comes out (one gesture); pushing the one in leaves it",
+        "legend_click": "a press on a button's cap chooses that position; a press between the caps does nothing",
+        "keys": "Space/Enter push the other; Right or Up the right one, Left or Down the left one"
+      },
+      "inverted": "IN is bypassed off"
+    },
+    {
+      "id": "face.lamp",
+      "view": "face",
+      "kind": "lamp",
+      "label": "Lamp",
+      "group": "face.face",
+      "binding": {
+        "rack_unit": 0,
+        "key": "bypassed",
+        "type": "toggle",
+        "default": 0
+      },
+      "lit_value": 0,
+      "geometry": {
+        "led": [
+          248.19,
+          332.43
+        ],
+        "lens_r": 25.98
+      },
+      "layers": {
+        "lit": "face:lamp.lit"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "lit while the delay is IN"
+      }
+    },
+    {
+      "id": "face.hub",
+      "view": "face",
+      "kind": "still",
+      "label": "TIME's hub",
+      "group": "face.face",
+      "geometry": {
+        "pivot": [
+          1068.46,
+          305.17
+        ],
+        "face_r": 34.87
+      },
+      "layers": {
+        "pointer": "face:time.hub"
+      },
+      "input": {
+        "readback_only": true,
+        "note": "drawn over TIME's needle; not focusable"
+      }
+    },
+    {
+      "id": "face.tempo",
+      "view": "face",
+      "kind": "action",
+      "label": "Open tempo and motion",
+      "group": "face.face",
+      "action": "open tempo",
+      "geometry": {
+        "rect": [
+          1737.88,
+          55.79,
+          305.57,
+          467.49
+        ]
+      },
+      "input": {
+        "click": "slides the tambour open in place",
+        "keys": "Space/Enter"
+      }
+    },
+    {
+      "id": "face.sync",
+      "view": "tempo",
+      "kind": "lever",
+      "label": "FREE / SYNC",
+      "group": "face.tempo",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.synced",
+        "type": "toggle",
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          1783.59,
+          199.3
+        ],
+        "rect": [
+          1752.63,
+          137.12,
+          61.69,
+          124.6
+        ],
+        "dot": [
+          1807.48,
+          143.93
+        ],
+        "hit_rect": [
+          1747.83,
+          79.66,
+          86.5,
+          214.8
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "FREE",
+          "asset": "tempo:sync.free",
+          "legend_rect": [
+            1756.08,
+            140.11,
+            55.25,
+            55.19
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "SYNC",
+          "asset": "tempo:sync.sync",
+          "legend_rect": [
+            1755.62,
+            203.07,
+            55.72,
+            55.67
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0
+      },
+      "input": {
+        "click": "pushes in the button pressed, and the other comes out (one gesture); pushing the one in leaves it",
+        "legend_click": "a press on a button's cap chooses that position; a press between the caps does nothing",
+        "keys": "Space/Enter push the other; Right or Up the top one, Left or Down the bottom one"
+      }
+    },
+    {
+      "id": "face.note",
+      "view": "tempo",
+      "kind": "rotary",
+      "label": "NOTE",
+      "group": "face.tempo",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.note",
+        "type": "choice",
+        "choices": [
+          "Beats",
+          "1/64 triplet",
+          "1/64",
+          "1/32 triplet",
+          "1/64 dotted",
+          "1/32",
+          "1/16 triplet",
+          "1/32 dotted",
+          "1/16",
+          "1/8 triplet",
+          "1/16 dotted",
+          "1/8",
+          "1/4 triplet",
+          "1/8 dotted",
+          "1/4",
+          "1/2 triplet",
+          "1/4 dotted",
+          "1/2",
+          "1/1 triplet",
+          "1/2 dotted",
+          "1/1",
+          "1/1 dotted"
+        ],
+        "range": [
+          0,
+          21
+        ],
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1931.83,
+          204.2
+        ],
+        "face_r": 36.54,
+        "tick_center": [
+          1932.0,
+          204.52
+        ],
+        "tick_r": 40.96,
+        "hit_r": 40.96,
+        "dot": [
+          1958.32,
+          177.71
+        ],
+        "hit_rect": [
+          1834.33,
+          79.66,
+          176.27,
+          214.8
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -138.03,
+          137.35
+        ],
+        "ticks": [
+          [
+            0,
+            -138.03
+          ],
+          [
+            1,
+            -115.41
+          ],
+          [
+            2,
+            -102.34
+          ],
+          [
+            3,
+            -88.36
+          ],
+          [
+            4,
+            -75.67
+          ],
+          [
+            5,
+            -62.8
+          ],
+          [
+            6,
+            -50.58
+          ],
+          [
+            7,
+            -39.13
+          ],
+          [
+            8,
+            -27.72
+          ],
+          [
+            9,
+            -17.63
+          ],
+          [
+            10,
+            -5.47
+          ],
+          [
+            11,
+            6.64
+          ],
+          [
+            12,
+            19.33
+          ],
+          [
+            13,
+            31.28
+          ],
+          [
+            14,
+            44.61
+          ],
+          [
+            15,
+            56.51
+          ],
+          [
+            16,
+            70.51
+          ],
+          [
+            17,
+            83.62
+          ],
+          [
+            18,
+            97.37
+          ],
+          [
+            19,
+            111.33
+          ],
+          [
+            20,
+            124.55
+          ],
+          [
+            21,
+            137.35
+          ]
+        ],
+        "note": "the pointer's angle at each step's printed mark; the drawn step's is the drawn pointer's"
+      },
+      "knurl": {
+        "asset": "tempo:note.knurl",
+        "frames": 24,
+        "teeth": 87,
+        "rest_angle": 31.28,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": 31.280000686645508,
+        "drawn_value": 13,
+        "brief_value": 11
+      },
+      "layers": {
+        "pointer": "tempo:note.pointer",
+        "knurl": "tempo:note.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel, landing on the nearest detent",
+        "wheel": "steps one detent",
+        "double_click": "the parameter's default",
+        "keys": "arrows step one detent, Home/End",
+        "legend_click": "a press on a step's printed legend, a triplet's 3 or a dotted note's dot chooses that step"
+      },
+      "detents": true,
+      "positions": [
+        {
+          "value": 0,
+          "legend": "BEATS",
+          "choice": "Beats",
+          "mark": "long",
+          "angle": -138.03,
+          "legend_rect": [
+            1869.51,
+            250.95,
+            30.36,
+            10.44
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "3",
+          "choice": "1/64 triplet",
+          "mark": "short",
+          "angle": -115.41,
+          "legend_rect": [
+            1879.47,
+            224.1,
+            6.47,
+            9.45
+          ]
+        },
+        {
+          "value": 2,
+          "legend": "1/64",
+          "choice": "1/64",
+          "mark": "long",
+          "angle": -102.34,
+          "legend_rect": [
+            1856.57,
+            215.15,
+            22.4,
+            11.43
+          ]
+        },
+        {
+          "value": 3,
+          "legend": "3",
+          "choice": "1/32 triplet",
+          "mark": "short",
+          "angle": -88.36,
+          "legend_rect": [
+            1875.49,
+            198.24,
+            6.47,
+            9.45
+          ]
+        },
+        {
+          "value": 4,
+          "legend": "",
+          "choice": "1/64 dotted",
+          "mark": "dot",
+          "angle": -75.67,
+          "legend_rect": [
+            1885.44,
+            189.29,
+            7.46,
+            8.46
+          ]
+        },
+        {
+          "value": 5,
+          "legend": "1/32",
+          "choice": "1/32",
+          "mark": "long",
+          "angle": -62.8,
+          "legend_rect": [
+            1861.55,
+            170.4,
+            22.4,
+            11.43
+          ]
+        },
+        {
+          "value": 6,
+          "legend": "3",
+          "choice": "1/16 triplet",
+          "mark": "short",
+          "angle": -50.58,
+          "legend_rect": [
+            1887.43,
+            165.43,
+            6.47,
+            8.45
+          ]
+        },
+        {
+          "value": 7,
+          "legend": "",
+          "choice": "1/32 dotted",
+          "mark": "dot",
+          "angle": -39.13,
+          "legend_rect": [
+            1900.37,
+            166.42,
+            7.47,
+            7.46
+          ]
+        },
+        {
+          "value": 8,
+          "legend": "1/16",
+          "choice": "1/16",
+          "mark": "long",
+          "angle": -27.72,
+          "legend_rect": [
+            1887.43,
+            140.57,
+            21.4,
+            11.43
+          ]
+        },
+        {
+          "value": 9,
+          "legend": "3",
+          "choice": "1/8 triplet",
+          "mark": "short",
+          "angle": -17.63,
+          "legend_rect": [
+            1912.31,
+            147.53,
+            6.47,
+            9.44
+          ]
+        },
+        {
+          "value": 10,
+          "legend": "",
+          "choice": "1/16 dotted",
+          "mark": "dot",
+          "angle": -5.47,
+          "legend_rect": [
+            1923.26,
+            156.48,
+            8.46,
+            8.45
+          ]
+        },
+        {
+          "value": 11,
+          "legend": "1/8",
+          "choice": "1/8",
+          "mark": "long",
+          "angle": 6.64,
+          "legend_rect": [
+            1930.23,
+            132.61,
+            16.42,
+            11.44
+          ]
+        },
+        {
+          "value": 12,
+          "legend": "3",
+          "choice": "1/4 triplet",
+          "mark": "short",
+          "angle": 19.33,
+          "legend_rect": [
+            1948.15,
+            147.53,
+            5.47,
+            9.44
+          ]
+        },
+        {
+          "value": 13,
+          "legend": "",
+          "choice": "1/8 dotted",
+          "mark": "dot",
+          "angle": 31.28,
+          "legend_rect": [
+            1952.13,
+            162.44,
+            7.46,
+            8.46
+          ]
+        },
+        {
+          "value": 14,
+          "legend": "1/4",
+          "choice": "1/4",
+          "mark": "long",
+          "angle": 44.61,
+          "legend_rect": [
+            1971.04,
+            153.49,
+            16.42,
+            10.44
+          ]
+        },
+        {
+          "value": 15,
+          "legend": "3",
+          "choice": "1/2 triplet",
+          "mark": "short",
+          "angle": 56.51,
+          "legend_rect": [
+            1974.03,
+            171.39,
+            6.47,
+            9.45
+          ]
+        },
+        {
+          "value": 16,
+          "legend": "",
+          "choice": "1/4 dotted",
+          "mark": "dot",
+          "angle": 70.51,
+          "legend_rect": [
+            1969.05,
+            185.32,
+            8.46,
+            8.45
+          ]
+        },
+        {
+          "value": 17,
+          "legend": "1/2",
+          "choice": "1/2",
+          "mark": "long",
+          "angle": 83.62,
+          "legend_rect": [
+            1987.96,
+            192.28,
+            16.42,
+            10.44
+          ]
+        },
+        {
+          "value": 18,
+          "legend": "3",
+          "choice": "1/1 triplet",
+          "mark": "short",
+          "angle": 97.37,
+          "legend_rect": [
+            1981.99,
+            206.2,
+            6.47,
+            9.45
+          ]
+        },
+        {
+          "value": 19,
+          "legend": "",
+          "choice": "1/2 dotted",
+          "mark": "dot",
+          "angle": 111.33,
+          "legend_rect": [
+            1969.05,
+            216.14,
+            8.46,
+            8.46
+          ]
+        },
+        {
+          "value": 20,
+          "legend": "1/1",
+          "choice": "1/1",
+          "mark": "long",
+          "angle": 124.55,
+          "legend_rect": [
+            1977.01,
+            237.03,
+            14.43,
+            11.43
+          ]
+        },
+        {
+          "value": 21,
+          "legend": "",
+          "choice": "1/1 dotted",
+          "mark": "dot",
+          "angle": 137.35,
+          "legend_rect": [
+            1958.1,
+            233.05,
+            8.46,
+            8.45
+          ]
+        }
+      ]
+    },
+    {
+      "id": "face.ping-pong",
+      "view": "tempo",
+      "kind": "lever",
+      "label": "DUAL / PING PONG",
+      "group": "face.tempo",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.ping_pong",
+        "type": "toggle",
+        "default": 0
+      },
+      "geometry": {
+        "pivot": [
+          1781.42,
+          402.96
+        ],
+        "rect": [
+          1749.94,
+          342.17,
+          62.03,
+          122.67
+        ],
+        "dot": [
+          1805.16,
+          348.77
+        ],
+        "hit_rect": [
+          1747.83,
+          300.42,
+          65.89,
+          210.82
+        ]
+      },
+      "positions": [
+        {
+          "value": 0,
+          "legend": "DUAL",
+          "asset": "tempo:ping-pong.dual",
+          "legend_rect": [
+            1754.94,
+            345.15,
+            53.87,
+            53.82
+          ]
+        },
+        {
+          "value": 1,
+          "legend": "PING PONG",
+          "asset": "tempo:ping-pong.ping-pong",
+          "legend_rect": [
+            1752.93,
+            405.85,
+            56.06,
+            56.01
+          ]
+        }
+      ],
+      "mockup": {
+        "drawn_value": 0
+      },
+      "input": {
+        "click": "pushes in the button pressed, and the other comes out (one gesture); pushing the one in leaves it",
+        "legend_click": "a press on a button's cap chooses that position; a press between the caps does nothing",
+        "keys": "Space/Enter push the other; Right or Up the top one, Left or Down the bottom one"
+      }
+    },
+    {
+      "id": "face.cross",
+      "view": "tempo",
+      "kind": "rotary",
+      "label": "CROSS",
+      "group": "face.tempo",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.stereo",
+        "type": "float",
+        "range": [
+          0,
+          1
+        ],
+        "unit": "%",
+        "default": 0,
+        "response": "linear"
+      },
+      "geometry": {
+        "pivot": [
+          1860.09,
+          407.48
+        ],
+        "face_r": 27.54,
+        "tick_center": [
+          1860.04,
+          408.87
+        ],
+        "tick_r": 31.59,
+        "hit_r": 31.59,
+        "dot": [
+          1879.95,
+          387.62
+        ],
+        "hit_rect": [
+          1813.72,
+          300.42,
+          96.65,
+          210.82
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -116.73,
+          117.28
+        ],
+        "ticks": [
+          [
+            0,
+            -116.73
+          ],
+          [
+            0.5,
+            0.4
+          ],
+          [
+            1,
+            117.28
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "tempo:cross.knurl",
+        "frames": 24,
+        "teeth": 54,
+        "rest_angle": -53.48,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -53.47999954223633,
+        "drawn_value": 0.27,
+        "brief_value": 0.3
+      },
+      "layers": {
+        "pointer": "tempo:cross.pointer",
+        "knurl": "tempo:cross.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.wobble-rate",
+      "view": "tempo",
+      "kind": "rotary",
+      "label": "WOBBLE RATE",
+      "group": "face.tempo",
+      "binding": {
+        "rack_unit": 0,
+        "key": "delay.wobble_rate_hz",
+        "type": "float",
+        "range": [
+          0.1,
+          10
+        ],
+        "unit": "Hz",
+        "default": 0.8,
+        "response": "logarithmic"
+      },
+      "geometry": {
+        "pivot": [
+          1960.79,
+          408.82
+        ],
+        "face_r": 28.7,
+        "tick_center": [
+          1960.94,
+          409.82
+        ],
+        "tick_r": 31.78,
+        "hit_r": 31.78,
+        "dot": [
+          1980.79,
+          388.82
+        ],
+        "hit_rect": [
+          1910.47,
+          300.42,
+          100.13,
+          210.82
+        ]
+      },
+      "scale": {
+        "sweep": [
+          -117.34,
+          117.71
+        ],
+        "ticks": [
+          [
+            0.1,
+            -117.34
+          ],
+          [
+            0.3,
+            -57.72
+          ],
+          [
+            1,
+            1.82
+          ],
+          [
+            3,
+            57.15
+          ],
+          [
+            10,
+            117.71
+          ]
+        ],
+        "note": "the pointer's angle at each printed step; between steps it is linear in the response's proportion, and it pins at the end steps"
+      },
+      "knurl": {
+        "asset": "tempo:wobble-rate.knurl",
+        "frames": 24,
+        "teeth": 58,
+        "rest_angle": -16.2,
+        "rule": "static position; frame = round(frac(teeth * (angle - rest_angle) / 360) * frames) mod frames"
+      },
+      "mockup": {
+        "pointer_angle": -16.200000762939453,
+        "drawn_value": 0.6946,
+        "brief_value": 0.8
+      },
+      "layers": {
+        "pointer": "tempo:wobble-rate.pointer",
+        "knurl": "tempo:wobble-rate.knurl"
+      },
+      "input": {
+        "drag": "vertical, 300 px for full travel; shift for fine",
+        "wheel": true,
+        "double_click": "the parameter's default",
+        "keys": "arrows step 1% (shift 0.1%), Page Up/Down 10%, Home/End"
+      }
+    },
+    {
+      "id": "face.close",
+      "view": "tempo",
+      "kind": "action",
+      "label": "Close tempo and motion",
+      "group": "face.tempo",
+      "action": "close tempo",
+      "geometry": {
+        "rect": [
+          2015.58,
+          59.77,
+          29.86,
+          459.43
+        ]
+      },
+      "input": {
+        "click": "slides the tambour closed by its pull bar",
+        "keys": "Space/Enter"
+      }
+    }
+  ]
+}

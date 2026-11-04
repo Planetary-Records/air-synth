@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "purpose": "Frozen actual pre-detector Sound21/Project20/2191 catalog and clipboard3, before any schema append",
+  "accepted_codec_source": "49ae5697fc2f0adfac584a4af4257462f02eb102",
+  "producer": "df3f048 plus Task2 routing and temporary development capture block; codec/registry exact accepted source, not claimed accepted product image",
+  "utc": "2026-10-19T15:57:25.0956107Z",
+  "private_capture": "build/task13-candidate-selftest-0f8852b9f84e4efd88f7ed4421c0c687",
+  "capture_source": "build/eq-dynamics-detection-20261019-a/t3-baseline-capture-RenderFixtures.cpp",
+  "capture_source_sha256": "1c3993ef02f9105d13147392fe1f73327c09edc362d08c695d027514689ed147",
+  "producer_image_sha256": "16cf267e117173c75e3c2909324ced29995e9548ea0331f62c235373383bb495",
+  "files": [
+    {
+      "bytes": 486071,
+      "file": "registry-v21.json",
+      "sha256": "61ec8fcdd1d000a53d706aa3f4f7fec8f2c0ec874eead5baf6edadd366aef402"
+    },
+    {
+      "bytes": 20073,
+      "file": "default-v21.soundstate",
+      "sha256": "c3e10638971089603605a0552f92322bfc63e697284131022c65dbfff50025fe"
+    },
+    {
+      "bytes": 23395,
+      "file": "embedded-v21.soundstate",
+      "sha256": "b17bf2846b8156f0a7baf25a0efebbcf46ccbe5d0bd1280a8e34938b78eff7fa"
+    },
+    {
+      "bytes": 20073,
+      "file": "rich-v21.soundstate",
+      "sha256": "e33bc5effcdf9588fed681f7a451b4552d4a07bf24db8677c01c2954a1c40161"
+    },
+    {
+      "bytes": 20181,
+      "file": "rich-v20.airackproject",
+      "sha256": "ca0b8e49b297706c33698a6071713536aa61a73db2e2183eecc9b97a1269baed"
+    },
+    {
+      "bytes": 935,
+      "file": "clipboard-v3.json",
+      "sha256": "2d588d1c30142a95df9e23128f6eb720357308fb25027b3a4638de714ae20136"
+    }
+  ]
+}

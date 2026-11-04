@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "tags": [
+    {
+      "id": "analog",
+      "label": "Analog"
+    },
+    {
+      "id": "warm",
+      "label": "Warm"
+    }
+  ],
+  "racks": [
+    {
+      "id": "ember-reed",
+      "order": 0,
+      "releases": [
+        {
+          "ref": {
+            "id": "ember-reed",
+            "version": "1.0.0",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "metadata": {
+            "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+            "revision": "1",
+            "canonical_sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a",
+            "name": "Ember Reed",
+            "maker": "Fixture Maker",
+            "purpose": "Native fixture",
+            "description": "Package boundary fixture",
+            "role": "synth",
+            "tags": [
+              "analog",
+              "warm"
+            ]
+          },
+          "capabilities": {
+            "airMin": "0.1.0",
+            "modules": [
+              {
+                "module": 0,
+                "algorithmRevision": 1
+              },
+              {
+                "module": 2,
+                "algorithmRevision": 1
+              }
+            ],
+            "nativeEditor": ""
+          },
+          "archive": {
+            "assetId": 101,
+            "url": "https://github.com/Planetary-Records/air-rack-library/releases/download/v1/ember.zip",
+            "bytes": 1024,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "screenshot": {
+            "url": "https://raw.githubusercontent.com/Planetary-Records/air-rack-library/main/ember.png",
+            "bytes": 70,
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          }
+        },
+        {
+          "ref": {
+            "id": "ember-reed",
+            "version": "2.0.0",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "metadata": {
+            "design": "c83dab6a-1c4e-48c1-83c4-80d9212ca601",
+            "revision": "1",
+            "canonical_sha256": "1b61f57c3fb42da21cfc53c39bd309ce58cb6017415f556add7d72b42cf4911a",
+            "name": "Ember Reed",
+            "maker": "Fixture Maker",
+            "purpose": "Native fixture",
+            "description": "Package boundary fixture",
+            "role": "synth",
+            "tags": [
+              "analog",
+              "warm"
+            ]
+          },
+          "capabilities": {
+            "airMin": "0.1.0",
+            "modules": [
+              {
+                "module": 0,
+                "algorithmRevision": 1
+              },
+              {
+                "module": 2,
+                "algorithmRevision": 1
+              }
+            ],
+            "nativeEditor": ""
+          },
+          "archive": {
+            "assetId": 102,
+            "url": "https://github.com/Planetary-Records/air-rack-library/releases/download/v1/ember.zip",
+            "bytes": 1024,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "screenshot": {
+            "url": "https://raw.githubusercontent.com/Planetary-Records/air-rack-library/main/ember.png",
+            "bytes": 70,
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          }
+        }
+      ]
+    }
+  ]
+}

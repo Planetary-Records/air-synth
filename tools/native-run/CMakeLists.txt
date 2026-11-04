@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.22)
+project(RackSynthNativeRun LANGUAGES CXX)
+add_executable(RackSynthNativeRun NativeRun.cpp)
+target_compile_features(RackSynthNativeRun PRIVATE cxx_std_20)
+target_compile_definitions(RackSynthNativeRun PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+target_link_libraries(RackSynthNativeRun PRIVATE shell32 ole32 user32)

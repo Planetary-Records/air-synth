@@ -1,0 +1,163 @@
+{
+  "family": "private27",
+  "sourceCommit": "d98f24baaefd47d96e6196bce3c0a14dd550140c",
+  "operationalHead": "d70790ead21654bf088bb1989e47e5392f668bbc",
+  "captureTest": {
+    "path": "build/drum-machine-native-20261022/main-reconciliation/private27-capture-test.cpp",
+    "bytes": 11736,
+    "sha256": "746e4630c1db753e29034499b81aa1ec09f159979549ee897cb63afb5e3b72c8"
+  },
+  "captureExecutable": {
+    "path": "build/drum-machine-native-20261022/main-reconciliation/private27-capture.exe",
+    "bytes": 10357760,
+    "sha256": "588d512455ceb54733aaacd4134a476700b58d3dc7144f3cd8cc01f8522ea84d"
+  },
+  "files": [
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-default.aipj",
+      "bytes": 37221,
+      "sha256": "4676f36c209e9594e399b7264e315509824716169ab668d6e5455a98f6689590",
+      "header": [
+        1246775617,
+        26,
+        0,
+        37113,
+        56
+      ],
+      "nestedHeader": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-default.arsi",
+      "bytes": 37113,
+      "sha256": "eea2c4b29e1a8c5537e937fc53eef68374f85eb7b8c3353871f54ed901301bff",
+      "header": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-default.witness.txt",
+      "bytes": 223664,
+      "sha256": "60664be98a644edc01b295dfb0b2875a1144e36723339bd9bceef0d67a47e439"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-pads.aipj",
+      "bytes": 37831,
+      "sha256": "f4a0a6ab5510230952b3f81642ffd8e3cff842ac183ea1aabf257eaffd065412",
+      "header": [
+        1246775617,
+        26,
+        36765953,
+        37124,
+        94
+      ],
+      "nestedHeader": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-pads.arsi",
+      "bytes": 37124,
+      "sha256": "8fb622282f713b960e1644ac0a90ebb352905b40981e45dd125588f26fd61d38",
+      "header": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-pads.witness.txt",
+      "bytes": 226041,
+      "sha256": "428bedb084b29eca335d68bbfe08711b6f39a1a7cbdb6fa1f2ceb3b8e1736050"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-retained140.aipj",
+      "bytes": 57350,
+      "sha256": "a3c8202c756863809c9455c837c2389be2b044b35328be1a52935316d859937e",
+      "header": [
+        1246775617,
+        26,
+        36765953,
+        56643,
+        94
+      ],
+      "nestedHeader": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-retained140.arsi",
+      "bytes": 56643,
+      "sha256": "180a0d4763c4476a7e764aa8efdd030f9d4e45a9507b22efac6522c3a0f6fa56",
+      "header": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-retained140.witness.txt",
+      "bytes": 242885,
+      "sha256": "c098542f9a9b7c8a1e52a50bfdb7b25197a980ad7d35fd44707d600be67b3514"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-space.aipj",
+      "bytes": 47353,
+      "sha256": "c3fb12cbd325c370d7035a3fb5a74654c8968d7762919b04c1d49137146c0c60",
+      "header": [
+        1246775617,
+        26,
+        36765953,
+        46646,
+        94
+      ],
+      "nestedHeader": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-space.arsi",
+      "bytes": 46646,
+      "sha256": "c471f2293666bd5be9fa01ebbedc924c4b003121a18d445873c078501298b336",
+      "header": [
+        1230197313,
+        27,
+        4083,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/private27-space.witness.txt",
+      "bytes": 232950,
+      "sha256": "0fb9d44f8917f9f7ffafd7d4240703aa5a1a73cd1b03dd6469fbc29b182f5fca"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/private27/registry4083.bin",
+      "bytes": 443897,
+      "sha256": "7459512085b40f7297bc0c66daf763a79d8936713453c699f464a64d9ee88402"
+    }
+  ],
+  "witnessFormat": "Native stable key, exact float uint32 bits and saved positional lock per parameter; metadata and Rack2 objects. Captured from actual current writer, never reconstructed from final combined writer.",
+  "macroWitnessCorrection": "Continuous-only: final continuous private4076/current4232; final mode private4082/current4238 remains scalar/lock witness.",
+  "fixtureCorrections": [
+    "First two trial retained140 fixtures invalid because second bound source bank not present; first also omitted matching algorithm revision. Failures preserved privately, not behavioral RED. Final actual instanceRecall validates, encodes, decodes and equals captured source."
+  ]
+}

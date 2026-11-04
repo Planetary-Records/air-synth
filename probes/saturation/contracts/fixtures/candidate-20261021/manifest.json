@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "status": "UNADOPTED",
+  "CPU": "DEFERRED",
+  "selected_factor": null,
+  "production": "FORCED_BYPASS",
+  "gates": "UNCHANGED",
+  "probe_factor": 4,
+  "frames": 2048,
+  "channels": 2,
+  "format": "IEEE754_f64_little_endian_interleaved_stereo",
+  "partitions": [
+    1,
+    17,
+    64,
+    127,
+    512
+  ],
+  "common_cases": 18,
+  "initial_sequence": "fresh Candidate; setSettings; prepare(rate,4); reset; process saved input; no edits or warmup",
+  "reset": "zero audio histories and settled admitted targets",
+  "common_reference": "settled candidate common behavior only; UNADOPTED; requalify/regenerate after adoption before production use",
+  "characterization": "event/serial current candidate only: immediate structural/style switches, effective 8..384kHz; 384001/768000 refusals are NOT future production behavior",
+  "original_task20_archive_sha256": "91b69bb4dd870e556c96d88d7468fe4e97b0ef59aac93650d8ffb7ac0373179c",
+  "producer_image_sha256": "2d9930bf070b6692e3203421ccde43226cc876da3c62990777b8d26aa8cba82d",
+  "files": {
+    "event-expected.f64": {
+      "bytes": 32768,
+      "sha256": "5ce549ae13e5daa111d4ad6cc9fb44347df69beb225ba6c6924b68d1490062c9"
+    },
+    "events-settings.csv": {
+      "bytes": 4161,
+      "sha256": "a50d3f20fc565652a0720a1cc22dc6f4830d48a0cb86e7e6d2aa02e5f2d44225"
+    },
+    "input.f64": {
+      "bytes": 32768,
+      "sha256": "73aee579e8868a65cf6ce2792477680d544b3833e51731c8fada0115892ae6fb"
+    },
+    "producer-receipt.json": {
+      "bytes": 13686,
+      "sha256": "7aa48f854fe2c061665ac0db0a799c12b6b158e384e68758eda024f26dd1ffda"
+    },
+    "serial-events.csv": {
+      "bytes": 180,
+      "sha256": "0b2b8a18a5c56cc2ebc727487c7afda1c32aac7fc0c3c254e0b836d63ba39f2e"
+    },
+    "serial-expected.f64": {
+      "bytes": 32768,
+      "sha256": "3c90ce9d4d70a8f97e938ee905c278d7e3925a36ec1e4ff18b0efe32d866997f"
+    },
+    "serial-settings.csv": {
+      "bytes": 1534,
+      "sha256": "ea170f4c3aad2cec36ed96f88bb8424d2665458ac8d66f3fb990361ffaf808bc"
+    },
+    "settled-44100-0-0.f64": {
+      "bytes": 32768,
+      "sha256": "f7aa7f3f57d828921f0e984dfd578fbc7a8a8c3a22dbbf5eae3f96c16a97fca7"
+    },
+    "settled-44100-0-1.f64": {
+      "bytes": 32768,
+      "sha256": "5f78a2ed6164c8036749d75871e3073bb7c81cc0ba01a346531544d8e335085d"
+    },
+    "settled-44100-0-2.f64": {
+      "bytes": 32768,
+      "sha256": "975223476168600d6dfa269e3c1ecc6c39b77e0e23bee957fa033d5a5bbe0bb1"
+    },
+    "settled-44100-1-0.f64": {
+      "bytes": 32768,
+      "sha256": "e888becde69793879f76e81273968f1ee35bc7161de897ce1533cc21df9190f7"
+    },
+    "settled-44100-1-1.f64": {
+      "bytes": 32768,
+      "sha256": "7590999fded6630eaca9f9b6e2662e8211b53effe1152002081df057f239f0d2"
+    },
+    "settled-44100-1-2.f64": {
+      "bytes": 32768,
+      "sha256": "694508c707d1b68c9c75a8f1ca26edf2ffdfe581d54d37363f944e6d8c049f42"
+    },
+    "settled-48000-0-0.f64": {
+      "bytes": 32768,
+      "sha256": "f7aa7f3f57d828921f0e984dfd578fbc7a8a8c3a22dbbf5eae3f96c16a97fca7"
+    },
+    "settled-48000-0-1.f64": {
+      "bytes": 32768,
+      "sha256": "0331a393e9b2417b929b1c3cb186f0ccfa475d5a3014bdd40a0a33c2da785c92"
+    },
+    "settled-48000-0-2.f64": {
+      "bytes": 32768,
+      "sha256": "7540cbb396d28f26974cac3c29fa7201a28376cc4c1ee4966b10a4b60a9bba47"
+    },
+    "settled-48000-1-0.f64": {
+      "bytes": 32768,
+      "sha256": "75482ac32a7e71a4e0ffa0490d021a9ac07bb9f56f8065333a54e0788847bde9"
+    },
+    "settled-48000-1-1.f64": {
+      "bytes": 32768,
+      "sha256": "94181799e0b7eb79545cf83335159443d35f05c02237f3593b162e073f7529cd"
+    },
+    "settled-48000-1-2.f64": {
+      "bytes": 32768,
+      "sha256": "ccdc324495177e01562c470ffec5e6c262309aa753c6a8779a9f539ee0e9d4d3"
+    },
+    "settled-96000-0-0.f64": {
+      "bytes": 32768,
+      "sha256": "f7aa7f3f57d828921f0e984dfd578fbc7a8a8c3a22dbbf5eae3f96c16a97fca7"
+    },
+    "settled-96000-0-1.f64": {
+      "bytes": 32768,
+      "sha256": "fb163ff1a435a659ee7d399956f35f0eea0827f9c7ac9bdac0e23fe9d34ec5e2"
+    },
+    "settled-96000-0-2.f64": {
+      "bytes": 32768,
+      "sha256": "964ad36033375286769083e2b37de840a9696043010d0a4c75bc3e4376c4858b"
+    },
+    "settled-96000-1-0.f64": {
+      "bytes": 32768,
+      "sha256": "b9c36490754bef1ae3cafe101c8ff46cfa2f6bb2388d8aeaf1509a9c2aec0d5c"
+    },
+    "settled-96000-1-1.f64": {
+      "bytes": 32768,
+      "sha256": "48dbe6237c25ac501d3ea2bdb7a062b801f19a71609993ef078aec66e7b2f432"
+    },
+    "settled-96000-1-2.f64": {
+      "bytes": 32768,
+      "sha256": "912aec9d7d8e1bed107fc640e5ff91a5d9c60c4696e7fb1865cb83c4798019b9"
+    },
+    "settled-settings.csv": {
+      "bytes": 2789,
+      "sha256": "6ce200bcaf26930be84061e9ed63a91a6c209081a3940226828ee4aaec116254"
+    }
+  }
+}

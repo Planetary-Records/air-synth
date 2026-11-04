@@ -1,0 +1,148 @@
+{
+  "source_commit": "05c0e256d3edec8ffd77dd3f09250f3afb84813f",
+  "source_path": "docs/design/racks/2026-10-09-studio-rack/house/skin",
+  "files": [
+    {
+      "path": "elements.json",
+      "sha256": "0dfa5ed3400f1f64c67bbe19b487bc0e68888a17751d0ebf163b62b0cc70de94"
+    },
+    {
+      "path": "parts/strip-led-lit.png",
+      "sha256": "a06dfc0177a7c31b03a1fe02319a08129cddf9a07add2d39794dcb4ed34f2c62"
+    },
+    {
+      "path": "parts/strip-macro-1-pointer.png",
+      "sha256": "b69657d11822b10cdd4dcc2bcb271e145a8563884ba3a7dbfbd861135fb403ef"
+    },
+    {
+      "path": "parts/strip-macro-2-pointer.png",
+      "sha256": "0ab3ec4ec7dc227ed134c7e5efcb41c13298f10037b8726f179388e54bd2d4a1"
+    },
+    {
+      "path": "parts/strip-macro-3-pointer.png",
+      "sha256": "a784b6e6887d12a91b68e65b5cd5a5f6b846ee8fcdb4fc21f160c28395c1c9da"
+    },
+    {
+      "path": "parts/strip-macro-4-pointer.png",
+      "sha256": "30e8fc7fb13dfd6846b96d0bb36ca9a725c0f866b3b841a977070f311a1053bc"
+    },
+    {
+      "path": "parts/strip-macro-5-pointer.png",
+      "sha256": "63267f5841714478f26a2843a52855124ea0ae5fd703b5fe1b2cde148dc4980f"
+    },
+    {
+      "path": "parts/strip-macro-6-pointer.png",
+      "sha256": "32b19de59b4b729b0a5e104bd391aec81c8279e0e8380a6d4e4e8af82f0cff9d"
+    },
+    {
+      "path": "parts/strip-macro-7-pointer.png",
+      "sha256": "e7d07447bbefeb02339edaa79349c7a0f4c15c7a1220ed3f0e9c192a407ec247"
+    },
+    {
+      "path": "parts/strip-macro-8-pointer.png",
+      "sha256": "fdba4de32abaa3c2b193bbe564cf1e5c4a6be906bf8ddaea2886ed06ca664e7b"
+    },
+    {
+      "path": "parts/strip-master-pointer.png",
+      "sha256": "b7a1afca3d8d0d23c4fea548da3cafa8ea307e4320e3c404c795f50ed85d7086"
+    },
+    {
+      "path": "parts/unit-fader-cap.png",
+      "sha256": "94df4e42809a597edd542b9037c68bfc759f765364db0f2d8101be14e93b84cf"
+    },
+    {
+      "path": "parts/unit-gain-pointer.png",
+      "sha256": "a8da0b65d472cd538624d25df709548d6192ea6104dcba8c83fa08267cf48337"
+    },
+    {
+      "path": "parts/unit-glide-pointer.png",
+      "sha256": "16dd522ca7dd18825735950ffef4c149ab128de576fe88be5e0b1c38f27e32d1"
+    },
+    {
+      "path": "parts/unit-led-lit.png",
+      "sha256": "db169813dd12c4cce3df9b04b8a3578b89c8dca822ee4081b0af490c6f4b5cd8"
+    },
+    {
+      "path": "parts/unit-macro-1-pointer.png",
+      "sha256": "94cce5726ffa8341f95c37068aed159b43001fd12bb568e52f86dfb23c16a36a"
+    },
+    {
+      "path": "parts/unit-macro-2-pointer.png",
+      "sha256": "14f1de676a7cd392c57b5ca1d8f9e052a521c0fffb15095e0f40cb5379195d60"
+    },
+    {
+      "path": "parts/unit-macro-3-pointer.png",
+      "sha256": "3149d582b1a584c52f9acea9a57e8c0a97defe1bd8f23b8365d5f334f402c7e1"
+    },
+    {
+      "path": "parts/unit-macro-4-pointer.png",
+      "sha256": "b38bfe681407acc7c7a801335b2661d17e0bc92d5234e6c2e14c92ecba4ca8f6"
+    },
+    {
+      "path": "parts/unit-macro-5-pointer.png",
+      "sha256": "14cd5e4efa4fd24c588655a49279b7980d6d2a7af427842f7185c00205c91987"
+    },
+    {
+      "path": "parts/unit-macro-6-pointer.png",
+      "sha256": "2287059fb376913a695c0c8418b8373d04417468408989d29676ea9786882292"
+    },
+    {
+      "path": "parts/unit-macro-7-pointer.png",
+      "sha256": "8f64b2cf0e2b7cd1a7d8d4b6d71a77e4846052a445960ca68db97b05daf2f1b7"
+    },
+    {
+      "path": "parts/unit-macro-8-pointer.png",
+      "sha256": "d9dc0bd76f39e3de781cc8f11e4f38aa4e9283ea2f927ca030070955487c97af"
+    },
+    {
+      "path": "parts/unit-master-pointer.png",
+      "sha256": "1ab70ad91db4c41bb88553e3a0a911b14b890186c2330e668e1e6e1c13b376c8"
+    },
+    {
+      "path": "parts/unit-pan-1-pointer.png",
+      "sha256": "88cea22b929c80ea811519f1991b8676801f3b50588409511ab96c4f0d934e88"
+    },
+    {
+      "path": "parts/unit-pan-2-pointer.png",
+      "sha256": "7322a1ee239b24337cefab00b0bcf08e9bb4894e963055619f6b674c95e033c6"
+    },
+    {
+      "path": "parts/unit-pan-3-pointer.png",
+      "sha256": "23a2413b52ca43a1e91a08706c7a5983a59d4f47d4eb6b8073a065f182cccd4b"
+    },
+    {
+      "path": "parts/unit-pan-4-pointer.png",
+      "sha256": "5207bf03d62a62d070ea1b852213c33518a8a808ff26da287684b4587c26d03b"
+    },
+    {
+      "path": "parts/unit-tape.png",
+      "sha256": "865a69c08fd9a500f6b580081767f1fb5970b8c68925fbcfae652518474eba19"
+    },
+    {
+      "path": "plates/strip.png",
+      "sha256": "7702abcd1314d07b541d676d0fe1d7c1416861f1e0d54066cbb31cf7ce65fb44"
+    },
+    {
+      "path": "plates/unit.png",
+      "sha256": "a6985ca90e9f24601cd880b1c943e8a9a0fd0a61c99b8ddee7457d45c7e29a77"
+    }
+  ],
+  "shared": [
+    {
+      "path": "fonts/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "embedded_as": "resources/studio-skin/fonts/PermanentMarker-LICENSE.txt"
+    },
+    {
+      "path": "fonts/PermanentMarker-Regular.ttf",
+      "sha256": "28f82c8a7943cb8e9d599f8554da1d4fc75dbcf69b9885ad6c0611d20c6946c5",
+      "embedded_as": "resources/studio-skin/fonts/PermanentMarker-Regular.ttf"
+    }
+  ],
+  "scope": "Current file identity and retained original authoring inputs. Sanitized documentary index; original acceptance/source manifests retained privately. No new native acceptance or exclusivity guarantee.",
+  "narrow": {
+    "command": "python -B house_skin.py narrow",
+    "script_sha256": "4dad678c64510220190470dfa9f65d7426c53d5c6d698805fff6243902d1e454",
+    "note": "elements.json gained its narrow record after source_commit; every other file is as there"
+  }
+}

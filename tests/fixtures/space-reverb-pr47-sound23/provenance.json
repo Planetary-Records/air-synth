@@ -1,0 +1,45 @@
+{
+  "source_head": "d0f0f474bd187ca25d61858f1853f133b95617dd",
+  "production_code": "ee7dd84d69535898cb9d9c39dbc28a6af674ad9e",
+  "scope": "Actual pre-main-PR55 Pro-R Sound23/Project22 writer, 2983 controls, 17 effect banks; temporary capture branch only; all shipped inputs unchanged from codeEE.",
+  "receipt": {
+    "code_head": "d0f0f474bd187ca25d61858f1853f133b95617dd",
+    "binary_sha256": "7DFA9E4AA6F450D4B2AD816E19AB59EBF7AB136BF549B6891C89BE4812296D06",
+    "actual_exit": 0,
+    "source_sha256": "9828685C8B967398F5DABF8AC279F9EE891DB61BDEAB9418F9E93201F7B9D482",
+    "ended_utc": "2026-10-20T14:35:49.4772393Z"
+  },
+  "checks": 13,
+  "failures": 0,
+  "rich_state": "Accepted long-hall-realtime-48000 scene with Copper Arc and Lumen Field personalities, non-default locks and two Space macro bindings; exact encode/decode equality checked before capture.",
+  "failed_setup_attempts": [
+    "capture1: MemoryBlock was not cleared before File::loadFileAsData appended, so decode/hash rejected concatenated input; corrected by reset, no decoder change.",
+    "capture2: expected exactly one personality but accepted scene retains both Copper Arc and Lumen Field; corrected capture guard to require actual Lumen Field presence. All other checks including exact rich sound/project round trips passed."
+  ],
+  "files": {
+    "capture.log": {
+      "bytes": 39,
+      "sha256": "f5b8dd63078b6f29228083ce1ee6fbd11885ce9b15f60a644001f08f71e98a1b"
+    },
+    "capture.patch": {
+      "bytes": 3053,
+      "sha256": "99e28600b5a9c7f82e63ca11eb60eb82513e68558e73304f781a4613a1d4513f"
+    },
+    "default-v23.soundstate": {
+      "bytes": 27209,
+      "sha256": "7c6cda1c2ef2472a20f58020cc9358bf86697d21281a0807936dd4bfeb0787c6"
+    },
+    "registry-v23.json": {
+      "bytes": 659359,
+      "sha256": "539c25b3651bad64189e8d8c4d408a70925074b795f6cb25567646cfa2f6ffd3"
+    },
+    "rich-v22.airackproject": {
+      "bytes": 41445,
+      "sha256": "47c6aee469064173e2d8aa426847f201e0b5edbc335748227b547fbe19907020"
+    },
+    "rich-v23.soundstate": {
+      "bytes": 41337,
+      "sha256": "420ac810ce7d2f67b6cc16e3f08fc581c173b49b3b973cd657224cddbabdebdc"
+    }
+  }
+}

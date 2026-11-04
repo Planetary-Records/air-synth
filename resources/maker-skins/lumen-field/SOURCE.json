@@ -1,0 +1,203 @@
+{
+  "format": "ai-rack-maker-skin-source",
+  "version": 1,
+  "approved_sources": {
+    "closed": {
+      "path": "docs/design/racks/2026-10-09-studio-rack/lumen-field/closed.png",
+      "sha256": "cd52d80264295c449aa8dc4ad733ab9ecc1e0e96b5e5b5722fba222502c4f818"
+    },
+    "open": {
+      "path": "docs/design/racks/2026-10-09-studio-rack/lumen-field/open.png",
+      "sha256": "28a74fade16025960a225f50e162f8127adfacd8d4cb8a3e3263d6c25978b7f8"
+    }
+  },
+  "script": {
+    "path": "docs\\design\\racks\\2026-10-09-studio-rack\\lumen-field\\skin\\lumen_field_skin.py",
+    "sha256": "eba33cfef04ec9abdc190ef166b7754d04e77bf9548c2dde9192ac853e97c026"
+  },
+  "production_manifest": {
+    "path": "docs\\design\\racks\\2026-10-09-studio-rack\\lumen-field\\skin-sources\\asset-map.json",
+    "sha256": "1a63644b30b521426a2cf5f9c00ee55733db52700f9800b7aea221eadbe9da1c"
+  },
+  "method": "measure/generated-cell-slicing/elements/production-composite/native-compare/install; no concept cutouts or synthesized missing states",
+  "fidelity": {
+    "label": "source-compositor",
+    "reference": "pre-native frozen production composites assembled from generated plates and shared cells; approved concepts separately reviewed at 1:1",
+    "views": {
+      "face": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 3794220
+      },
+      "front": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 1264740
+      },
+      "deck": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 3800640
+      }
+    },
+    "artwork_views": {
+      "face": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 3794220
+      },
+      "front": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 1264740
+      },
+      "deck": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 3800640
+      }
+    },
+    "controls": {
+      "face.decay": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 287685
+      },
+      "face.size": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 63507
+      },
+      "face.predelay": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 63486
+      },
+      "face.brightness": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 63501
+      },
+      "face.character": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 63501
+      },
+      "face.distance": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 63513
+      },
+      "face.width": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 165312
+      },
+      "face.mix": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 164328
+      },
+      "face.in": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 14100
+      },
+      "face.lamp": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 3504
+      },
+      "deck.duck-range": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 58719
+      },
+      "deck.duck-threshold": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 58686
+      },
+      "deck.duck-attack": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 58722
+      },
+      "deck.duck-release": {
+        "mean_per_channel": 0.0,
+        "p99": 0.0,
+        "maximum": 0.0,
+        "samples": 58725
+      }
+    },
+    "native": false,
+    "live_graph": "native live graph is functionally validated separately; source artwork glass stays blank",
+    "pass": true
+  },
+  "status": "SOURCE_COMPARISON_ONLY_NATIVE_ACCEPTANCE_PENDING",
+  "files": [
+    {
+      "path": "lumen-field-elements.json",
+      "sha256": "951fad6877ce332c598a14c1a9b3fb1e8d08f57b78e5a13c269047f2de5df918"
+    },
+    {
+      "path": "parts/lumen-field-deck-shared-pointer.png",
+      "sha256": "5d79d463569bb62af26d5661b05127ee1b95f637131b9e1435e46cddb0d52971"
+    },
+    {
+      "path": "parts/lumen-field-face-decay-pointer.png",
+      "sha256": "3b17192a0b2cf6f01205f210138633b8fdba2e90052263aa75c6da547b5186cb"
+    },
+    {
+      "path": "parts/lumen-field-face-in-down.png",
+      "sha256": "914e6fa0380b752227a510daf89187f37aaa13df12b96b5e31068e17e9e5b71c"
+    },
+    {
+      "path": "parts/lumen-field-face-in-up.png",
+      "sha256": "f36526c912daf44f95a764d0f13c6c41f498a48b10697e1237b5decee50d6570"
+    },
+    {
+      "path": "parts/lumen-field-face-lamp-lit.png",
+      "sha256": "9133277dc0aa5b31363e3c9978411524f82198b9e602bda9c5ef7eedef8fffad"
+    },
+    {
+      "path": "parts/lumen-field-face-shared-cap.png",
+      "sha256": "420af8130d7c3b339c12483e0488a88d134788234b72285281c75715f8c0f7c1"
+    },
+    {
+      "path": "parts/lumen-field-face-shared-pointer.png",
+      "sha256": "a273158743931be9111c265500fdcda5da2c938270868e11a93b958603d6e56b"
+    },
+    {
+      "path": "plates/lumen-field-deck.png",
+      "sha256": "427c1bc3c932a53c8ade47383adda35581f2f9a9e41c3dd4d3acb29e9f90a02e"
+    },
+    {
+      "path": "plates/lumen-field-face.png",
+      "sha256": "f5dc3ee403be83f6e2fc8045204328498023a3e5064af0be5cc7c639a4124f11"
+    },
+    {
+      "path": "plates/lumen-field-front.png",
+      "sha256": "44e5341ca04c587867e37f7717b246ff7bf7ff91b3c555c71bab3b968ccce2c0"
+    }
+  ]
+}

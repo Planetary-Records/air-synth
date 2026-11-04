@@ -1,0 +1,314 @@
+#include "RackDesign.h"
+#include "ParameterRegistry.h"
+#include "StrictJson.h"
+#include <algorithm>
+#include <charconv>
+#include <cmath>
+#include <limits>
+#include <set>
+#include <string_view>
+
+namespace airack {
+const UnitBinding* rackUnitBinding(const RackInstance& instance,std::uint8_t unit) noexcept {
+    const auto found=std::find_if(instance.bindings.begin(),instance.bindings.end(),[&](const auto& binding){return binding.unit==unit;});
+    return found==instance.bindings.end()?nullptr:&*found;
+}
+juce::String moduleDisplayName(NativeModule m) {
+    constexpr const char* names[]{"Analog","Wavetable","Drive","Delay","Reverb","Compressor","EQ","Filter","Chorus","Phaser","Flanger","Stereo","Dimension","Frequency shift","Convolution","Frequency split","Mid/side split","Dynamic EQ","Space Reverb","Era Reverb","Drum","Saturation"};
+    return unsigned(m)<std::size(names)?juce::String(names[unsigned(m)]):juce::String("Unknown");
+}
+juce::String effectDisplayName(EffectKind k) {
+    return k<=EffectKind::saturation?moduleDisplayName(nativeModuleForEffect(k)):juce::String("Unknown");
+}
+
+namespace {
+using juce::String; using juce::var;
+constexpr std::size_t maximumBytes = 65536;
+// JUCE uses fixed notation between 1e-5 and 1e6. Five extra fractional
+// places preserve max_digits10 significant digits at the lower threshold;
+// outside it JUCE uses scientific notation with this same precision.
+constexpr int jsonDecimalPlaces = std::numeric_limits<double>::max_digits10 + 5;
+constexpr const char* modules[] = {"analog", "wavetable", "drive", "delay", "reverb", "compressor", "eq", "filter_fx", "chorus", "phaser", "flanger", "stereo", "dimension", "frequency_shift", "convolution", "frequency_split", "mid_side_split", "dynamic_eq", "space_reverb", "era_reverb", "drum", "saturation"};
+static_assert(std::size(modules)==unsigned(NativeModule::saturation)+1);
+constexpr const char* layouts[] = {"instrumentSections", "performanceControls", "orderedFxStrip"};
+constexpr const char* widgets[] = {"rotary", "verticalSlider", "toggle", "choice"};
+constexpr const char* responses[] = {"linear", "logarithmic"};
+constexpr const char* roles[] = {"synth", "fx"};
+constexpr const char* styleFields[] = {"surface", "accent", "frame", "emphasis", "spacing", "density"};
+const std::vector<std::vector<const char*>> styleTokens = {{"light", "dark"}, {"warm", "cool", "neutral"}, {"rounded", "square"}, {"balanced", "prominent"}, {"compact", "relaxed"}, {"sparse", "dense"}};
+int defaultLimit(NativeModule module,RackValidationMode mode) {
+    return isSourceModule(module)||module==NativeModule::dynamicEq||module==NativeModule::spaceReverb||module==NativeModule::eraReverb||module==NativeModule::saturation||mode==RackValidationMode::instanceRecall
+        ?int(rackUnitParameterCapacity(module)):23;
+}
+bool text(const String& s, std::size_t bound) {
+    const auto bytes = s.getNumBytesAsUTF8();
+    return bytes <= bound && juce::CharPointer_UTF8::isValidString(s.toRawUTF8(), static_cast<int>(bytes));
+}
+bool keyText(const String& key) {
+    if (key.isEmpty() || !text(key, rackParameterKeyBytes)) return false;
+    for (auto c : key.toStdString()) if (static_cast<unsigned char>(c) >= 128) return false;
+    return true;
+}
+var object(std::initializer_list<std::pair<const char*, var>> fields) {
+    auto* o = new juce::DynamicObject; for (const auto& f : fields) o->setProperty(f.first, f.second); return o;
+}
+bool closed(const var& v, std::initializer_list<const char*> required, std::initializer_list<const char*> optional = {}) {
+    const auto* o = v.getDynamicObject(); if (!o) return false;
+    for (auto key : required) if (!o->hasProperty(key)) return false;
+    for (const auto& p : o->getProperties()) {
+        auto known = [&](auto list) { return std::any_of(list.begin(), list.end(), [&](auto k) { return p.name.toString() == k; }); };
+        if (!known(required) && !known(optional)) return false;
+    }
+    return true;
+}
+bool integer(const var& v, int min, int max) {
+    return (v.isInt() || v.isInt64()) && static_cast<juce::int64>(v) >= min && static_cast<juce::int64>(v) <= max;
+}
+bool number(const var& v) { return (v.isInt() || v.isInt64() || v.isDouble()) && std::isfinite(static_cast<double>(v)); }
+// Bound already-materialized nested objects too. This preflight limits traversal
+// and serialization work before inspecting any arrays supplied by a caller.
+bool boundedObject(const var& v, std::size_t& remaining, unsigned depth = 0) {
+    auto consume = [&](std::size_t n) { if (n > remaining) return false; remaining -= n; return true; };
+    if (depth > 24 || !consume(1)) return false;
+    if (v.isString()) return consume(v.toString().getNumBytesAsUTF8());
+    if (const auto* a = v.getArray()) {
+        if (static_cast<std::size_t>(a->size()) > remaining) return false;
+        for (const auto& item : *a) if (!boundedObject(item, remaining, depth + 1)) return false;
+    } else if (const auto* o = v.getDynamicObject()) {
+        if (static_cast<std::size_t>(o->getProperties().size()) > remaining) return false;
+        for (const auto& p : o->getProperties())
+            if (!consume(p.name.toString().getNumBytesAsUTF8()) || !boundedObject(p.value, remaining, depth + 1)) return false;
+    } else if (!v.isVoid() && !v.isBool() && !number(v)) return false;
+    return true;
+}
+template <typename Tokens> int token(const var& v, const Tokens& tokens) {
+    if (!v.isString()) return -1;
+    for (std::size_t i = 0; i < std::size(tokens); ++i) if (v.toString() == tokens[i]) return static_cast<int>(i);
+    return -1;
+}
+bool arrayBound(const var& v, int min, int max) { const auto* a = v.getArray(); return a && a->size() >= min && a->size() <= max; }
+bool revision(const var& v, std::uint64_t& out) {
+    if (!v.isString()) return false;
+    const auto s = v.toString().toStdString();
+    if (s.empty() || s.size() > 20 || s[0] < '1' || s[0] > '9') return false;
+    for (auto c : s) if (c < '0' || c > '9') return false;
+    const auto r = std::from_chars(s.data(), s.data() + s.size(), out);
+    return r.ec == std::errc{} && r.ptr == s.data() + s.size();
+}
+bool uuid(const var& v, juce::Uuid& out) {
+    if (!v.isString()) return false;
+    auto s = v.toString(); if (s.length() != 36) return false;
+    for (int i = 0; i < 36; ++i) {
+        auto c = s[i]; if (i == 8 || i == 13 || i == 18 || i == 23) { if (c != '-') return false; }
+        else if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))) return false;
+    }
+    out = juce::Uuid(s); return !out.isNull();
+}
+var stringSchema(int bytes) { return object({{"type", "string"}, {"maxLength", bytes}}); }
+var enumSchema(const auto& tokens) {
+    juce::Array<var> a; for (auto t : tokens) a.add(t); return object({{"type", "string"}, {"enum", a}});
+}
+var intSchema(int min, int max) { return object({{"type", "integer"}, {"minimum", min}, {"maximum", max}}); }
+var arraySchema(var item, int min, int max) { return object({{"type", "array"}, {"items", item}, {"minItems", min}, {"maxItems", max}}); }
+var objectSchema(var properties, std::initializer_list<const char*> optional = {}) {
+    juce::Array<var> required;
+    for (const auto& p : properties.getDynamicObject()->getProperties()) {
+        if (std::none_of(optional.begin(), optional.end(), [&](auto k) { return p.name.toString() == k; })) required.add(p.name.toString());
+    }
+    return object({{"type", "object"}, {"properties", properties}, {"required", required}, {"additionalProperties", false}});
+}
+}
+
+bool rackParameterActive(NativeModule module, const String& key) {
+    if(unsigned(module)>=std::size(modules))return false;
+    if (module==NativeModule::drum) return key=="enabled"||key=="level"||key=="pan"||key.startsWith("drum.pad.");
+    if (isSourceModule(module)) {
+        if(key=="drum_mode"||key.startsWith("drum.pad."))return false;
+        if (key.startsWith("analog.")) return module == NativeModule::analog;
+        if (key.startsWith("wavetable.")) return module == NativeModule::wavetable;
+        return true;
+    }
+    return key == "bypassed" || key.startsWith(String(modules[static_cast<unsigned>(module)]) + ".");
+}
+
+std::optional<std::size_t> rackParameterIndex(NativeModule module, std::uint8_t slot, const String& key) {
+    if (static_cast<unsigned>(module) >= std::size(modules) || !keyText(key) || slot >= (isSourceModule(module) ? 4 : 8)) return {};
+    const auto id = String(isSourceModule(module) ? "synth." : "effect.") + String(slot + 1) + "." + key;
+    const auto r = parameterRegistry();
+    for (std::size_t i = 0; i < r.size(); ++i) if (r[i].id == id) return i;
+    return {};
+}
+bool supportsAlgorithm(NativeModule module,AlgorithmRevision algorithm) noexcept {
+    const auto index=static_cast<unsigned>(module);
+    return module==NativeModule::drum||module==NativeModule::saturation?algorithm==1:index<=static_cast<unsigned>(NativeModule::eraReverb)
+        && (index<2?supportsSynthAlgorithmRevision(algorithm):supportsEffectAlgorithmRevision(index-2,algorithm));
+}
+AlgorithmRevision rackAlgorithmRevision(const KernelCompatibility& c,NativeModule m,std::uint8_t slot) noexcept {
+    if(m==NativeModule::drum)return slot<4?1:0;
+    if(m==NativeModule::analog||m==NativeModule::wavetable)return slot<4?c.synth[slot][unsigned(m)]:0;
+    return isEffectModule(m)&&slot<8?c.effects[slot][unsigned(effectKindForModule(m))]:0;
+}
+bool setRackAlgorithmRevision(KernelCompatibility& c,NativeModule m,std::uint8_t slot,AlgorithmRevision revision) noexcept {
+    if(!supportsAlgorithm(m,revision)||slot>=(isSourceModule(m)?4:8))return false;
+    if(m==NativeModule::drum)return true;
+    if(isSourceModule(m))c.synth[slot][unsigned(m)]=revision;else c.effects[slot][unsigned(effectKindForModule(m))]=revision;
+    return true;
+}
+bool validateRackDesign(const RackDesign& d, RackValidationMode mode) {
+    if (mode != RackValidationMode::portableDesign && mode != RackValidationMode::instanceRecall) return false;
+    if (d.id.isNull() || d.revision == 0 || !text(d.name, 64) || !text(d.intent, 512)
+        || static_cast<unsigned>(d.role) > 1 || d.units.empty() || d.units.size() > (d.role == RackRole::synth ? 9u : 8u)
+        || static_cast<unsigned>(d.panel.layout) >= std::size(layouts) || d.panel.sections.empty() || d.panel.sections.size() > 4 || d.panel.controls.size() > 8) return false;
+    const std::uint8_t styles[] = {d.panel.surface, d.panel.accent, d.panel.frame, d.panel.emphasis, d.panel.spacing, d.panel.density};
+    for (std::size_t i = 0; i < std::size(styles); ++i) if (styles[i] >= styleTokens[i].size()) return false;
+    for (const auto& s : d.panel.sections) if (!text(s, 64)) return false;
+    std::set<unsigned> ids;
+    for (std::size_t i = 0; i < d.units.size(); ++i) {
+        const auto& u = d.units[i];
+        if (u.id > 8 || !ids.insert(u.id).second || !supportsAlgorithm(u.module,u.algorithmRevision)
+            || isSourceModule(u.module) != (d.role == RackRole::synth && i == 0) || u.defaults.size() > std::size_t(defaultLimit(u.module,mode))) return false;
+        std::set<String> keys;
+        for (const auto& p : u.defaults) {
+            const auto index = rackParameterIndex(u.module, 0, p.key);
+            if (p.key=="drum_mode" || p.unit != u.id || !index || !keys.insert(p.key).second || !std::isfinite(p.normalized) || p.normalized < 0 || p.normalized > 1
+                || (mode == RackValidationMode::portableDesign && !rackParameterActive(u.module, p.key))) return false;
+            const auto& descriptor = parameterRegistry()[*index];
+            if (descriptor.kind != ParameterKind::continuous) {
+                const auto step = p.normalized * (descriptor.maximum - descriptor.minimum);
+                if (std::abs(step - std::round(step)) > 1e-5f) return false;
+            }
+            if (p.key == "engine" && u.module!=NativeModule::drum && p.normalized != (u.module == NativeModule::wavetable ? 1.f : 0.f)) return false;
+        }
+        if(u.module==NativeModule::dynamicEq){
+            auto values=defaultParameterValues();
+            for(const auto& p:u.defaults)values[*rackParameterIndex(u.module,0,p.key)]=p.normalized;
+            if(!validateParameterValues(values))return false;
+        }
+    }
+    std::set<std::pair<unsigned, String>> controls;
+    for (const auto& c : d.panel.controls) {
+        const auto u = std::find_if(d.units.begin(), d.units.end(), [&](const auto& unit) { return unit.id == c.unit; });
+        if (u == d.units.end() || !text(c.label, 64) || c.section >= d.panel.sections.size() || !controls.emplace(c.unit, c.key).second) return false;
+        const auto index = rackParameterIndex(u->module, 0, c.key);
+        if (c.key=="drum_mode" || !index || (mode == RackValidationMode::portableDesign && !rackParameterActive(u->module, c.key))) return false;
+        const auto& p = parameterRegistry()[*index];
+        if (static_cast<unsigned>(c.widget) >= std::size(widgets) || static_cast<unsigned>(c.response) >= std::size(responses)
+            || !std::isfinite(c.minimum) || !std::isfinite(c.maximum) || c.minimum < p.minimum || c.maximum > p.maximum || c.minimum >= c.maximum
+            || (c.response == FocusResponse::logarithmic && c.minimum <= 0)) return false;
+        if (p.kind == ParameterKind::continuous) { if (c.widget != FocusWidget::rotary && c.widget != FocusWidget::verticalSlider) return false; }
+        else if (c.widget != (p.kind == ParameterKind::toggle ? FocusWidget::toggle : FocusWidget::choice)
+                 || c.minimum != std::round(c.minimum) || c.maximum != std::round(c.maximum)) return false;
+    }
+    return true;
+}
+bool encodeRackDesignObject(const RackDesign& d, var& out, RackValidationMode mode) {
+    if (!validateRackDesign(d, mode)) return false;
+    juce::Array<var> units, sections, controls;
+    for (const auto& u : d.units) {
+        juce::Array<var> defaults; for (const auto& p : u.defaults) defaults.add(object({{"unit", p.unit}, {"key", p.key}, {"normalized", p.normalized}}));
+        units.add(object({{"id", u.id}, {"module", modules[static_cast<unsigned>(u.module)]}, {"defaults", defaults}, {"algorithm_revision",u.algorithmRevision}}));
+    }
+    for (const auto& s : d.panel.sections) sections.add(s);
+    for (const auto& c : d.panel.controls) controls.add(object({{"label", c.label}, {"unit", c.unit}, {"section", c.section}, {"key", c.key},
+        {"widget", widgets[static_cast<unsigned>(c.widget)]}, {"response", responses[static_cast<unsigned>(c.response)]}, {"minimum", c.minimum}, {"maximum", c.maximum}}));
+    auto panel = object({{"layout", layouts[static_cast<unsigned>(d.panel.layout)]}, {"sections", sections}, {"controls", controls}});
+    const std::uint8_t styles[] = {d.panel.surface, d.panel.accent, d.panel.frame, d.panel.emphasis, d.panel.spacing, d.panel.density};
+    for (std::size_t i = 0; i < std::size(styles); ++i) panel.getDynamicObject()->setProperty(styleFields[i], styleTokens[i][styles[i]]);
+    auto candidate = object({{"version", 2}, {"id", d.id.toDashedString()}, {"revision", String(std::to_string(d.revision))}, {"name", d.name}, {"intent", d.intent}, {"role", roles[static_cast<unsigned>(d.role)]}, {"units", units}, {"panel", panel}});
+    if (juce::JSON::toString(candidate, true, jsonDecimalPlaces).getNumBytesAsUTF8() > maximumBytes) return false;
+    out = candidate; return true;
+}
+bool decodeRackDesignObject(const var& v, RackDesign& out, RackValidationMode mode) {
+    if (!closed(v, {"version", "id", "revision", "name", "intent", "role", "units", "panel"}) || !integer(v["version"], 1, 2)) return false;
+    auto remaining = maximumBytes;
+    if (!boundedObject(v, remaining) || juce::JSON::toString(v, true, jsonDecimalPlaces).getNumBytesAsUTF8() > maximumBytes) return false;
+    RackDesign d;
+    if (!uuid(v["id"], d.id) || !revision(v["revision"], d.revision) || !v["name"].isString() || !v["intent"].isString()) return false;
+    d.name = v["name"].toString(); d.intent = v["intent"].toString(); const auto role = token(v["role"], roles); if (role < 0) return false; d.role = static_cast<RackRole>(role);
+    if (!arrayBound(v["units"], 1, role == 0 ? 9 : 8)) return false;
+    for (const auto& u : *v["units"].getArray()) {
+        if (!(int(v["version"])==1?closed(u, {"id", "module", "defaults"}):closed(u, {"id", "module", "defaults","algorithm_revision"})) || !integer(u["id"], 0, 8)) return false;
+        const auto m = token(u["module"], modules); if (m < 0 || !arrayBound(u["defaults"], 0, defaultLimit(static_cast<NativeModule>(m),mode))) return false;
+        RackUnit unit {static_cast<std::uint8_t>(int(u["id"])), static_cast<NativeModule>(m), {}};
+        if(int(v["version"])==2){if(!integer(u["algorithm_revision"],1,255))return false;unit.algorithmRevision=static_cast<AlgorithmRevision>(int(u["algorithm_revision"]));}
+        for (const auto& p : *u["defaults"].getArray()) {
+            if (!closed(p, {"unit", "key", "normalized"}) || !integer(p["unit"], 0, 8) || !p["key"].isString() || !number(p["normalized"])
+                || double(p["normalized"]) < 0 || double(p["normalized"]) > 1) return false;
+            unit.defaults.push_back({static_cast<std::uint8_t>(int(p["unit"])), p["key"].toString(), static_cast<float>(double(p["normalized"]))});
+        }
+        d.units.push_back(std::move(unit));
+    }
+    const auto& p = v["panel"];
+    if (!closed(p, {"layout", "sections", "controls"}, {"surface", "accent", "frame", "emphasis", "spacing", "density"}) || !arrayBound(p["sections"], 1, 4) || !arrayBound(p["controls"], 0, 8)) return false;
+    const auto layout = token(p["layout"], layouts); if (layout < 0) return false; d.panel.layout = static_cast<PanelLayout>(layout);
+    for (const auto& s : *p["sections"].getArray()) { if (!s.isString()) return false; d.panel.sections.push_back(s.toString()); }
+    for (const auto& c : *p["controls"].getArray()) {
+        if (!closed(c, {"label", "unit", "section", "key", "widget", "response", "minimum", "maximum"}) || !c["label"].isString() || !c["key"].isString()
+            || !integer(c["unit"], 0, 8) || !integer(c["section"], 0, 3) || !number(c["minimum"]) || !number(c["maximum"])) return false;
+        const auto w = token(c["widget"], widgets);
+        const auto r = token(c["response"], responses);
+        if (w < 0 || r < 0) return false;
+        const auto unit = std::find_if(d.units.begin(), d.units.end(), [&](const auto& u) { return u.id == int(c["unit"]); });
+        if (unit == d.units.end()) return false;
+        const auto index = rackParameterIndex(unit->module, 0, c["key"].toString());
+        if (!index) return false;
+        const auto& descriptor = parameterRegistry()[*index];
+        const auto minimum = double(c["minimum"]);
+        const auto maximum = double(c["maximum"]);
+        if (minimum < descriptor.minimum || maximum > descriptor.maximum || minimum >= maximum
+            || (r == 1 && minimum <= 0)
+            || (descriptor.kind != ParameterKind::continuous && (minimum != std::round(minimum) || maximum != std::round(maximum)))) return false;
+        d.panel.controls.push_back({
+            c["label"].toString(),
+            static_cast<std::uint8_t>(int(c["unit"])),
+            static_cast<std::uint8_t>(int(c["section"])),
+            c["key"].toString(),
+            static_cast<FocusWidget>(w),
+            static_cast<FocusResponse>(r),
+            static_cast<float>(minimum),
+            static_cast<float>(maximum)});
+    }
+    std::uint8_t* styles[] = {&d.panel.surface, &d.panel.accent, &d.panel.frame, &d.panel.emphasis, &d.panel.spacing, &d.panel.density};
+    for (std::size_t i = 0; i < std::size(styles); ++i) { const auto t = token(p[styleFields[i]], styleTokens[i]); if (t >= 0) *styles[i] = static_cast<std::uint8_t>(t); }
+    if (!validateRackDesign(d, mode)) return false;
+    var bounded; if (!encodeRackDesignObject(d, bounded, mode)) return false;
+    out = std::move(d); return true;
+}
+bool encodeRackDesign(const RackDesign& d, juce::MemoryBlock& out, RackValidationMode mode) {
+    var v; if (!encodeRackDesignObject(d, v, mode)) return false;
+    const auto s = juce::JSON::toString(v, true, jsonDecimalPlaces).toStdString();
+    juce::MemoryBlock candidate(s.data(), s.size());
+    out = std::move(candidate);
+    return true;
+}
+bool decodeRackDesign(const void* data, std::size_t size, RackDesign& out, RackValidationMode mode) {
+    if (!data || size == 0 || size > maximumBytes) return false;
+    const auto s = std::string_view(static_cast<const char*>(data), size);
+    // JUCE strings terminate at NUL. Reject escaped NUL before materialization;
+    // skip escaped backslashes so a literal "\\u0000" remains ordinary text.
+    for (std::size_t i = 0; i + 1 < s.size(); ++i) if (s[i] == '\\') {
+        if (s.substr(i, 6) == "\\u0000") return false; ++i;
+    }
+    var v; return ai::parseStrictJson(s, v, maximumBytes) && decodeRackDesignObject(v, out, mode);
+}
+var rackDesignSchema(bool includeIdentity) {
+    auto parameter = objectSchema(object({{"unit", intSchema(0, 8)}, {"key", stringSchema(rackParameterKeyBytes)}, {"normalized", object({{"type", "number"}, {"minimum", 0}, {"maximum", 1}})}}));
+    // Correlate revision admission with its native module in the provider schema.
+    juce::Array<var> unitChoices;
+    for(unsigned m=0;m<std::size(modules);++m) {
+        const char* choice[]{modules[m]};
+        unitChoices.add(objectSchema(object({{"id",intSchema(0,8)},{"module",enumSchema(choice)},
+            {"defaults",arraySchema(parameter,0,isSourceModule(NativeModule(m))||NativeModule(m)>=NativeModule::dynamicEq?int(rackUnitParameterCapacity(NativeModule(m))):140)},{"algorithm_revision",intSchema(1,supportsAlgorithm(NativeModule(m),2)?2:1)}})));
+    }
+    auto unit=object({{"anyOf",unitChoices}});
+    auto control = objectSchema(object({{"label", stringSchema(64)}, {"unit", intSchema(0, 8)}, {"section", intSchema(0, 3)}, {"key", stringSchema(rackParameterKeyBytes)}, {"widget", enumSchema(widgets)}, {"response", enumSchema(responses)}, {"minimum", object({{"type", "number"}})}, {"maximum", object({{"type", "number"}})}}));
+    auto panel = object({{"layout", enumSchema(layouts)}, {"sections", arraySchema(stringSchema(64), 1, 4)}, {"controls", arraySchema(control, 0, 8)}});
+    for (std::size_t i = 0; i < std::size(styleFields); ++i) panel.getDynamicObject()->setProperty(styleFields[i], enumSchema(styleTokens[i]));
+    auto properties = object({{"version", object({{"type", "integer"}, {"enum", juce::Array<var>{2}}})}, {"name", stringSchema(64)}, {"intent", stringSchema(512)}, {"role", enumSchema(roles)}, {"units", arraySchema(unit, 1, 9)}, {"panel", objectSchema(panel)}});
+    if (includeIdentity) {
+        properties.getDynamicObject()->setProperty("id", object({{"type", "string"}, {"format", "uuid"}, {"maxLength", 36}}));
+        properties.getDynamicObject()->setProperty("revision", object({{"type", "string"}, {"maxLength", 20}, {"pattern", "^[1-9][0-9]{0,19}$"}}));
+    }
+    return objectSchema(properties);
+}
+}

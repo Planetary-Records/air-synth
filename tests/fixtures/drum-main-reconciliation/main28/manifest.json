@@ -1,0 +1,183 @@
+{
+  "family": "main28",
+  "sourceCommit": "f4115c5349d4a4bcfbb19672f8b2c797a81e5e04",
+  "operationalHead": "085b82c44ef123973945a66cfc480c2597aa2b87",
+  "captureTest": {
+    "path": "build/drum-machine-native-20261022/main-reconciliation/main28-capture-test.cpp",
+    "bytes": 13800,
+    "sha256": "9a602bf8d5e7090df1b63342f99c1a70bd03084c76328d879083f79e7bf15d99"
+  },
+  "captureExecutable": {
+    "path": "build/drum-machine-native-20261022/main-reconciliation/main28-capture.exe",
+    "bytes": 10489344,
+    "sha256": "162a63c553d946e9dbfdd0dfb6f348ad1ffb48bc39f2a142c260492e1f025cdc"
+  },
+  "files": [
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-default.aipj",
+      "bytes": 33413,
+      "sha256": "449cd402379281c6316ce10eeeef84b5f271d98824928bac76570c1da6bd908c",
+      "header": [
+        1246775617,
+        27,
+        0,
+        33305,
+        56
+      ],
+      "nestedHeader": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-default.arsi",
+      "bytes": 33305,
+      "sha256": "0e28365ae64471b13e6268fba6ad7673fee8fd0ec91987236a4fd9f58a3bc68c",
+      "header": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-default.witness.txt",
+      "bytes": 202349,
+      "sha256": "60d5175f8500deec1b9b4d820e3ae927234582b5da35524d5eb9191a057904a6"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-era.aipj",
+      "bytes": 35924,
+      "sha256": "d075b105bf83f7356f9cfad6ea3882cc78a33eb955f587f63e5bd33d93b8535f",
+      "header": [
+        1246775617,
+        27,
+        36765953,
+        35217,
+        94
+      ],
+      "nestedHeader": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-era.arsi",
+      "bytes": 35217,
+      "sha256": "bf998c133cf72689384b6163b0cd098e85fc446dba88dc9c1d079e20bc3bd8c9",
+      "header": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-era.witness.txt",
+      "bytes": 204542,
+      "sha256": "5a240487e2973b91be0ebee81b790119454160cb4476ca22d80e623ca647c083"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-space.aipj",
+      "bytes": 43542,
+      "sha256": "6baa4e45815cab0e57919ed53fafdebea0e7d431b096b861515c2e311349c957",
+      "header": [
+        1246775617,
+        27,
+        36765953,
+        42835,
+        94
+      ],
+      "nestedHeader": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-space.arsi",
+      "bytes": 42835,
+      "sha256": "ee867cb579c6c305ffa44cb6fe0298c47ae189c9167aa829e8e1bc27ff48606f",
+      "header": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-space.witness.txt",
+      "bytes": 211632,
+      "sha256": "7410f47a9d4a7ba7d03d89f3e7942fccf5871a7d6814a87f582f2b3765721b31"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-warmth.aipj",
+      "bytes": 54863,
+      "sha256": "f8db1e8143b6f277c8b89e5d147b5cf1f64e43c128a0f47bca34771495d3aa1e",
+      "header": [
+        1246775617,
+        27,
+        36765953,
+        54156,
+        94
+      ],
+      "nestedHeader": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-warmth.arsi",
+      "bytes": 54156,
+      "sha256": "acee3f70f48396455697862c435df295fb0a1f25d1fd8f56af722c734d062ad7",
+      "header": [
+        1230197313,
+        28,
+        3659,
+        0
+      ]
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/main28-warmth.witness.txt",
+      "bytes": 222964,
+      "sha256": "1bdeb3425b0b520697af75c910e155ab0bca24a1c4236df1d4f4d0429f6c9f36"
+    },
+    {
+      "path": "tests/fixtures/drum-main-reconciliation/main28/registry3659.bin",
+      "bytes": 378113,
+      "sha256": "6312dbd48d5692cd651c165eefe6243986fc47e038db8b41eb40fd0c12ec8176"
+    }
+  ],
+  "witnessFormat": "Native stable key, exact float uint32 bits and saved positional lock per parameter; metadata and Rack2 objects. Captured from actual current writer, never reconstructed from final combined writer.",
+  "macroWitnessCorrection": "Continuous-only: final continuous private4076/current4232; final mode private4082/current4238 remains scalar/lock witness.",
+  "fixtureCorrections": [
+    "First main retained149 trial copied bank0 Wave engine default into bank1 Analog unit; corrected capture to preserve each bound bank defaults. Main has no Era factory personality; named native Era fixture built from actual module19 catalog and validated through real makeRackCandidate. Both setup failures preserved privately, not behavioral RED."
+  ],
+  "mainCaptureSource": {
+    "path": "build/drum-machine-native-20261022/main-reconciliation/main-capture-source.json",
+    "bytes": 8336,
+    "sha256": "a5f2d3279be2d2031993a84a4d905dfa8922e9ef57e93637e32c87e96e5a6747"
+  },
+  "compilerLog": {
+    "path": "build/drum-machine-native-20261022/main-reconciliation/main3659-capture-build-r4.log",
+    "bytes": 3912,
+    "sha256": "b26a29222eeb7044a171c58756f6d00d99905ce51cf40e44bc5e10b4968ead51"
+  },
+  "captureLog": {
+    "path": "build/drum-machine-native-20261022/main-reconciliation/main28-capture-r3.log",
+    "bytes": 223,
+    "sha256": "31028a9983f8684907f4c400a19e09bb2693d149d836180d7b7eeb97e9b42fb7"
+  },
+  "actualReach": {
+    "analog": 116,
+    "wave1": 116,
+    "wave2": 125
+  }
+}

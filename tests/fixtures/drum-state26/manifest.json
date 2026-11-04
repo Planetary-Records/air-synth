@@ -1,0 +1,38 @@
+{
+  "predecessorCommit": "923bb02e3087e756e92a2a81c7c13ddf106c8cff",
+  "captureCount": 3503,
+  "soundVersion": 26,
+  "projectVersion": 25,
+  "routing": "Inherited parent model and reasoning; no overrides",
+  "fixtures": {
+    "project25-0.aipj": {
+      "bytes": 32001,
+      "sha256": "8ea8cc82b0470de34cc60c8694371439a0ba4db643ebcbfe20d6ba25b29a587c"
+    },
+    "project25-1.aipj": {
+      "bytes": 41534,
+      "sha256": "88967fec98d7701cddb03881c3a95160f51ffa5d8a792be8325b3baf663230d2"
+    },
+    "project25-2.aipj": {
+      "bytes": 41680,
+      "sha256": "3dff90e33cea76779a5f1ede13d10aac0742b246b7dea5e473872ac064f1ccea"
+    },
+    "registry3503.bin": {
+      "bytes": 364381,
+      "sha256": "5636854a398179bf9288a03011a31a84c7c88c82a184af2b2becdf82e90da8af"
+    },
+    "sound26-0.arsi": {
+      "bytes": 31893,
+      "sha256": "83222877da76c654ce066e9c85199b7a968f788044e156c04e831e99dd59aa08"
+    },
+    "sound26-1.arsi": {
+      "bytes": 41426,
+      "sha256": "db77db638afd15bdc3452af2a9b7717107b4bb15e7848f6d9c34234219dae66a"
+    },
+    "sound26-2.arsi": {
+      "bytes": 41572,
+      "sha256": "b851fddf5570f75bc86e91f10c169670b3002035b7dbb22fa4f8fb3ff8d8b0bd"
+    }
+  },
+  "testSetupCorrection": "Reset reused MemoryBlock before loadFileAsData because pinned JUCE appends; captures unchanged."
+}

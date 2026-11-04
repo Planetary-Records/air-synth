@@ -1,0 +1,596 @@
+#include "SaturationCandidate.h"
+#include "SaturationAnalysis.h"
+#include <juce_cryptography/juce_cryptography.h>
+#include <algorithm>
+#include <array>
+#include <bit>
+#include <chrono>
+#include <cmath>
+#include <complex>
+#include <cstdint>
+#include <cstdlib>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <limits>
+#include <memory>
+#include <new>
+#include <numbers>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <vector>
+#if defined(_WIN32)
+#include <malloc.h>
+#endif
+
+namespace allocationWitness
+{
+thread_local bool enabled=false;
+thread_local std::size_t allocations=0,frees=0;
+void allocated() noexcept { if(enabled) ++allocations; }
+void freed(void* pointer) noexcept { if(enabled&&pointer) ++frees; }
+}
+void* operator new(std::size_t size) { if(auto* p=std::malloc(size?size:1)){allocationWitness::allocated();return p;}throw std::bad_alloc(); }
+void* operator new[](std::size_t size) { return ::operator new(size); }
+void operator delete(void* p) noexcept { allocationWitness::freed(p);std::free(p); }
+void operator delete[](void* p) noexcept { ::operator delete(p); }
+void operator delete(void* p,std::size_t) noexcept { ::operator delete(p); }
+void operator delete[](void* p,std::size_t) noexcept { ::operator delete(p); }
+#if defined(_WIN32)
+void* operator new(std::size_t size,std::align_val_t alignment) { if(auto* p=_aligned_malloc(size?size:1,static_cast<std::size_t>(alignment))){allocationWitness::allocated();return p;}throw std::bad_alloc(); }
+void* operator new[](std::size_t size,std::align_val_t alignment) { return ::operator new(size,alignment); }
+void operator delete(void* p,std::align_val_t) noexcept { allocationWitness::freed(p);_aligned_free(p); }
+void operator delete[](void* p,std::align_val_t alignment) noexcept { ::operator delete(p,alignment); }
+void operator delete(void* p,std::size_t,std::align_val_t alignment) noexcept { ::operator delete(p,alignment); }
+void operator delete[](void* p,std::size_t,std::align_val_t alignment) noexcept { ::operator delete(p,alignment); }
+#endif
+
+namespace
+{
+using namespace airack;
+using namespace airack::probe;
+using namespace airack::probe::analysis;
+namespace fs=std::filesystem;
+using Clock=std::chrono::steady_clock;
+constexpr double R=1./16;
+constexpr std::size_t recordFrames=65536;
+constexpr std::array<double,3> rates{44100,48000,96000};
+constexpr std::array<double,3> levels{R/16,R/4,R};
+constexpr std::array<const char*,3> styles{"soft","glow","dense"};
+std::string quoted(const std::string& text)
+{
+    std::string result="\"";
+    for(unsigned char c:text) switch(c){case '\\':result+="\\\\";break;case '"':result+="\\\"";break;case '\n':result+="\\n";break;case '\r':result+="\\r";break;case '\t':result+="\\t";break;default:if(c<32) result+='?';else result+=static_cast<char>(c);}
+    return result+'"';
+}
+std::ofstream output(const fs::path& path,bool binary=false)
+{
+    std::ofstream stream;stream.exceptions(std::ios::failbit|std::ios::badbit);
+    stream.open(path,binary?std::ios::out|std::ios::binary:std::ios::out);
+    stream<<std::setprecision(17);return stream;
+}
+std::string read(const fs::path& path)
+{
+    std::ifstream stream(path,std::ios::binary);
+    if(!stream) throw std::runtime_error("cannot hash source "+path.string());
+    std::ostringstream bytes;bytes<<stream.rdbuf();return bytes.str();
+}
+std::string hash(std::span<const char> bytes) { return juce::SHA256(bytes.data(),bytes.size()).toHexString().toStdString(); }
+std::string hash(const std::string& bytes) { return hash(std::span<const char>(bytes)); }
+std::string hash(std::span<const double> values) { return hash(std::span<const char>(reinterpret_cast<const char*>(values.data()),values.size_bytes())); }
+std::string id(double rate,int mode,int style,double drive,double level)
+{
+    std::ostringstream name;name<<static_cast<int>(rate)<<'-'<<mode<<'-'<<styles[static_cast<std::size_t>(style)]<<'-'<<drive<<'-'<<level;return name.str();
+}
+SaturationSettings settings(int mode,int style,double drive,bool compensation=false)
+{
+    SaturationSettings value;value.mode=static_cast<SaturationMode>(mode);value.driveCompensation=compensation;
+    for(auto& lane:value.lanes){lane.character=static_cast<SaturationCharacter>(style);lane.driveDb=static_cast<float>(drive);}
+    return value;
+}
+void prepare(Candidate& candidate,double rate,unsigned factor,const SaturationSettings& value)
+{
+    if(!candidate.prepare(rate,factor)||!candidate.setSettings(value)) throw std::runtime_error("candidate rejected frozen settings");
+    candidate.reset();
+}
+struct Gate { std::string name;bool pass=false,invalid=false;std::string detail; };
+struct Evidence
+{
+    fs::path directory;unsigned factor;std::vector<Gate> gates;
+    std::ofstream recordings;
+    Evidence(fs::path path,unsigned f):directory(std::move(path)),factor(f),recordings(output(directory/"recordings.csv"))
+    {
+        recordings<<"file,sha256,sample_rate,frames,channels,encoding,warmup_frames,input,settings\n";
+    }
+    void gate(std::string name,bool pass,std::string detail={},bool invalid=false)
+    {
+        std::cout<<name<<": "<<(invalid?"INVALID":pass?"PASS":"FAIL")<<' '<<detail<<std::endl;
+        gates.push_back({std::move(name),pass,invalid,std::move(detail)});
+    }
+    void raw(const std::string& name,std::span<const double> samples,double rate,std::size_t warm,const std::string& inputDescription,const std::string& settingDescription)
+    {
+        const auto filename=name+".f64";auto stream=output(directory/filename,true);
+        stream.write(reinterpret_cast<const char*>(samples.data()),static_cast<std::streamsize>(samples.size_bytes()));stream.close();
+        recordings<<quoted(filename)<<','<<hash(samples)<<','<<rate<<','<<samples.size()<<",1,IEEE754-f64-little-endian,"<<warm<<','<<quoted(inputDescription)<<','<<quoted(settingDescription)<<'\n';
+    }
+};
+std::vector<double> render(Candidate& candidate,double rate,double frequency,double peak,std::size_t frames,double warmSeconds)
+{
+    const auto warm=static_cast<std::size_t>(std::ceil(warmSeconds*rate));
+    std::vector<double> samples(frames);
+    for(std::size_t n=0;n<warm+frames;++n)
+    {
+        const double x=peak*std::sin(2*std::numbers::pi*frequency*static_cast<double>(n)/rate);
+        const auto y=candidate.process({x,x});
+        if(n>=warm) samples[n-warm]=y[0];
+    }
+    return samples;
+}
+double db(double power,double denominator) { return power==0?-std::numeric_limits<double>::infinity():10*std::log10(power/denominator); }
+void freeze(Evidence& evidence)
+{
+    auto manifest=output(evidence.directory/"frozen-manifest.json");
+    manifest<<"{\n\"schema\":1,\"factor\":"<<evidence.factor<<",\"record_frames\":"<<recordFrames<<",\"window\":\"rectangular\",\"normalization\":\"sum one-sided squared DFT/N; dBc denominator candidate fundamental power\",\n\"sources\":[";
+    bool comma=false;const fs::path source=fs::path(__FILE__).parent_path();
+    for(const auto* filename:{"SaturationCandidate.h","SaturationCandidate.cpp","SaturationCalibration.h","SaturationAnalysis.h","SaturationAnalysis.cpp","SaturationAnalysisTests.cpp","SaturationProbeTests.cpp","SaturationFeasibility.cpp"})
+    {
+        if(comma) manifest<<',';comma=true;const auto bytes=read(source/filename);
+        manifest<<"{\"file\":"<<quoted(filename)<<",\"sha256\":"<<quoted(hash(bytes))<<'}';
+    }
+    const auto coefficients=saturationCoefficientManifest();
+    if(coefficients.empty()) throw std::runtime_error("cannot freeze empty coefficient manifest");
+    manifest<<"],\n\"coefficients\":[";comma=false;
+    for(const auto& coefficient:coefficients)
+    {
+        if(!coefficient.name||!coefficient.name[0]||coefficient.values.empty()||!std::all_of(coefficient.values.begin(),coefficient.values.end(),[](double value){return std::isfinite(value);}))
+            throw std::runtime_error("cannot freeze empty/nonfinite coefficient values");
+        if(comma) manifest<<',';comma=true;
+        manifest<<"{\"name\":"<<quoted(coefficient.name)<<",\"sha256\":"<<quoted(hash(coefficient.values))<<",\"values\":[";
+        for(std::size_t n=0;n<coefficient.values.size();++n){if(n) manifest<<',';manifest<<coefficient.values[n];}manifest<<"]}";
+    }
+    manifest<<"],\n\"compensation_tables\":[";
+    for(int style=0;style<3;++style)
+    {
+        if(style) manifest<<',';const auto table=saturationCompensationTable(static_cast<SaturationCharacter>(style));
+        if(table.size()!=37||!std::all_of(table.begin(),table.end(),[](double value){return std::isfinite(value);}))
+            throw std::runtime_error("cannot freeze compensation table: expected37 finite values");
+        manifest<<"{\"style\":"<<quoted(styles[static_cast<std::size_t>(style)])<<",\"sha256\":"<<quoted(hash(table))<<",\"values\":[";
+        for(std::size_t n=0;n<table.size();++n){if(n) manifest<<',';manifest<<table[n];}manifest<<"]}";
+    }
+    manifest<<"],\n\"coherent_bins\":[";comma=false;
+    for(double rate:rates) for(double requested:{1760.,3520.,7040.})
+    {
+        const auto bin=nearestOddCoherentBin(requested,rate,recordFrames);if(!bin) throw std::runtime_error("coherent-bin calibration invalid");
+        if(comma) manifest<<',';comma=true;
+        manifest<<"{\"sample_rate\":"<<rate<<",\"requested_hz\":"<<requested<<",\"bin\":"<<*bin<<",\"exact_hz\":"<<rate*static_cast<double>(*bin)/recordFrames<<'}';
+    }
+    const std::string inputs="R=1/16;alias modes=full,three;styles=soft,glow,dense;drive=36;peak=R/4;compOff;tilt0;trim0;mix1;cutsOff;crossovers180,3500;2s warm;N65536;ref64 independent FIR;1x negative;mask reference unaliased harmonic amplitude>-120dBc;ref<=-100dBc;candidate<=-50dBc and10dB below1x;character bin301,N65536,2s warm,drive18;levels=R/16,R/4,R;comp220Hz48k peakR/4,1s discard1s measure73points0:.5:36;CPU8serialthreebandmixed24lanes8eachStyle;fixed24dB,mix.75,compOn,cuts20/18000;moving20ms triangle,Hzlog,dBlinear,mixlinear;A global(-3,+3,.4),xover80/1800,cuts40/9000,lane6/-6/.35/-3;B global(+3,-3,1),xover800/6500,cuts150/18000,lane30/+6/1/+3;callback-start targets,setSettings timed;stereo .01sin220+.005sin1760,rightphasepi/3both;block64/512;warm>=2s bothaudio/wall;measure>=10s bothaudio/wall;nearest-rankp99;0/0 C++heapalloc/free;neutral impulseN65536 rawinput response;corners180/3500,2000/500,40/16000";
+    auto inputVectors=output(evidence.directory/"frozen-input-vectors.csv");
+    inputVectors<<"name,sample_rate,frequency,peak,warmup_frames,measured_frames,sha256_all_native_input_frames\n";
+    const auto freezeTone=[&](const std::string& name,double rate,double hz,double peak,std::size_t warm,std::size_t measured)
+    {
+        std::vector<double> data(warm+measured);
+        for(std::size_t n=0;n<data.size();++n) data[n]=peak*std::sin(2*std::numbers::pi*hz*static_cast<double>(n)/rate);
+        inputVectors<<name<<','<<rate<<','<<hz<<','<<peak<<','<<warm<<','<<measured<<','<<hash(std::span<const double>(data))<<'\n';
+    };
+    for(double rate:rates)
+    {
+        for(double requested:{1760.,3520.,7040.}){const auto bin=*nearestOddCoherentBin(requested,rate,recordFrames);freezeTone("alias-all-modes-styles",rate,rate*bin/recordFrames,R/4,static_cast<std::size_t>(2*rate),recordFrames);}
+        for(double level:levels){freezeTone("character-all-styles",rate,rate*301/recordFrames,level,static_cast<std::size_t>(2*rate),recordFrames);freezeTone("operating-grid-all-settings",rate,rate*31/4096,level,static_cast<std::size_t>(std::ceil(.25*rate)),4096);}
+    }
+    freezeTone("compensation-all-219-points",48000,220,R/4,48000,48000);
+    inputVectors.close();
+    manifest<<"],\n\"input_manifest\":"<<quoted(inputs)<<",\"input_sha256\":"<<quoted(hash(inputs))<<",\"frozen_input_vectors_sha256\":"<<quoted(hash(read(evidence.directory/"frozen-input-vectors.csv")))<<",\"other_input_generators\":\"neutral impulse with2s zero prehistory;neutral null220+7040Hz eachR/8;Dense history prior2s220HzR then1.1sR/4;link L220R/8,R713R/2;burst220Hz segments seconds2/.1/1/2/1/.1/1 peaks0/level/0/R/0/level/0 with phase reset eachsegment;CPU deterministic generator plus actual rendered extent in timing-summary\",\"cpu_output_integrity\":\"store each serial8-unit stereo frame inside callback;outside timing finite and positive phase energy;FNV1a64 offset14695981039346656037 prime1099511628211 modulo2^64 over every outputdouble as8little-endian bytes in frame/channel order;separate warm/measured checksums\",\"operating_grid_warm_seconds\":0.25,\"operating_grid_frames\":4096,\"neutral_frequency_grid\":\"161 log points30..min18k/.4Fs plus exact requested corners and inner/outer quality limits;group-delay central +/-1Hz\",\"endian\":\"little\",\"hash_algorithm\":\"SHA256\"\n}\n";
+    manifest.close();
+}
+
+void calibration(Evidence& evidence)
+{
+    std::vector<double> sine(4096),candidate(4096);
+    for(std::size_t n=0;n<sine.size();++n){sine[n]=.4*std::sin(2*std::numbers::pi*101*static_cast<double>(n)/sine.size());candidate[n]=sine[n]+.04*std::sin(2*std::numbers::pi*317*static_cast<double>(n)/sine.size());}
+    const auto summary=summarizeSignal(sine);
+    const auto spectrum=rectangularPowerSpectrum(sine);
+    const auto result=measureAlias(rectangularPowerSpectrum(candidate),spectrum,48000,101);
+    const bool valid=summary.valid&&spectrum.valid&&result.valid&&std::abs(summary.rms-.4/std::sqrt(2.))<1e-12&&std::abs(result.unwantedDbc+20)<1e-6;
+    evidence.gate("analysis_calibration",valid,"known coherent sine power and injected -20 dBc",!valid);
+    if(!valid) throw std::runtime_error("analysis calibration invalid");
+}
+
+void aliases(Evidence& evidence)
+{
+    auto rows=output(evidence.directory/"aliases.csv");
+    rows<<"sample_rate,mode,style,requested_hz,bin,exact_hz,reference_unwanted_dbc,candidate_unwanted_dbc,one_x_unwanted_dbc,improvement_db,valid,pass,legitimate_bins,mismatched_dry_dbc,mismatched_control_failed\n";
+    bool pass=true,valid=true,negativePass=true;std::size_t mismatchCases=0;
+    std::array<std::array<bool,3>,2> oneXFailures{};
+    for(double rate:rates) for(int mode=0;mode<2;++mode) for(int style=0;style<3;++style) for(double requested:{1760.,3520.,7040.})
+    {
+        const auto bin=*nearestOddCoherentBin(requested,rate,recordFrames);const auto hz=rate*static_cast<double>(bin)/recordFrames;
+        const auto s=settings(mode,style,36);Candidate measured,reference,oneX,dry;
+        prepare(measured,rate,evidence.factor,s);prepare(reference,rate,64,s);prepare(oneX,rate,1,s);
+        auto drySettings=s;drySettings.mix=0;prepare(dry,rate,64,drySettings);
+        const auto y=render(measured,rate,hz,R/4,recordFrames,2),ref=render(reference,rate,hz,R/4,recordFrames,2),control=render(oneX,rate,hz,R/4,recordFrames,2),dryRef=render(dry,rate,hz,R/4,recordFrames,2);
+        const auto refSpectrum=rectangularPowerSpectrum(ref);
+        const auto result=measureAlias(rectangularPowerSpectrum(y),refSpectrum,rate,bin);
+        const auto negative=measureAlias(rectangularPowerSpectrum(control),refSpectrum,rate,bin);
+        const auto mismatch=measureAlias(rectangularPowerSpectrum(y),rectangularPowerSpectrum(dryRef),rate,bin);
+        const bool accepted=passesAliasGate(result,negative);
+        const bool mismatchedRejected=mismatch.valid&&mismatch.unwantedDbc>-50;
+        // A mismatched dry reference is meaningful only where legitimate harmonics lie inside the alias band.
+        bool inBandHarmonic=false;for(auto harmonic:result.harmonicBins) if(harmonic!=bin&&harmonic*rate/recordFrames<std::min(16000.,.4*rate)) inBandHarmonic=true;
+        if(inBandHarmonic){negativePass=negativePass&&mismatchedRejected;++mismatchCases;}
+        if(negative.valid&&negative.unwantedDbc>-50) oneXFailures[static_cast<std::size_t>(mode)][static_cast<std::size_t>(style)]=true;
+        valid=valid&&result.valid&&negative.valid;pass=pass&&accepted;
+        std::ostringstream mask;for(auto harmonic:result.harmonicBins) mask<<harmonic<<';';
+        rows<<rate<<','<<mode<<','<<styles[static_cast<std::size_t>(style)]<<','<<requested<<','<<bin<<','<<hz<<','<<result.referenceUnwantedDbc<<','<<result.unwantedDbc<<','<<negative.unwantedDbc<<','<<negative.unwantedDbc-result.unwantedDbc<<','<<result.valid<<','<<accepted<<','<<quoted(mask.str())<<','<<mismatch.unwantedDbc<<','<<mismatchedRejected<<'\n';
+        const auto name="alias-"+id(rate,mode,style,36,R/4)+'-'+std::to_string(bin);
+        const auto input="sin;peak=R/4;bin="+std::to_string(bin)+";N=65536";
+        evidence.raw(name+"-candidate",y,rate,static_cast<std::size_t>(2*rate),input,"factor="+std::to_string(evidence.factor));
+        evidence.raw(name+"-reference64",ref,rate,static_cast<std::size_t>(2*rate),input,"independent FIR64;drive36;compOff");
+        evidence.raw(name+"-negative1x",control,rate,static_cast<std::size_t>(2*rate),input,"unoversampled1x;drive36;compOff");
+        evidence.raw(name+"-mismatched-dry64",dryRef,rate,static_cast<std::size_t>(2*rate),input,"mix0 mismatched dry reference");
+        std::cout<<"alias "<<rate<<' '<<mode<<' '<<style<<' '<<requested<<": "<<result.unwantedDbc<<" dBc, ref "<<result.referenceUnwantedDbc<<std::endl;
+    }
+    evidence.gate("alias_reference_qualification",valid,"all 54 independent64x cases must be <=-100 dBc",!valid);
+    evidence.gate("alias_candidate_and_improvement",pass&&valid,"all 54 cases <=-50 dBc and >=10 dB below same1x",!valid);
+    bool oneXFailed=true;for(const auto& mode:oneXFailures) for(bool failure:mode) oneXFailed=oneXFailed&&failure;
+    evidence.gate("unoversampled_1x_negative_control",oneXFailed,"each mode/style must have at least one deliberately1x case above -50dBc");
+    evidence.gate("mismatched_dry_reference_control",negativePass&&mismatchCases>0,"eligible cases with legitimate in-band harmonics must reject dry mask; cases="+std::to_string(mismatchCases));
+}
+
+void compensation(Evidence& evidence)
+{
+    auto rows=output(evidence.directory/"compensation.csv");
+    rows<<"style,drive_db,baseline_rms,uncompensated_rms,compensated_rms,table_db,error_db,clamp_contact,pass\n";
+    bool pass=true,valid=true;std::size_t contacts=0;
+    for(int style=0;style<3;++style)
+    {
+        Candidate baseline;prepare(baseline,48000,evidence.factor,settings(0,style,0));
+        const auto reference=summarizeSignal(render(baseline,48000,220,R/4,48000,1));
+        valid=valid&&reference.valid&&reference.rms>0;
+        for(int halfStep=0;halfStep<=72;++halfStep)
+        {
+            const double drive=halfStep*.5;Candidate raw,corrected;
+            prepare(raw,48000,evidence.factor,settings(0,style,drive));
+            prepare(corrected,48000,evidence.factor,settings(0,style,drive,true));
+            const auto rawRms=summarizeSignal(render(raw,48000,220,R/4,48000,1));
+            const auto correctedRms=summarizeSignal(render(corrected,48000,220,R/4,48000,1));
+            const auto table=saturationDriveCompensationDb(static_cast<SaturationCharacter>(style),static_cast<float>(drive));
+            const double error=20*std::log10(correctedRms.rms/reference.rms);
+            const bool contact=table<=-18||table>=6;contacts+=contact?1:0;
+            const bool accepted=rawRms.valid&&correctedRms.valid&&std::isfinite(error)&&std::abs(error)<=.5;
+            valid=valid&&rawRms.valid&&correctedRms.valid&&std::isfinite(error);pass=pass&&accepted;
+            rows<<styles[static_cast<std::size_t>(style)]<<','<<drive<<','<<reference.rms<<','<<rawRms.rms<<','<<correctedRms.rms<<','<<table<<','<<error<<','<<contact<<','<<accepted<<'\n';
+        }
+    }
+    evidence.gate("compensation_all_219_integer_half_steps",pass&&valid,"73 points/style; clamped accuracy retained; clamp contacts="+std::to_string(contacts),!valid);
+}
+
+void characters(Evidence& evidence)
+{
+    auto rows=output(evidence.directory/"character-harmonics.csv");
+    rows<<"sample_rate,style,peak,fundamental_bin,mean,rms,even_h2_h4_dbc,harmonic_order,harmonic_dbc\n";
+    std::array<double,3> requiredEven{};double requiredGlowMean=0;bool valid=true;
+    for(double rate:rates) for(double level:levels) for(int style=0;style<3;++style)
+    {
+        Candidate candidate;prepare(candidate,rate,evidence.factor,settings(0,style,18));
+        const auto samples=render(candidate,rate,rate*301/recordFrames,level,recordFrames,2);
+        const auto summary=summarizeSignal(samples);const auto spectrum=rectangularPowerSpectrum(samples);
+        const bool usable=spectrum.valid&&summary.valid&&spectrum.oneSidedPower[301]>0;
+        valid=valid&&usable;if(!usable) continue;
+        const auto fundamental=spectrum.oneSidedPower[301];
+        const auto even=db(spectrum.oneSidedPower[602]+spectrum.oneSidedPower[1204],fundamental);
+        for(std::size_t harmonic=1;harmonic*301<recordFrames/2;++harmonic)
+            rows<<rate<<','<<styles[static_cast<std::size_t>(style)]<<','<<level<<",301,"<<summary.mean<<','<<summary.rms<<','<<even<<','<<harmonic<<','<<db(spectrum.oneSidedPower[harmonic*301],fundamental)<<'\n';
+        if(rate==48000&&level==R/4){requiredEven[static_cast<std::size_t>(style)]=even;if(style==1) requiredGlowMean=std::abs(summary.mean);}
+        evidence.raw("character-"+id(rate,0,style,18,level),samples,rate,static_cast<std::size_t>(2*rate),"coherent bin301;N65536;initial state zero","Full;Drive18;compOff;neutral;mix1");
+    }
+    evidence.gate("character_spectrum_valid",valid,"all rates and R/16,R/4,R retained",!valid);
+    evidence.gate("soft_symmetry",valid&&requiredEven[0]<=-100,"H2+H4 dBc="+std::to_string(requiredEven[0]),!valid);
+    evidence.gate("glow_asymmetry",valid&&requiredEven[1]>=-60&&requiredEven[1]-requiredEven[0]>=20,"Glow/Soft even dBc="+std::to_string(requiredEven[1])+"/"+std::to_string(requiredEven[0]),!valid);
+    evidence.gate("glow_dc",valid&&requiredGlowMean<=1e-5*R,"abs mean="+std::to_string(requiredGlowMean),!valid);
+}
+
+std::complex<double> response(std::span<const double> impulse,double frequency,double rate)
+{
+    std::complex<double> sum=0,phase=1;const auto step=std::polar(1.,-2*std::numbers::pi*frequency/rate);
+    for(double sample:impulse){sum+=sample*phase;phase*=step;}return sum;
+}
+std::vector<double> impulse(double rate,unsigned factor,const SaturationSettings& value)
+{
+    Candidate candidate;prepare(candidate,rate,factor,value);
+    for(std::size_t n=0;n<static_cast<std::size_t>(2*rate);++n) candidate.process({0,0});
+    std::vector<double> result(recordFrames);
+    for(std::size_t n=0;n<result.size();++n) result[n]=candidate.process({n==0?R:0,n==0?R:0})[0]/R;
+    return result;
+}
+struct Biquad
+{
+    double b0=0,b1=0,b2=0,a1=0,a2=0,z1=0,z2=0;
+    Biquad(double rate,double frequency,bool high)
+    {
+        const double k=std::tan(std::numbers::pi*frequency/rate),norm=1/(1+std::sqrt(2.)*k+k*k);
+        b0=(high?1:k*k)*norm;b1=(high?-2:2)*b0;b2=b0;a1=2*(k*k-1)*norm;a2=(1-std::sqrt(2.)*k+k*k)*norm;
+    }
+    double process(double x){const auto y=b0*x+z1;z1=b1*x-a1*y+z2;z2=b2*x-a2*y;return y;}
+};
+void neutral(Evidence& evidence)
+{
+    auto rows=output(evidence.directory/"neutral-frequency-group-delay.csv");
+    rows<<"sample_rate,low_requested,high_requested,frequency_hz,full_raw_input_db,three_raw_input_db,crossover_only_db,full_phase_rad,three_phase_rad,full_group_delay_frames,three_group_delay_frames\n";
+    auto nulls=output(evidence.directory/"neutral-null-layer-controls.csv");nulls<<"sample_rate,mode,low_requested,high_requested,max_wet_dry_null,max_identical_layer_error,max_mismatched_raw_dry_error\n";
+    bool crossoverPass=true,combinedPass=true,nullPass=true,layerPass=true,mismatchPass=true,valid=true;
+    for(double rate:rates) for(auto corners:{std::array<float,2>{180,3500},std::array<float,2>{2000,500},std::array<float,2>{40,16000}})
+    {
+        auto full=settings(0,0,0),three=settings(1,0,0);full.lowCrossoverHz=three.lowCrossoverHz=corners[0];full.highCrossoverHz=three.highCrossoverHz=corners[1];
+        const auto fullImpulse=impulse(rate,evidence.factor,full),threeImpulse=impulse(rate,evidence.factor,three);
+        evidence.raw("impulse-full-"+std::to_string(static_cast<int>(rate))+'-'+std::to_string(static_cast<int>(corners[0]))+'-'+std::to_string(static_cast<int>(corners[1])),fullImpulse,rate,static_cast<std::size_t>(2*rate),"unit impulse normalized from peakR","drive0;compOff;neutral");
+        evidence.raw("impulse-three-"+std::to_string(static_cast<int>(rate))+'-'+std::to_string(static_cast<int>(corners[0]))+'-'+std::to_string(static_cast<int>(corners[1])),threeImpulse,rate,static_cast<std::size_t>(2*rate),"unit impulse normalized from peakR","drive0;compOff;neutral");
+        const double top=std::min(18000.,.4*rate),inner=std::min(15000.,.35*rate);
+        std::vector<double> frequencies{30,static_cast<double>(corners[0]),static_cast<double>(corners[1]),inner,top};
+        for(int i=0;i<=160;++i) frequencies.push_back(30*std::pow(top/30,static_cast<double>(i)/160));
+        for(double frequency:frequencies)
+        {
+            if(frequency<30||frequency>top) continue;
+            const auto f=response(fullImpulse,frequency,rate),t=response(threeImpulse,frequency,rate);
+            const auto fullDb=20*std::log10(std::abs(f)),threeDb=20*std::log10(std::abs(t)),crossDb=threeDb-fullDb;
+            const auto fullDelay=-std::arg(response(fullImpulse,frequency+1,rate)/response(fullImpulse,frequency-1,rate))*rate/(4*std::numbers::pi);
+            const auto threeDelay=-std::arg(response(threeImpulse,frequency+1,rate)/response(threeImpulse,frequency-1,rate))*rate/(4*std::numbers::pi);
+            valid=valid&&std::isfinite(fullDb)&&std::isfinite(threeDb)&&std::isfinite(fullDelay)&&std::isfinite(threeDelay);
+            crossoverPass=crossoverPass&&std::abs(crossDb)<=.1;
+            const double bound=frequency<=inner+1e-8?.5:1.;combinedPass=combinedPass&&std::abs(fullDb)<=bound&&std::abs(threeDb)<=bound;
+            rows<<rate<<','<<corners[0]<<','<<corners[1]<<','<<frequency<<','<<fullDb<<','<<threeDb<<','<<crossDb<<','<<std::arg(f)<<','<<std::arg(t)<<','<<fullDelay<<','<<threeDelay<<'\n';
+        }
+        for(int mode=0;mode<2;++mode)
+        {
+            auto wet=mode?three:full,dry=wet;dry.mix=0;
+            Candidate a,b,reference;prepare(a,rate,evidence.factor,wet);prepare(b,rate,evidence.factor,wet);prepare(reference,rate,evidence.factor,dry);
+            double maxNull=0,maxLayer=0,maxMismatch=0;
+            const auto warm=static_cast<std::size_t>(2*rate);
+            std::vector<double> witness(recordFrames);
+            for(std::size_t n=0;n<warm+recordFrames;++n)
+            {
+                const double x=R/8*(std::sin(2*std::numbers::pi*220*n/rate)+std::sin(2*std::numbers::pi*7040*n/rate));
+                const auto ya=a.process({x,x})[0],yb=b.process({x,x})[0],yd=reference.process({x,x})[0];
+                if(n>=warm){maxNull=std::max(maxNull,std::abs(ya-yd));maxLayer=std::max(maxLayer,std::abs(ya+yb-2*yd));maxMismatch=std::max(maxMismatch,std::abs(ya-x));witness[n-warm]=ya+yb;}
+            }
+            nullPass=nullPass&&maxNull<=1e-10;layerPass=layerPass&&maxLayer<=2e-10;mismatchPass=mismatchPass&&maxMismatch>1e-7*R;
+            nulls<<rate<<','<<mode<<','<<corners[0]<<','<<corners[1]<<','<<maxNull<<','<<maxLayer<<','<<maxMismatch<<'\n';
+            evidence.raw("two-layer-"+std::to_string(static_cast<int>(rate))+'-'+std::to_string(mode)+'-'+std::to_string(static_cast<int>(corners[0])),witness,rate,warm,"220+7040Hz each peakR/8","two independently prepared identical neutral layers");
+        }
+    }
+    // Independent uncompensated LR4 split: its missing upper allpass must fail unity.
+    Biquad ll1(48000,400,false),ll2=ll1,lh1(48000,400,true),lh2=lh1,ml1(48000,500,false),ml2=ml1,hh1(48000,500,true),hh2=hh1;
+    std::vector<double> naive(recordFrames);
+    for(std::size_t n=0;n<naive.size();++n){const double x=n==0?1:0;const auto low=ll2.process(ll1.process(x)),upper=lh2.process(lh1.process(x));naive[n]=low+ml2.process(ml1.process(upper))+hh2.process(hh1.process(upper));}
+    double worst=0;for(int i=0;i<=300;++i){const double hz=30*std::pow(18000./30,static_cast<double>(i)/300);worst=std::max(worst,std::abs(20*std::log10(std::abs(response(naive,hz,48000)))));}
+    evidence.raw("negative-naive-uncompensated-LR4",naive,48000,0,"unit impulse","raw2000/500;effective400/500;low branch intentionally lacks upper allpass");
+    evidence.gate("neutral_response_valid",valid,"raw input normalization; all AA and ADAA attenuation retained",!valid);
+    evidence.gate("crossover_only_unity_0_1db",valid&&crossoverPass,"three/full ratio isolates crossover magnitude",!valid);
+    evidence.gate("combined_neutral_raw_input_envelope",valid&&combinedPass,".5dB through min15k/.35Fs;1dB through min18k/.4Fs",!valid);
+    evidence.gate("neutral_wet_reference_null",nullPass,"max<=1e-10 after equal settled preparation");
+    evidence.gate("two_identical_layer_sum",layerPass,"sum vs twice independently prepared reference max<=2e-10");
+    evidence.gate("mismatched_raw_dry_control",mismatchPass,"unmatched raw dry must not null");
+    evidence.gate("naive_uncompensated_split_control",worst>.1,"raw2000/500;effective400/500;worst absolute dB="+std::to_string(worst));
+}
+
+void denseStateAndBursts(Evidence& evidence)
+{
+    auto recurrence=output(evidence.directory/"dense-recurrence.csv");
+    recurrence<<"sample_rate,factor,phase,samples,retained_envelope,closed_form_envelope,worst_relative_error,min_sag_db,max_sag_db\n";
+    bool recurrencePass=true,rangePass=true,historyPass=true,swapPass=true;
+    for(double rate:rates) for(unsigned factor:{1u,2u,4u,8u,64u})
+    {
+        const double highRate=rate*factor;double envelope=0,worst=0,minDb=0,maxDb=-6;
+        const auto attack=static_cast<std::size_t>(std::ceil(.01*highRate));
+        for(std::size_t n=1;n<=attack;++n)
+        {
+            const auto gain=advanceSag(2,highRate,envelope);const auto gainDb=20*std::log10(gain);
+            const auto expected=2*(1-std::exp(-static_cast<double>(n)/(highRate*.002)));
+            worst=std::max(worst,std::abs(envelope-expected)/std::max(1.,expected));minDb=std::min(minDb,gainDb);maxDb=std::max(maxDb,gainDb);
+        }
+        recurrence<<rate<<','<<factor<<",attack,"<<attack<<','<<envelope<<','<<2*(1-std::exp(-static_cast<double>(attack)/(highRate*.002)))<<','<<worst<<','<<minDb<<','<<maxDb<<'\n';
+        const double retained=envelope;const auto release=static_cast<std::size_t>(std::ceil(.4*highRate));
+        for(std::size_t n=1;n<=release;++n)
+        {
+            const auto gain=advanceSag(0,highRate,envelope);const auto gainDb=20*std::log10(gain);
+            const auto expected=retained*std::exp(-static_cast<double>(n)/(highRate*.080));
+            worst=std::max(worst,std::abs(envelope-expected)/std::max(1.,expected));minDb=std::min(minDb,gainDb);maxDb=std::max(maxDb,gainDb);
+        }
+        recurrence<<rate<<','<<factor<<",release,"<<release<<','<<envelope<<','<<retained*std::exp(-static_cast<double>(release)/(highRate*.080))<<','<<worst<<','<<minDb<<','<<maxDb<<'\n';
+        recurrencePass=recurrencePass&&worst<=1e-10;rangePass=rangePass&&minDb>=-6-1e-12&&maxDb<=1e-12;
+    }
+    auto histories=output(evidence.directory/"dense-history-and-link.csv");histories<<"sample_rate,first_20ms_max_difference,after_1s_max_difference,swap_max_error\n";
+    for(double rate:rates)
+    {
+        Candidate hot,fresh,leftRight,rightLeft;const auto s=settings(0,2,36);
+        prepare(hot,rate,evidence.factor,s);prepare(fresh,rate,evidence.factor,s);prepare(leftRight,rate,evidence.factor,s);prepare(rightLeft,rate,evidence.factor,s);
+        for(std::size_t n=0;n<static_cast<std::size_t>(2*rate);++n){const double x=R*std::sin(2*std::numbers::pi*220*n/rate);hot.process({x,x});}
+        const auto count=static_cast<std::size_t>(std::ceil(1.1*rate));std::vector<double> hotAudio(count),freshAudio(count),difference(count),linkedLeft(count),linkedRight(count);
+        double first=0,last=0,swap=0;
+        for(std::size_t n=0;n<count;++n)
+        {
+            const auto x=R/4*std::sin(2*std::numbers::pi*220*n/rate);hotAudio[n]=hot.process({x,x})[0];freshAudio[n]=fresh.process({x,x})[0];difference[n]=hotAudio[n]-freshAudio[n];
+            if(n<static_cast<std::size_t>(.02*rate)) first=std::max(first,std::abs(difference[n]));
+            if(n>=static_cast<std::size_t>(rate)) last=std::max(last,std::abs(difference[n]));
+            const double l=R/8*std::sin(2*std::numbers::pi*220*n/rate),r=R/2*std::sin(2*std::numbers::pi*713*n/rate);
+            const auto a=leftRight.process({l,r}),b=rightLeft.process({r,l});swap=std::max({swap,std::abs(a[0]-b[1]),std::abs(a[1]-b[0])});linkedLeft[n]=a[0];linkedRight[n]=a[1];
+        }
+        historyPass=historyPass&&first>1e-7*R&&last<=1e-5*R;swapPass=swapPass&&swap<=1e-12;
+        histories<<rate<<','<<first<<','<<last<<','<<swap<<'\n';
+        const auto suffix=std::to_string(static_cast<int>(rate));
+        evidence.raw("dense-preconditioned-"+suffix,hotAudio,rate,static_cast<std::size_t>(2*rate),"prior2s220Hz peakR,then220Hz peakR/4","Dense;Drive36;compOff;initial state zero before precondition");
+        evidence.raw("dense-reset-"+suffix,freshAudio,rate,0,"220Hz peakR/4","Dense;Drive36;compOff;reset");
+        evidence.raw("dense-history-difference-"+suffix,difference,rate,0,"preconditioned minus reset","Dense;controlled history witness");
+        evidence.raw("dense-linked-left-"+suffix,linkedLeft,rate,0,"L220Hz R/8;R713Hz R/2","Dense;Drive36;max stereo linking");
+        evidence.raw("dense-linked-right-"+suffix,linkedRight,rate,0,"L220Hz R/8;R713Hz R/2","Dense;Drive36;max stereo linking");
+    }
+    auto burstRows=output(evidence.directory/"burst-segments.csv");burstRows<<"recording,sample_rate,style,level,segment,start_frame,frames,input_peak\n";
+    for(double rate:rates) for(int style=0;style<3;++style) for(double level:levels)
+    {
+        Candidate candidate;prepare(candidate,rate,evidence.factor,settings(0,style,18));
+        const std::array<double,7> seconds{2,.1,1,2,1,.1,1},peaks{0,level,0,R,0,level,0};
+        const std::array<const char*,7> labels{"initial_silence","fresh_equal_burst","independent_recovery","sustained_drive","recovery_after_prior_drive","repeated_equal_burst","final_recovery"};
+        const auto name="burst-"+id(rate,0,style,18,level);std::vector<double> audio;std::size_t frame=0;
+        for(std::size_t segment=0;segment<seconds.size();++segment)
+        {
+            const auto count=static_cast<std::size_t>(std::llround(seconds[segment]*rate));burstRows<<quoted(name+".f64")<<','<<rate<<','<<styles[static_cast<std::size_t>(style)]<<','<<level<<','<<labels[segment]<<','<<frame<<','<<count<<','<<peaks[segment]<<'\n';
+            for(std::size_t n=0;n<count;++n,++frame){const auto x=peaks[segment]*std::sin(2*std::numbers::pi*220*n/rate);audio.push_back(candidate.process({x,x})[0]);}
+        }
+        evidence.raw(name,audio,rate,0,"220Hz;segment manifest in burst-segments.csv;2s independent initial silence","Full;Drive18;compOff;zero initial state");
+    }
+    evidence.gate("dense_1e_attack_release",recurrencePass,"2ms/80ms closed-form recurrence; all rates and factors1/2/4/8/64");
+    evidence.gate("dense_sag_range",rangePass,"gain range [-6,0] dB");
+    evidence.gate("dense_history_audio",historyPass,"first20ms >1e-7R; after1s <=1e-5R; retained audio");
+    evidence.gate("dense_stereo_swap",swapPass,"max channel-swap error <=1e-12");
+}
+
+void operatingGrid(Evidence& evidence)
+{
+    auto rows=output(evidence.directory/"operating-grid.csv");
+    rows<<"sample_rate,mode,style,drive,peak,corner_case,cuts_enabled,low_requested,high_requested,low_effective,high_effective,pre_cut_hz,post_cut_hz,warmup_frames,measured_frames,rms,mean,finite\n";
+    bool valid=true;std::size_t cases=0;
+    for(double rate:rates) for(int mode=0;mode<2;++mode) for(int style=0;style<3;++style) for(double drive:{0.,6.,18.,36.}) for(double level:levels) for(int corner=0;corner<3;++corner) for(int cuts=0;cuts<2;++cuts)
+    {
+        auto s=settings(mode,style,drive);
+        constexpr std::array<std::array<float,2>,3> corners{{{180,3500},{2000,500},{40,16000}}};
+        s.lowCrossoverHz=corners[static_cast<std::size_t>(corner)][0];s.highCrossoverHz=corners[static_cast<std::size_t>(corner)][1];
+        s.preLowCutEnabled=s.postHighCutEnabled=cuts!=0;s.preLowCutHz=corner==2?2000.f:40.f;s.postHighCutHz=corner==2?1000.f:18000.f;
+        Candidate candidate;prepare(candidate,rate,evidence.factor,s);const auto effective=effectiveSaturationCrossovers(s,rate);
+        const auto samples=render(candidate,rate,rate*31/4096,level,4096,.25);const auto summary=summarizeSignal(samples);valid=valid&&summary.valid;
+        rows<<rate<<','<<mode<<','<<styles[static_cast<std::size_t>(style)]<<','<<drive<<','<<level<<','<<corner<<','<<cuts<<','<<s.lowCrossoverHz<<','<<s.highCrossoverHz<<','<<effective.lowHz<<','<<effective.highHz<<','<<s.preLowCutHz<<','<<s.postHighCutHz<<','<<static_cast<std::size_t>(.25*rate)<<",4096,"<<summary.rms<<','<<summary.mean<<','<<summary.valid<<'\n';
+        evidence.raw("grid-"+std::to_string(cases++),samples,rate,static_cast<std::size_t>(std::ceil(.25*rate)),"coherent bin31/N4096;peak="+std::to_string(level),id(rate,mode,style,drive,level)+";corner="+std::to_string(corner)+";cuts="+std::to_string(cuts));
+    }
+    evidence.gate("operating_grid_finite",valid,"1296 raw records; .25s warm; measurement coverage, not a perceptual/loudness promise",!valid);
+}
+
+SaturationSettings cpuSettings(std::size_t unit,int endpoint)
+{
+    SaturationSettings s;s.mode=SaturationMode::threeBand;s.driveCompensation=true;s.preLowCutEnabled=s.postHighCutEnabled=true;
+    s.preLowCutHz=endpoint<0?20.f:endpoint==0?40.f:150.f;s.postHighCutHz=endpoint==0?9000.f:18000.f;
+    s.inputTrimDb=endpoint<0?0.f:endpoint==0?-3.f:3.f;s.outputTrimDb=-s.inputTrimDb;s.mix=endpoint<0?1.f:endpoint==0?.4f:1.f;
+    s.lowCrossoverHz=endpoint<0?180.f:endpoint==0?80.f:800.f;s.highCrossoverHz=endpoint<0?3500.f:endpoint==0?1800.f:6500.f;
+    for(std::size_t lane=0;lane<3;++lane)
+    {
+        auto& value=s.lanes[lane+1];value.character=static_cast<SaturationCharacter>((unit+lane)%3);
+        value.driveDb=endpoint<0?24.f:endpoint==0?6.f:30.f;value.preTiltDb=endpoint<0?0.f:endpoint==0?-6.f:6.f;
+        value.mix=endpoint<0?.75f:endpoint==0?.35f:1.f;value.trimDb=endpoint<0?0.f:endpoint==0?-3.f:3.f;
+    }
+    return s;
+}
+float interpolate(float a,float b,double position) { return static_cast<float>(a+(b-a)*position); }
+float interpolateHz(float a,float b,double position) { return static_cast<float>(std::exp(std::log(static_cast<double>(a))+(std::log(static_cast<double>(b))-std::log(static_cast<double>(a)))*position)); }
+SaturationSettings cpuMoving(std::size_t unit,double elapsed)
+{
+    auto a=cpuSettings(unit,0);const auto b=cpuSettings(unit,1);const auto phase=std::fmod(elapsed/.020,2.);const auto t=phase<=1?phase:2-phase;
+    a.inputTrimDb=interpolate(a.inputTrimDb,b.inputTrimDb,t);a.outputTrimDb=interpolate(a.outputTrimDb,b.outputTrimDb,t);a.mix=interpolate(a.mix,b.mix,t);
+    a.lowCrossoverHz=interpolateHz(a.lowCrossoverHz,b.lowCrossoverHz,t);a.highCrossoverHz=interpolateHz(a.highCrossoverHz,b.highCrossoverHz,t);a.preLowCutHz=interpolateHz(a.preLowCutHz,b.preLowCutHz,t);a.postHighCutHz=interpolateHz(a.postHighCutHz,b.postHighCutHz,t);
+    for(std::size_t lane=1;lane<4;++lane){auto& value=a.lanes[lane];const auto& end=b.lanes[lane];value.driveDb=interpolate(value.driveDb,end.driveDb,t);value.preTiltDb=interpolate(value.preTiltDb,end.preTiltDb,t);value.mix=interpolate(value.mix,end.mix,t);value.trimDb=interpolate(value.trimDb,end.trimDb,t);}
+    return a;
+}
+void settingRow(std::ostream& rows,const char* label,std::size_t unit,const SaturationSettings& s)
+{
+    for(std::size_t lane=1;lane<4;++lane) rows<<label<<','<<unit<<','<<lane<<','<<static_cast<int>(s.lanes[lane].character)<<','<<s.inputTrimDb<<','<<s.outputTrimDb<<','<<s.mix<<','<<s.lowCrossoverHz<<','<<s.highCrossoverHz<<','<<s.preLowCutHz<<','<<s.postHighCutHz<<','<<s.lanes[lane].driveDb<<','<<s.lanes[lane].preTiltDb<<','<<s.lanes[lane].mix<<','<<s.lanes[lane].trimDb<<'\n';
+}
+struct Callback { double seconds;std::size_t allocations,frees; };
+volatile double timingSink=0;
+void checksumSample(std::uint64_t& checksum,double sample) noexcept
+{
+    auto bits=std::bit_cast<std::uint64_t>(sample);
+    for(int byte=0;byte<8;++byte){checksum^=bits&255;checksum*=1099511628211ULL;bits>>=8;}
+}
+void timings(Evidence& evidence)
+{
+    auto rows=output(evidence.directory/"timing-summary.csv");
+    rows<<"sample_rate,block,moving,warm_audio_seconds,warm_wall_seconds,measured_audio_seconds,measured_wall_seconds,callbacks,mean_seconds,p99_seconds,max_seconds,period_seconds,mean_fraction,p99_fraction,allocations,frees,warm_output_energy,measured_output_energy,output_finite,output_nonzero,warm_output_fnv1a64,measured_output_fnv1a64,pass\n";
+    auto settingRows=output(evidence.directory/"timing-settings.csv");settingRows<<"label,unit,lane,character,input_db,output_db,global_mix,low_hz,high_hz,precut_hz,postcut_hz,drive_db,tilt_db,lane_mix,lane_trim_db\n";
+    for(std::size_t unit=0;unit<8;++unit){settingRow(settingRows,"fixed",unit,cpuSettings(unit,-1));settingRow(settingRows,"A",unit,cpuSettings(unit,0));settingRow(settingRows,"B",unit,cpuSettings(unit,1));}
+    bool allPass=true,zeroHeap=true,allValid=true,allOutputFinite=true,allOutputNonzero=true;
+    for(double rate:rates) for(std::size_t block:{64u,512u}) for(bool moving:{false,true})
+    {
+        const auto name="timings-"+std::to_string(static_cast<int>(rate))+'-'+std::to_string(block)+'-'+std::to_string(moving);
+        std::array<std::unique_ptr<Candidate>,8> units;
+        for(std::size_t unit=0;unit<units.size();++unit){units[unit]=std::make_unique<Candidate>();prepare(*units[unit],rate,evidence.factor,cpuSettings(unit,moving?0:-1));}
+        std::vector<Candidate::Frame> input(block),actualOutput(block);std::array<std::vector<Callback>,2> callbacks;std::array<double,2> audioSeconds{},wallSeconds{};std::array<long double,2> outputEnergy{};std::array<bool,2> outputFinite{true,true};std::array<std::uint64_t,2> checksums{14695981039346656037ULL,14695981039346656037ULL};std::size_t rendered=0;bool acceptedSettings=true;
+        for(int phase=0;phase<2;++phase)
+        {
+            for(std::size_t unit=0;unit<units.size();++unit) settingRow(settingRows,(name+(phase?"-measure-first-target":"-warm-prepared-state")).c_str(),unit,moving?cpuMoving(unit,static_cast<double>(rendered)/rate):cpuSettings(unit,-1));
+            callbacks[static_cast<std::size_t>(phase)].reserve(static_cast<std::size_t>(rate*(phase?10:2)/static_cast<double>(block))*4+1);
+            const auto started=Clock::now();const auto firstFrame=rendered;const double minimum=phase?10:2;
+            do
+            {
+                for(std::size_t n=0;n<block;++n) for(std::size_t channel=0;channel<2;++channel)
+                {
+                    const double time=static_cast<double>(rendered+n)/rate,offset=channel?std::numbers::pi/3:0;
+                    input[n][channel]=.01*std::sin(2*std::numbers::pi*220*time+offset)+.005*std::sin(2*std::numbers::pi*1760*time+offset);
+                }
+                allocationWitness::allocations=allocationWitness::frees=0;
+                const auto before=Clock::now();allocationWitness::enabled=true;
+                if(moving) for(std::size_t unit=0;unit<units.size();++unit) acceptedSettings=units[unit]->setSettings(cpuMoving(unit,static_cast<double>(rendered)/rate))&&acceptedSettings;
+                std::size_t outputIndex=0;
+                for(auto value:input){for(auto& unit:units) value=unit->process(value);actualOutput[outputIndex++]=value;}
+                allocationWitness::enabled=false;const auto after=Clock::now();timingSink=actualOutput.back()[0]+actualOutput.back()[1];
+                for(const auto& frame:actualOutput) for(double sample:frame)
+                {
+                    checksumSample(checksums[static_cast<std::size_t>(phase)],sample);
+                    if(std::isfinite(sample)) outputEnergy[static_cast<std::size_t>(phase)]+=static_cast<long double>(sample)*sample;
+                    else outputFinite[static_cast<std::size_t>(phase)]=false;
+                }
+                callbacks[static_cast<std::size_t>(phase)].push_back({std::chrono::duration<double>(after-before).count(),allocationWitness::allocations,allocationWitness::frees});rendered+=block;
+                audioSeconds[static_cast<std::size_t>(phase)]=static_cast<double>(rendered-firstFrame)/rate;wallSeconds[static_cast<std::size_t>(phase)]=std::chrono::duration<double>(Clock::now()-started).count();
+            } while(audioSeconds[static_cast<std::size_t>(phase)]<minimum||wallSeconds[static_cast<std::size_t>(phase)]<minimum);
+        }
+        auto raw=output(evidence.directory/(name+".csv"));raw<<"phase,index,duration_seconds,allocations,frees\n";std::vector<double> measured;std::size_t allocations=0,frees=0;
+        for(std::size_t phase=0;phase<2;++phase) for(std::size_t i=0;i<callbacks[phase].size();++i)
+        {
+            const auto& c=callbacks[phase][i];raw<<(phase?"measure":"warm")<<','<<i<<','<<c.seconds<<','<<c.allocations<<','<<c.frees<<'\n';allocations+=c.allocations;frees+=c.frees;if(phase) measured.push_back(c.seconds);
+        }
+        const auto summary=summarizeTiming(measured);const double period=static_cast<double>(block)/rate;
+        const bool finite=outputFinite[0]&&outputFinite[1]&&std::isfinite(outputEnergy[0])&&std::isfinite(outputEnergy[1]),nonzero=outputEnergy[0]>0&&outputEnergy[1]>0;
+        const bool pass=summary.valid&&acceptedSettings&&finite&&nonzero&&summary.meanSeconds<=.35*period&&summary.p99Seconds<=.5*period&&allocations==0&&frees==0;
+        allPass=allPass&&pass;allValid=allValid&&summary.valid&&acceptedSettings&&finite;zeroHeap=zeroHeap&&allocations==0&&frees==0;allOutputFinite=allOutputFinite&&finite;allOutputNonzero=allOutputNonzero&&nonzero;
+        rows<<rate<<','<<block<<','<<moving<<','<<audioSeconds[0]<<','<<wallSeconds[0]<<','<<audioSeconds[1]<<','<<wallSeconds[1]<<','<<summary.count<<','<<summary.meanSeconds<<','<<summary.p99Seconds<<','<<summary.maximumSeconds<<','<<period<<','<<summary.meanSeconds/period<<','<<summary.p99Seconds/period<<','<<allocations<<','<<frees<<','<<outputEnergy[0]<<','<<outputEnergy[1]<<','<<finite<<','<<nonzero<<','<<checksums[0]<<','<<checksums[1]<<','<<pass<<'\n';
+        for(std::size_t unit=0;unit<units.size();++unit) settingRow(settingRows,(name+"-final-target").c_str(),unit,moving?cpuMoving(unit,static_cast<double>(rendered-block)/rate):cpuSettings(unit,-1));
+        std::cout<<name<<": mean="<<summary.meanSeconds/period<<" p99="<<summary.p99Seconds/period<<" period, heap="<<allocations<<'/'<<frees<<std::endl;
+    }
+    evidence.gate("core_cpu_mean_and_p99",allPass,"8serial stereo three-band mixed styles; mean<=.35period;p99<=.5period;both audio/wall minima",!allValid);
+    evidence.gate("callback_cpp_heap",zeroHeap,"all global C++ new/delete incl arrays/aligned; C allocation freedom also requires core source audit");
+    evidence.gate("core_cpu_output_integrity",allOutputFinite&&allOutputNonzero,"preallocated output block; finite and positive energy in warm/measured phases; exact FNV1a64 over every stereo double in frame/channel order",!allOutputFinite);
+}
+
+void finish(Evidence& evidence)
+{
+    bool pass=true,invalid=false;for(const auto& gate:evidence.gates){pass=pass&&gate.pass;invalid=invalid||gate.invalid;}
+    evidence.recordings.flush();
+    auto receipt=output(evidence.directory/"decision.json");
+    receipt<<"{\n\"schema\":1,\"factor\":"<<evidence.factor<<",\"status\":"<<quoted(invalid?"invalid":pass?"passing_candidate":"rejected")<<",\"all_gates_pass\":"<<(pass?"true":"false")<<",\"frozen_manifest_sha256\":"<<quoted(hash(read(evidence.directory/"frozen-manifest.json")))<<",\"selection\":\"parent must select the lowest passing factor after all factor receipts; provisional on Task2 structural overlap and Task7 whole-product contention\",\"routing\":\"inherited parent model; no overrides\",\"gates\":[\n";
+    for(std::size_t i=0;i<evidence.gates.size();++i){const auto& gate=evidence.gates[i];if(i) receipt<<",\n";receipt<<"{\"name\":"<<quoted(gate.name)<<",\"pass\":"<<(gate.pass?"true":"false")<<",\"invalid\":"<<(gate.invalid?"true":"false")<<",\"detail\":"<<quoted(gate.detail)<<'}';}
+    receipt<<"],\"limits\":[\"core timing is the frozen representative mixed-style workload, not maximum production overlap\",\"global C++ allocation instrumentation does not intercept direct malloc/free; audit candidate source\",\"operating-grid RMS is measured at declared .25s warmup, not promised perceptual equivalence\",\"no DAW or listening acceptance claimed\"]}\n";
+    receipt.close();
+    auto hashes=output(evidence.directory/"artifact-hashes.csv");hashes<<"file,sha256,bytes\n";
+    std::vector<fs::path> paths;for(const auto& entry:fs::directory_iterator(evidence.directory)) if(entry.is_regular_file()&&entry.path().filename()!="artifact-hashes.csv") paths.push_back(entry.path());
+    std::sort(paths.begin(),paths.end());for(const auto& path:paths){const auto bytes=read(path);hashes<<quoted(path.filename().string())<<','<<hash(bytes)<<','<<bytes.size()<<'\n';}
+    std::cout<<"factor "<<evidence.factor<<" decision: "<<(invalid?"INVALID":pass?"PASS":"REJECT")<<std::endl;
+}
+}
+
+int main(int argc,char** argv)
+{
+    try
+    {
+        unsigned factor=0;fs::path directory;
+        for(int i=1;i<argc;++i)
+        {
+            const std::string option=argv[i];
+            if(option=="--factor"&&i+1<argc){const std::string value=argv[++i];if(value=="2"||value=="4"||value=="8") factor=static_cast<unsigned>(std::stoul(value));else throw std::runtime_error("factor must be 2,4,8");}
+            else if(option=="--output"&&i+1<argc) directory=fs::path(argv[++i]);
+            else throw std::runtime_error("usage: --factor 2|4|8 --output FRESH_ABSOLUTE_DIRECTORY");
+        }
+        if(!factor||directory.empty()||!directory.is_absolute()||fs::exists(directory)) throw std::runtime_error("output must be a fresh absolute directory and factor must be 2,4,8");
+        fs::create_directories(directory);Evidence evidence(directory,factor);
+        freeze(evidence);calibration(evidence);neutral(evidence);compensation(evidence);characters(evidence);denseStateAndBursts(evidence);operatingGrid(evidence);aliases(evidence);timings(evidence);finish(evidence);
+        return 0;
+    }
+    catch(const std::exception& error){allocationWitness::enabled=false;std::cerr<<"INVALID/incomplete saturation measurement: "<<error.what()<<'\n';return 2;}
+}
