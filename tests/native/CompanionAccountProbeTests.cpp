@@ -270,7 +270,7 @@ void catalog_materialize_authority_exports(const juce::File& probe)
     if(entries)for(const auto& design:melodic)CHECK(std::any_of(entries->begin(),entries->end(),[&](const auto& e){return juce::Uuid(e["id"].toString())==design.id;}));
     if(entries)CHECK(std::none_of(entries->begin(),entries->end(),[&](const auto& e){return juce::Uuid(e["id"].toString())==tile;}));
 }
-void brief_requests(const juce::File& probe)
+void brief_requests(const juce::File& probe,bool onlyLong=false,bool withoutLong=false)
 {
     begin(__func__); // A brief's request carries its prompt, context, phrase, tempo and source.
     struct Expected{const char* id;const char* instruction;const char* role;double bpm;int bars;std::vector<PatternNote> notes;};
@@ -282,6 +282,7 @@ void brief_requests(const juce::File& probe)
              {4,.25,60,90,1},{4.5,.25,63,70,1},{5,.25,67,90,1},{5.5,.25,70,70,1},{6,.25,67,90,1},{6.5,.25,63,70,1}}}};
     const auto fresh24=[](const SoundDocument& s){return std::abs(parameterPhysicalValue(s.values,756)-24.0f)<1e-4f&&s.values[757]==1;};
     for(const auto& e:expected){
+        const bool longPad=juce::String(e.id)=="A";if((onlyLong&&!longPad)||(withoutLong&&longPad))continue;
         Service service;Temp t;const auto output=fresh("account-probe-brief");std::cout<<"retainedBriefOutput="<<output.getFullPathName()<<std::endl;
         auto p=run(probe,fixtureArgs(t,service.name,{"--generate","--brief",e.id,"--model","synthetic-model:1","--output",output.getFullPathName()}));
         CHECK(p.exit==0);publicReply(p,"generate",true);CHECK(p.reply["explanation"].toString()=="synthetic fixture"&&p.reply["characteristics"].toString()=="pluck");
@@ -305,6 +306,7 @@ void brief_requests(const juce::File& probe)
             CHECK(double(w["start_beats"])==x.startBeats&&double(w["duration_beats"])==x.durationBeats&&int(w["pitch"])==x.pitch&&int(w["velocity"])==x.velocity&&int(w["channel"])==x.channel);}
         CHECK(output.getChildFile("instruction.txt").loadFileAsString()==e.instruction);
     }
+    if(onlyLong)return;
     // A brief replaces the instruction file and needs --generate; only A and B exist.
     {Service service;Temp t;const auto instruction=t.root.getChildFile("prompt.txt");CHECK(instruction.replaceWithText("a pad"));const auto output=fresh("rejected-brief");
         const std::vector<std::vector<juce::String>> invalid{
@@ -320,5 +322,5 @@ void brief_requests(const juce::File& probe)
 }
 int main(int argc,char** argv)
 {
-    try{if(argc!=3)return 2;Temp logRoot;logs=logRoot.root;std::cout<<"retainedFixtureCommandLogs="<<logs.getFullPathName()<<std::endl;const juce::File probe=juce::File::getCurrentWorkingDirectory().getChildFile(juce::String::fromUTF8(argv[1]));const juce::File helper=juce::File::getCurrentWorkingDirectory().getChildFile(juce::String::fromUTF8(argv[2]));CHECK(probe.existsAsFile() && helper.existsAsFile());acceptedHelperHash=juce::SHA256(helper).toHexString();CHECK(juce::SHA256(probe.getSiblingFile(companionExecutableName)).toHexString()==acceptedHelperHash);help_and_argument_isolation(probe);public_account_cli(probe,helper);generation_and_artifact_integrity(probe);catalog_materialize_authority_exports(probe);brief_requests(probe);finish();std::cout<<"checks="<<checks<<" groups="<<groups<<" failures="<<failures<<" commands="<<commandId<<std::endl;return failures?1:0;}catch(...){std::cerr<<"fixture_setup_exception\n";return 2;}
+    try{const bool onlyLong=argc==4&&juce::String(argv[3])=="--long-brief-only",withoutLong=argc==4&&juce::String(argv[3])=="--without-long-brief";if(argc!=3&&!onlyLong&&!withoutLong)return 2;Temp logRoot;logs=logRoot.root;std::cout<<"retainedFixtureCommandLogs="<<logs.getFullPathName()<<std::endl;const juce::File probe=juce::File::getCurrentWorkingDirectory().getChildFile(juce::String::fromUTF8(argv[1]));const juce::File helper=juce::File::getCurrentWorkingDirectory().getChildFile(juce::String::fromUTF8(argv[2]));CHECK(probe.existsAsFile() && helper.existsAsFile());acceptedHelperHash=juce::SHA256(helper).toHexString();CHECK(juce::SHA256(probe.getSiblingFile(companionExecutableName)).toHexString()==acceptedHelperHash);if(!onlyLong){help_and_argument_isolation(probe);public_account_cli(probe,helper);generation_and_artifact_integrity(probe);catalog_materialize_authority_exports(probe);}brief_requests(probe,onlyLong,withoutLong);finish();std::cout<<"checks="<<checks<<" groups="<<groups<<" failures="<<failures<<" commands="<<commandId<<std::endl;return failures?1:0;}catch(...){std::cerr<<"fixture_setup_exception\n";return 2;}
 }

@@ -4281,7 +4281,9 @@ void windowPatternUnfolds()
 void windowResizes()
 {
     std::cout<<"SECTION window_resizes\n";
+    juce::TemporaryFile savedPreset(".airack");
     WindowRig w;
+    w.p.setSoundPresetPath(savedPreset.getFile().getFullPathName());
     auto& e=*w.editor;
     auto* stage=w.stage();
     auto* save=widget<studio::SkinButton>(e,"preset.save");
@@ -4306,7 +4308,7 @@ void windowResizes()
         const auto at=save->getLocalPoint(&e,centre);
         save->mouseDown(event(*save,at,juce::ModifierKeys::leftButtonModifier,1,false));
         save->mouseUp(event(*save,at,{},1,false));
-        CHECK(status->getText()=="Preset failed: enter an absolute file path");
+        CHECK(status->getText()=="Save preset complete"&&savedPreset.getFile().existsAsFile());
         // The rack area is the stack's: the unit at its top with its proportions, 2184 of the stack's 2228 design px wide,
         // synth 1's generic rack 2U under it, then the empty space between the rails, 1U past the strip.
         const auto area=e.getLocalArea(stage,Rect(0.0f,top,1547.0f,bottom-top));
@@ -5652,6 +5654,13 @@ void sideTextPlacement()
         juce::StringArray missing;
         int matched=0;
         auto runs=drawnRuns(rig.model,key);
+        // Alpha access copy replaces these drawing labels at the same measured text anchors.
+        if(juce::String(key)=="account0")
+            for(auto& run:runs)
+            {
+                if(run.text=="Sign in to create sounds and racks.")run.text="Sound generation is experimental.";
+                else if(run.text=="Your browser opens to sign in.")run.text="Account access and limits may vary.";
+            }
         if(const auto g=gone.find(key);g!=gone.end())std::erase_if(runs,[&](const DrawnRun& r){return g->second.contains(r.text);});
         for(const auto& r:runs)
         {

@@ -13,6 +13,7 @@
 #include "ProgrammerUnit.h"
 #include "SkinControls.h"
 #include "StudioSkin.h"
+#include "StudioServices.h"
 #include "PostedClick.h"
 #include "BlankInstance.h"
 #include "OwnedFixture.h"
@@ -959,6 +960,42 @@ std::vector<float> renderDocument(const SoundDocument& d, std::optional<double> 
     for (int i=0;i<samples;i+=256) { if(i==0) note(m); else m.clear(); p.processBlock(b,m); std::copy_n(b.getReadPointer(0),256,result.data()+i); }
     p.setPlayHead(nullptr); return result;
 }
+void menuServiceLifetime()
+{
+    section("preset_menu_owns_only_its_modal_and_delivers_once");
+    auto services=studio::defaultStudioServices();auto target=std::make_unique<juce::Component>();
+    target->setBounds(0,0,100,30);target->addToDesktop(0);target->setVisible(true);
+    int callbacks=0,selected=-1;
+    services.chooseMenu(target.get(),{"One"},[&](int value){++callbacks;selected=value;});
+    juce::Component::SafePointer<juce::Component> menu=juce::Component::getCurrentlyModalComponent();CHECK(menu&&menu->isCurrentlyModal());
+    juce::Component unrelated;unrelated.enterModalState(false);CHECK(unrelated.isCurrentlyModal());
+    target.reset();dispatch();
+    CHECK(!menu);CHECK(unrelated.isCurrentlyModal());CHECK(juce::Component::getNumCurrentlyModalComponents()==1);CHECK(callbacks==0&&selected==-1);
+    unrelated.exitModalState(0);dispatch();CHECK(juce::Component::getNumCurrentlyModalComponents()==0);
+    target=std::make_unique<juce::Component>();target->setBounds(0,0,100,30);target->addToDesktop(0);target->setVisible(true);
+    services.chooseMenu(target.get(),{"One"},[&](int value){++callbacks;selected=value;});
+    menu=juce::Component::getCurrentlyModalComponent();CHECK(menu&&menu->isCurrentlyModal());if(menu)menu->exitModalState(1);dispatch();
+    CHECK(!menu&&callbacks==1&&selected==1);
+    services.chooseMenu(target.get(),{"One"},[&](int value){++callbacks;selected=value;});
+    CHECK(juce::PopupMenu::dismissAllActiveMenus());dispatch();CHECK(callbacks==2&&selected==0);
+    target.reset();dispatch();CHECK(callbacks==2&&juce::Component::getNumCurrentlyModalComponents()==0);
+}
+void presetMenuCancellation(InstrumentProcessor& p,std::unique_ptr<juce::AudioProcessorEditor>& e)
+{
+    section("native_chooser_cancellation_and_all_scroll_pages_reachable");
+    const auto click=[&]{auto* button=dynamic_cast<juce::Button*>(findComponent(*e,"preset.browse"));CHECK(button);if(button)::click(*button,1);};
+    auto chooserOpen=[]{return juce::ModalComponentManager::getInstance()->getNumModalComponents()>0;};
+    auto beforeChooserFixture=airack::testing::fixtureValue([&]{return document(p);});const auto& beforeChooser=*beforeChooserFixture;click();
+    CHECK(waitForUi("the preset chooser opens",chooserOpen,[]{return juce::String("no modal component");}));
+    juce::ModalComponentManager::getInstance()->cancelAllModalComponents();dispatch();dispatch();
+    CHECK(documentMatches(p,beforeChooser));
+    auto* cancelled=dynamic_cast<juce::Label*>(findComponent(*e,"status"));CHECK(cancelled&&cancelled->getText().containsIgnoreCase("cancelled"));
+    click();CHECK(waitForUi("the preset chooser opens again",chooserOpen,[]{return juce::String("no modal component");}));
+    const auto closeBegin=std::chrono::steady_clock::now();e.reset();
+    dispatch();CHECK(juce::ModalComponentManager::getInstance()->getNumModalComponents()==0);
+    CHECK(documentMatches(p,beforeChooser));
+    std::cout<<"PRESET_MENU_LIFETIME close_ms="<<std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-closeBegin).count()<<" modal_count="<<juce::ModalComponentManager::getInstance()->getNumModalComponents()<<" dispatch_ms=30\n";
+}
 void completeEditorCheck(const juce::String& prefix)
 {
     const auto editorProgressStart = std::chrono::steady_clock::now();
@@ -1240,16 +1277,8 @@ void completeEditorCheck(const juce::String& prefix)
     e->setVisible(true);dispatch();
     editorProgress("final_editor_visibility_dispatch_end", parameterCount);
     editorProgress("native_chooser_cancellation_and_all_scroll_pages_reachable", parameterCount);
-    section("native_chooser_cancellation_and_all_scroll_pages_reachable");
-    // The chooser opens from a posted message, which may wait behind others.
-    auto chooserOpen=[]{return juce::ModalComponentManager::getInstance()->getNumModalComponents()>0;};
-    auto beforeChooserFixture = airack::testing::fixtureValue([&]{return document(p);}); const auto& beforeChooser = *beforeChooserFixture;click("preset.browse");
-    CHECK(waitForUi("the preset chooser opens",chooserOpen,[]{return juce::String("no modal component");}));
-    juce::ModalComponentManager::getInstance()->cancelAllModalComponents();dispatch();dispatch();
-    CHECK(documentMatches(p,beforeChooser));
-    auto* cancelled=dynamic_cast<juce::Label*>(findComponent(*e,"status"));CHECK(cancelled&&cancelled->getText().containsIgnoreCase("cancelled"));
-    click("preset.browse");CHECK(waitForUi("the preset chooser opens again",chooserOpen,[]{return juce::String("no modal component");}));
-    e.reset();dispatch();CHECK(juce::ModalComponentManager::getInstance()->getNumModalComponents()==0);
+    menuServiceLifetime();
+    presetMenuCancellation(p,e);
     e.reset(p.createEditor());e->setVisible(true);dispatch();
     click("rack.toggle");
     // The click is a posted message, which may wait behind others; the walk needs the unit it shows.
@@ -3965,6 +3994,13 @@ int main(int argc, char** argv)
     if(argc==2&&juce::String(argv[1])=="--source-authority") {
         sourceSelectorAuthority();sourceSelectorCallbacks();sourceAiCaptureAuthority();sourceWholeBankTransactions();personalityInvalidEngineRepair();
         std::cout<<checks<<" checks, "<<sections<<" sections, "<<failures<<" failures\n";return failures?1:0;
+    }
+    if(argc==2&&juce::String(argv[1])=="--preset-menu-lifetime-check") {
+        menuServiceLifetime();
+        auto p=std::make_unique<InstrumentProcessor>(airack::testing::isolatedRackRuntime());CHECK(blankInstance(*p));
+        std::unique_ptr<juce::AudioProcessorEditor> e(p->createEditor());e->setVisible(true);dispatch();
+        presetMenuCancellation(*p,e);
+        std::cout<<checks<<" checks, "<<failures<<" failures\n";return failures?1:0;
     }
     if(argc==2&&juce::String(argv[1])=="--complete-editor-check") {
         std::cout.setf(std::ios::unitbuf);

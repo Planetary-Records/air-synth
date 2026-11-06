@@ -372,10 +372,16 @@ struct OwnedPreviewService {
     juce::String suffix=juce::Uuid().toString().removeCharacters("-");
     std::atomic_bool captureRelease{true},captureArrived{false};
     std::string structuredResponse;
-    companion::RuntimeServer server;std::thread io;
+    companion::RuntimeServer server;companion::CompanionClient fixtureClient;std::thread io;
     explicit OwnedPreviewService(std::string response={}):structuredResponse(std::move(response)),server([this](const auto& job){return run(job);},[](const auto& job){if(job.previewExchange)job.previewExchange->cancel();}),
-        io([this]{const auto result=server.run(stop,suffix);workerRetained=result.workerRetained;}){}
-    ~OwnedPreviewService(){stop=true;if(io.joinable())io.join();}
+        io([this]{const auto result=server.run(stop,suffix);workerRetained=result.workerRetained;}){
+        // Keep the fixture available while full-kit preparation precedes the processor's first connection.
+        CHECK(fixtureClient.start(options()));const auto end=std::chrono::steady_clock::now()+std::chrono::milliseconds(companion::clientStartupTimeoutMs);
+        do{fixtureClient.poll();std::this_thread::sleep_for(std::chrono::milliseconds(1));}
+        while(fixtureClient.status().phase==companion::ClientPhase::connecting&&std::chrono::steady_clock::now()<end);
+        CHECK(fixtureClient.status().phase==companion::ClientPhase::ready);
+    }
+    ~OwnedPreviewService(){stop=true;fixtureClient.close();if(io.joinable())io.join();}
     companion::ClientOptions options() const {companion::ClientOptions value;value.allowLaunch=false;value.negotiateSpectrum=false;
         value.launch.pipeSuffix=suffix;value.launch.fixtureRoot=juce::File::getSpecialLocation(juce::File::tempDirectory);return value;}
     companion::Frame run(const companion::RuntimeJob& job){using namespace ai;using namespace companion;
@@ -613,6 +619,8 @@ std::atomic<std::size_t> callbackAllocations{0},callbackFrees{0},callbackRequest
 std::atomic<bool> recording{false};thread_local bool inside=false;
 std::atomic_flag ledgerGate=ATOMIC_FLAG_INIT;std::atomic<DWORD> ownerThread{0};unsigned observation=0;
 std::atomic<std::size_t> otherAllocations{0},otherFrees{0},otherAllocatedBytes{0},otherFreedBytes{0};
+struct Boundary {bool start;_CrtMemState& heap;Result& measured;bool taken=false;};
+thread_local Boundary* pendingBoundary=nullptr;
 std::size_t bucket(long request) noexcept {return (std::uint64_t(std::uint32_t(request))*11400714819323198485ull)>>(64-std::countr_zero(ledgerCapacity));}
 Row* locate(long request,bool insertion=false) noexcept {
     const auto first=bucket(request);
@@ -643,6 +651,21 @@ void remove(long request,std::size_t size) noexcept {
     }
 }
 int __cdecl hook(int kind,void* data,std::size_t bytes,int use,long request,const unsigned char*,int){
+    // The CRT invokes allocation hooks under its recursive heap lock. A zero
+    // byte CRT marker lets the global snapshot and recorder transition share
+    // that lock; CRT blocks are excluded from our NORMAL/CLIENT accounting.
+    if(pendingBoundary&&kind==_HOOK_ALLOC&&(use&0xffff)==_CRT_BLOCK&&bytes==0){
+        auto& boundary=*pendingBoundary;pendingBoundary=nullptr;
+        if(boundary.start){_CrtMemCheckpoint(&boundary.heap);recording.store(true,std::memory_order_release);}
+        else{
+            recording.store(false,std::memory_order_release);
+            while(ledgerGate.test_and_set(std::memory_order_acquire)){}
+            boundary.measured=result;boundary.measured.callbackAllocationCount=callbackAllocations.load();
+            boundary.measured.callbackFreeCount=callbackFrees.load();boundary.measured.callbackRequested=callbackRequestedBytes.load();
+            ledgerGate.clear(std::memory_order_release);_CrtMemCheckpoint(&boundary.heap);
+        }
+        boundary.taken=true;return 1;
+    }
     if(!recording.load(std::memory_order_acquire)||inside)return 1;inside=true;struct Exit{~Exit(){inside=false;}}exit;
     long oldRequest=0;std::size_t oldBytes=0;bool valid=true;
     // Resolve CRT block identity before the private ledger gate. The gate's
@@ -668,12 +691,23 @@ int __cdecl hook(int kind,void* data,std::size_t bytes,int use,long request,cons
         result.live+=bytes;result.allocated+=bytes;++result.allocations;result.peak=std::max(result.peak,result.live);
     }else if(kind==_HOOK_FREE&&data)remove(oldRequest,oldBytes);return 1;
 }
-template<class F> Result observe(F&& work){
-    rows.fill({});result={};inside=false;callbackAllocations=callbackFrees=callbackRequestedBytes=0;otherAllocations=0;otherFrees=0;otherAllocatedBytes=0;otherFreedBytes=0;ownerThread=GetCurrentThreadId();_CrtMemState before{},after{};_CrtMemCheckpoint(&before);
-    const auto old=_CrtSetAllocHook(hook);recording.store(true,std::memory_order_release);
-    try{work();}catch(...){recording=false;_CrtSetAllocHook(old);throw;}
-    recording.store(false,std::memory_order_release);while(ledgerGate.test_and_set(std::memory_order_acquire)){}auto out=result;out.callbackAllocationCount=callbackAllocations.load();out.callbackFreeCount=callbackFrees.load();out.callbackRequested=callbackRequestedBytes.load();ledgerGate.clear(std::memory_order_release);
-    _CrtSetAllocHook(old);_CrtMemCheckpoint(&after);
+bool takeBoundary(bool start,_CrtMemState& heap,Result& measured){
+    Boundary boundary{start,heap,measured};pendingBoundary=&boundary;
+    auto* marker=_malloc_dbg(0,_CRT_BLOCK,__FILE__,__LINE__);pendingBoundary=nullptr;
+    if(marker)_free_dbg(marker,_CRT_BLOCK);
+    CHECK(marker&&boundary.taken);return marker&&boundary.taken;
+}
+template<class F> Result observe(F&& work,void(*boundaryProbe)(bool,void*)=nullptr,void* probeContext=nullptr){
+    rows.fill({});result={};inside=false;callbackAllocations=callbackFrees=callbackRequestedBytes=0;otherAllocations=0;otherFrees=0;otherAllocatedBytes=0;otherFreedBytes=0;ownerThread=GetCurrentThreadId();_CrtMemState before{},after{};Result out;
+    const auto old=_CrtSetAllocHook(hook);
+    try{
+        if(!takeBoundary(true,before,out)){recording=false;_CrtSetAllocHook(old);out.valid=false;return out;}
+        if(boundaryProbe)boundaryProbe(true,probeContext);
+        work();
+        if(!takeBoundary(false,after,out)){recording=false;_CrtSetAllocHook(old);out.valid=false;return out;}
+        if(boundaryProbe)boundaryProbe(false,probeContext);
+    }catch(...){recording=false;pendingBoundary=nullptr;_CrtSetAllocHook(old);throw;}
+    _CrtSetAllocHook(old);
     const auto delta=std::int64_t(after.lSizes[_NORMAL_BLOCK])-std::int64_t(before.lSizes[_NORMAL_BLOCK])
         +std::int64_t(after.lSizes[_CLIENT_BLOCK])-std::int64_t(before.lSizes[_CLIENT_BLOCK]);
     std::cout<<"REQUESTED_HEAP_OBSERVATION number="<<++observation<<" live="<<out.live<<" baseline_freed="<<out.baselineFreed<<" checkpoint_delta="<<delta
@@ -684,7 +718,34 @@ template<class F> Result observe(F&& work){
         <<" insertion_failures="<<out.insertionFailures<<" first_overflow_request="<<out.firstOverflowRequest<<" first_overflow_bytes="<<out.firstOverflowBytes<<" first_overflow_owner="<<out.firstOverflowOwner<<" baseline_free_requests="<<out.baselineFreeRequests<<" other_allocations="<<otherAllocations<<" other_frees="<<otherFrees<<" other_allocated_bytes="<<otherAllocatedBytes<<" other_freed_bytes="<<otherFreedBytes<<'\n';
     CHECK(out.valid);CHECK(std::int64_t(out.live)-std::int64_t(out.baselineFreed)==delta);return out;
 }
+void boundaryRegression(){
+    // A real worker allocates/frees at each recorder transition. Keep the worker
+    // alive outside both snapshots so its own startup/teardown is not measured.
+    struct Worker {
+        std::atomic_int command{0},completed{-1};void* block=nullptr;
+        std::thread thread{[this]{completed=0;for(;;){const auto next=command.load();if(next==3)return;
+            if(next==completed.load()){std::this_thread::yield();continue;}
+            if(next==1)block=_malloc_dbg(216,_NORMAL_BLOCK,__FILE__,__LINE__);
+            if(next==2){_free_dbg(block,_NORMAL_BLOCK);block=nullptr;}completed=next;}}};
+        bool await(int value){const auto end=std::chrono::steady_clock::now()+std::chrono::seconds(5);
+            while(completed.load()!=value&&std::chrono::steady_clock::now()<end)std::this_thread::yield();return completed.load()==value;}
+        void perform(int value){command=value;CHECK(await(value));}
+        ~Worker(){command=3;thread.join();if(block)_free_dbg(block,_NORMAL_BLOCK);}
+    };
+    {
+        Worker worker;CHECK(worker.await(0));
+        const auto measured=observe([]{},[](bool start,void* context){if(start)static_cast<Worker*>(context)->perform(1);},&worker);
+        CHECK(worker.block!=nullptr&&measured.valid&&measured.live==216&&measured.allocated==216);worker.perform(2);
+    }
+    {
+        Worker worker;CHECK(worker.await(0));
+        const auto measured=observe([&]{worker.perform(1);CHECK(worker.block!=nullptr);},
+            [](bool start,void* context){if(!start)static_cast<Worker*>(context)->perform(2);},&worker);
+        CHECK(worker.block==nullptr&&measured.valid&&measured.live==216&&measured.allocated==216);
+    }
+}
 void calibrate(){
+    boundaryRegression();
     std::cout<<"LOCAL_LOAD_RECORDER row_capacity="<<rows.size()<<" row_bytes="<<sizeof(Row)<<" static_observer_bytes="<<sizeof(rows)<<" (test observer storage, not product C admission)\n";
     // Collision, wrap, full-table deletion and long churn precede the real CRT/checkpoint controls.
     for(const auto target:{bucket(1),rows.size()-1}){
@@ -1748,6 +1809,7 @@ int main(int argc,char** argv){
 #if defined(_MSC_VER) && defined(_DEBUG)
     else if(mode=="--observation")owned_observation_allocation_and_lifetime();
     else if(mode=="--load")owned_full_load();
+    else if(mode=="--heap-boundary")ownershipHeap::boundaryRegression();
     else if(mode=="--oom-terminal"){idle_parent_poll_preserves();consumed_terminal_allocation_settles();owned_apply_map_allocation_refusal_preserves_retry();owned_root_validation_allocation_preserves();}
 #endif
     else {std::cerr<<"Unsupported not-yet-implemented local preview test mode\n";return 2;}

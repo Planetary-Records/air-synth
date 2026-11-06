@@ -58,6 +58,44 @@ private:
     juce::Component* parent;
     std::unique_ptr<juce::FileChooser> chooser;
 };
+
+// A menu's target controls placement, but JUCE does not close the menu when
+// that target is deleted. Retain only this menu's modal component until its
+// callback unwinds, matching the file chooser's owner lifetime above.
+class PendingMenu final : private juce::ComponentListener
+{
+public:
+    static void launch (juce::Component* target, const juce::StringArray& items, std::function<void(int)> done)
+    {
+        auto pending = std::shared_ptr<PendingMenu> (new PendingMenu (target, std::move (done)));
+        juce::PopupMenu menu;
+        for (int i=0;i<items.size();++i) menu.addItem(i+1,items[i]);
+        const auto* previous = juce::Component::getCurrentlyModalComponent();
+        menu.showMenuAsync (juce::PopupMenu::Options().withTargetComponent(target), [pending] (int selected)
+        {
+            pending->detach();
+            const auto callback = std::move (pending->done);
+            if (callback) callback (selected);
+        });
+        auto* shown = juce::Component::getCurrentlyModalComponent();
+        if (shown != previous) pending->popup = shown;
+    }
+    ~PendingMenu() override { detach(); }
+
+private:
+    PendingMenu (juce::Component* target, std::function<void(int)> callback) : parent(target), done(std::move(callback))
+    { if (parent) parent->addComponentListener(this); }
+    void detach() { if (parent) parent->removeComponentListener(this); parent=nullptr; }
+    void componentBeingDeleted (juce::Component&) override
+    {
+        detach();done=nullptr;
+        if (popup) popup->setVisible(false);
+        if (popup) popup->exitModalState(0);
+    }
+    juce::Component* parent;
+    std::function<void(int)> done;
+    juce::Component::SafePointer<juce::Component> popup;
+};
 } // namespace
 
 StudioServices defaultStudioServices()
@@ -70,9 +108,7 @@ StudioServices defaultStudioServices()
     s.copyText = [] (const juce::String& text) { juce::SystemClipboard::copyTextToClipboard (text); };
     s.chooseMenu = [] (juce::Component* target, const juce::StringArray& items, std::function<void(int)> done)
     {
-        juce::PopupMenu menu;
-        for (int i=0;i<items.size();++i) menu.addItem(i+1,items[i]);
-        menu.showMenuAsync(juce::PopupMenu::Options().withTargetComponent(target),std::move(done));
+        PendingMenu::launch(target,items,std::move(done));
     };
     return s;
 }

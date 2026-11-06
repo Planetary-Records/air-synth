@@ -446,14 +446,20 @@ void InstrumentProcessor::pollGroup()
         if(busy&&g.marker&&!aiApplying)invalidateGroupedProposal();
         if(g.dirty||busy!=g.publishedBusy){submitGroup(GroupControl::Purpose::publish,now);return;}
         if(aiDelayedApply&&renderedPreview.stopped()&&g.marker){submitGroup(GroupControl::Purpose::apply,now);return;}
-        if(aiStartupAccount||aiActiveAccount)return;
-        if(now-g.observationTime>=200){submitGroup(GroupControl::Purpose::publish,now);return;}
-        if(g.marker&&aiProposalPhase()==AiProposalPhase::proposed&&(g.checkTime==0||now-g.checkTime>=500))
-        {if(submitGroup(GroupControl::Purpose::check,now))return;}
     }
     if(aiStartupAccount||aiActiveAccount)return;
-    if(g.discovery&&(g.browseRequested||g.browseTime==0||now-g.browseTime>=500)){if(submitGroup(GroupControl::Purpose::browse,now))return;}
-    (void)submitEqSpectrum(now);
+    // Serve the oldest due periodic request. With slow UI polling, always
+    // prioritising a 200ms heartbeat can otherwise starve every spectrum reply.
+    const auto never=std::numeric_limits<std::uint64_t>::max();
+    auto due=never;auto purpose=GroupControl::Purpose::publish;
+    const auto consider=[&](GroupControl::Purpose candidate,std::uint64_t time){if(time<due){due=time;purpose=candidate;}};
+    if(g.admitted&&now-g.observationTime>=200)consider(GroupControl::Purpose::publish,g.observationTime+200);
+    if(g.admitted&&g.marker&&aiProposalPhase()==AiProposalPhase::proposed&&(g.checkTime==0||now-g.checkTime>=500))
+        consider(GroupControl::Purpose::check,g.checkTime?g.checkTime+500:0);
+    if(g.discovery&&(g.browseRequested||g.browseTime==0||now-g.browseTime>=500))
+        consider(GroupControl::Purpose::browse,g.browseRequested||g.browseTime==0?0:g.browseTime+500);
+    if(submitEqSpectrum(now,due))return;
+    if(due!=never)(void)submitGroup(purpose,now);
 }
 void InstrumentProcessor::refuseGroupPresses()
 {

@@ -452,7 +452,7 @@ private:
     void resetEqSpectrumConnection();
     void configureEqSpectrumInbox();
     void receiveEqSpectrumReply(const companion::GroupCommand&,const companion::GroupReply&);
-    bool submitEqSpectrum(std::uint64_t);
+    bool submitEqSpectrum(std::uint64_t,std::uint64_t before);
     void submitCatalogFollowup();
     void timerCallback() override;
     companion::ClientOptions aiClientOptions;

@@ -65,7 +65,7 @@ struct ScopedMcpRackRoot {
 };
 struct Stdio {
     HANDLE process=nullptr,input=nullptr,output=nullptr;std::string buffered;unsigned serial=0;
-    juce::File transcript;
+    juce::File transcript;unsigned responseWorkDelayMs=0;std::atomic_bool frameReceived=false;
     ~Stdio(){close();}
     bool start(const juce::File& helper,const juce::File& root,const juce::String& suffix){
         transcript=root.getChildFile("raw-mcp-"+juce::Uuid().toString()+".jsonl");
@@ -83,12 +83,14 @@ struct Stdio {
     }
     bool send(juce::var value){const auto text=juce::JSON::toString(value,true)+"\n";CHECK(transcript.appendText(juce::JSON::toString(object({{"direction","stdin"},{"message",value}}),true)+"\n"));DWORD bytes=0;return WriteFile(input,text.toRawUTF8(),DWORD(text.getNumBytesAsUTF8()),&bytes,nullptr)&&bytes==text.getNumBytesAsUTF8();}
     juce::var receive(){const auto end=GetTickCount64()+5000;do{
-        if(auto at=buffered.find('\n');at!=std::string::npos){const auto line=buffered.substr(0,at);buffered.erase(0,at+1);juce::var value;CHECK(ai::parseStrictJson(line,value,mcp::maximumResultBytes));CHECK(transcript.appendText(juce::JSON::toString(object({{"direction","stdout"},{"message",value}}),true)+"\n"));return value;}
+        if(auto at=buffered.find('\n');at!=std::string::npos){const auto line=buffered.substr(0,at);buffered.erase(0,at+1);frameReceived=true;if(responseWorkDelayMs)Sleep(responseWorkDelayMs);juce::var value;CHECK(ai::parseStrictJson(line,value,mcp::maximumResultBytes));CHECK(transcript.appendText(juce::JSON::toString(object({{"direction","stdout"},{"message",value}}),true)+"\n"));return value;}
         DWORD available=0;if(!PeekNamedPipe(output,nullptr,0,nullptr,&available,nullptr))break;
         if(available){char data[65536];DWORD bytes=0;if(!ReadFile(output,data,(std::min)(DWORD(sizeof(data)),available),&bytes,nullptr))break;buffered.append(data,bytes);if(buffered.size()>mcp::maximumResultBytes)return {};}else Sleep(1);
     }while(GetTickCount64()<end);return {};}
     juce::var rpc(const char* method,juce::var params){const auto id=++serial;CHECK(send(object({{"jsonrpc","2.0"},{"id",int(id)},{"method",method},{"params",params}})));
-        juce::var reply;std::atomic_bool done=false;std::thread reader([&]{reply=receive();done=true;});CHECK(until([&]{return done.load();},5500));reader.join();CHECK(int(reply["id"])==int(id));CHECK(!reply.hasProperty("error"));return reply["result"];}
+        juce::var reply;frameReceived=false;std::atomic_bool done=false;std::thread reader([&]{reply=receive();done=true;});
+        // Bound transport, not this client's large JSON/transcript work; keep the hosted plugin pumping during both.
+        CHECK(until([&]{return frameReceived.load()||done.load();},5500));while(!done.load())pump();reader.join();CHECK(int(reply["id"])==int(id));CHECK(!reply.hasProperty("error"));return reply["result"];}
     juce::var tool(const char* name,juce::var args,const char* expected="ready"){
         juce::var result;const bool waitForInventory=juce::String(name)=="get_state"&&juce::String(expected)=="ready";const auto deadline=GetTickCount64()+30000;
         do{result=rpc("tools/call",object({{"name",name},{"arguments",args}}))["structuredContent"];
@@ -100,6 +102,16 @@ struct Stdio {
         return result["protocolVersion"].toString()=="2025-11-25"&&send(object({{"jsonrpc","2.0"},{"method","notifications/initialized"}}));}
     void close(){if(input){CloseHandle(input);input=nullptr;}if(process){if(WaitForSingleObject(process,5000)!=WAIT_OBJECT_0){CHECK(false);TerminateProcess(process,97);WaitForSingleObject(process,5000);}else{DWORD code=99;GetExitCodeProcess(process,&code);CHECK(code==0);}CloseHandle(process);process=nullptr;}if(output){CloseHandle(output);output=nullptr;}}
 };
+void stdioClientWorkTest(){
+    juce::TemporaryFile transcript(".jsonl");Stdio client;client.transcript=transcript.getFile();HANDLE requests=nullptr,replies=nullptr;
+    CHECK(CreatePipe(&requests,&client.input,nullptr,0)!=FALSE);CHECK(CreatePipe(&client.output,&replies,nullptr,0)!=FALSE);
+    if(!requests||!replies){if(requests)CloseHandle(requests);if(replies)CloseHandle(replies);return;}
+    const std::string response="{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"fixture\":true}}\n";DWORD written=0;
+    CHECK(WriteFile(replies,response.data(),DWORD(response.size()),&written,nullptr)&&written==response.size());
+    client.responseWorkDelayMs=5600;CHECK(bool(client.rpc("fixture",object({}))["fixture"]));CloseHandle(requests);CloseHandle(replies);client.close();
+    Stdio stalled;HANDLE heldWriter=nullptr;CHECK(CreatePipe(&stalled.output,&heldWriter,nullptr,0)!=FALSE);if(!heldWriter)return;
+    const auto began=GetTickCount64();CHECK(stalled.receive().isVoid());const auto elapsed=GetTickCount64()-began;CHECK(elapsed>=5000&&elapsed<5500);std::cout<<"STDIO_READ_TIMEOUT elapsed_ms="<<elapsed<<std::endl;CloseHandle(heldWriter);
+}
 struct ServiceChild {
     juce::ChildProcess child;
     ~ServiceChild(){if(child.isRunning())child.kill();}
@@ -269,6 +281,7 @@ void workflow(const juce::File& plugin,const juce::File& helper,const juce::File
 }
 }
 int main(int argc,char** argv){juce::ScopedJuceInitialiser_GUI gui;_CrtSetAllocHook(allocationHook);
+    if(argc==2&&juce::String(argv[1])=="--stdio-self-test"){stdioClientWorkTest();std::cout<<checks<<" checks, "<<failures<<" failures"<<std::endl;return failures?1:0;}
     juce::String plugin=RACKSYNTH_MCP_VST3,helper=RACKSYNTH_MCP_HELPER;juce::File root;bool hold=false,capture=false,warnings=false;
     for(int i=1;i<argc;++i){const juce::String a(argv[i]);if(a=="--hold")hold=true;else if(a=="--warnings")warnings=true;else if(a=="--capture-only")capture=true;else if(a=="--output"&&i+1<argc){const juce::String raw(argv[++i]);
 #if defined(_DEBUG)
@@ -293,7 +306,7 @@ int main(int argc,char** argv){juce::ScopedJuceInitialiser_GUI gui;_CrtSetAllocH
     const OwnedRackMarker* marker=nullptr;
 #endif
     const auto suffix=juce::SystemStats::getEnvironmentVariable("AIRACK_MCP_PIPE_SUFFIX",juce::Uuid().toString().removeCharacters("-"));
-    try{if(capture){if(marker&&!captureIsolationPreflight(juce::File(plugin),juce::File(helper),root,suffix,*marker)){CHECK(false);return 1;}captureProduct(juce::File(plugin),root);}else if(warnings)warningProjection(juce::File(plugin),juce::File(helper),root,suffix,marker);else workflow(juce::File(plugin),juce::File(helper),root,suffix,hold,marker);}catch(const std::exception& e){std::cout<<"EXCEPTION "<<e.what()<<std::endl;CHECK(false);}
+    try{if(capture){if(marker&&!captureIsolationPreflight(juce::File(plugin),juce::File(helper),root,suffix,*marker)){CHECK(false);return 1;}captureProduct(juce::File(plugin),root);}else if(warnings)warningProjection(juce::File(plugin),juce::File(helper),root,suffix,marker);else{stdioClientWorkTest();workflow(juce::File(plugin),juce::File(helper),root,suffix,hold,marker);}}catch(const std::exception& e){std::cout<<"EXCEPTION "<<e.what()<<std::endl;CHECK(false);}
     CHECK(callbackAllocations==0&&callbackFrees==0);std::cout<<"actual VST3 callback allocations="<<callbackAllocations<<" frees="<<callbackFrees<<std::endl;
     std::cout<<checks<<" checks, "<<failures<<" failures"<<std::endl;return failures?1:0;
 }

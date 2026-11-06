@@ -511,7 +511,7 @@ struct Synthetic
  std::atomic_bool& returned=backend->returned;std::atomic_int& calls=backend->calls;std::atomic_int& accounts=backend->accounts;
  std::atomic_int& providerCalls=backend->providerCalls;std::atomic_int& held=backend->held;
  Fixture fixture;juce::String suffix=juce::Uuid().toString().removeCharacters("-");
- std::shared_ptr<RuntimeServer> server;std::thread io;
+ std::shared_ptr<RuntimeServer> server;std::unique_ptr<CompanionClient> probe=std::make_unique<CompanionClient>();std::thread io;
  Synthetic()
  {
   server=std::make_shared<RuntimeServer>([state=backend](const RuntimeJob& job){
@@ -532,10 +532,11 @@ struct Synthetic
    AccountReply r;r.providerStatus=rack::oauth::Status::connected;r.httpStatus=200;r.selectedModel="synthetic-public";r.modelVerified=true;r.models={{"synthetic-public","Synthetic native model"}};Frame f{MessageKind::accountResult,job.session,{}};CHECK(encodeAccountReply(r,f.payload));return f;
   },[](const RuntimeJob& job){if(job.previewExchange)job.previewExchange->cancel();});
   io=std::thread([state=backend,server=server,suffix=suffix]{const auto r=server->run(state->stop,suffix);state->returned=true;std::cout<<"SERVER_RETURN status="<<int(r.status)<<" retained="<<r.workerRetained<<" stop="<<state->stop.load()<<'\n';CHECK(!r.workerRetained);CHECK(state->stop.load()&&r.status==RuntimeStatus::ready);});
-  auto probe=std::make_unique<CompanionClient>();CHECK(probe->start(options()));const auto end=GetTickCount64()+clientStartupTimeoutMs;do{probe->poll();juce::MessageManager::getInstance()->runDispatchLoopUntil(1);}while(probe->status().phase!=ClientPhase::ready&&!returned.load()&&GetTickCount64()<end);
-  CHECK(probe->status().phase==ClientPhase::ready);CHECK(!probe->session().isNull());CHECK(probe->peer().processId==GetCurrentProcessId()&&probe->peer().creationTime==creation());std::cout<<"STARTUP_WELCOME ready="<<(probe->status().phase==ClientPhase::ready)<<'\n';probe->close();
+  CHECK(probe->start(options()));const auto end=GetTickCount64()+clientStartupTimeoutMs;do{probe->poll();juce::MessageManager::getInstance()->runDispatchLoopUntil(1);}while(probe->status().phase!=ClientPhase::ready&&!returned.load()&&GetTickCount64()<end);
+  // Keep the fixture's service alive across editor construction and client replacement.
+  CHECK(probe->status().phase==ClientPhase::ready);CHECK(!probe->session().isNull());CHECK(probe->peer().processId==GetCurrentProcessId()&&probe->peer().creationTime==creation());std::cout<<"STARTUP_WELCOME ready="<<(probe->status().phase==ClientPhase::ready)<<'\n';
  }
- ~Synthetic(){backend->stop=true;if(io.joinable())io.join();}
+ ~Synthetic(){backend->stop=true;probe->close();if(io.joinable())io.join();}
  ClientOptions options()const{return{{juce::File{},suffix,fixture.root},false};}
  std::vector<RuntimeJob> captured(){std::lock_guard lock(backend->mutex);return backend->jobs;}
 };

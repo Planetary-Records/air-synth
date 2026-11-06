@@ -88,18 +88,22 @@ void InstrumentProcessor::receiveEqSpectrumReply(const companion::GroupCommand&,
         // cached reply cannot resurrect an old window after a transient failure.
         (void)s.inbox->receive(aiClient.session(),reply.runtime,reply.loadRevision,{},now);
 }
-bool InstrumentProcessor::submitEqSpectrum(std::uint64_t now)
+bool InstrumentProcessor::submitEqSpectrum(std::uint64_t now,std::uint64_t before)
 {
     auto& g=*groupControl;auto& s=g.spectrum;
     if(!g.admitted||g.session!=aiClient.session()||!(aiClient.capabilities()&companion::spectrumCapability))return false;
-    if(s.withdraw){if(!submitGroup(GroupControl::Purpose::spectrumWithdraw,now))return false;s.withdraw=false;return true;}
+    if(s.withdraw){if(before==0||!submitGroup(GroupControl::Purpose::spectrumWithdraw,now))return false;s.withdraw=false;return true;}
     if(!s.owner||!s.view.enabled)return false;
     configureEqSpectrumInbox();
     // Integer milliseconds need one extra tick to guarantee >=100 real ms.
-    if(s.latest&&s.latest->sequence>s.submitted&&(s.publishTime==0||now-s.publishTime>=101)){
+    const auto never=std::numeric_limits<std::uint64_t>::max();
+    const auto publishDue=s.latest&&s.latest->sequence>s.submitted&&(s.publishTime==0||now-s.publishTime>=101)?(s.publishTime?s.publishTime+101:0):never;
+    const auto readDue=s.view.peerCount&&(s.readTime==0||now-s.readTime>=101)?(s.readTime?s.readTime+101:0):never;
+    if(std::min(publishDue,readDue)>=before)return false;
+    if(publishDue<=readDue){
         const auto sequence=s.latest->sequence;if(!submitGroup(GroupControl::Purpose::spectrumPublish,now))return false;s.submitted=sequence;s.publishTime=now;return true;
     }
-    if(s.view.peerCount&&(s.readTime==0||now-s.readTime>=101)){
+    if(readDue!=never){
         if(!submitGroup(GroupControl::Purpose::spectrumRead,now))return false;s.readTime=now;return true;
     }
     return false;

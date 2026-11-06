@@ -884,8 +884,11 @@ if(WIN32 AND RACKSYNTH_BUILD_PROBES)
     target_compile_definitions(RackSynthCompanionAccountProbeTests PRIVATE RACKSYNTH_WORKSPACE="${CMAKE_SOURCE_DIR}")
     target_link_libraries(RackSynthCompanionAccountProbeTests PRIVATE RackSynthCompanionRuntimeServer RackSynthAiGeneration RackSynthJuce shell32)
     add_dependencies(RackSynthCompanionAccountProbeTests RackSynthCompanionAccountProbeDeploy)
-    racksynth_add_test(NAME RackSynthCompanionAccountProbeTests COMMAND RackSynthCompanionAccountProbeTests $<TARGET_FILE:RackSynthCompanionAccountProbe> $<TARGET_FILE:RackSynthCompanion>)
+    racksynth_add_test(NAME RackSynthCompanionAccountProbeTests COMMAND RackSynthCompanionAccountProbeTests $<TARGET_FILE:RackSynthCompanionAccountProbe> $<TARGET_FILE:RackSynthCompanion> --without-long-brief)
     set_tests_properties(RackSynthCompanionAccountProbeTests PROPERTIES PROCESSORS ${RACKSYNTH_HEAVY_TEST_PROCESSORS})
+    # Only the long, native multi-note render observes the tight25s process
+    # deadline. Give that command its own lease; keep the other62 shareable.
+    racksynth_add_test(NAME RackSynthCompanionAccountProbeTests_long_brief EXCLUSIVE COMMAND RackSynthCompanionAccountProbeTests $<TARGET_FILE:RackSynthCompanionAccountProbe> $<TARGET_FILE:RackSynthCompanion> --long-brief-only)
 endif()
 
 # Development-only processor/editor workflow acceptance; product linkage unchanged.

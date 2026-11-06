@@ -184,12 +184,13 @@ struct Backend
 };
 struct Service
 {
- Temp temp;juce::String name=juce::Uuid().toString().removeCharacters("-");std::shared_ptr<Backend> backend=std::make_shared<Backend>();std::atomic_bool stop=false,returned=false;std::atomic_int result=-1;RuntimeServer server;std::thread io;
+ Temp temp;juce::String name=juce::Uuid().toString().removeCharacters("-");std::shared_ptr<Backend> backend=std::make_shared<Backend>();std::atomic_bool stop=false,returned=false;std::atomic_int result=-1;RuntimeServer server;std::unique_ptr<CompanionClient> probe=std::make_unique<CompanionClient>();std::thread io;
  Service():server([b=backend](const auto& j){return b->run(j);},[](const auto&){}),io([this]{const auto r=server.run(stop,name);result=int(r.status);returned=true;std::cout<<"SERVER_RETURN status="<<int(r.status)<<" retained="<<r.workerRetained<<" stop="<<stop.load()<<'\n';CHECK(!r.workerRetained);if(!stop.load()||r.status!=RuntimeStatus::ready)CHECK(false);})
  {
-  auto probe=std::make_unique<CompanionClient>();CHECK(probe->start(options()));CHECK(observe([&]{probe->poll();return probe->status().phase==ClientPhase::ready||returned.load();}));CHECK(probe->status().phase==ClientPhase::ready);CHECK(probe->peer().processId==GetCurrentProcessId()&&probe->peer().creationTime==creation());CHECK(!probe->session().isNull());std::cout<<"STARTUP_WELCOME ready="<<(probe->status().phase==ClientPhase::ready)<<" serverReturned="<<returned.load()<<'\n';probe->close();
+  // Keep the fixture's service alive while tests close and replace their editors.
+  CHECK(probe->start(options()));CHECK(observe([&]{probe->poll();return probe->status().phase==ClientPhase::ready||returned.load();}));CHECK(probe->status().phase==ClientPhase::ready);CHECK(probe->peer().processId==GetCurrentProcessId()&&probe->peer().creationTime==creation());CHECK(!probe->session().isNull());std::cout<<"STARTUP_WELCOME ready="<<(probe->status().phase==ClientPhase::ready)<<" serverReturned="<<returned.load()<<'\n';
  }
- ~Service(){stop=true;io.join();}
+ ~Service(){stop=true;probe->close();io.join();}
  ClientOptions options()const{return{{juce::File{},name,temp.root},false};}
 };
 // A processor with the AI unit on the desktop, hidden until open() shows it as AI on the session bar does; or with the

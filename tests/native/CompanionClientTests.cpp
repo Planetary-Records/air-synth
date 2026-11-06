@@ -340,7 +340,34 @@ void late_and_slow_polls()
         CHECK(p.pipe.beginWrite(resultFrame(r,p.session))==PipeStatus::ready);now+=std::chrono::milliseconds(clientOperationTimeoutMs+1);p.pump();
         ClientGenerationReply reply=ControlMessage{};CHECK(p.client.takeGeneration(reply));CHECK(std::holds_alternative<ai::GenerationResult>(reply));CHECK(observe([&]{return p.pipe.pollWrite()==PipeStatus::complete;}));}}}
 }
-unsigned threadCount(){HANDLE snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD,0);if(snapshot==INVALID_HANDLE_VALUE)return 0;THREADENTRY32 entry{};entry.dwSize=sizeof(entry);unsigned count=0;if(Thread32First(snapshot,&entry)){do{if(entry.th32OwnerProcessID==GetCurrentProcessId())++count;}while(Thread32Next(snapshot,&entry));}CloseHandle(snapshot);return count;}
+using ThreadIdentity=std::pair<DWORD,std::uint64_t>;
+std::vector<ThreadIdentity> applicationThreads()
+{
+    using Query=LONG(WINAPI*)(HANDLE,ULONG,PVOID,ULONG,PULONG);
+    const auto system=GetModuleHandleW(L"ntdll.dll");
+    const auto query=reinterpret_cast<Query>(GetProcAddress(system,"NtQueryInformationThread"));
+    CHECK(system&&query);std::vector<ThreadIdentity> result;
+    HANDLE snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD,0);CHECK(snapshot!=INVALID_HANDLE_VALUE);if(snapshot==INVALID_HANDLE_VALUE)return result;
+    THREADENTRY32 entry{};entry.dwSize=sizeof(entry);CHECK(Thread32First(snapshot,&entry));
+    do{if(entry.th32OwnerProcessID!=GetCurrentProcessId())continue;
+        HANDLE h=OpenThread(THREAD_QUERY_INFORMATION,FALSE,entry.th32ThreadID);CHECK(h);if(!h)continue;
+        FILETIME created{},exited{},kernel{},user{};void* start=nullptr;HMODULE module=nullptr;
+        const bool known=GetThreadTimes(h,&created,&exited,&kernel,&user)&&query&&query(h,9 /* ThreadQuerySetWin32StartAddress */,&start,sizeof(start),nullptr)==0&&start
+            &&GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCWSTR>(start),&module);
+        CHECK(known);CloseHandle(h);
+        // Windows pool workers may retire or grow independently of the clients.
+        if(known&&module!=system)result.emplace_back(entry.th32ThreadID,(std::uint64_t(created.dwHighDateTime)<<32)|created.dwLowDateTime);
+    }while(Thread32Next(snapshot,&entry));CloseHandle(snapshot);std::sort(result.begin(),result.end());return result;
+}
+void thread_lifetime_observer_controls()
+{
+    const auto baseline=applicationThreads();CHECK(!baseline.empty());
+    auto wait=[](std::stop_token stop){while(!stop.stop_requested())Sleep(1);};
+    std::jthread first(wait);const auto before=applicationThreads();CHECK(before.size()==baseline.size()+1);
+    std::jthread replacement(wait);first.request_stop();first.join();const auto after=applicationThreads();
+    CHECK(after.size()==before.size());CHECK(after!=before); // Equal counts must not hide a replacement/retained application thread.
+    replacement.request_stop();replacement.join();CHECK(applicationThreads()==baseline);
+}
 void catalog_reply_and_materialize_capture()
 {
     begin(__func__);Pair p;if(!p.open())return;auto r=request(p.client,1);
@@ -378,9 +405,9 @@ void catalog_reply_and_materialize_capture()
 }
 void lifetime_capacity_and_deployment(const juce::File& helper,const juce::File& dll,const juce::File& directory)
 {
-    begin(__func__);static_assert(!std::is_copy_constructible_v<CompanionClient> && !std::is_copy_assignable_v<CompanionClient> && !std::is_move_constructible_v<CompanionClient> && !std::is_move_assignable_v<CompanionClient>);
+    begin(__func__);thread_lifetime_observer_controls();static_assert(!std::is_copy_constructible_v<CompanionClient> && !std::is_copy_assignable_v<CompanionClient> && !std::is_move_constructible_v<CompanionClient> && !std::is_move_assignable_v<CompanionClient>);
     {Pair p;if(p.open()){auto r=request(p.client,1);CHECK(p.accepted(r));auto f=resultFrame(r,p.session,true);CHECK(f.payload.getSize()<=maximumResultPayloadBytes);const auto timer=std::chrono::steady_clock::now();CHECK(p.send(f));ClientGenerationReply out;CHECK(take(p.client,out));const auto ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-timer).count();CHECK(std::holds_alternative<ai::GenerationResult>(out));if(const auto* g=std::get_if<ai::GenerationResult>(&out)){const auto expected=result(r,true);CHECK(g->audio.left.size()==576000 && g->audio.right.size()==576000);CHECK(std::memcmp(g->audio.left.data(),expected.audio.left.data(),576000*sizeof(float))==0);CHECK(std::memcmp(g->audio.right.data(),expected.audio.right.data(),576000*sizeof(float))==0);CHECK(g->candidate==expected.candidate && g->tag==r.tag);}std::cout<<"maximum_payload_bytes="<<f.payload.getSize()<<" matching_transfer_poll_decode_ms="<<ms<<" logical_processors="<<std::thread::hardware_concurrency()<<" test_image="<<juce::File::getSpecialLocation(juce::File::currentExecutableFile).getFullPathName()<<std::endl;}}
-    {Service service;Temp t;CompanionClient other;if(ready(other,options(t,service.name))){const auto threads=threadCount();CHECK(threads>0);for(std::uint64_t i=1;i<=24;++i){auto c=std::make_unique<CompanionClient>();if(ready(*c,options(t,service.name))){CHECK(c->generate(request(*c,i)));CHECK(airack::companion::detail::CompanionClientTestAccess::hasStartedWrite(*c));c.reset();CHECK(other.status().phase==ClientPhase::ready);}}CHECK(threadCount()==threads);CHECK(other.account({AccountAction::status,{}}));AccountReply q;CHECK(take(other,q));CHECK(airack::companion::detail::PipeTestAccess::retainedOwners()==0);}}
+    {Service service;Temp t;CompanionClient other;if(ready(other,options(t,service.name))){const auto threads=applicationThreads();CHECK(!threads.empty());for(std::uint64_t i=1;i<=24;++i){auto c=std::make_unique<CompanionClient>();if(ready(*c,options(t,service.name))){CHECK(c->generate(request(*c,i)));CHECK(airack::companion::detail::CompanionClientTestAccess::hasStartedWrite(*c));c.reset();CHECK(other.status().phase==ClientPhase::ready);}}CHECK(applicationThreads()==threads);CHECK(other.account({AccountAction::status,{}}));AccountReply q;CHECK(take(other,q));CHECK(airack::companion::detail::PipeTestAccess::retainedOwners()==0);}}
 
     {Temp t;const auto name=suffix();const auto previous=currentUserPipeName(name).replace("AIRackSynth-v9-","AIRackSynth-v8-");CHECK(previous!=currentUserPipeName(name));HANDLE older=CreateNamedPipeW(previous.toWideCharPointer(),PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,PIPE_TYPE_BYTE|PIPE_READMODE_BYTE|PIPE_WAIT,1,65536,65536,0,nullptr);CHECK(older!=INVALID_HANDLE_VALUE);if(older!=INVALID_HANDLE_VALUE){OVERLAPPED pending{};pending.hEvent=CreateEventW(nullptr,TRUE,FALSE,nullptr);CHECK(pending.hEvent);const bool connected=ConnectNamedPipe(older,&pending)!=FALSE;CHECK(!connected&&GetLastError()==ERROR_IO_PENDING);{CompanionClient current;Child child;const bool matched=ready(current,options(t,name,helper,true));CHECK(matched);if(matched){CHECK(child.duplicate(current));CHECK(currentUserPipeName(name).contains("AIRackSynth-v9-"));CHECK(WaitForSingleObject(pending.hEvent,0)==WAIT_TIMEOUT);CHECK(GetNamedPipeInfo(older,nullptr,nullptr,nullptr,nullptr)!=FALSE);current.close();CHECK(child.alive());}}CancelIoEx(older,&pending);DWORD retired=0;CHECK(GetOverlappedResult(older,&pending,&retired,TRUE)==FALSE&&GetLastError()==ERROR_OPERATION_ABORTED);CHECK(GetNamedPipeInfo(older,nullptr,nullptr,nullptr,nullptr)!=FALSE);CloseHandle(older);if(pending.hEvent)CloseHandle(pending.hEvent);}std::cout<<"v9 real matched helper launch; synthetic v8 namespace remained open/unconnected; no existing helper terminated\n";}
     const auto deployed=directory.getChildFile(companionExecutableName);CHECK(deployed.existsAsFile());if(deployed.existsAsFile()){juce::MemoryBlock a,b;CHECK(helper.loadFileAsData(a));CHECK(deployed.loadFileAsData(b));CHECK(a==b);}
