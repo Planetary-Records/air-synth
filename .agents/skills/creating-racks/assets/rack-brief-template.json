@@ -1,0 +1,135 @@
+{
+  "format": "ai-rack-ui-brief",
+  "version": 6,
+  "status": {
+    "wireframes": "not_drawn | closed and open drawn, checked and shown to the user on <date>",
+    "concept_closed": "not_generated | candidates shown | approved by the user on <date>: \"<quote>\"",
+    "concept_open": "not_generated | approved by the user on <date>: \"<quote>\"",
+    "asset_sheets": "not_generated | shared sheets generated, state coverage and alignment checked on <date>",
+    "skin": "not_assembled | assembled from clean plates and shared asset sheets, fidelity <face mean> / <reveal mean>",
+    "native": "not_started | in the plugin on <branch>",
+    "visual_acceptance": "not_recorded | accepted by the user on <date>",
+    "listening_acceptance": "not_needed (sound unchanged) | not_run | accepted on <date>"
+  },
+  "rack": {
+    "slug": "<kebab-case>",
+    "design_id": "<fixed UUID, new>",
+    "name": "<at most 64 characters>",
+    "role": "synth | fx",
+    "intent": "<at most 512 characters: what it sounds like and what to shape with it>",
+    "units": [
+      { "id": 0, "module": "<NativeModule name>", "recipe": { "<local key>": "<physical value>" } }
+    ],
+    "panel_layout": "instrumentSections | performanceControls | orderedFxStrip",
+    "panel_sections": [ "<1 to 4 section names>" ],
+    "reference_product": "none | <product>, see docs/verification/<date>-<product>-investigation.json"
+  },
+  "source_files": [ "src/racks/RackExamples.cpp", "src/racks/RackDesign.cpp", "src/state/ParameterRegistry.cpp" ],
+  "maker": {
+    "name": "<fictional maker> (fictional)",
+    "era_and_origin": "<decade, country, kind of equipment maker>",
+    "product_line": "<RACK NAME> <model line engraved on the face>"
+  },
+  "visual_identity": {
+    "theme": "analog | digital | deliberately specified hybrid",
+    "interaction_vocabulary": "<controls, readouts and reveal mechanisms that fit the theme, maker and era; no web-style accordion on analog hardware>",
+    "materials": "<panel material and finish, legend method, knob family, switches, lamp, screws, maker's plate>",
+    "palette": { "panel": "#000000", "legend": "#000000", "knob": "#000000", "accent": "#000000" },
+    "typography": "<typeface family and how legends are applied>",
+    "readout_strategy": "printed scales in real units | maker scales with the host's touch readout | a maker display showing <what>",
+    "functional_hierarchy": "<what reads first, what is secondary, what is tool-like>",
+    "layout_rationale": "<why the sections sit in this order>",
+    "distinct_from": {
+      "thread_press": "<how it differs: material, colour temperature, knob family, typography, readout, height, reveal>",
+      "ember_reed": "<same>",
+      "glass_current": "<same>",
+      "house": "<how it differs from the graphite AI Rack Synth unit>",
+      "reference_product": "<how it differs from the reference product's own interface, or none>"
+    }
+  },
+  "outer_contract": {
+    "closed_height": "<N>U, fixed by the wireframe and checked against the concept's measured proportion",
+    "open_height": "<N>U (recess: unchanged)",
+    "folded": "the host's fallback strip | the maker's own 1U strip, drawn in the concept",
+    "host_parts": "rails, U numbers, selection light, fold triangle, OPERATIONS, AI: KEEP tape, lock dots, the AI's marks: drawn by the host, not the faceplate"
+  },
+  "focused_controls": [
+    {
+      "label": "<engraved label>",
+      "unit_id": 0,
+      "key": "<local key>",
+      "focus_widget": "rotary | verticalSlider | choice | toggle (what the house plate would draw)",
+      "drawn_as": "<the maker's control>",
+      "registry_range": [0, 1],
+      "useful_range": [0, 1],
+      "printed_scale": [ "<each printed tick, in the parameter's units>" ],
+      "display_unit": "<dB, ms, Hz, % or empty>",
+      "response": "linear | logarithmic",
+      "drawn_value": "<the recipe's value, where the pointer sits in the concept>"
+    }
+  ],
+  "face_extras": [
+    { "label": "IN / OUT", "unit_id": 0, "key": "bypassed", "drawn_as": "<lever>", "inverted": true }
+  ],
+  "readbacks": [
+    { "label": "<lamp or LED>", "unit_id": 0, "key": "enabled | bypassed", "lit_when": "<value>" }
+  ],
+  "reveal": {
+    "kind": "recess | drawer | door",
+    "mechanism": "<what moves and how>",
+    "functional_reason": "<why this maker hides these controls>",
+    "opener": "<affordance and its legend; at least 3:1 contrast>",
+    "units_added": 0,
+    "groups": [
+      {
+        "group": "<engraved group title>",
+        "controls": [
+          { "label": "<label>", "unit_id": 0, "key": "<local key>", "drawn_as": "<control>", "printed_scale": [ "<ticks>" ], "drawn_value": "<value>" }
+        ]
+      }
+    ]
+  },
+  "all_controls_panel_only": [ "<unit>:<key> for every parameter of the rack's units that neither the face nor the reveal draws" ],
+  "never_drawn": [ "global.* parameters", "meters, scopes, spectra or curves without telemetry", "names or legends with no parameter behind them" ],
+  "production_artwork": {
+    "clean_plates": [ "<slug>/skin-sources/plate-face.png", "<slug>/skin-sources/plate-reveal.png" ],
+    "asset_map": "<slug>/skin-sources/asset-map.json",
+    "shared_sheets": [
+      {
+        "file": "<slug>/skin-sources/assets-01.png",
+        "grid_source": "<slug>/skin-sources/assets-01-grid.svg",
+        "grid_reference": "<slug>/skin-sources/assets-01-grid.png",
+        "canvas_px": [0, 0],
+        "rows": 0,
+        "columns": 0,
+        "cell_px": [0, 0],
+        "padding_px": 0,
+        "transparent_background": true,
+        "assets": [
+          {
+            "asset_id": "<visual family and size, shared by matching instances>",
+            "used_by": [ "<control instance ID>" ],
+            "states": [ "<required state or frame in playback order>" ],
+            "cells": [
+              { "state": "<state or frame>", "rect_px": [0, 0, 0, 0], "pivot_px": [0, 0], "value_or_angle": "<physical value, angle or action state>" }
+            ],
+            "native_motion": "none | rotate separate rotor | translate fader cap | mapped frame sequence"
+          }
+        ],
+        "split_reason": "first shared sheet | <why another sheet is needed for inventory, state count or resolution>"
+      }
+    ]
+  },
+  "files": {
+    "wireframe_closed_source": "<slug>/wireframe-closed.svg",
+    "wireframe_closed": "<slug>/wireframe-closed.png",
+    "wireframe_open_source": "<slug>/wireframe-open.svg",
+    "wireframe_open": "<slug>/wireframe-open.png",
+    "prompt_closed": "<slug>/prompt-closed.txt",
+    "prompt_open": "<slug>/prompt-open.txt",
+    "closed": "<slug>/closed.png",
+    "open": "<slug>/open.png",
+    "skin_script": "<slug>/skin/<slug_underscored>_skin.py",
+    "installed_skin": "resources/maker-skins/<slug>/"
+  }
+}
