@@ -66,6 +66,9 @@ public:
     explicit InstrumentProcessor(std::shared_ptr<RackLibraryRuntime>);
     explicit InstrumentProcessor(const companion::ClientOptions&);
     InstrumentProcessor(const companion::ClientOptions&,std::shared_ptr<RackLibraryRuntime>);
+    // Developer preview: disable service startup before construction and keep the default sound folder local.
+    struct RackPreviewMode {juce::File workspace;};
+    InstrumentProcessor(const companion::ClientOptions&,std::shared_ptr<RackLibraryRuntime>,RackPreviewMode);
     std::shared_ptr<RackLibraryRuntime> rackLibraryRuntime() const {return libraryRuntime;}
     // Native callers, like VST3 hosts, serialize destruction on the message/UI
     // thread and stop concurrent calls before teardown begins.
@@ -232,6 +235,7 @@ public:
     const juce::String getProgramName(int) override { return "Default"; }
     void changeProgramName(int, const juce::String&) override {}
 private:
+    InstrumentProcessor(std::shared_ptr<RackLibraryRuntime>,RackPreviewMode);
     std::shared_ptr<RackLibraryRuntime> libraryRuntime;
     bool sessionTracked = false;
     RackLibrarySkinPreparationPtr makerPreparation;

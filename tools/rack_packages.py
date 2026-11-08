@@ -285,6 +285,154 @@ def build_package(source: Path, manifest: dict, output: Path) -> Path:
     return target
 
 
+def _plain_read(path: Path, maximum: int, label: str) -> bytes:
+    _require(all(not p.is_symlink() and not p.is_junction() for p in (path, *path.parents)), "Linked source path is not allowed")
+    return _bounded_bytes(path, maximum, label)
+
+
+def prepare_manifest(source: Path) -> dict:
+    """Refresh declared inputs in memory; writing the authoring manifest is an explicit CLI action."""
+    source = source.absolute()
+    manifest = _read_json(_plain_read(source / "package.json", MANIFEST_BYTES, "Manifest"))
+    _validate_manifest(manifest)
+    for entry in manifest["files"]:
+        data = _plain_read(source / entry["path"], LIMITS[entry["kind"]], "Package file")
+        entry.update(bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
+    recipe = _read_json(_plain_read(source / manifest["design"], DESIGN_BYTES, "Recipe"))
+    for field, key in (("design", "id"), ("revision", "revision"), ("name", "name"), ("role", "role")):
+        manifest["metadata"][field] = recipe[key]
+    manifest["metadata"]["canonical_sha256"] = next(f["sha256"] for f in manifest["files"] if f["path"] == manifest["design"])
+    _validate_manifest(manifest)
+    # Reuse every payload/PNG/recipe capability check before returning or rewriting anything.
+    with tempfile.TemporaryDirectory() as temporary:
+        build_package(source, manifest, Path(temporary))
+    return manifest
+
+
+def export_sources(source: Path, output: Path, previous: Path | None = None) -> dict:
+    """Stage only reviewed authoring inputs, independent of the historical initial-release fixture."""
+    _require(output.is_absolute(), "Source output must be absolute")
+    _require(not output.exists(), "Source output must be a new empty directory")
+    _require(all(not p.is_symlink() and not p.is_junction() for p in (output, *output.parents)), "Linked output path is not allowed")
+    sources = sorted(source.absolute().glob("*/package.json"))
+    _require(0 < len(sources) <= 512, "Source rack count limit")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=output.parent) as temporary:
+        stage, index = Path(temporary) / "source", dict(schema=1, releases=[])
+        stage.mkdir()
+        docs = ROOT / "packaging/rack-library-source"
+        if not docs.is_dir():
+            docs = ROOT
+        def write(path, data):
+            target = stage / path
+            _require(not str(path).startswith("releases/") or not target.exists() or target.read_bytes() == data,
+                     "Immutable source release differs")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+        if previous is not None:
+            # A retained reviewed export, not an arbitrary checkout or ignored workspace.
+            prior_files = {}
+            for file in sorted(previous.rglob("*")):
+                _require(not file.is_symlink() and not file.is_junction(), "Linked previous source path")
+                path = file.relative_to(previous).as_posix()
+                _require(public_library_path(path, "tree" if file.is_dir() else "blob"), "Unlisted previous source path")
+                if file.is_file() and path != "SOURCE-CHECKSUMS.sha256":
+                    data = _plain_read(file, ARCHIVE_BYTES, "Previous source file")
+                    prior_files[path] = data
+            inventory = "".join(hashlib.sha256(data).hexdigest() + "  " + path + "\n" for path, data in sorted(prior_files.items()))
+            _require(_plain_read(previous / "SOURCE-CHECKSUMS.sha256", CATALOG_BYTES, "Previous inventory") == inventory.encode("utf-8"),
+                     "Previous source inventory mismatch")
+            for path, data in prior_files.items():
+                if not path.startswith("racks/"):
+                    write(path, data)
+            index = _read_json(prior_files["SOURCE-INDEX.json"])
+            _require(_closed(index, "schema releases") and index["schema"] == 1 and isinstance(index["releases"], list)
+                     and len(index["releases"]) <= 32768, "Invalid previous source index")
+            identities = set()
+            for entry in index["releases"]:
+                _require(_closed(entry, "id version sha256 path") and _token(entry["id"],64) and _version(entry["version"])
+                         and _hash(entry["sha256"]) and entry["path"] == "releases/"+entry["id"]+"/"+entry["version"]+"/"+entry["sha256"],
+                         "Invalid previous source identity")
+                key = (entry["id"], entry["version"])
+                _require(key not in identities and entry["path"] + "/package.json" in prior_files, "Duplicate or missing previous source release")
+                identities.add(key)
+        for name in ("README.md", "CONTRIBUTING.md", ".gitignore", ".gitattributes"):
+            data = _plain_read(docs / name, SKIN_BYTES, "Contributor document")
+            _clean_public_json(data.decode("utf-8"))
+            write(name, data)
+        write("LICENSE", _plain_read(ROOT / "LICENSE", SKIN_BYTES, "License"))
+        write("tools/rack_packages.py", _plain_read(Path(__file__), SKIN_BYTES, "Packaging tool"))
+        write("tests/test_rack_authoring.py", _plain_read(ROOT / "tests/test_rack_authoring.py", SKIN_BYTES, "Contributor tests"))
+        write("racks/tags.json", _plain_read(ROOT / "racks/tags.json", SKIN_BYTES, "Tag vocabulary"))
+        seen = set()
+        for file in sources:
+            rack = file.parent
+            manifest = _read_json(_plain_read(file, MANIFEST_BYTES, "Manifest"))
+            _validate_manifest(manifest)
+            _require(rack.name == manifest["id"] and rack.name not in seen, "Source folder must match its unique rack ID")
+            seen.add(rack.name)
+            with tempfile.TemporaryDirectory() as archives:
+                archive = build_package(rack, manifest, Path(archives))
+                digest = hashlib.sha256(archive.read_bytes()).hexdigest()
+                # The archive is the validated snapshot. An editor may already have changed the authoring files.
+                with zipfile.ZipFile(archive) as package:
+                    payloads = {entry["path"]: package.read(entry["path"]) for entry in manifest["files"]}
+                    payloads["package.json"] = package.read("package.json")
+            path = "releases/" + rack.name + "/" + manifest["version"] + "/" + digest
+            prior = next((row for row in index["releases"] if row["id"] == rack.name and row["version"] == manifest["version"]), None)
+            _require(prior is None or prior["sha256"] == digest, "Published package ID/version differs; increase the version")
+            if prior is None:
+                index["releases"].append(dict(id=rack.name, version=manifest["version"], sha256=digest, path=path))
+            readme = _plain_read(rack / "README.md", SKIN_BYTES, "Rack guide")
+            _clean_public_json(readme.decode("utf-8"))
+            payloads["README.md"] = readme
+            for name, data in payloads.items():
+                write("racks/" + rack.name + "/" + name, data)
+                write(path + "/" + name, data)
+        index["releases"].sort(key=lambda row: (row["id"], _version(row["version"])))
+        write("SOURCE-INDEX.json", _json_bytes(index))
+        inventory = "".join(hashlib.sha256(file.read_bytes()).hexdigest() + "  " + file.relative_to(stage).as_posix() + "\n"
+                            for file in sorted(stage.rglob("*"), key=lambda p: p.relative_to(stage).as_posix())
+                            if file.is_file() and file.name != "SOURCE-CHECKSUMS.sha256")
+        write("SOURCE-CHECKSUMS.sha256", inventory.encode("utf-8"))
+        os.rename(stage, output)
+    return index
+
+
+def public_library_path(path: str, kind: str) -> bool:
+    """Public data/source paths only; never workflows, native binaries or development maps."""
+    if kind not in ("blob", "tree"):
+        return False
+    roots = {"README.md", "CONTRIBUTING.md", ".gitignore", ".gitattributes", "LICENSE", "NOTICES.txt", "catalog.json", "tags.json",
+             "SOURCE-INDEX.json", "SOURCE-CHECKSUMS.sha256", "tools/rack_packages.py", "tests/test_rack_authoring.py", "racks/tags.json"}
+    if path in roots:
+        return kind == "blob"
+    if kind == "tree" and path in {"tools", "tests", "racks", "releases", "notices"}:
+        return True
+    parts = path.split("/")
+    if parts[0] == "notices":
+        return _path(path) and (kind == "tree" or PurePosixPath(path).suffix in {".txt", ".md"})
+    if len(parts) < 2 or parts[0] not in {"racks", "releases"} or not _token(parts[1], 64):
+        return False
+    if len(parts) == 2:
+        return kind == "tree"
+    start = 2
+    if parts[0] == "releases":
+        if not _version(parts[2]):
+            return False
+        if len(parts) == 3:
+            return kind == "tree"
+        if not _hash(parts[3]):
+            return False
+        if len(parts) == 4:
+            return kind == "tree"
+        start = 4
+    relative = "/".join(parts[start:])
+    if relative in {"package.json", "README.md"}:
+        return kind == "blob"
+    return _path(relative) and (kind == "tree" or PurePosixPath(relative).suffix in {extension for values in EXTENSIONS.values() for extension in values})
+
+
 def author_sources(root: Path, captures: Path):
     """One development authoring pass; frozen inputs and private source maps are never rewritten."""
     frozen = _read_json((root / "tests/fixtures/rack-library/v1/manifest.json").read_bytes())
@@ -564,13 +712,10 @@ class GitHubReleaseClient:
         head = self._head()
         commit = self._api(self.endpoint + "/git/commits/" + head)
         tree = self._api(self.endpoint + "/git/trees/" + commit["tree"]["sha"] + "?recursive=1")
-        allowed = {"README.md", "LICENSE", "NOTICES.txt", "catalog.json", "tags.json"}
         if tree.get("truncated") is not False or any(
-                item["path"] not in allowed and not (item["path"] == "notices" and item["type"] == "tree")
-                and not (item["type"] == "blob" and item["path"].startswith("notices/")
-                         and _path(item["path"]) and PurePosixPath(item["path"]).suffix in {".md", ".txt"})
+                not public_library_path(item["path"], item["type"])
                 for item in tree["tree"]):
-            raise PublicationError("Public repository contains files outside data/notices/readme allowlist")
+            raise PublicationError("Public repository contains files outside data/source/notices allowlist")
         return head, commit["tree"]["sha"], tree["tree"]
 
     def _load_assets(self):
@@ -692,8 +837,58 @@ def main():
     publish.add_argument("--input", type=Path, required=True)
     publish.add_argument("--repository", required=True)
     publish.add_argument("--dry-run", action="store_true", help="Verify and print the exact public allowlist without credentials or network")
+    prepare = commands.add_parser("prepare", help="Validate edited inputs and explicitly refresh package.json hashes")
+    prepare.add_argument("--source", type=Path, required=True)
+    single = commands.add_parser("build-rack", help="Validate and package one editable rack folder")
+    single.add_argument("--source", type=Path, required=True)
+    single.add_argument("--output", type=Path, required=True)
+    export = commands.add_parser("export-source", help="Prepare an allowlisted public source tree; never uploads")
+    export.add_argument("--source", type=Path, required=True)
+    export.add_argument("--output", type=Path, required=True)
+    export.add_argument("--previous", type=Path, help="Retained reviewed source export; preserve all immutable prior releases")
+    preview = commands.add_parser("preview", help="Build a rack and open its actual native editor in a fresh private workspace")
+    preview.add_argument("--source", type=Path, required=True)
+    preview.add_argument("--workspace", type=Path, required=True)
+    preview.add_argument("--executable", type=Path, required=True)
+    preview.add_argument("--check", action="store_true", help="Capture the editor and check native render/recall, then exit")
     args = parser.parse_args()
     try:
+        if args.command == "preview":
+            _require(args.workspace.is_absolute() and not args.workspace.exists(), "Preview workspace must be a new absolute directory")
+            _require(all(not p.is_symlink() and not p.is_junction() for p in (args.workspace, *args.workspace.parents)), "Linked preview workspace is not allowed")
+            _require(args.executable.is_absolute() and args.executable.is_file(), "Preview executable must be an existing absolute path")
+            # Keep package staging separate: the native process owns creating its new workspace.
+            with tempfile.TemporaryDirectory() as temporary:
+                archive = build_package(args.source, prepare_manifest(args.source), Path(temporary))
+                command = [str(args.executable), "--archive", str(archive), "--workspace", str(args.workspace)]
+                if args.check:
+                    command.append("--check")
+                result = subprocess.run(command, check=False)
+                _require(result.returncode == 0, "Native preview failed (exit " + str(result.returncode) + "); retain the workspace for diagnosis")
+            return
+        if args.command == "prepare":
+            manifest = prepare_manifest(args.source)
+            # Replace only after validation; retain the previous file if validation failed.
+            target = args.source / "package.json"
+            with tempfile.NamedTemporaryFile(dir=args.source, delete=False) as stream:
+                temporary = Path(stream.name)
+                stream.write(_validate_manifest(manifest))
+            try:
+                os.replace(temporary, target)
+            finally:
+                temporary.unlink(missing_ok=True)
+            print("Prepared " + manifest["id"] + " " + manifest["version"])
+            return
+        if args.command == "build-rack":
+            _require(args.output.is_absolute(), "Package output must be absolute")
+            archive = build_package(args.source, prepare_manifest(args.source), args.output)
+            print(str(archive))
+            print("SHA256 " + hashlib.sha256(archive.read_bytes()).hexdigest())
+            return
+        if args.command == "export-source":
+            index = export_sources(args.source, args.output, args.previous)
+            print(str(len(index["releases"])) + " source folders exported; NOT PUBLISHED")
+            return
         if args.command == "publish":
             plan = publication_plan(args.input, args.repository)
             if args.dry_run:

@@ -16,6 +16,10 @@
 #include <windows.h>
 #include <winternl.h>
 namespace airack {
+juce::String rackLibrarySourceUrl(const RackPackageRef& ref){
+    if(!validRackPackageRef(ref))return {};
+    return "https://github.com/Planetary-Records/air-rack-library/tree/main/releases/"+ref.id+"/"+ref.version+"/"+ref.sha256;
+}
 #if AIRACK_LIBRARY_CACHE_TESTS
 namespace {std::mutex cacheTestMutex;std::function<void(const juce::File&,const juce::String&)> cacheTestHook;
 std::function<void(std::vector<RackInstance>,std::optional<RackInstance>,std::vector<RackInstance>,bool,bool)> skinTestHook;

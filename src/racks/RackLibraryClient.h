@@ -86,6 +86,9 @@ inline constexpr auto rackLibraryOwner="Planetary-Records";
 inline constexpr auto rackLibraryRepository="air-rack-library";
 inline constexpr auto rackLibraryCatalogUrl="https://raw.githubusercontent.com/Planetary-Records/air-rack-library/main/catalog.json";
 inline constexpr auto rackLibraryCountsUrl="https://api.github.com/repos/Planetary-Records/air-rack-library/releases?per_page=100&page=1";
+inline constexpr auto rackLibraryContributeUrl="https://github.com/Planetary-Records/air-rack-library/blob/main/CONTRIBUTING.md";
+// The archive hash pins source independently of the current editable rack folder.
+juce::String rackLibrarySourceUrl(const RackPackageRef&);
 bool validRackLibraryUrl(const juce::String&,bool redirect=false);
 RackLibraryTransport rackLibraryHttpWindows();
 }

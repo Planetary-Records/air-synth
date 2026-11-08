@@ -51,6 +51,7 @@ struct LibraryUnit::Browser final : juce::ListBoxModel {
     juce::String message,reviewText;
     KeyFocus<juce::TextButton> all{"ALL"},installed{"INSTALLED"},updates{"UPDATES"},filter{"FILTER"},refreshKey{"REFRESH"},back{"BACK"},cancelKey{"CANCEL"},clear{"CLEAR FILTERS"};
     KeyFocus<juce::TextButton> add{"ADD"},install{"INSTALL"},remove{"UNINSTALL"},folder{"OPEN LIBRARY FOLDER"},reuse{"REUSE: OFF"};
+    KeyFocus<juce::HyperlinkButton> source{"VIEW SOURCE",juce::URL{}},contribute{"CONTRIBUTE",juce::URL(rackLibraryContributeUrl)};
     juce::TextEditor search,allocation,description,details;
     juce::ComboBox role,destination,releases;
     std::vector<RackPackageRef> managedReleases;
@@ -72,6 +73,9 @@ struct LibraryUnit::Browser final : juce::ListBoxModel {
         owner.setLookAndFeel(&look);owner.setWantsKeyboardFocus(true);owner.setFocusContainerType(juce::Component::FocusContainerType::focusContainer);identify(owner,"library.panel","AIR rack library");
         const auto key=[&](juce::Button& b,const char* id){identify(b,id,b.getButtonText());owner.addAndMakeVisible(b);};
         key(all,"library.all");key(installed,"library.installed");key(updates,"library.updates");key(filter,"library.filter");key(refreshKey,"library.refresh");key(back,"library.back");key(cancelKey,"library.cancel");key(clear,"library.clear");key(add,"library.apply");key(install,"library.install");key(remove,"library.uninstall");key(folder,"library.folder");key(reuse,"library.reuse");
+        key(source,"library.source");key(contribute,"library.contribute");
+        for(auto* link:{&source,&contribute}){link->setFont(mono.fontForCap(18),false);link->setColour(juce::HyperlinkButton::textColourId,juce::Colour(0xffc8d3cb));link->setWantsKeyboardFocus(true);}
+        source.setTooltip("Open this exact package's readable recipe, bindings and skin in your browser. Source must have been published.");contribute.setTooltip("Open the shared rack contribution guide in your browser.");
         search.setTextToShowWhenEmpty("Name, maker, purpose or tags",juce::Colour(0xff81918a));identify(search,"library.search","Search rack library");owner.addAndMakeVisible(search);
         identify(role,"library.role","Rack type");role.addItem("TYPE: ALL",1);role.addItem("TYPE: SYNTH",2);role.addItem("TYPE: FX",3);role.setSelectedId(1);owner.addAndMakeVisible(role);
         identify(allocation,"library.allocation","Exact banks: local unit:physical bank, blank for automatic");allocation.setTextToShowWhenEmpty("AUTO BANKS (unit:bank)",juce::Colour(0xff81918a));owner.addAndMakeVisible(allocation);
@@ -205,6 +209,8 @@ struct LibraryUnit::Browser final : juce::ListBoxModel {
     }
     void updateDetail(){
         const auto* row=chosen();if(!row)return;updateManagedReleases(*row);const auto target=removalTarget();const auto* remote=exactRemote(*row);const auto* newer=latest(*row);
+        const auto sourceUrl=row->package?rackLibrarySourceUrl(*row->package):juce::String{};
+        source.setURL(juce::URL(sourceUrl));source.setEnabled(sourceUrl.isNotEmpty());source.setVisible(state.detailOpen&&!filterOpen&&sourceUrl.isNotEmpty());
         const auto installedVersion=row->builtIn?juce::String("Included with AIR"):row->installed&&row->package?row->package->version:localFor(*row)&&row->package?juce::String("Not active; exact artwork unverified"):juce::String("Not installed");
         const auto line=[](const char* label,const juce::String& value){return juce::String(label).paddedRight(' ',17)+value+"\n";};
         auto metadata=line("TYPE:",row->metadata.role==RackRole::synth?"SYNTH":"FX")+line("TAGS:",tagText(*row))+line("DOWNLOADS:",downloads(*row))
@@ -272,8 +278,10 @@ struct LibraryUnit::Browser final : juce::ListBoxModel {
         tagOverflowCue.setVisible(tagOverflow);tagOverflowCue.setBounds(14,y,filterBody.getWidth()-28,140);if(tagOverflow)filterBody.setSize(filterBody.getWidth(),y+156);
         clear.setBounds(footer.getX(),footer.getY(),150,82);clear.setVisible(!state.detailOpen);folder.setBounds(footer.getX()+160,footer.getY(),210,82);folder.setVisible(!state.detailOpen);
         for(auto* c:std::initializer_list<juce::Component*>{&description,&details,&destination,&allocation,&reuse,&add})c->setVisible(state.detailOpen&&!filterOpen);
+        source.setVisible(state.detailOpen&&!filterOpen);contribute.setVisible(state.detailOpen&&!filterOpen);
         if(state.detailOpen){
             preview=content.withHeight(std::min(240,content.getHeight()/2));auto information=content.withTrimmedTop(preview.getHeight()+8);information.removeFromTop(42);
+            source.setBounds(content.getRight()-424,preview.getBottom()+8,210,34);contribute.setBounds(content.getRight()-210,preview.getBottom()+8,210,34);
             releases.setBounds(content.getX()+8,preview.getBottom()+48,content.getWidth()-16,34);information.removeFromTop(managedReleases.empty()?0:40);description.setBounds(information.removeFromLeft(information.getWidth()/2).withTrimmedRight(8));details.setBounds(information);
             auto actions=footer;destination.setBounds(actions.removeFromLeft(320).withHeight(36));allocation.setBounds(actions.removeFromLeft(narrow?actions.getWidth():260).reduced(8,0).withHeight(36));
             if(narrow)actions=footer.withTrimmedTop(82);
@@ -284,7 +292,7 @@ struct LibraryUnit::Browser final : juce::ListBoxModel {
     }
     void paint(juce::Graphics& g){look.drawFace(g,owner.getLocalBounds().toFloat());g.setColour(juce::Colour(0xff161a1c));g.fillRect(0,0,26,owner.getHeight());g.fillRect(owner.getWidth()-26,0,26,owner.getHeight());g.setColour(juce::Colour(0xff8c9291));for(const auto x:{13,owner.getWidth()-13})for(const auto y:{25,owner.getHeight()-25}){g.fillEllipse(float(x-6),float(y-6),12,12);g.setColour(juce::Colour(0xff141719));g.drawLine(float(x-3),float(y),float(x+3),float(y),2);g.setColour(juce::Colour(0xff8c9291));}
         g.setColour(juce::Colour(0xffe0e2df));g.setFont(juce::Font(juce::FontOptions(model.face).withHeight(34)));g.drawText("LIBRARY",44,20,170,40,juce::Justification::centredLeft);g.setFont(juce::Font(juce::FontOptions(model.face).withHeight(18)));g.drawText("RACK DESIGNS",44,58,170,24,juce::Justification::centredLeft);g.setFont(caps.fontForCap(18));g.drawText("SEARCH",search.getX(),search.getY()-24,search.getWidth(),23,juce::Justification::centredLeft);
-        if(state.detailOpen){look.drawGlass(g,preview.toFloat());if(const auto* row=chosen()){paintImage(g,*row,preview.reduced(7),2048);g.setColour(juce::Colour(0xffe0e2df));g.setFont(caps.fontForCap(24));g.drawText(row->metadata.name.toUpperCase(),content.getX()+8,preview.getBottom()+8,content.getWidth()-16,34,juce::Justification::centredLeft);}}
+        if(state.detailOpen){look.drawGlass(g,preview.toFloat());if(const auto* row=chosen()){paintImage(g,*row,preview.reduced(7),2048);g.setColour(juce::Colour(0xffe0e2df));g.setFont(caps.fontForCap(24));g.drawText(row->metadata.name.toUpperCase(),content.getX()+8,preview.getBottom()+8,content.getWidth()-442,34,juce::Justification::centredLeft);}}
     }
 };
 LibraryUnit::LibraryUnit(InstrumentProcessor& p,const Model& m,StudioServices,Host h):browser(std::make_unique<Browser>(*this,p,m,std::move(h))){setSize(1547,740);}
