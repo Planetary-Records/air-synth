@@ -201,6 +201,10 @@ target_sources(RackSynthRackPackageExport PRIVATE tools/native/ExportRackPackage
 target_link_libraries(RackSynthRackPackageExport PRIVATE RackSynthState RackSynthJuceInstrumentApps RackSynthInstrument)
 target_compile_definitions(RackSynthRackPackageExport PRIVATE JUCE_MODAL_LOOPS_PERMITTED=1)
 set_target_properties(RackSynthRackPackageExport PROPERTIES EXCLUDE_FROM_ALL TRUE)
+juce_add_console_app(RackSynthRackPreview PRODUCT_NAME "RackSynthRackPreview")
+target_sources(RackSynthRackPreview PRIVATE tools/native/RackPreview.cpp)
+target_link_libraries(RackSynthRackPreview PRIVATE RackSynthState RackSynthJuceInstrumentApps RackSynthInstrument)
+target_compile_definitions(RackSynthRackPreview PRIVATE JUCE_MODAL_LOOPS_PERMITTED=1)
 add_library(RackSynthRackPackage STATIC src/racks/RackPackage.cpp)
 target_link_libraries(RackSynthRackPackage PUBLIC RackSynthState)
 juce_add_console_app(RackSynthRackPackageTests PRODUCT_NAME "RackSynthRackPackageTests")
@@ -472,6 +476,7 @@ racksynth_add_test(NAME RackSynthRackLibraryProductTests_bundle COMMAND RackSynt
     --bundle "${CMAKE_BINARY_DIR}/RackSynthInstrument_artefacts/$<CONFIG>/VST3/AI Rack Synth.vst3"
     --fixtures "${CMAKE_BINARY_DIR}/../rack-library-native/releases" --output "${CMAKE_BINARY_DIR}/../rack-library-native/task8/bundle")
 set_tests_properties(RackSynthRackLibraryProductTests_bundle PROPERTIES RESOURCE_LOCK desktop)
+find_package(Python3 COMPONENTS Interpreter)
 if(Python3_Interpreter_FOUND)
     add_custom_target(RackSynthRackPackageFixtures
         COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/rack_packages.py" build
@@ -481,6 +486,11 @@ if(Python3_Interpreter_FOUND)
         VERBATIM)
     add_dependencies(RackSynthRackLibraryProductTests RackSynthRackPackageFixtures)
     add_dependencies(RackSynthRackPackageTests RackSynthRackPackageFixtures)
+    add_dependencies(RackSynthRackPreview RackSynthRackPackageFixtures)
+    racksynth_add_test(NAME RackSynthRackPreviewCheck COMMAND RackSynthRackPreview
+        --archive "${CMAKE_BINARY_DIR}/../rack-library-native/releases/thread-press-1.0.0.airrack"
+        --workspace-parent "${CMAKE_BINARY_DIR}/../rack-preview-tests" --check)
+    set_tests_properties(RackSynthRackPreviewCheck PROPERTIES RESOURCE_LOCK desktop)
 endif()
 juce_add_console_app(RackSynthReferencePluginProbe PRODUCT_NAME "RackSynthReferencePluginProbe")
 target_sources(RackSynthReferencePluginProbe PRIVATE tools/native/ReferencePluginProbe.cpp)

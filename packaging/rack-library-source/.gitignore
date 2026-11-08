@@ -1,0 +1,6 @@
+packages/
+preview-workspaces/
+__pycache__/
+*.py[cod]
+.env
+.env.*

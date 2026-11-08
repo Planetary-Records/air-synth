@@ -375,12 +375,14 @@ studio::MakerSkinPtr InstrumentProcessor::preparedMakerSkin(const RackInstance& 
     return rack.package?studio::MakerSkinPtr{}:studio::makerFaceFor(rack.design);
 }
 InstrumentProcessor::InstrumentProcessor() : InstrumentProcessor(defaultRackLibraryRuntime()) {}
-InstrumentProcessor::InstrumentProcessor(std::shared_ptr<RackLibraryRuntime> runtime) : AudioProcessor(BusesProperties()
+InstrumentProcessor::InstrumentProcessor(std::shared_ptr<RackLibraryRuntime> runtime) : InstrumentProcessor(std::move(runtime),RackPreviewMode{}) {}
+InstrumentProcessor::InstrumentProcessor(std::shared_ptr<RackLibraryRuntime> runtime,RackPreviewMode preview) : AudioProcessor(BusesProperties()
     .withInput("External detector",juce::AudioChannelSet::stereo(),false)
     .withOutput("Output",juce::AudioChannelSet::stereo(),true))
 {
     // Only a real plug-in or standalone session is tracked; test processors are not.
-    if(wrapperType==wrapperType_VST3||wrapperType==wrapperType_Standalone){feedback::SessionTracker::instanceCreated();sessionTracked=true;}
+    if(preview.workspace==juce::File{}&&(wrapperType==wrapperType_VST3||wrapperType==wrapperType_Standalone)){feedback::SessionTracker::instanceCreated();sessionTracked=true;}
+    if(preview.workspace!=juce::File{})presetFolder=preview.workspace.getChildFile("Sounds");
     libraryRuntime=runtime&&runtime->store&&runtime->client?std::move(runtime):defaultRackLibraryRuntime();
     makerPreparation=libraryRuntime->client->createSkinPreparation([](const auto& rack,const auto* snapshot,const auto& cancel){return studio::prepareMakerSkin(rack,snapshot,cancel);});
     inventoryPreparation=libraryRuntime->client->createInventoryPreparation();
@@ -407,10 +409,11 @@ InstrumentProcessor::InstrumentProcessor(std::shared_ptr<RackLibraryRuntime> run
     for(auto& token:drumTargetTokens)token.store(1);
     drumControlPump=std::make_unique<DrumControlPump>(*this);
     drumImporter=std::make_unique<DrumImport>(*this);
-    startMcp();
+    if(preview.workspace==juce::File{})startMcp();
 }
 InstrumentProcessor::InstrumentProcessor(const companion::ClientOptions& options) : InstrumentProcessor() { aiClientOptions=options; }
 InstrumentProcessor::InstrumentProcessor(const companion::ClientOptions& options,std::shared_ptr<RackLibraryRuntime> runtime) : InstrumentProcessor(std::move(runtime)) {aiClientOptions=options;}
+InstrumentProcessor::InstrumentProcessor(const companion::ClientOptions& options,std::shared_ptr<RackLibraryRuntime> runtime,RackPreviewMode preview) : InstrumentProcessor(std::move(runtime),std::move(preview)) {aiClientOptions=options;}
 InstrumentProcessor::~InstrumentProcessor()
 {
     if(sessionTracked)feedback::SessionTracker::instanceDestroyed();

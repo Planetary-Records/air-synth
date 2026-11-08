@@ -437,6 +437,14 @@ void publicServiceProbeFixture(const juce::File& root){
     const auto result=publicServiceProbe(receipt.getFullPathName(),f.transport());CHECK(result==0);if(result!=0)return;const auto doc=juce::JSON::parse(receipt);CHECK(doc["phase"].toString()=="complete"&&bool(doc["countsComplete"]));CHECK(doc["installed"]["sha256"].toString()==f.two.sha256);CHECK(!juce::File(doc["temporaryStore"].toString()).exists());f.mode=7;const auto failed=root.getChildFile("service-failed.json");CHECK(publicServiceProbe(failed.getFullPathName(),f.transport())==1);const auto partial=juce::JSON::parse(failed);CHECK(partial["phase"].toString()=="failed"&&!bool(partial["countsComplete"])&&partial["failedAt"].toString()=="catalog_and_counts");CHECK(f.archiveGets==1);
 }
 int main(int argc,char** argv){
+    const RackPackageRef sourceRef{"thread-press","1.0.0",juce::String::repeatedString("a",64)};
+    const auto sourceUrl=rackLibrarySourceUrl(sourceRef);
+    CHECK(sourceUrl=="https://github.com/Planetary-Records/air-rack-library/tree/main/releases/thread-press/1.0.0/"+sourceRef.sha256);
+    auto changedSource=sourceRef;changedSource.version="2.0.0";CHECK(rackLibrarySourceUrl(changedSource)!=sourceUrl);
+    changedSource=sourceRef;changedSource.sha256=juce::String::repeatedString("b",64);CHECK(rackLibrarySourceUrl(changedSource)!=sourceUrl);
+    changedSource=sourceRef;changedSource.id="../air";CHECK(rackLibrarySourceUrl(changedSource).isEmpty());
+    changedSource=sourceRef;changedSource.version="main";CHECK(rackLibrarySourceUrl(changedSource).isEmpty());
+    changedSource=sourceRef;changedSource.sha256="";CHECK(rackLibrarySourceUrl(changedSource).isEmpty());
     if(argc==3&&juce::String(argv[1])=="--public-service")return publicServiceProbe(argv[2],rackLibraryHttpWindows());
     if(argc==4&&juce::String(argv[1])=="--refresh-peer"){std::atomic<int> requests{0};auto store=std::make_shared<RackPackageStore>(RackLibraryPaths{juce::File(argv[2])});RackLibraryClient client(store,[&](const auto&,const auto&,const auto&,auto&){++requests;return RackLibraryStatus::networkFailure;});const auto job=client.refresh();CHECK(juce::File(argv[3]).replaceWithText("ready"));CHECK(waitForTerminal(client,job));CHECK(client.view()->status==RackLibraryStatus::ready&&client.view()->cached);CHECK(requests==0);std::cout<<"peer_cache_requests="<<requests<<" checks="<<checks<<" failures="<<failures<<'\n';return failures?1:0;}
     if(argc!=2&&argc!=3)return 2;const auto root=juce::File(argv[1]).getChildFile(juce::Uuid().toString());CHECK(root.createDirectory().wasOk());
